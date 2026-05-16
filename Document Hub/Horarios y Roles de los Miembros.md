@@ -7,9 +7,7 @@ Category:
   - Documentación Interna
 Last updated time: 2026-05-02T10:18:00
 ---
----
-
-La idea de esta Página es crear un mini cronograma de las horas que tiene cada uno por semana, con esto va a ser posible planificar y estimar horas de trabajo para cada miembro ocn cierto margen de seguridad en que se van a poder cumplir los plazos
+La idea de esta Página es crear un mini cronograma de las horas que tiene cada uno por semana, con esto va a ser posible planificar y estimar horas de trabajo para cada miembro con cierto margen de seguridad en que se van a poder cumplir los plazos
 
 | Miembros/Hora | Lunes | Martes | Miércoles | Jueves | Viernes | Sábado | Domingo | Hs Totales |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
