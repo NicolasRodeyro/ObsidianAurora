@@ -1,11 +1,12 @@
-# Arquitectura de Aurora
-
-> **Documento de Arquitectura y Stack Tecnológico**
->
-> Versión: 1.0 — Mayo 2026
-
 ---
-
+base: "[[Document Hub.base]]"
+Created time: 2026-05-25T20:39:00
+Last edited by: Octavio Escudero
+Created by: Octavio Escudero
+Category:
+  - Documentación Interna
+Last updated time: 2026-05-25T20:43:00
+---
 ## 1. Introducción y Propósito
 
 ### 1.1 Objetivo del documento
