@@ -257,7 +257,7 @@ flowchart TB
 |---|---|
 | **ID** | ADR-001 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 | **Decisores** | Equipo Aurora |
 
 #### Contexto
@@ -272,26 +272,6 @@ El backend de Aurora (Aurora Core) debe manejar múltiples responsabilidades: AP
 4. **Curva de aprendizaje razonable** para el equipo
 5. **Tipado estático** para reducir errores en un sistema crítico (alertas de emergencia)
 6. **Rendimiento** para concurrencia moderada (~decenas de pacientes simultáneos)
-
-#### Opciones consideradas
-
-| Opción                                      | Versión                      | Fundamentos                                                                    |
-| ------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------ |
-| **Node.js / TypeScript** — NestJS o Fastify | Node 22 LTS, TS 5.x          | Ecosistema maduro, tipado estático, async/await nativo, mismo lenguaje que n8n |
-| **Python** — FastAPI o Django               | Python 3.12, FastAPI 0.110+  | Ideal para IA/ML, tipado con Pydantic, buena performance asíncrona             |
-| **Java** — Spring Boot 3                    | Java 21 LTS, Spring Boot 3.x | Madurez enterprise, rendimiento superior, ecosistema vasto                     |
-
-#### Criterios de evaluación
-
-| Criterio | Node.js/TS | Python | Java |
-|---|---|---|---|
-| Latencia (p50/p99) | ★★★★ Bajo | ★★★ Medio | ★★★★★ Muy bajo |
-| Ecosistema IA/ML | ★★★ Medio | ★★★★★ Excelente | ★★ Bajo |
-| Integración con n8n | ★★★★★ Nativo | ★★★ Webhook | ★★★ Webhook |
-| Despliegue AWS (Lambda) | ★★★★★ Excelente | ★★★★ Bueno | ★★★ Medio |
-| Curva de aprendizaje | ★★★★★ Fácil | ★★★★ Fácil | ★★★ Media |
-| Tipado estático | ★★★★ TS fuerte | ★★★ Pydantic | ★★★★★ Nativo |
-| Costo operativo (Free Tier) | ★★★★★ Bajo | ★★★★ Bajo | ★★★ Medio |
 
 #### Decisión
 
@@ -328,7 +308,7 @@ Se adopta **Python con Django** como lenguaje y framework backend para Aurora Co
 |---|---|
 | **ID** | ADR-002 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -342,26 +322,6 @@ Aurora Care es la aplicación que utiliza el cuidador para monitorear al pacient
 4. **Rapidez de desarrollo** con el equipo actual
 5. **SEO** no es relevante (app protegida por autenticación)
 6. **Compartir tipos** con el backend TypeScript
-
-#### Opciones consideradas
-
-| Opción                    | Descripción                                               |
-| ------------------------- | --------------------------------------------------------- |
-| **React + Next.js (PWA)** | SPA con service workers, responsive, despliegue estático  |
-| **Vue.js + Nuxt**         | Similar a Next.js, ecosistema Vue                         |
-| **Flutter**               | Compilado nativo, UI consistente, una sola base de código |
-| **React Native**          | App móvil nativa con lógica compartida                    |
-
-#### Criterios de evaluación
-
-| Criterio | Next.js (PWA) | Nuxt (PWA) | Flutter | React Native |
-|---|---|---|---|---|
-| Mobile + Desktop | ★★★★★ PWA | ★★★★★ PWA | ★★★★★ Nativo | ★★★★★ Nativo |
-| Notificaciones push | ★★★★ Service Worker | ★★★★ Service Worker | ★★★★★ Firebase | ★★★★★ Firebase |
-| Offline partial | ★★★★ Cache API | ★★★★ Cache API | ★★★ Local DB | ★★★ Local DB |
-| Velocidad de desarrollo | ★★★★★ Excelente | ★★★★ Bueno | ★★★ Medio | ★★★ Medio |
-| Compartir tipos con backend | ★★★★★ TypeScript | ★★★★ TypeScript | ★ Bajo | ★★★ TypeScript |
-| Despliegue (Free Tier) | ★★★★★ S3+CloudFront | ★★★★★ S3+CloudFront | ★★★ Google Play | ★★★ App Store |
 
 #### Decisión
 
@@ -396,7 +356,7 @@ Se adopta **React + Next.js (PWA)** como framework frontend para Aurora Care.
 |---|---|
 | **ID** | ADR-003 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -409,28 +369,6 @@ Aurora requiere persistencia para datos relacionales (pacientes, cuidadores, eve
 3. **Costo** en Free Tier / bajos recursos
 4. **Simplicidad operativa** (preferible una sola base de datos)
 5. **Respaldo y recuperación** ante fallas
-
-#### Opciones consideradas
-
-| Opción | Relacional | Vectorial | Esquema |
-|---|---|---|---|---|
-| **Supabase (PostgreSQL + pgvector)** | PostgreSQL 16 (gestionado) | pgvector (extensión) | Plataforma gestionada (DB + Auth + Realtime + Storage) |
-| **PostgreSQL + pgvector** | PostgreSQL 16 | pgvector (extensión) | Una sola base de datos |
-| **PostgreSQL + Qdrant separado** | PostgreSQL 16 | Qdrant (servicio aparte) | Dos bases de datos |
-| **MongoDB + Atlas Vector Search** | MongoDB 7 | Atlas Vector Search (integrado) | Una sola base de datos |
-| **PostgreSQL + Pinecone** | PostgreSQL 16 | Pinecone (SaaS) | Dos servicios |
-
-#### Criterios de evaluación
-
-| Criterio                | Supabase (PG + pgvector)       | PostgreSQL + pgvector         | PostgreSQL + Qdrant                | MongoDB + Atlas                | PostgreSQL + Pinecone                        |
-| ----------------------- | ------------------------------ | ----------------------------- | ---------------------------------- | ------------------------------ | -------------------------------------------- |
-| Costo Free Tier         | ★★★★ Gratis (Free Project)     | ★★★★★ Gratis (RDS + pgvector) | ★★★★ Gratis RDS + Qdrant self-host | ★★★ Free tier limitado (512MB) | ★★★ Gratis RDS + Pinecone free tier limitado |
-| Simplicidad operativa   | ★★★★★ Plataforma gestionada    | ★★★★ Un solo motor            | ★★★★ Dos servicios                 | ★★★★★ Una sola DB              | ★★★ Dos servicios SaaS                       |
-| Madurez relacional      | ★★★★★ Excelente (PostgreSQL)   | ★★★★★ Excelente               | ★★★★★ Excelente                    | ★★★★ Bueno                     | ★★★★★ Excelente                              |
-| Búsqueda vectorial      | ★★★★ Buena (pgvector HNSW)     | ★★★★ Buena (HNSW)             | ★★★★★ Excelente (HNSW, filtros)    | ★★★★ Buena                     | ★★★★★ Excelente (gestionado)                 |
-| Servicios adicionales   | ★★★★★ Auth + Realtime + Storage| ★★★ Solo DB                  | ★★★ Solo DB                       | ★★★★ Atlas servicios           | ★★★ Solo DB                                  |
-| Flexibilidad de esquema | ★★★ Esquema fijo               | ★★★ Esquema fijo              | ★★★ Esquema fijo                   | ★★★★★ Sin esquema              | ★★★ Esquema fijo                             |
-| Comunidad / Soporte     | ★★★★ Creciente                 | ★★★★★ Masiva                  | ★★★ Creciente                      | ★★★★★ Masiva                   | ★★★★ Creciente                               |
 
 #### Decisión
 
@@ -467,7 +405,7 @@ Se adopta **Supabase (PostgreSQL 16 + pgvector)** como plataforma de datos.
 |---|---|
 | **ID** | ADR-004 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -480,27 +418,6 @@ Aurora integra múltiples subsistemas (voz, IoT, IA, automatización, notificaci
 3. **Complejidad controlada**: el equipo es pequeño y el presupuesto acotado
 4. **Integración con n8n**: el orquestador de flujos existente en el diseño
 5. **Evolución**: poder partir de una arquitectura simple y evolucionar hacia microservicios si es necesario
-
-#### Opciones consideradas
-
-| Opción | Descripción |
-|---|---|
-| **Monolito Modular** | Un solo proceso Node.js con módulos bien definidos (carpetas/dominios) y APIs internas claras |
-| **Microservicios** | Cada módulo como servicio independiente desplegado separadamente |
-| **Arquitectura Orientada a Eventos (EDA)** | Componentes se comunican mediante eventos asíncronos (broker de mensajes) |
-| **Híbrido: Monolito Modular + n8n para flujos** | Core como monolito modular, flujos de automatización delegados a n8n |
-
-#### Criterios de evaluación
-
-| Criterio | Monolito Modular | Microservicios | EDA puro | Híbrido (propuesto) |
-|---|---|---|---|---|
-| Complejidad inicial | ★★★★★ Baja | ★★ Alta | ★★★ Media | ★★★★ Baja-Media |
-| Tolerancia a fallos | ★★ Baja (todo en uno) | ★★★★ Alta | ★★★★★ Muy alta | ★★★★ Alta |
-| Escalabilidad | ★★★ Vertical | ★★★★★ Horizontal | ★★★★★ Horizontal | ★★★★ Parcial |
-| Velocidad de desarrollo | ★★★★★ Rápida | ★★★ Lenta | ★★★ Lenta | ★★★★ Rápida |
-| Integración n8n | ★★★ Webhook | ★★★★ Webhook nativo | ★★★★★ Nativo | ★★★★★ Nativo |
-| Costo operativo | ★★★★★ Bajo | ★★★ Alto | ★★★ Medio | ★★★★ Medio-bajo |
-| Curva de aprendizaje | ★★★★★ Baja | ★★ Alta | ★★★ Media | ★★★★ Baja |
 
 #### Decisión
 
@@ -544,7 +461,7 @@ Se adopta el patrón de **Microservicios** como arquitectura principal, organiza
 |---|---|
 | **ID** | ADR-005 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -557,28 +474,6 @@ Aurora maneja datos sensibles de salud (biométricos, ubicación, medicación, h
 3. **Múltiples canales**: acceso desde Aurora Care (web), API para Aurora Home, y potencialmente app mobile
 4. **Costo**: preferencia por solución gratuita o de bajo costo en etapa inicial
 5. **Bajo mantenimiento**: el equipo no debe administrar infraestructura de autenticación compleja
-
-#### Opciones consideradas
-
-| Opción | Tipo | Costo |
-|---|---|---|
-| **AWS Cognito** | Servicio administrado (AWS) | Free Tier: 50k MAU |
-| **Auth0** | SaaS | Free Tier: 7k MAU |
-| **Firebase Authentication** | SaaS (Google) | Free Tier: 10k MAU |
-| **Keycloak** | Self-hosted (open source) | Costo de infraestructura (EC2) |
-| **JWT Custom (bcrypt + JWT)** | Implementación propia | Solo tiempo de desarrollo |
-
-#### Criterios de evaluación
-
-| Criterio | AWS Cognito | Auth0 | Firebase Auth | Keycloak | JWT Custom |
-|---|---|---|---|---|---|
-| Costo Free Tier | ★★★★★ 50k MAU | ★★★★ 7k MAU | ★★★★ 10k MAU | ★★★ Infra EC2 | ★★★★★ Sin costo directo |
-| Multi-tenant | ★★★★ Grupos | ★★★★★ Organizaciones | ★★★ Custom claims | ★★★★★ Realms | ★★★ Custom |
-| MFA / 2FA | ★★★★★ Sí | ★★★★★ Sí | ★★★★ SMS/App | ★★★★★ Sí | ★★ Manual |
-| Social login | ★★★★ Google, Apple, FB | ★★★★★ Muchos | ★★★★★ Google, Apple | ★★★★ SAML/OIDC | ★ Manual |
-| Integración Node.js | ★★★★ AWS SDK | ★★★★★ SDK Auth0 | ★★★★ Firebase Admin | ★★★★ Adaptadores | ★ Sólo JWT |
-| Mantenimiento | ★★★★★ Zero | ★★★★★ Zero | ★★★★★ Zero | ★★★ Medio | ★★ Alto |
-| Residencia de datos | ★★★★ Regiones AWS | ★★★ Regiones limitadas | ★★★ Regiones Google | ★★★★★ Control total | ★★★★★ Control total |
 
 #### Decisión
 
@@ -616,7 +511,7 @@ Se adopta **Auth0** como proveedor de autenticación y autorización.
 |---|---|
 | **ID** | ADR-006 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -629,26 +524,6 @@ Aurora Home (Raspberry Pi) captura audio del paciente para procesarlo mediante S
 3. **Modo offline**: para que Aurora Home funcione sin internet, el STT debe ejecutarse localmente
 4. **Recursos de la RPi**: Whisper.cpp puede ejecutarse en RPi 4/5 con modelos pequeños (tiny/base) con latencia aceptable
 5. **Ancho de banda**: enviar texto transcrito (~100 bytes) vs. audio comprimido (~10-50 KB/segundo) reduce drásticamente el uso de red
-
-#### Opciones consideradas
-
-| Opción | Descripción |
-|---|---|
-| **STT cloud** | Aurora Home envía audio crudo a API cloud (Whisper API, Google STT). Máxima precisión, mínima carga en RPi |
-| **STT local (RPi)** | Transcripción en la RPi con Whisper.cpp (modelo tiny/base). Privacidad total, funciona offline |
-| **STT híbrido** | Local por defecto, con fallback a cloud si la RPi no puede procesar (alta carga CPU, audio muy ruidoso) |
-| **STT local + TTS cloud** | Transcripción local, síntesis de voz en cloud. Balance entre privacidad y calidad de voz |
-
-#### Criterios de evaluación
-
-| Criterio | STT cloud | STT local (RPi) | STT híbrido | STT local + TTS cloud |
-|---|---|---|---|---|
-| Privacidad de audio | ★★ El audio sale del hogar | ★★★★★ Nunca sale de la RPi | ★★★★ Generalmente local | ★★★★★ Audio nunca sale |
-| Latencia (p50) | ★★★ 300-800 ms red + cloud | ★★★★ 200-500 ms local | ★★★★ 200-500 ms (local) | ★★★★ 200-500 ms local |
-| Funcionamiento offline | ★★ No funciona sin internet | ★★★★★ Sí, completamente | ★★★★ Sí, con precisión reducida | ★★★★ Sí, pero sin TTS |
-| Precisión STT | ★★★★★ Whisper large / Google | ★★★ Whisper tiny/base | ★★★★ Generalmente buena | ★★★ Whisper tiny/base |
-| Carga CPU en RPi | ★★★★★ Mínima (solo captura) | ★★ 30-60% CPU持续 | ★★★ Media | ★★ 30-60% CPU持续 |
-| Complejidad firmware | ★★★★★ Simple (enviar audio) | ★★★ Whisper.cpp + optimización | ★★ Lógica de fallback compleja | ★★★ Whisper.cpp + gestión |
 
 #### Decisión
 
@@ -707,7 +582,7 @@ Con STT local en RPi, la cadena de procesamiento cambia:
 |---|---|
 | **ID** | ADR-007 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -721,27 +596,6 @@ El sistema Aurora debe desplegarse inicialmente con costos mínimos (Free Tier A
 4. **Actualizaciones remotas** de Aurora Home (Raspberry Pi) sin intervención física
 5. **Monitoreo** básico para detectar caídas del servicio
 
-#### Opciones consideradas
-
-| Opción | Descripción |
-|---|---|
-| **AWS Free Tier (EC2 + RDS + S3)** | Servicios cloud con capa gratuita |
-| **On-premise (servidor local)** | Servidor en el hogar del paciente |
-| **Auto-hosting (VPS barato)** | VPS de $5/mes (DigitalOcean, Linode, Hetzner) |
-| **Híbrido: cloud + on-premise** | Aurora Core en cloud, Aurora Home local |
-
-#### Criterios de evaluación
-
-| Criterio | AWS Free Tier | On-premise local | VPS barato | Híbrido (propuesto) |
-|---|---|---|---|---|
-| Costo inicial | ★★★★★ $0 | ★★★★ $0 (si hay hardware) | ★★★ $5-10/mes | ★★★★ $0-5/mes |
-| Disponibilidad | ★★★★★ 99.99% SLA | ★★ Depende de internet local | ★★★★ 99.9% | ★★★★★ Cloud + local |
-| Mantenimiento | ★★★★★ Gestionado | ★★★ Manual | ★★★★ Automatizable | ★★★★ Gestión mixta |
-| Actualizaciones remotas | ★★★★★ Fáciles | ★★★ Port forwarding | ★★★★ Fáciles | ★★★★★ Fáciles |
-| Migración a on-premise | ★★★★ Posible | ★★★★★ Ya está on-prem | ★★★★ Posible | ★★★★ Migración parcial |
-| Privacidad de datos | ★★★ AWS | ★★★★★ Control total | ★★★ VPS provider | ★★★★ Datos locales |
-| Escalabilidad | ★★★★ Límites Free Tier | ★★ Limitado | ★★★ Vertical | ★★★★ Escalable cloud |
-
 #### Decisión
 
 Se adopta una estrategia **híbrida multicloud + local**:
@@ -750,11 +604,11 @@ Se adopta una estrategia **híbrida multicloud + local**:
 - **Base de datos** → **Supabase** (PostgreSQL + pgvector, Free Project) — o **RDS PostgreSQL Free Tier** como alternativa si se supera el Free Tier de Supabase
 - **Redis** → **Ejecutado en la Raspberry Pi** (Aurora Home) para caché local y cola de mensajería offline. Alternativa cloud si se necesita Redis compartido entre servicios
 - **Aurora Care** (frontend) → **S3 + CloudFront** (AWS Free Tier 1TB/mes) o **Hostinger VPS** (misma instancia)
-- **n8n** → Misma instancia VPS que Aurora Core o contenedor separado
+- **n8n** → Misma instancia VPS que Aurora Core
 - **Aurora Home** → **Raspberry Pi 4/5** en el hogar del paciente
 - **AWS Free Tier** → Uso complementario para S3/CloudFront y como respaldo si Hostinger no es suficiente
-- **Dominio** → DuckDNS (gratuito) o Namecheap/Hostinger (costo mínimo)
-- **CI/CD** → **GitHub Actions** (Free Tier: 2000 min/mes para repos privados; repos públicos tienen minutos ilimitados. Si el repo es privado, considerar build eficiente: cache de Docker layer, separar jobs de test y deploy, y evitar builds innecesarios en cada commit)
+- **Dominio** → Namecheap/Hostinger (costo mínimo)
+- **CI/CD** → **GitHub Actions** (Free Tier: 2000 min/mes para repos privados)
 
 **Plan de migración:**
 - Todo el stack empaquetado en Docker Compose desde el inicio, permitiendo migrar entre Hostinger, AWS o on-premise sin cambios de código
@@ -785,7 +639,7 @@ Se adopta una estrategia **híbrida multicloud + local**:
 |---|---|
 | **ID** | ADR-008 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -797,26 +651,6 @@ Aurora Home (el asistente de voz en el hogar del paciente) depende de conectivid
 2. **Experiencia de usuario**: la interacción por voz no debe fallar abruptamente; debe degradarse gracefulmente
 3. **Autonomía del dispositivo**: la batería y recursos de la Raspberry Pi limitan qué puede ejecutarse localmente
 4. **Recuperación automática**: al restaurarse la conectividad, el sistema debe sincronizar datos sin intervención manual
-
-#### Opciones consideradas
-
-| Opción | Descripción |
-|---|---|
-| **Online-only (sin modo offline)** | Todo el procesamiento depende de cloud. Sin internet, Aurora Home queda inoperativo |
-| **Cola local + reprocesamiento** | Aurora Home acumula audio y eventos localmente y los procesa cuando vuelve la conexión |
-| **Degradado híbrido (propuesto)** | Funcionalidad crítica local (recordatorios programados, TTS offline básico); funcionalidad completa requiere cloud |
-| **Full offline** | Todos los modelos (STT, TTS, LLM) se ejecutan localmente en la RPi |
-
-#### Criterios de evaluación
-
-| Criterio | Online-only | Cola local + repro | Degradado híbrido | Full offline |
-|---|---|---|---|---|
-| Recordatorios sin internet | ★★ No funcionan | ★★★★ Programados en RPi | ★★★★★ Sí, locales | ★★★★★ Sí, locales |
-| Interacción vocal sin internet | ★★ No funciona | ★★★ Reprocesa después | ★★★★ Respuestas predefinidas | ★★★★★ Sí, con LLM local |
-| Complejidad técnica | ★★★★★ Baja | ★★★ Media | ★★★ Media | ★ Alta (modelos en RPi) |
-| Calidad de interacción | ★★★★★ Completa online | ★★★ Diferida | ★★★★ Básica offline | ★★★ LLM local limitado |
-| Costo de hardware RPi | ★★★★★ Mínimo | ★★★★ Mínimo | ★★★ Aceptable | ★★ RPi 8GB+ o acelerador |
-| Recuperación automática | ★★ Manual | ★★★★ Sincronización automática | ★★★★ Sincronización automática | ★★★★ Sincronización automática |
 
 #### Decisión
 
@@ -853,7 +687,7 @@ Se adopta el modo **degradado híbrido** con la siguiente estrategia:
 |---|---|
 | **ID** | ADR-009 |
 | **Fecha** | Mayo 2026 |
-| **Estado** | Propuesto |
+| **Estado** | Aceptado  |
 
 #### Contexto
 
@@ -866,28 +700,6 @@ Aurora Band (pulsera IoT) debe enviar datos biométricos (frecuencia cardíaca, 
 3. **Desconexiones frecuentes**: la pulsera puede salir del alcance del gateway o perder conectividad Bluetooth
 4. **Volumen de datos**: envío periódico de lecturas biométricas (cada 1-5 minutos) más eventos esporádicos
 5. **Simplicidad del firmware**: el hardware de la pulsera tiene recursos limitados
-
-#### Opciones consideradas
-
-| Opción        | Modelo                     | Consumo                            | Confiabilidad            |
-| ------------- | -------------------------- | ---------------------------------- | ------------------------ |
-| **HTTP REST** | Request-response (pull)    | Alto (conexión por cada envío)     | Medio (sin QoS nativo)   |
-| **MQTT**      | Pub-sub (push)             | Bajo (conexión persistente ligera) | Alto (QoS 0, 1, 2)       |
-| **WebSocket** | Full-duplex                | Medio (conexión persistente TCP)   | Medio (sin QoS)          |
-| **CoAP**      | Request-response sobre UDP | Muy bajo                           | Bajo (UDP, sin garantía) |
-
-#### Criterios de evaluación
-
-| Criterio                                | HTTP REST                                             | MQTT                                                              | WebSocket                           | CoAP                         |
-| --------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------- | ---------------------------- |
-| Consumo energético (envío c/5 min)      | ★★★★ Bajo (sin conexión persistente, send-and-forget) | ★★★ Medio (conexión persistente innecesaria para baja frecuencia) | ★★★ Medio (conexión TCP permanente) | ★★★★★ Muy bajo               |
-| Confiabilidad (QoS)                     | ★★★ Retry manual                                      | ★★★★★ QoS 0/1/2 nativo                                            | ★★★ Sin QoS nativo                  | ★★ No garantizado            |
-| Manejo de desconexión                   | ★★★★ Buffer local + batch REST                        | ★★★★★ Sesión persistente + buffer en broker                       | ★★★ Reconexión manual               | ★★★ Retry simple             |
-| Ancho de banda (payload pequeño)        | ★★★ Headers verbosos pero payload <1 KB               | ★★★★★ Binario ligero                                              | ★★★★ Framing simple                 | ★★★★★ Mínimo                 |
-| Madurez en IoT                          | ★★★★ Común en APIs                                    | ★★★★★ Estándar de facto IoT                                       | ★★★ Poco común en IoT               | ★★★ Emergente                |
-| Complejidad firmware                    | ★★★★★ Simple (librerías HTTP estándar)                | ★★★★ Media (cliente MQTT + manejo de sesión)                      | ★★★ Media                           | ★★★ Media                    |
-| Facilidad de integración en Aurora Core | ★★★★★ Django REST Framework nativo                    | ★★★★ Requiere broker MQTT + bridge                                | ★★★★★ Django Channels nativo        | ★★ Bridge necesario          |
-| Infraestructura adicional               | ★★★★★ Ninguna (solo endpoint HTTP)                    | ★★★ Requiere broker MQTT (Mosquitto/EMQX)                         | ★★★★ Solo WebSocket server          | ★★★ Requiere proxy CoAP-HTTP |
 
 #### Decisión
 
@@ -1048,11 +860,11 @@ ejemplo: feat(patient): agregar CRUD de perfil de paciente
 
 ### 5.1 Ambientes
 
-| Ambiente              | Infraestructura                                   | Propósito                                                | Actualización                       |
-| --------------------- | ------------------------------------------------- | -------------------------------------------------------- | ----------------------------------- |
-| **Desarrollo (dev)**  | Local (Docker Compose)                            | Desarrollo diario, testing interno, pruebas unitarias y de integración | Manual (sin CI/CD, cada desarrollador gestiona su entorno) |
-| **Staging**           | VPS Hostinger / AWS (EC2 + RDS)                   | Validación de integración, pruebas con stakeholders, UAT | Automática al merge a `main`        |
-| **Producción (prod)** | VPS Hostinger / AWS (pago por uso) u on-premise   | Uso real con pacientes                                   | Manual mediante GitHub Releases     |
+| Ambiente              | Infraestructura                                 | Propósito                                                              | Actualización                                              |
+| --------------------- | ----------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Desarrollo (dev)**  | Local (Docker Compose)                          | Desarrollo diario, testing interno, pruebas unitarias y de integración | Manual (sin CI/CD, cada desarrollador gestiona su entorno) |
+| **Staging**           | VPS Hostinger                                   | Validación de integración, pruebas con stakeholders, UAT               | Automática al merge a `main`                               |
+| **Producción (prod)** | VPS Hostinger / AWS (pago por uso) u on-premise | Uso real con pacientes                                                 | Manual mediante GitHub Releases                            |
 
 ### 5.2 Flujo CI/CD (GitHub Actions)
 
