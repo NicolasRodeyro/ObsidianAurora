@@ -193,12 +193,12 @@ Este presupuesto contempla los gastos necesarios durante los 6 meses de desarrol
 
 Proyección financiera para mantener el sistema funcional con un grupo de control de **10 usuarios activos** interactuando diariamente con el ecosistema (Aurora Home + Aurora Band + Aurora Care):
 
-|**Concepto Tecnológico**|**Detalle del Servicio**|**Costo Mensual Estimado (USD)**|
-|---|---|---|
-|**Infraestructura de Backend**|Servidor Virtual Privado (VPS) para alojar _Aurora Core_ (Node.js/Python).|$10.00 USD|
-|**Persistencia de Datos**|Base de Datos Relacional / NoSQL alojada en la nube con backups diarios.|$15.00 USD|
-|**Consumo de Inteligencia Artificial**|Procesamiento ultrarrápido de LLMs (ej. Llama 3 8B vía Groq). Estimando 2 millones de tokens por paciente al mes (20M tokens totales a $0.10 el millón).|$2.00 USD|
-|**Total Operativo Mensual (10 usuarios)**|Punto de equilibrio técnico (Break-even de infraestructura).|**$27.00 USD / mes**|
+| **Concepto Tecnológico**                  | **Detalle del Servicio**                                                                                                                                 | **Costo Mensual Estimado (USD)** |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **Infraestructura de Backend**            | Servidor Virtual Privado (VPS) para alojar _Aurora Core_ (Node.js/Python).                                                                               | $10.00 USD                       |
+| **Persistencia de Datos**                 | Base de Datos Relacional / NoSQL alojada en la nube con backups diarios.                                                                                 | $15.00 USD                       |
+| **Consumo de Inteligencia Artificial**    | Procesamiento ultrarrápido de LLMs (ej. Llama 3 8B vía Groq). Estimando 2 millones de tokens por paciente al mes (20M tokens totales a $0.10 el millón). | $2.00 USD                        |
+| **Total Operativo Mensual (10 usuarios)** | Punto de equilibrio técnico (Break-even de infraestructura).                                                                                             | **$27.00 USD / mes**             |
 
 - _Nota Estratégica:_ Al ejecutar la transcripción de voz (STT) y la síntesis de audio (TTS) de manera **local** en el hardware de la Raspberry Pi de cada paciente, el costo operativo mensual en la nube se reduce drásticamente, haciendo que el modelo de negocio B2B y B2C propuesto sea altamente rentable y escalable.
 

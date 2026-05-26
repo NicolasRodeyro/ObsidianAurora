@@ -47,30 +47,28 @@ El diagrama de contexto muestra a Aurora como un sistema que interactúa con el 
 ```mermaid
 flowchart TB
 
-    patient(["👤 Paciente \n Persona con Alzheimer\nInteractúa por voz"])
-    caregiver(["👩‍⚕️ Cuidador\n Familiar o profesional\nMonitorea y configura"])
+    patient(["👤 Paciente<br/>Persona con Alzheimer<br/>Interactúa por voz"])
+    caregiver(["👩‍⚕️ Cuidador<br/>Familiar o profesional<br/>Monitorea y configura"])
 
-    aurora["🌐 Sistema Aurora\nEcosistema de acompañamiento,\nmonitoreo e interacción inteligente"]
+    aurora["🌐 Sistema Aurora<br/>Ecosistema de acompañamiento<br/>Monitoreo e interacción inteligente"]
 
     subgraph ext_ai["IA & Voz"]
         direction TB
-        llm(["🤖 Proveedor LLM\nOpenAI / Anthropic / Local"])
-        stt(["🎙️ Servicio STT\nWhisper / API cloud"])
-        tts(["🔊 Servicio TTS\nElevenLabs / API cloud"])
+        llm(["🤖 Proveedor LLM - OpenAI / Anthropic / Local"])
+        tts(["🔊 Servicio TTS - ElevenLabs / API cloud"])
     end
 
     subgraph ext_notif["Notificaciones"]
         direction TB
         email(["✉️ Email SMTP"])
-        telephony(["📞 API Telefonía\nTwilio / VoIP"])
-        messaging(["💬 Mensajería\nWhatsApp / Telegram"])
+        telephony(["📞 API Telefonía - Twilio / VoIP"])
+        messaging(["💬 Mensajería - WhatsApp / Telegram"])
     end
 
     patient -->|"Audio bidireccional"| aurora
     caregiver -->|"Monitorea, configura, alertas"| aurora
 
     aurora -->|"Genera respuestas"| llm
-    aurora -->|"Transcribe voz a texto"| stt
     aurora -->|"Sintetiza texto a voz"| tts
     aurora -->|"Reportes y notificaciones"| email
     aurora -->|"Llamadas de emergencia"| telephony
@@ -86,14 +84,13 @@ flowchart TB
 
 #### Sistemas externos
 
-| Sistema | Propósito |
-|---|---|
-| **Proveedor LLM** | Generación de respuestas conversacionales, inferencia emocional, adaptación de contenido |
-| **STT** | Transcripción de voz del paciente a texto (p.ej., Whisper, Google STT) |
-| **TTS** | Síntesis de voz natural para respuestas del asistente (p.ej., ElevenLabs, AWS Polly) |
-| **WhatsApp / Telegram API** | Canales de notificación alternativos al cuidador |
-| **API de Telefonía** | Llamada automática de emergencia cuando la alerta escala |
-| **Email SMTP** | Notificaciones por correo electrónico (reportes diarios/semanales) |
+| Sistema                     | Propósito                                                                                |
+| --------------------------- | ---------------------------------------------------------------------------------------- |
+| **Proveedor LLM**           | Generación de respuestas conversacionales, inferencia emocional, adaptación de contenido |
+| **TTS**                     | Síntesis de voz natural para respuestas del asistente (p.ej., ElevenLabs, AWS Polly)     |
+| **WhatsApp / Telegram API** | Canales de notificación alternativos al cuidador                                         |
+| **API de Telefonía**        | Llamada automática de emergencia cuando la alerta escala                                 |
+| **Email SMTP**              | Notificaciones por correo electrónico (reportes diarios/semanales)                       |
 
 ---
 
@@ -112,30 +109,29 @@ flowchart TB
 
         subgraph iot["IoT / Dispositivos"]
             direction TB
-            aurora_home["Aurora Home\nRaspberry Pi\nSTT · TTS · Audio"]
-            aurora_band["Aurora Band Gateway\nNode.js\nIngesta biométrica"]
+            aurora_home["Aurora Home<br/>Raspberry Pi - STT local · TTS · Audio"]
+            aurora_band["Aurora Band Gateway<br/>Python / DRF - Ingesta biométrica"]
         end
 
         subgraph core["Backend"]
             direction TB
-            aurora_core["Aurora Core\nNode.js / TypeScript\nAPI REST + WebSocket"]
-            worker_ia["Worker IA\nPython / Node.js\nLLM + RAG"]
-            n8n["Orquestador n8n\nWorkflow automation"]
+            aurora_core["Aurora Core<br/>Python / Django + DRF<br/>API REST + WebSocket"]
+            worker_ia["Worker IA<br/>Python / FastAPI<br/>LLM + RAG"]
+            n8n["Orquestador n8n<br/>Workflow automation"]
         end
 
         subgraph data["Datos"]
             direction TB
-            postgres[("PostgreSQL\n+ pgvector")]
-            redis[("Redis\nCache + Pub/Sub")]
+            supabase[("Supabase<br/>PostgreSQL + pgvector")]
+            redis[("Redis<br/>Cache + Pub/Sub")]
         end
 
-        aurora_care["Aurora Care\nReact / Next.js 14\nPWA"]
+        aurora_care["Aurora Care<br/>React / Next.js 14<br/>PWA"]
     end
 
     subgraph ext["Servicios Externos"]
         direction TB
         llm(["LLM API"])
-        stt_ext(["STT API"])
         tts_ext(["TTS API"])
         messaging_ext(["WhatsApp / Telegram"])
         telephony_ext(["Telefonía / Twilio"])
@@ -145,23 +141,22 @@ flowchart TB
     patient -->|"Bluetooth / Zigbee"| aurora_band
     caregiver -->|"HTTPS"| aurora_care
 
-    aurora_home -->|"REST / WebSocket"| aurora_core
-    aurora_home -->|"HTTPS"| stt_ext
+    aurora_home -->|"REST / WebSocket (texto)"| aurora_core
     aurora_home -->|"HTTPS"| tts_ext
 
     aurora_care -->|"HTTPS + JWT"| aurora_core
 
-    aurora_core -->|"SQL / TCP"| postgres
+    aurora_core -->|"SQL / TCP"| supabase
     aurora_core -->|"TCP"| redis
-    aurora_core -->|"gRPC / HTTP"| worker_ia
+    aurora_core -->|"HTTP / WebSocket"| worker_ia
     aurora_core -->|"Webhook / REST"| n8n
     aurora_core -->|"REST"| telephony_ext
     aurora_core -->|"REST"| messaging_ext
 
     worker_ia -->|"HTTPS"| llm
-    worker_ia -->|"RAG — vectores"| postgres
+    worker_ia -->|"RAG — vectores"| supabase
 
-    aurora_band -->|"REST / MQTT"| aurora_core
+    aurora_band -->|"REST"| aurora_core
 ```
 
 
@@ -169,14 +164,14 @@ flowchart TB
 
 | Contenedor              | Tecnología propuesta                    | Responsabilidad                                                                                               |
 | ----------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Aurora Home**         | Raspberry Pi OS + Node.js + ALSA        | Captura de audio, reproducción de respuestas, comunicación con Aurora Core, ejecución local de STT/TTS ligero |
-| **Aurora Core**         | Node.js / TypeScript — NestJS o Fastify | API REST/WebSocket, lógica de dominio, orquestación de módulos, autenticación, gestión de eventos             |
-| **Worker IA**           | Python (FastAPI) o Node.js              | Inferencia con LLM, pipeline RAG, clasificación de eventos, detección de estados                              |
-| **Base de Datos**       | PostgreSQL 16 + pgvector                | Datos relacionales (pacientes, cuidadores, eventos, rutinas) + vectores de embeddings para RAG                |
-| **Redis**               | Redis 7                                 | Caché de consultas frecuentes, sesiones WebSocket, cola de mensajería/pub-sub                                 |
+| **Aurora Home**         | Raspberry Pi OS + Python + ALSA         | Captura de audio, STT local (Whisper.cpp), reproducción de respuestas, comunicación con Aurora Core, modo offline |
+| **Aurora Core**         | Python / Django + DRF + Channels        | API REST/WebSocket, lógica de dominio, orquestación de módulos, autenticación JWT, gestión de eventos         |
+| **Worker IA**           | Python (FastAPI)                        | Inferencia con LLM, pipeline RAG, clasificación de eventos, detección de estados                              |
+| **Base de Datos**       | Supabase (PostgreSQL 16 + pgvector)     | Datos relacionales (pacientes, cuidadores, eventos, rutinas) + vectores de embeddings para RAG + Auth + Realtime |
+| **Redis**               | Redis 7 (en Raspberry Pi + VPS)         | Caché local en RPi, cola de eventos offline; Redis compartido en VPS para pub-sub entre servicios             |
 | **n8n**                 | n8n (self-hosted)                       | Automatización de flujos: recordatorios por horario, escalado de alertas, reglas condicionales                |
 | **Aurora Care**         | React + Next.js 14 (PWA)                | Panel del cuidador responsive, notificaciones push, modo offline parcial                                      |
-| **Aurora Band Gateway** | Node.js / TypeScript                    | API de ingesta de datos biométricos, gestión de estado de conexión, buffer de datos offline                   |
+| **Aurora Band Gateway** | Python / Django (módulo de Aurora Core) | API REST de ingesta de datos biométricos, gestión de estado de conexión, buffer de datos offline              |
 
 ---
 
@@ -187,30 +182,25 @@ El diagrama de despliegue muestra cómo se distribuyen físicamente los contened
 ```mermaid
 flowchart TB
 
-    subgraph cloud["☁️ AWS Cloud — Free Tier / Low Cost (us-east-1)"]
+    subgraph cloud["☁️ Hostinger VPS + AWS — Híbrido"]
         direction TB
 
-        subgraph ec2["EC2 t2.micro — Docker Compose"]
+        subgraph vps["VPS Hostinger — Docker Compose"]
             direction TB
-            aurora_core_d["Aurora Core\nNode.js / TypeScript"]
-            n8n_d["n8n\nWorkflow automation"]
-            worker_ia_d["Worker IA\nPython / Node.js"]
-            aurora_band_d["Aurora Band Gateway\nNode.js / TypeScript"]
+            aurora_core_d["Aurora Core<br/>Python / Django"]
+            n8n_d["n8n<br/>Workflow automation"]
+            worker_ia_d["Worker IA<br/>Python / FastAPI"]
+            aurora_band_d["Aurora Band Gateway<br/>Python / DRF"]
         end
 
-        subgraph rds["RDS PostgreSQL Free Tier\ndb.t4g.micro — 20 GB"]
+        subgraph supabase_cloud["Supabase Cloud — Free Project"]
             direction TB
-            postgres_d[("PostgreSQL + pgvector")]
+            supabase_d[("PostgreSQL + pgvector<br/>Auth + Realtime")]
         end
 
-        subgraph elasticache["ElastiCache Redis\ncache.t3.micro"]
+        subgraph s3["AWS S3 + CloudFront — Estático"]
             direction TB
-            redis_d[("Redis")]
-        end
-
-        subgraph s3["S3 + CloudFront — Estático"]
-            direction TB
-            aurora_care_d["Aurora Care\nNext.js SSG / PWA"]
+            aurora_care_d["Aurora Care<br/>Next.js SSG / PWA"]
         end
     end
 
@@ -218,23 +208,24 @@ flowchart TB
         direction TB
 
         subgraph rpi["Raspberry Pi 4/5 — Raspberry Pi OS Lite"]
-            aurora_home_d["Aurora Home\nNode.js + ALSA"]
+            aurora_home_d["Aurora Home<br/>Python + Whisper.cpp"]
+            redis_rpi[("Redis local<br/>Caché + cola offline")]
         end
 
         subgraph band["Aurora Band — Firmware IoT"]
-            aurora_band_device["Pulsera IoT\nPPG · IMU · GPS · EDA · Temperatura"]
+            aurora_band_device["Pulsera IoT<br/>PPG · IMU · GPS · EDA · Temperatura"]
         end
     end
 
     subgraph cg_devices["📱 Dispositivos del Cuidador"]
         direction TB
-        browser["Navegador Web / PWA\nChrome · Safari · Firefox"]
+        browser["Navegador Web / PWA<br/>Chrome · Safari · Firefox"]
     end
 
-    rpi -->|"API REST / WebSocket — HTTPS/WSS"| ec2
-    band -->|"Datos biométricos — HTTPS/MQTT"| ec2
+    rpi -->|"REST / WebSocket — HTTPS/WSS (texto)"| vps
+    band -->|"Datos biométricos — HTTPS REST"| vps
     browser -->|"HTTPS"| s3
-    s3 -->|"Consume API — HTTPS + JWT"| ec2
+    s3 -->|"Consume API — HTTPS + JWT"| vps
 ```
 
 
@@ -242,16 +233,16 @@ flowchart TB
 
 | Ambiente | Infraestructura | Propósito |
 |---|---|---|
-| **Desarrollo** | Local (Docker Compose) o AWS Free Tier | Desarrollo activo, pruebas unitarias |
-| **Staging** | AWS Free Tier (recursos mínimos) | Integración, pruebas E2E, validación con stakeholders |
-| **Producción** | AWS (escalable) u on-premise (servidor local) | Uso real con pacientes |
+| **Desarrollo** | Local (Docker Compose) | Desarrollo activo, testing interno, pruebas unitarias y de integración |
+| **Staging** | VPS Hostinger / AWS (recursos mínimos) | Integración, pruebas E2E, validación con stakeholders |
+| **Producción** | VPS Hostinger / AWS (escalable) u on-premise | Uso real con pacientes |
 
-**Nota sobre costos:** La configuración inicial en AWS Free Tier permite operar con:
+**Nota sobre costos:** La configuración inicial combina Hostinger VPS + AWS Free Tier:
 
-- 1 instancia EC2 t2.micro (750 h/mes gratis)
-- 1 RDS db.t4g.micro (750 h/mes gratis)
-- 1 ElastiCache cache.t3.micro (costo mínimo ~$15/mes)
-- S3 + CloudFront (Free Tier 1TB/mes)
+- 1 VPS Hostinger (plan básico ~$4-8/mes) — Aurora Core, n8n, Worker IA, Aurora Band Gateway
+- Supabase Free Project ($0) — Base de datos PostgreSQL + pgvector (500 MB)
+- S3 + CloudFront (Free Tier 1TB/mes) — Aurora Care (frontend estático)
+- Redis en Raspberry Pi ($0) — caché local y cola de eventos
 - Alternativa on-premise: servidor local en el hogar del paciente con port forwarding/DuckDNS
 
 ---
@@ -284,11 +275,11 @@ El backend de Aurora (Aurora Core) debe manejar múltiples responsabilidades: AP
 
 #### Opciones consideradas
 
-| Opción | Versión | Fundamentos |
-|---|---|---|
-| **Node.js / TypeScript** — NestJS o Fastify | Node 22 LTS, TS 5.x | Ecosistema maduro, tipado estático, async/await nativo, mismo lenguaje que n8n |
-| **Python** — FastAPI o Django | Python 3.12, FastAPI 0.110+ | Ideal para IA/ML, tipado con Pydantic, buena performance asíncrona |
-| **Java** — Spring Boot 3 | Java 21 LTS, Spring Boot 3.x | Madurez enterprise, rendimiento superior, ecosistema vasto |
+| Opción                                      | Versión                      | Fundamentos                                                                    |
+| ------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------ |
+| **Node.js / TypeScript** — NestJS o Fastify | Node 22 LTS, TS 5.x          | Ecosistema maduro, tipado estático, async/await nativo, mismo lenguaje que n8n |
+| **Python** — FastAPI o Django               | Python 3.12, FastAPI 0.110+  | Ideal para IA/ML, tipado con Pydantic, buena performance asíncrona             |
+| **Java** — Spring Boot 3                    | Java 21 LTS, Spring Boot 3.x | Madurez enterprise, rendimiento superior, ecosistema vasto                     |
 
 #### Criterios de evaluación
 
@@ -304,18 +295,30 @@ El backend de Aurora (Aurora Core) debe manejar múltiples responsabilidades: AP
 
 #### Decisión
 
-
+Se adopta **Python con Django** como lenguaje y framework backend para Aurora Core.
 
 **Fundamento:**
-
+- El equipo tiene experiencia sólida en Python, lo que acelera el desarrollo y reduce la curva de aprendizaje
+- Django ofrece un ecosistema maduro con ORM, autenticación, admin panel y migraciones integradas
+- La integración con IA/ML es nativa (Python es el lenguaje estándar del ecosistema)
+- Django REST Framework (DRF) proporciona una base sólida para la API REST
+- La concurrencia con Django Channels + ASGI cubre las necesidades de WebSocket
+- Aunque n8n está construido en Node.js, la integración vía webhooks/REST no requiere mismo lenguaje
 
 #### Consecuencias
 
 **Positivas:**
-
+- Mayor velocidad de desarrollo gracias a la familiaridad del equipo con Python/Django
+- Ecosistema IA/ML directamente accesible (LangChain, transformers, spaCy, etc.)
+- Django Admin proporciona una interfaz de gestión rápida para debugging interno
+- ORM maduro con migraciones automáticas y soporte para PostgreSQL + pgvector
+- Comunidad grande, documentación extensa y abundantes paquetes de terceros
 
 **Negativas (trade-offs):**
-
+- Django no es asíncrono por defecto; requiere configuración ASGI (Daphne/Uvicorn) para WebSocket
+- Menor rendimiento bruto que Node.js o Java en operaciones CPU-bound ligeras
+- n8n está construido en Node.js, lo que implica un stack heterogéneo (Python + Node.js)
+- Tipado dinámico de Python requiere disciplina y herramientas externas (mypy, Pydantic) para compensar
 
 ---
 
@@ -342,12 +345,12 @@ Aurora Care es la aplicación que utiliza el cuidador para monitorear al pacient
 
 #### Opciones consideradas
 
-| Opción | Descripción |
-|---|---|
-| **React + Next.js (PWA)** | SPA con service workers, responsive, despliegue estático |
-| **Vue.js + Nuxt** | Similar a Next.js, ecosistema Vue |
-| **Flutter** | Compilado nativo, UI consistente, una sola base de código |
-| **React Native** | App móvil nativa con lógica compartida |
+| Opción                    | Descripción                                               |
+| ------------------------- | --------------------------------------------------------- |
+| **React + Next.js (PWA)** | SPA con service workers, responsive, despliegue estático  |
+| **Vue.js + Nuxt**         | Similar a Next.js, ecosistema Vue                         |
+| **Flutter**               | Compilado nativo, UI consistente, una sola base de código |
+| **React Native**          | App móvil nativa con lógica compartida                    |
 
 #### Criterios de evaluación
 
@@ -362,15 +365,28 @@ Aurora Care es la aplicación que utiliza el cuidador para monitorear al pacient
 
 #### Decisión
 
-
+Se adopta **React + Next.js (PWA)** como framework frontend para Aurora Care.
 
 **Fundamento:**
+- Next.js con App Router proporciona una base sólida para PWA con service workers
+- TypeScript compartido con el backend (Django → DRF → OpenAPI → generar tipos TS)
+- Despliegue estático (SSG) en S3 + CloudFront, sin necesidad de servidor Node.js en producción
+- Service Workers permiten modo offline parcial (caché de datos recientes)
+- Next.js 14 tiene soporte maduro para PWA mediante `next-pwa` o `@serwist/next`
 
 #### Consecuencias
 
 **Positivas:**
+- Una sola base de código para mobile y desktop (responsive + PWA)
+- Sin servidor Node.js en producción (SSG + S3 + CloudFront → costo mínimo)
+- Tipos compartidos backend ↔ frontend mediante generación OpenAPI → TypeScript
+- Notificaciones push vía Service Worker + Push API
+- Despliegue simple: `next build && next export` → subir a S3
 
 **Negativas:**
+- PWA no es una app nativa; ciertas APIs de hardware (bluetooth, sensores) pueden no estar disponibles
+- Service Workers tienen limitaciones en iOS Safari (notificaciones push no soportadas en iOS < 16.4)
+- La experiencia offline es parcial (no permite crear/modificar datos sin conexión)
 
 ---
 
@@ -397,7 +413,8 @@ Aurora requiere persistencia para datos relacionales (pacientes, cuidadores, eve
 #### Opciones consideradas
 
 | Opción | Relacional | Vectorial | Esquema |
-|---|---|---|---|
+|---|---|---|---|---|
+| **Supabase (PostgreSQL + pgvector)** | PostgreSQL 16 (gestionado) | pgvector (extensión) | Plataforma gestionada (DB + Auth + Realtime + Storage) |
 | **PostgreSQL + pgvector** | PostgreSQL 16 | pgvector (extensión) | Una sola base de datos |
 | **PostgreSQL + Qdrant separado** | PostgreSQL 16 | Qdrant (servicio aparte) | Dos bases de datos |
 | **MongoDB + Atlas Vector Search** | MongoDB 7 | Atlas Vector Search (integrado) | Una sola base de datos |
@@ -405,26 +422,41 @@ Aurora requiere persistencia para datos relacionales (pacientes, cuidadores, eve
 
 #### Criterios de evaluación
 
-| Criterio | PostgreSQL + pgvector | PostgreSQL + Qdrant | MongoDB + Atlas | PostgreSQL + Pinecone |
-|---|---|---|---|---|
-| Costo Free Tier | ★★★★★ Gratis (RDS + pgvector) | ★★★★ Gratis RDS + Qdrant self-host | ★★★ Free tier limitado (512MB) | ★★★ Gratis RDS + Pinecone free tier limitado |
-| Simplicidad operativa | ★★★★★ Un solo motor | ★★★★ Dos servicios | ★★★★★ Una sola DB | ★★★ Dos servicios SaaS |
-| Madurez relacional | ★★★★★ Excelente | ★★★★★ Excelente | ★★★★ Bueno | ★★★★★ Excelente |
-| Búsqueda vectorial | ★★★★ Buena (HNSW) | ★★★★★ Excelente (HNSW, filtros) | ★★★★ Buena | ★★★★★ Excelente (gestionado) |
-| Flexibilidad de esquema | ★★★ Esquema fijo | ★★★ Esquema fijo | ★★★★★ Sin esquema | ★★★ Esquema fijo |
-| Comunidad / Soporte | ★★★★★ Masiva | ★★★ Creciente | ★★★★★ Masiva | ★★★★ Creciente |
+| Criterio                | Supabase (PG + pgvector)       | PostgreSQL + pgvector         | PostgreSQL + Qdrant                | MongoDB + Atlas                | PostgreSQL + Pinecone                        |
+| ----------------------- | ------------------------------ | ----------------------------- | ---------------------------------- | ------------------------------ | -------------------------------------------- |
+| Costo Free Tier         | ★★★★ Gratis (Free Project)     | ★★★★★ Gratis (RDS + pgvector) | ★★★★ Gratis RDS + Qdrant self-host | ★★★ Free tier limitado (512MB) | ★★★ Gratis RDS + Pinecone free tier limitado |
+| Simplicidad operativa   | ★★★★★ Plataforma gestionada    | ★★★★ Un solo motor            | ★★★★ Dos servicios                 | ★★★★★ Una sola DB              | ★★★ Dos servicios SaaS                       |
+| Madurez relacional      | ★★★★★ Excelente (PostgreSQL)   | ★★★★★ Excelente               | ★★★★★ Excelente                    | ★★★★ Bueno                     | ★★★★★ Excelente                              |
+| Búsqueda vectorial      | ★★★★ Buena (pgvector HNSW)     | ★★★★ Buena (HNSW)             | ★★★★★ Excelente (HNSW, filtros)    | ★★★★ Buena                     | ★★★★★ Excelente (gestionado)                 |
+| Servicios adicionales   | ★★★★★ Auth + Realtime + Storage| ★★★ Solo DB                  | ★★★ Solo DB                       | ★★★★ Atlas servicios           | ★★★ Solo DB                                  |
+| Flexibilidad de esquema | ★★★ Esquema fijo               | ★★★ Esquema fijo              | ★★★ Esquema fijo                   | ★★★★★ Sin esquema              | ★★★ Esquema fijo                             |
+| Comunidad / Soporte     | ★★★★ Creciente                 | ★★★★★ Masiva                  | ★★★ Creciente                      | ★★★★★ Masiva                   | ★★★★ Creciente                               |
 
 #### Decisión
 
-
+Se adopta **Supabase (PostgreSQL 16 + pgvector)** como plataforma de datos.
 
 **Fundamento:**
+- Supabase ofrece PostgreSQL gestionado con extensión pgvector incluida, eliminando la necesidad de administrar RDS
+- Incluye autenticación, Realtime (WebSocket), Storage y APIs automáticas, reduciendo servicios externos
+- Plan Free Project (500 MB DB, 2 GB storage, 50k MAU) es suficiente para prototipo y validación
+- Al estar basado en PostgreSQL puro, no hay vendor lock-in: se puede migrar a PostgreSQL estándar en cualquier momento
+- pgvector proporciona búsqueda vectorial HNSW integrada, suficiente para RAG (memoria del paciente)
 
 #### Consecuencias
 
 **Positivas:**
+- Reducción de servicios externos: Supabase reemplaza RDS, ElastiCache (Realtime), Auth0 y S3 (storage)
+- Costo inicial $0 con el Free Project de Supabase
+- APIs automáticas de Supabase (REST + Realtime) agilizan el desarrollo inicial
+- Migración trivial a PostgreSQL estándar si se supera el Free Tier
+- Auth integrado con Row Level Security (RLS) para multi-tenant (cada cuidador ve solo sus pacientes)
 
 **Negativas:**
+- Free Project limitado a 500 MB DB, 2 proyectos simultáneos
+- Supabase Realtime no es un reemplazo completo de Redis para colas/pub-sub complejos
+- Dependencia parcial de un servicio externo (Supabase Cloud); la instancia self-hosted de Supabase requiere recursos adicionales
+- pgvector tiene rendimiento inferior a soluciones vectoriales dedicadas (Qdrant, Pinecone) en conjuntos de datos muy grandes (>1M vectores), pero es suficiente para el volumen esperado
 
 
 ---
@@ -472,16 +504,37 @@ Aurora integra múltiples subsistemas (voz, IoT, IA, automatización, notificaci
 
 #### Decisión
 
-**Estructura:**
+Se adopta el patrón de **Microservicios** como arquitectura principal, organizados por dominio.
 
+**Estructura propuesta:**
+- **Aurora Core API** — Gateway REST + WebSocket (Django + Channels) — punto único de entrada
+- **Worker IA** — Servicio Python independiente (FastAPI) para inferencia LLM + RAG
+- **Aurora Band Gateway** — Servicio Node.js para ingesta de datos biométricos
+- **n8n** — Orquestador de flujos separado para automatización (recordatorios, escalado de alertas)
+- Comunicación síncrona vía REST/HTTP entre servicios; comunicación asíncrona vía Redis Pub/Sub para eventos en tiempo real
 
+**Fundamento:**
+- Tolerancia a fallos parciales: una caída del Worker IA no afecta los recordatorios programados ni la ingesta biométrica
+- Escalabilidad selectiva: el Worker IA puede escalar independientemente si aumenta la demanda de LLM
+- n8n como orquestador externo desacopla la automatización de flujos del código de dominio
+- Redis Pub/Sub como backbone de eventos permite comunicación en tiempo real sin acoplar servicios
+- Cada servicio puede desarrollarse en el lenguaje más adecuado (Python para IA, Node.js para IoT Gateway)
 
 #### Consecuencias
 
 **Positivas:**
-
+- Aislamiento de fallos: un error en el Worker IA no bloquea el resto del sistema
+- Despliegue independiente: cada servicio puede actualizarse sin afectar a los demás
+- Stack heterogéneo permite usar Python para IA y Node.js para tiempo real según convenga
+- n8n externaliza flujos de automatización sin necesidad de código personalizado
+- Redis Pub/Sub proporciona comunicación en tiempo real desacoplada
 
 **Negativas:**
+- Mayor complejidad operativa: múltiples servicios que monitorear, desplegar y mantener
+- Latencia de red entre servicios (vs. llamadas internas en un monolito)
+- Consistencia eventual entre servicios: requiere manejo de estados y compensaciones
+- Debugging distribuido más complejo (trazabilidad entre servicios)
+- El equipo pequeño enfrenta una sobrecarga inicial de configuración (Docker Compose, redes, health checks)
 
 ---
 
@@ -529,20 +582,35 @@ Aurora maneja datos sensibles de salud (biométricos, ubicación, medicación, h
 
 #### Decisión
 
+Se adopta **Auth0** como proveedor de autenticación y autorización.
 
 **Fundamento:**
+- Auth0 ofrece un SDK maduro para Python/Django (social-auth-app-django, django-rest-framework-simplejwt)
+- Soporte nativo para multi-tenant mediante Organizations (cada cuidador asociado a un paciente)
+- MFA/2FA incluido sin configuración adicional, crítico para datos de salud
+- Free Tier (7k MAU) es suficiente para la etapa inicial (decenas de cuidadores)
+- Cero mantenimiento de infraestructura de autenticación
+- Integración con redes sociales (Google, Apple) para facilitar el registro de cuidadores
 
 #### Consecuencias
 
 **Positivas:**
-
+- Implementación rápida: semanas en lugar de meses para un sistema de autenticación seguro
+- MFA, social login, y recuperación de contraseña sin desarrollo interno
+- Organizations de Auth0 simplifican el multi-tenant (cada organización = un paciente)
+- Trazabilidad de accesos incluida (logs de autenticación)
+- Políticas de contraseñas y bloqueo por intentos fallidos sin código personalizado
 
 **Negativas:**
-
+- Free Tier limitado a 7k MAU; al crecer, el costo escala significativamente
+- Dependencia de un servicio externo: si Auth0 cae, el sistema completo queda inaccesible
+- Los datos de identidad residen en Auth0 (consideraciones de privacidad/residencia de datos)
+- Migrar a otro proveedor requiere cambiar todos los usuarios de identidad
+- Las Organizations de Auth0 tienen limitaciones en el Free Tier (solo 2 organizaciones)
 
 ---
 
-### ADR-006: Diseño de API
+### ADR-006: Procesamiento de Voz — STT Local en Raspberry Pi
 
 | Campo | Valor |
 |---|---|
@@ -552,69 +620,84 @@ Aurora maneja datos sensibles de salud (biométricos, ubicación, medicación, h
 
 #### Contexto
 
-Aurora Core debe exponer APIs para múltiples clientes: Aurora Home (voice assistant), Aurora Care (web PWA), Aurora Band Gateway (data ingestion), y n8n (webhooks). La API debe soportar tanto operaciones CRUD tradicionales como comunicación en tiempo real.
+Aurora Home (Raspberry Pi) captura audio del paciente para procesarlo mediante STT (Speech-to-Text) y enviar el texto transcrito a Aurora Core. La pregunta clave es dónde ocurre la transcripción: si en la nube (enviando audio crudo a una API STT externa) o localmente en la Raspberry Pi. Esta decisión impacta la latencia, la privacidad, la capacidad offline y el consumo de recursos del dispositivo.
 
 #### Drivers de decisión
 
-1. **Múltiples clientes** con necesidades diferentes (web, IoT, voz, automatización)
-2. **Tiempo real** para interacciones de voz, alertas y actualización de estado
-3. **Simplicidad** para que n8n y servicios externos consuman la API sin lógica compleja
-4. **Tipado** compartido entre backend y frontend
-5. **Documentación** generada automáticamente
+1. **Latencia**: el envío de audio a la nube agrega latencia de red + procesamiento cloud (300-800 ms)
+2. **Privacidad**: el audio crudo del paciente contiene información sensible que idealmente no debería salir del hogar
+3. **Modo offline**: para que Aurora Home funcione sin internet, el STT debe ejecutarse localmente
+4. **Recursos de la RPi**: Whisper.cpp puede ejecutarse en RPi 4/5 con modelos pequeños (tiny/base) con latencia aceptable
+5. **Ancho de banda**: enviar texto transcrito (~100 bytes) vs. audio comprimido (~10-50 KB/segundo) reduce drásticamente el uso de red
 
 #### Opciones consideradas
 
 | Opción | Descripción |
 |---|---|
-| **REST + WebSocket** | REST para CRUD, WebSocket para tiempo real y streaming de audio |
-| **GraphQL** | API flexible con tipado, suscripciones para tiempo real |
-| **gRPC** | RPC tipado con streaming bidireccional, alta performance |
-| **REST + SSE (Server-Sent Events)** | REST + eventos unidireccionales |
+| **STT cloud** | Aurora Home envía audio crudo a API cloud (Whisper API, Google STT). Máxima precisión, mínima carga en RPi |
+| **STT local (RPi)** | Transcripción en la RPi con Whisper.cpp (modelo tiny/base). Privacidad total, funciona offline |
+| **STT híbrido** | Local por defecto, con fallback a cloud si la RPi no puede procesar (alta carga CPU, audio muy ruidoso) |
+| **STT local + TTS cloud** | Transcripción local, síntesis de voz en cloud. Balance entre privacidad y calidad de voz |
 
 #### Criterios de evaluación
 
-| Criterio | REST + WebSocket | GraphQL | gRPC | REST + SSE |
+| Criterio | STT cloud | STT local (RPi) | STT híbrido | STT local + TTS cloud |
 |---|---|---|---|---|
-| Simplicidad de consumo | ★★★★★ Universal | ★★★★ Bueno (pero query complejo) | ★★★ Requiere proto | ★★★★★ Universal |
-| Tiempo real bidireccional | ★★★★★ WebSocket | ★★★★ Subscriptions | ★★★★★ Streaming | ★★ SSE unidireccional |
-| Streaming de audio | ★★★★★ WebSocket | ★★★ Subscriptions | ★★★★★ Streaming | ★ No soportado |
-| Documentación automática | ★★★★ Swagger/OpenAPI | ★★★★★ GraphiQL/Introspection | ★★★★ Protobuf | ★★★★ Swagger/OpenAPI |
-| Tipado compartido | ★★★★ OpenAPI → TS | ★★★★★ Codegen nativo | ★★★★ Proto → TS | ★★★★ OpenAPI → TS |
-| Eficiencia de red | ★★★ Múltiples endpoints | ★★★★★ Una query específica | ★★★★★ Binario eficiente | ★★★ Múltiples endpoints |
-| Facilidad para n8n | ★★★★★ Webhook nativo | ★★★★ Query HTTP | ★★ Bajo soporte | ★★★★★ Webhook nativo |
-| Curva de aprendizaje | ★★★★★ Baja | ★★★★ Media | ★★★ Alta | ★★★★★ Baja |
+| Privacidad de audio | ★★ El audio sale del hogar | ★★★★★ Nunca sale de la RPi | ★★★★ Generalmente local | ★★★★★ Audio nunca sale |
+| Latencia (p50) | ★★★ 300-800 ms red + cloud | ★★★★ 200-500 ms local | ★★★★ 200-500 ms (local) | ★★★★ 200-500 ms local |
+| Funcionamiento offline | ★★ No funciona sin internet | ★★★★★ Sí, completamente | ★★★★ Sí, con precisión reducida | ★★★★ Sí, pero sin TTS |
+| Precisión STT | ★★★★★ Whisper large / Google | ★★★ Whisper tiny/base | ★★★★ Generalmente buena | ★★★ Whisper tiny/base |
+| Carga CPU en RPi | ★★★★★ Mínima (solo captura) | ★★ 30-60% CPU持续 | ★★★ Media | ★★ 30-60% CPU持续 |
+| Complejidad firmware | ★★★★★ Simple (enviar audio) | ★★★ Whisper.cpp + optimización | ★★ Lógica de fallback compleja | ★★★ Whisper.cpp + gestión |
 
 #### Decisión
 
+Se adopta **STT local en la Raspberry Pi** con Whisper.cpp (modelo base) para la transcripción de voz del paciente.
 
 **Fundamento:**
+- La privacidad del paciente es crítica: el audio crudo nunca sale del hogar, solo se envía texto transcrito a Aurora Core
+- Whisper.cpp en RPi 4/5 logra transcripción en tiempo real (200-500 ms) con el modelo base, comparable a la latencia de cloud
+- El STT local es un requisito habilitante para el modo offline (ADR-008)
+- Enviar texto en lugar de audio reduce el ancho de banda y la dependencia de red
+- La API de Aurora Core recibe texto (no audio), simplificando el protocolo a REST + WebSocket para mensajes de texto
+- Para TTS se mantiene cloud (ElevenLabs) para calidad de voz superior, con fallback a TTS offline (Piper) en modo degradado
 
 #### Consecuencias
 
 **Positivas:**
-
+- Privacidad total del audio del paciente (nunca sale de la RPi)
+- Latencia de transcripción predecible y sin dependencia de red
+- Funcionamiento offline completo para STT (interacción vocal básica sin internet)
+- Reducción de ancho de banda: texto vs. audio crudo
+- Simplificación del protocolo: Aurora Home envía texto, no audio, a Aurora Core
 
 **Negativas:**
-
+- Whisper.cpp en RPi consume 30-60% de CPU durante la transcripción, limitando otros procesos
+- La precisión del modelo base es inferior a Whisper large o Google STT, especialmente con acentos o ruido de fondo
+- La RPi requiere ~1-2 GB de RAM adicional para Whisper.cpp
+- Actualizaciones del modelo STT requieren descarga de archivos a la RPi
+- No es posible mejorar la precisión usando modelos más grandes sin afectar la experiencia de usuario (latencia + CPU)
 
 #### Presupuesto de latencia para el pipeline de voz (baseline esperado)
 
-La cadena de procesamiento de una interacción de voz involucra componentes secuenciales con latencias estimadas en condiciones normales (p50):
+Con STT local en RPi, la cadena de procesamiento cambia:
 
 | Etapa | Latencia estimada | Dependencia |
 |---|---|---|
-| Captura de audio + envío | <100 ms | Aurora Home → red local |
-| STT (Speech-to-Text) | 300-800 ms | API cloud externa |
+| Captura de audio | <50 ms | Aurora Home (local) |
+| STT local (Whisper.cpp base) | 200-500 ms | Aurora Home (RPi CPU) |
+| Envío de texto transcrito a Aurora Core | <50 ms | Red local → cloud |
 | LLM + RAG (generación de respuesta) | 500-2000 ms | API cloud externa + consulta a BD |
 | TTS (Text-to-Speech) | 200-500 ms | API cloud externa |
 | Recepción + reproducción | <100 ms | Red local → Aurora Home |
-| **Total estimado (p50)** | **~1.1-3.5 segundos** | |
+| **Total estimado (p50)** | **~1.0-3.2 segundos** | |
 
-**Objetivo de diseño:** p95 por debajo de 4 segundos para respuestas conversacionales simples (recordatorios, confirmaciones). Para respuestas que requieren RAG completo (reminiscencia, actividades cognitivas), se acepta hasta 6 segundos.
+**Objetivo de diseño:** p95 por debajo de 3.5 segundos para respuestas conversacionales simples. Para respuestas que requieren RAG completo, se acepta hasta 5.5 segundos.
 
 **Implicaciones:**
-- Si la latencia supera estos umbrales, se debe considerar: (a) modelos de IA más ligeros, (b) STT/TTS local en Aurora Home, (c) caché de respuestas frecuentes, (d) respuestas parciales con indicación de "estoy pensando..."
-- La instancia EC2 t2.micro con CPU credits limitados puede agregar latencia de red; monitorear en staging antes de producción
+- Whisper.cpp debe ejecutarse con prioridad ajustable para no bloquear otros procesos de Aurora Home
+- Si la CPU de la RPi no da abasto, considerar: (a) modelo smaller (tiny en lugar de base), (b) offloading a GPU (si hay acelerador), (c) STT híbrido con fallback a cloud selectivo
+- Pipeline de voz completamente offline es posible (STT local + TTS Piper + LLM local) para operación degradada total
 
 ---
 
@@ -661,36 +744,38 @@ El sistema Aurora debe desplegarse inicialmente con costos mínimos (Free Tier A
 
 #### Decisión
 
-Se adopta una estrategia **híbrida con prioridad AWS Free Tier**:
+Se adopta una estrategia **híbrida multicloud + local**:
 
-- **Aurora Core** (API + workers) → **EC2 t2.micro** o **ECS Fargate** (dentro del Free Tier)
-- **Base de datos** → **RDS PostgreSQL Free Tier** (db.t4g.micro, 20GB)
-- **Redis** → **ElastiCache** (caché, pub/sub) — costo mínimo (~$15/mes)
-- **Aurora Care** (frontend) → **S3 + CloudFront** (Free Tier 1TB/mes)
-- **n8n** → Misma instancia EC2 que Aurora Core o contenedor separado
+- **Aurora Core** (API + workers) → **VPS Hostinger** (plan económico, ~$4-8/mes) con Docker Compose
+- **Base de datos** → **Supabase** (PostgreSQL + pgvector, Free Project) — o **RDS PostgreSQL Free Tier** como alternativa si se supera el Free Tier de Supabase
+- **Redis** → **Ejecutado en la Raspberry Pi** (Aurora Home) para caché local y cola de mensajería offline. Alternativa cloud si se necesita Redis compartido entre servicios
+- **Aurora Care** (frontend) → **S3 + CloudFront** (AWS Free Tier 1TB/mes) o **Hostinger VPS** (misma instancia)
+- **n8n** → Misma instancia VPS que Aurora Core o contenedor separado
 - **Aurora Home** → **Raspberry Pi 4/5** en el hogar del paciente
-- **Dominio** → DuckDNS (gratuito) o Route53 (costo mínimo)
+- **AWS Free Tier** → Uso complementario para S3/CloudFront y como respaldo si Hostinger no es suficiente
+- **Dominio** → DuckDNS (gratuito) o Namecheap/Hostinger (costo mínimo)
 - **CI/CD** → **GitHub Actions** (Free Tier: 2000 min/mes para repos privados; repos públicos tienen minutos ilimitados. Si el repo es privado, considerar build eficiente: cache de Docker layer, separar jobs de test y deploy, y evitar builds innecesarios en cada commit)
 
-**Plan de migración a on-premise:**
-- Todo el stack (excepto Aurora Home) empaquetado en Docker Compose
+**Plan de migración:**
+- Todo el stack empaquetado en Docker Compose desde el inicio, permitiendo migrar entre Hostinger, AWS o on-premise sin cambios de código
 - n8n permite reconfigurar flujos sin cambiar código
+- Redis en la RPi proporciona caché local y cola de eventos para operación offline; si se necesita Redis compartido, se puede añadir un contenedor Redis en el VPS
 
 #### Consecuencias
 
 **Positivas:**
-- Costo inicial cercano a $0 gracias al Free Tier de AWS
-- Docker Compose en todo el stack permite portabilidad completa (cloud ↔ on-premise)
+- Costo inicial bajo: VPS Hostinger (~$4-8/mes) + Free Tier de AWS/Supabase
+- Redis en la RPi reduce costos cloud y mejora la resiliencia offline (caché local siempre disponible)
+- Sin depender de un solo proveedor cloud: se puede migrar entre Hostinger, AWS u on-premise
 - GitHub Actions automatiza pruebas y despliegue sin costo adicional
 - Aurora Home con actualización OTA via `git pull` o Docker pull
-- La instancia EC2 única simplifica el monitoreo y la gestión inicial
 
 **Negativas:**
-- EC2 t2.micro tiene CPU limitada (CPU credits); cargas sostenidas pueden estrangular el rendimiento
-- RDS Free Tier no tiene réplicas Multi-AZ (riesgo ante falla de AZ)
-- ElastiCache tiene un costo aunque sea mínimo (~$15/mes); se puede usar Redis en la misma EC2 como alternativa más económica
+- Hostinger VPS tiene recursos limitados comparado con AWS; puede requerir migrar a AWS si la carga crece
+- Redis en la RPi no está disponible para servicios cloud si la RPi está apagada o sin red (limitado a uso local)
+- La administración del VPS (actualizaciones OS, seguridad) es responsabilidad del equipo, no gestionado
 - On-premise requiere que el cuidador tenga internet estable y conocimientos básicos para reiniciar el sistema si falla
-- La migración entre cloud y on-premise requiere sincronización de datos (backup/restore de PostgreSQL)
+- La migración entre proveedores cloud requiere sincronización de datos (backup/restore de PostgreSQL)
 
 ---
 
@@ -737,11 +822,11 @@ Aurora Home (el asistente de voz en el hogar del paciente) depende de conectivid
 
 Se adopta el modo **degradado híbrido** con la siguiente estrategia:
 
-- **En línea (conectividad normal):** Funcionamiento completo con STT/TTS/LLM cloud. Aurora Home opera como thin client de voz.
+- **En línea (conectividad normal):** STT local con Whisper.cpp, TTS cloud (ElevenLabs) y LLM cloud. Aurora Home envía texto transcrito a Aurora Core.
 - **Sin conectividad (degradado):**
   - **Recordatorios programados** se ejecutan localmente desde un archivo de configuración con horarios cacheados (sincronizado desde Aurora Core cuando hay conexión)
-  - **Interacción por voz básica:** Se utiliza un pequeño modelo TTS offline (e.g., Piper TTS) para respuestas predefinidas ("Lo siento, no tengo conexión", "Es hora de tu medicación")
-  - **El audio del paciente** se almacena localmente en un buffer circular (máximo 5 minutos) para su procesamiento posterior cuando la conexión se restablezca
+  - **Interacción por voz básica:** STT local (Whisper.cpp) + TTS offline (Piper TTS) para respuestas predefinidas ("Lo siento, no tengo conexión", "Es hora de tu medicación"). LLM offline con modelo pequeño (opcional)
+  - **El audio del paciente** se transcribe localmente y las transcripciones se almacenan para su envío posterior cuando la conexión se restablezca
   - **Alertas críticas** (caídas detectadas por la pulsera) se almacenan localmente y se reenvían al restaurar la conexión; no se pierden
 - **Reconexión automática:** Al detectar conectividad, Aurora Home sincroniza eventos almacenados, descarga actualizaciones de configuración, y reanuda operación completa. Implementar con **retry exponencial** y health check periódico.
 
@@ -784,74 +869,72 @@ Aurora Band (pulsera IoT) debe enviar datos biométricos (frecuencia cardíaca, 
 
 #### Opciones consideradas
 
-| Opción | Modelo | Consumo | Confiabilidad |
-|---|---|---|---|
-| **HTTP REST** | Request-response (pull) | Alto (conexión por cada envío) | Medio (sin QoS nativo) |
-| **MQTT** | Pub-sub (push) | Bajo (conexión persistente ligera) | Alto (QoS 0, 1, 2) |
-| **WebSocket** | Full-duplex | Medio (conexión persistente TCP) | Medio (sin QoS) |
-| **CoAP** | Request-response sobre UDP | Muy bajo | Bajo (UDP, sin garantía) |
+| Opción        | Modelo                     | Consumo                            | Confiabilidad            |
+| ------------- | -------------------------- | ---------------------------------- | ------------------------ |
+| **HTTP REST** | Request-response (pull)    | Alto (conexión por cada envío)     | Medio (sin QoS nativo)   |
+| **MQTT**      | Pub-sub (push)             | Bajo (conexión persistente ligera) | Alto (QoS 0, 1, 2)       |
+| **WebSocket** | Full-duplex                | Medio (conexión persistente TCP)   | Medio (sin QoS)          |
+| **CoAP**      | Request-response sobre UDP | Muy bajo                           | Bajo (UDP, sin garantía) |
 
 #### Criterios de evaluación
 
-| Criterio | HTTP REST | MQTT | WebSocket | CoAP |
-|---|---|---|---|---|
-| Consumo energético | ★★ Alto (handshake + headers cada request) | ★★★★★ Bajo (conexión persistente ligera) | ★★★ Medio | ★★★★★ Muy bajo |
-| Confiabilidad (QoS) | ★★★ Retry manual | ★★★★★ QoS 0/1/2 nativo | ★★★ Sin QoS nativo | ★★ No garantizado |
-| Manejo de desconexión | ★★★★ Buffer + retry | ★★★★★ Sesión persistente + buffer en broker | ★★★ Reconexión manual | ★★★ Retry simple |
-| Ancho de banda | ★★ Headers HTTP verbosos | ★★★★★ Binario ligero | ★★★★ Framing simple | ★★★★★ Mínimo |
-| Madurez en IoT | ★★★★ Común en APIs | ★★★★★ Estándar de facto IoT | ★★★ Poco común en IoT | ★★★ Emergente |
-| Complejidad firmware | ★★★★★ Simple | ★★★★ Media (cliente MQTT) | ★★★ Media | ★★★ Media |
-| Facilidad de integración en Aurora Core | ★★★★★ Express/NestJS nativo | ★★★★ Broker + bridge HTTP | ★★★★★ Nativo WebSocket | ★★ Bridge necesario |
+| Criterio                                | HTTP REST                                             | MQTT                                                              | WebSocket                           | CoAP                         |
+| --------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------- | ---------------------------- |
+| Consumo energético (envío c/5 min)      | ★★★★ Bajo (sin conexión persistente, send-and-forget) | ★★★ Medio (conexión persistente innecesaria para baja frecuencia) | ★★★ Medio (conexión TCP permanente) | ★★★★★ Muy bajo               |
+| Confiabilidad (QoS)                     | ★★★ Retry manual                                      | ★★★★★ QoS 0/1/2 nativo                                            | ★★★ Sin QoS nativo                  | ★★ No garantizado            |
+| Manejo de desconexión                   | ★★★★ Buffer local + batch REST                        | ★★★★★ Sesión persistente + buffer en broker                       | ★★★ Reconexión manual               | ★★★ Retry simple             |
+| Ancho de banda (payload pequeño)        | ★★★ Headers verbosos pero payload <1 KB               | ★★★★★ Binario ligero                                              | ★★★★ Framing simple                 | ★★★★★ Mínimo                 |
+| Madurez en IoT                          | ★★★★ Común en APIs                                    | ★★★★★ Estándar de facto IoT                                       | ★★★ Poco común en IoT               | ★★★ Emergente                |
+| Complejidad firmware                    | ★★★★★ Simple (librerías HTTP estándar)                | ★★★★ Media (cliente MQTT + manejo de sesión)                      | ★★★ Media                           | ★★★ Media                    |
+| Facilidad de integración en Aurora Core | ★★★★★ Django REST Framework nativo                    | ★★★★ Requiere broker MQTT + bridge                                | ★★★★★ Django Channels nativo        | ★★ Bridge necesario          |
+| Infraestructura adicional               | ★★★★★ Ninguna (solo endpoint HTTP)                    | ★★★ Requiere broker MQTT (Mosquitto/EMQX)                         | ★★★★ Solo WebSocket server          | ★★★ Requiere proxy CoAP-HTTP |
 
 #### Decisión
 
-Se adopta **MQTT** como protocolo primario de comunicación entre Aurora Band y el Aurora Band Gateway, con **HTTP REST** como canal secundario para comandos de configuración y sincronización inicial.
+Se adopta **API REST (HTTP)** como protocolo de comunicación entre Aurora Band y Aurora Band Gateway.
 
-**Arquitectura MQTT:**
+**Fundamento:**
+- **Simplicidad del firmware**: la pulsera IoT tiene recursos limitados; un cliente HTTP es más simple y liviano que un cliente MQTT completo
+- **Frecuencia de envío baja**: datos biométricos cada 1-5 minutos más eventos esporádicos — no justifica una conexión persistente MQTT
+- **Batería**: REST con conexión HTTP corta (send-and-forget) consume menos energía que mantener una conexión TCP persistente para envíos tan espaciados
+- **Integración nativa**: Django REST Framework procesa los endpoints HTTP sin necesidad de un broker MQTT adicional
+- **Compatibilidad con modo offline**: la pulsera acumula datos localmente y los envía como batch REST cuando hay conectividad
+- **Menor infraestructura**: no requiere broker MQTT, simplificando el despliegue y monitoreo
 
-```
-Aurora Band ──MQTT──→ [Broker MQTT (Mosquitto / AWS IoT Core)] ──→ Aurora Band Gateway ──→ Aurora Core
-```
-
-- **MQTT QoS 1** para datos biométricos periódicos (al menos una entrega, sin duplicación estricta)
-- **MQTT QoS 2** para eventos críticos (caídas, alertas de emergencia) — entrega exactamente una vez
-- **Tópicos**: `/aurora/band/{device_id}/biometric`, `/aurora/band/{device_id}/event`, `/aurora/band/{device_id}/status`
-- **HTTP REST** para: registro inicial del dispositivo, sincronización de configuración, consulta de estado (batería, conectividad)
-- **Broker**: AWS IoT Core (si se usa AWS) o Mosquitto self-hosted (si on-premise)
+**Nota:** Para eventos críticos (detección de caídas) donde la latencia importa, se puede establecer una conexión WebSocket bajo demanda como complemento a REST.
 
 #### Consecuencias
 
 **Positivas:**
-- MQTT está diseñado para IoT: conexiones de baja potencia, reconexión automática con sesión persistente, y QoS granular
-- El broker MQTT desacopla la pulsera del backend: la pulsera publica eventos y no necesita conocer la topología del servidor
-- AWS IoT Core tiene integración nativa con el resto del stack AWS y reglas para reenviar mensajes a Lambda, SQS o Kinesis
-- El payload binario ligero (CBOR o MessagePack sobre MQTT vs. JSON sobre HTTP) reduce el ancho de banda y el consumo de batería
-- Los tópicos con wildcards permiten escalar a múltiples pulseras sin cambiar la infraestructura
+- Firmware más simple y testeable (HTTP es ubicuo, librerías maduras en C/C++ para IoT)
+- Sin broker MQTT que administrar (una pieza menos de infraestructura)
+- Compatible con REST estándar de Django (DRF viewsets, serializers, auth JWT)
+- Buffer de datos offline simple: almacenar en JSON local y enviar como batch HTTP cuando hay conexión
+- Debugging sencillo con herramientas HTTP estándar (curl, Postman, logs de Django)
 
 **Negativas:**
-- MQTT introduce un componente adicional (el broker) que debe ser administrado o pagado como servicio
-- AWS IoT Core tiene costos (aprox. $0.08/millón de mensajes después del Free Tier de 250KB/mes)
-- Si se usa Mosquitto self-hosted, es un servicio más que monitorear y mantener actualizado
-- El equipo necesita familiarizarse con MQTT (tópicos, QoS, will messages, retained messages)
-- La depuración de problemas de conectividad IoT es más compleja que con HTTP simple (pérdida de mensajes, QoS no entregado)
-- Para migrar a on-premise, el broker MQTT debe desplegarse junto con el resto del stack
+- Mayor consumo energético por envío individual que MQTT (handshake TCP + headers HTTP por cada request), aunque mitigado por la baja frecuencia de envío
+- Sin QoS nativo: necesita retry manual en el firmware si la request falla
+- Mayor latencia por envío que MQTT persistente (handshake TCP overhead)
+- Headers HTTP más verbosos que el binario MQTT, aunque el payload biométrico es pequeño
+- Si la frecuencia de envío aumenta a segundos (no minutos), MQTT sería más eficiente
+
 
 ---
 
-## 4. Pautas de Codificación
-
+## 4. Pautas de codificación
 ### 4.1 Convenciones de nomenclatura
 
-| Elemento | Convención | Ejemplo |
-|---|---|---|
-| Archivos TypeScript/JavaScript | `kebab-case` | `patient-service.ts`, `event-handler.ts` |
-| Clases / interfaces / tipos | `PascalCase` | `PatientService`, `AlertEvent` |
-| Funciones / métodos / variables | `camelCase` | `getPatientById()`, `createEvent()` |
-| Constantes globales | `UPPER_SNAKE_CASE` | `MAX_RETRY_COUNT`, `ALERT_CRITICAL` |
-| Directorios | `kebab-case` | `src/modules/patient/`, `src/common/` |
-| Archivos de componentes React | `PascalCase` | `PatientDashboard.tsx`, `AlertCard.tsx` |
-| Archivos de test | `*.test.ts` / `*.spec.ts` | `patient-service.test.ts` |
-| Migraciones de BD | `YYYYMMDDHHmmss_<desc>.sql` | `20260525120000_create_patients.sql` |
+| Elemento                        | Convención                  | Ejemplo                                  |
+| ------------------------------- | --------------------------- | ---------------------------------------- |
+| Archivos TypeScript/JavaScript  | `kebab-case`                | `patient-service.ts`, `event-handler.ts` |
+| Clases / interfaces / tipos     | `PascalCase`                | `PatientService`, `AlertEvent`           |
+| Funciones / métodos / variables | `camelCase`                 | `getPatientById()`, `createEvent()`      |
+| Constantes globales             | `UPPER_SNAKE_CASE`          | `MAX_RETRY_COUNT`, `ALERT_CRITICAL`      |
+| Directorios                     | `kebab-case`                | `src/modules/patient/`, `src/common/`    |
+| Archivos de componentes React   | `PascalCase`                | `PatientDashboard.tsx`, `AlertCard.tsx`  |
+| Archivos de test                | `*.test.ts` / `*.spec.ts`   | `patient-service.test.ts`                |
+| Migraciones de BD               | `YYYYMMDDHHmmss_<desc>.sql` | `20260525120000_create_patients.sql`     |
 
 ### 4.2 Estructura de directorios propuesta
 
@@ -945,10 +1028,11 @@ infra/
 tipos: feat, fix, refactor, test, docs, chore, style, perf
 scope: patient, alerts, auth, home, band, api, infra...
 ejemplo: feat(patient): agregar CRUD de perfil de paciente
+
 	- Create para cuidadores
 	- Read para cuidadores y pacientes
 	- Update para cuidadores
-	- Delete desa 
+	- Delete deshabilitar
 ```
 
 ### 4.4 Calidad y testing
@@ -964,11 +1048,11 @@ ejemplo: feat(patient): agregar CRUD de perfil de paciente
 
 ### 5.1 Ambientes
 
-| Ambiente | Infraestructura | Propósito | Actualización |
-|---|---|---|---|
-| **Desarrollo (dev)** | Local (Docker Compose) o AWS Free Tier compartido | Desarrollo diario, pruebas unitarias y de integración | Automática en cada push a `develop` |
-| **Staging** | AWS free tier (EC2 + RDS) | Validación de integración, pruebas con stakeholders, UAT | Automática al merge a `main` |
-| **Producción (prod)** | AWS (pago por uso) u on-premise | Uso real con pacientes | Manual mediante GitHub Releases |
+| Ambiente              | Infraestructura                                   | Propósito                                                | Actualización                       |
+| --------------------- | ------------------------------------------------- | -------------------------------------------------------- | ----------------------------------- |
+| **Desarrollo (dev)**  | Local (Docker Compose)                            | Desarrollo diario, testing interno, pruebas unitarias y de integración | Manual (sin CI/CD, cada desarrollador gestiona su entorno) |
+| **Staging**           | VPS Hostinger / AWS (EC2 + RDS)                   | Validación de integración, pruebas con stakeholders, UAT | Automática al merge a `main`        |
+| **Producción (prod)** | VPS Hostinger / AWS (pago por uso) u on-premise   | Uso real con pacientes                                   | Manual mediante GitHub Releases     |
 
 ### 5.2 Flujo CI/CD (GitHub Actions)
 
@@ -1013,26 +1097,26 @@ jobs:
 ### 5.3 Estrategia de releases
 
 1. **Desarrollo diario** en ramas `feature/*` → PR a `develop`
-2. **Integración** en `develop` → despliegue automático a dev
+2. **Integración** en `develop` (testing interno) → despliegue automático a dev
 3. **Pre-release** → merge a `main` → despliegue automático a staging
 4. **Release** → tag semántico (`v1.0.0`) en `main` → build de producción + deploy manual a prod
 5. **Hotfix** → rama `hotfix/*` desde `main` → PR directo a `main`
 
 ### 5.4 Monitoreo y logging
 
-| Herramienta | Propósito | Costo |
-|---|---|---|
-| **AWS CloudWatch** | Logs de EC2/Lambda, métricas de sistema | Gratuito (5GB logs) |
-| **Sentry** (opcional) | Monitoreo de errores en frontend y backend | Free Tier: 5k eventos/mes |
-| **Uptime Kuma** (self-host) | Health checks de endpoints críticos | Gratuito |
-| **n8n** | Monitoreo visual de flujos de automatización | Incluido en n8n |
+| Herramienta                   | Propósito                                              | Costo                     |
+| ----------------------------- | ------------------------------------------------------ | ------------------------- |
+| **Loki + Prometheus**         | Logs de contenedores y métricas del sistema (self-hosted en VPS) | Gratuito (open source)    |
+| **Sentry**                    | Monitoreo de errores en frontend (Aurora Care) y backend (Aurora Core) | Free Tier: 5k eventos/mes |
+| **Grafana**                   | Dashboard unificado para visualizar logs (Loki) y métricas (Prometheus) | Gratuito (open source)    |
+| **Uptime Kuma** (self-host)   | Health checks de endpoints críticos                    | Gratuito                  |
+| **n8n**                       | Monitoreo visual de flujos de automatización           | Incluido en n8n           |
 
 ### 5.5 Respaldo y recuperación
 
-- **RDS**: Automated backups diarios (7 días de retención en Free Tier)
-- **PostgreSQL dump**: Script semanal que sube a S3 (Gratis: 5GB)
+- **PostgreSQL dump (Supabase)**: Backup vía `pg_dump` semanal, almacenado en S3 (5 GB gratis) o en el VPS
 - **Configuración n8n**: Exportada a JSON y versionada en Git (no incluye credenciales)
-- **Plan de recuperación**: Documento separado en `docs/ops/disaster-recovery.md`
+- **Código y assets**: Versionado en Git (GitHub); el frontend estático se regenera desde CI/CD
 
 ---
 
@@ -1053,20 +1137,20 @@ Dado que Aurora maneja datos sensibles de salud (biométricos, ubicación, medic
 
 ### 6.2 Políticas de retención de datos propuestas
 
-| Tipo de dato | Período sugerido | Justificación |
-|---|---|---|
-| Grabaciones de voz (audio crudo) | 30 días, luego anonimizar o eliminar | Necesario para mejora de modelos STT y auditoría inmediata |
-| Transcripciones de interacciones | 6 meses | Trazabilidad de interacciones y mejora de respuestas LLM |
-| Datos biométricos (HR, temperatura, EDA) | 90 días | Detección de tendencias y patrones de salud |
-| Datos de ubicación (GPS) | 7 días | Seguridad inmediata; datos históricos agregados (sin precisión) se retienen 90 días |
-| Eventos y alertas | 2 años | Trazabilidad legal y médica; base para auditoría |
-| Configuración de rutinas y medicación | Vigencia de la relación + 1 año | Continuidad del servicio; respaldo post-cesación |
-| Datos de cuenta de cuidador | Vigencia de la relación + 2 años | Cumplimiento contable y legal |
+| Tipo de dato                             | Período                              | Justificación                                                                       |
+| ---------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------- |
+| Grabaciones de voz (audio crudo)         | 30 días, luego anonimizar o eliminar | Necesario para mejora de modelos STT y auditoría inmediata                          |
+| Transcripciones de interacciones         | 6 meses                              | Trazabilidad de interacciones y mejora de respuestas LLM                            |
+| Datos biométricos (HR, temperatura, EDA) | 90 días                              | Detección de tendencias y patrones de salud                                         |
+| Datos de ubicación (GPS)                 | 7 días                               | Seguridad inmediata; datos históricos agregados (sin precisión) se retienen 90 días |
+| Eventos y alertas                        | 2 años                               | Trazabilidad legal y médica; base para auditoría                                    |
+| Configuración de rutinas y medicación    | Vigencia de la relación + 1 año      | Continuidad del servicio; respaldo post-cesación                                    |
+| Datos de cuenta de cuidador              | Vigencia de la relación + 2 años     | Cumplimiento contable y legal                                                       |
 
 ### 6.3 Controles de privacidad recomendados
 
-- **Cifrado en reposo**: Todos los datos sensibles en PostgreSQL deben cifrarse a nivel de columna (pgcrypto) o usar RDS encryption-at-rest
-- **Cifrado en tránsito**: TLS 1.3 obligatorio para todas las comunicaciones externas; TLS 1.2 mínimo para comunicación interna
+- **Cifrado en reposo**: Todos los datos sensibles en PostgreSQL deben cifrarse a nivel de columna (pgcrypto)
+- **Cifrado en tránsito**: TLS 1.3 obligatorio para todas las comunicaciones externas
 - **Minimización de datos**: Aurora Home solo debe transmitir el audio necesario para la interacción; no debe almacenar grabaciones en la RPi más allá del buffer circular de 5 minutos
 - **Consentimiento**: El sistema debe registrar el consentimiento del paciente o su tutor legal para el tratamiento de datos, incluyendo alcance, finalidad y vigencia
 - **Anonimización**: Los datos usados para entrenamiento o mejora de modelos IA deben ser anonimizados (eliminar identificadores directos y cuasi-identificadores)
