@@ -321,7 +321,7 @@ Aurora Care es la aplicación que utiliza el cuidador para monitorear al pacient
 3. **Modo offline parcial** para visualizar datos sin conexión
 4. **Rapidez de desarrollo** con el equipo actual
 5. **SEO** no es relevante (app protegida por autenticación)
-6. **Compartir tipos** con el backend TypeScript
+6. **Compartir tipos** con el backend 
 
 #### Decisión
 
@@ -329,7 +329,6 @@ Se adopta **React + Next.js (PWA)** como framework frontend para Aurora Care.
 
 **Fundamento:**
 - Next.js con App Router proporciona una base sólida para PWA con service workers
-- TypeScript compartido con el backend (Django → DRF → OpenAPI → generar tipos TS)
 - Despliegue estático (SSG) en S3 + CloudFront, sin necesidad de servidor Node.js en producción
 - Service Workers permiten modo offline parcial (caché de datos recientes)
 - Next.js 14 tiene soporte maduro para PWA mediante `next-pwa` o `@serwist/next`
@@ -339,7 +338,6 @@ Se adopta **React + Next.js (PWA)** como framework frontend para Aurora Care.
 **Positivas:**
 - Una sola base de código para mobile y desktop (responsive + PWA)
 - Sin servidor Node.js en producción (SSG + S3 + CloudFront → costo mínimo)
-- Tipos compartidos backend ↔ frontend mediante generación OpenAPI → TypeScript
 - Notificaciones push vía Service Worker + Push API
 - Despliegue simple: `next build && next export` → subir a S3
 
@@ -426,7 +424,7 @@ Se adopta el patrón de **Microservicios** como arquitectura principal, organiza
 **Estructura propuesta:**
 - **Aurora Core API** — Gateway REST + WebSocket (Django + Channels) — punto único de entrada
 - **Worker IA** — Servicio Python independiente (FastAPI) para inferencia LLM + RAG
-- **Aurora Band Gateway** — Servicio Node.js para ingesta de datos biométricos
+- **Aurora Band Gateway** — Servicio Python / Django para ingesta de datos biométricos
 - **n8n** — Orquestador de flujos separado para automatización (recordatorios, escalado de alertas)
 - Comunicación síncrona vía REST/HTTP entre servicios; comunicación asíncrona vía Redis Pub/Sub para eventos en tiempo real
 
@@ -737,57 +735,65 @@ Se adopta **API REST (HTTP)** como protocolo de comunicación entre Aurora Band 
 ## 4. Pautas de codificación
 ### 4.1 Convenciones de nomenclatura
 
-| Elemento                        | Convención                  | Ejemplo                                  |
-| ------------------------------- | --------------------------- | ---------------------------------------- |
-| Archivos TypeScript/JavaScript  | `kebab-case`                | `patient-service.ts`, `event-handler.ts` |
-| Clases / interfaces / tipos     | `PascalCase`                | `PatientService`, `AlertEvent`           |
-| Funciones / métodos / variables | `camelCase`                 | `getPatientById()`, `createEvent()`      |
-| Constantes globales             | `UPPER_SNAKE_CASE`          | `MAX_RETRY_COUNT`, `ALERT_CRITICAL`      |
-| Directorios                     | `kebab-case`                | `src/modules/patient/`, `src/common/`    |
-| Archivos de componentes React   | `PascalCase`                | `PatientDashboard.tsx`, `AlertCard.tsx`  |
-| Archivos de test                | `*.test.ts` / `*.spec.ts`   | `patient-service.test.ts`                |
-| Migraciones de BD               | `YYYYMMDDHHmmss_<desc>.sql` | `20260525120000_create_patients.sql`     |
+| Elemento                        | Convención         | Ejemplo                                         |
+| ------------------------------- | ------------------ | ----------------------------------------------- |
+| Archivos Python                 | `snake_case`       | `patient_service.py`, `event_handler.py`        |
+| Clases                          | `PascalCase`       | `PatientService`, `AlertEvent`                  |
+| Funciones / métodos / variables | `snake_case`       | `get_patient_by_id()`, `create_event()`         |
+| Constantes globales             | `UPPER_SNAKE_CASE` | `MAX_RETRY_COUNT`, `ALERT_CRITICAL`             |
+| Directorios                     | `snake_case`       | `apps/patients/`, `common/`                     |
+| Archivos de test                | `test_*.py`        | `test_patient_service.py`                       |
+| Migraciones de BD               | Django autogenera  | `apps/patients/migrations/0001_initial.py`      |
 
 ### 4.2 Estructura de directorios propuesta
 
 ```
 backend/
-  src/
-    modules/
-      patient/
-        patient.module.ts
-        patient.controller.ts
-        patient.service.ts
-        patient.entity.ts
-        dto/
-        interfaces/
-      event/
-      alert/
-      biometric/
-      auth/
-      caregiver/
-      routine/
-      medication/
-      interaction/
-    common/
-      guards/
-      filters/
-      interceptors/
-      pipes/
-      decorators/
-      utils/
-    config/
-    database/
-      migrations/
-      seeds/
-    webhooks/
-      n8n/
-      aurora-home/
-      aurora-band/
-  test/
-    unit/
-    integration/
-    e2e/
+  config/
+    settings/
+      base.py
+      local.py
+      production.py
+    urls.py
+    wsgi.py
+    asgi.py
+  apps/
+    patients/
+      models.py
+      views.py
+      serializers.py
+      urls.py
+      admin.py
+      services.py
+      tests/
+        test_models.py
+        test_views.py
+        test_services.py
+    events/
+    alerts/
+    biometrics/
+    authentication/
+    caregivers/
+    routines/
+    medications/
+    interactions/
+  common/
+    mixins.py
+    permissions.py
+    exceptions.py
+    filters.py
+    pagination.py
+    utils.py
+  webhooks/
+    n8n/
+    aurora-home/
+    aurora-band/
+  requirements/
+    base.txt
+    local.txt
+    production.txt
+  manage.py
+  Dockerfile
 frontend/
   src/
     app/        (Next.js App Router)
@@ -824,11 +830,10 @@ infra/
 ### 4.3 Linting y formateo
 
 | Herramienta | Propósito | Configuración |
-|---|---|---|
-| **ESLint** | Análisis estático TypeScript/JavaScript | Configuración basada en `@typescript-eslint` + `eslint-plugin-nestjs` |
-| **Prettier** | Formateo automático de código | `printWidth: 100`, `semi: true`, `singleQuote: true`, `trailingComma: 'all'` |
-| **Husky** | Git hooks | Pre-commit: lint-staged (ESLint + Prettier) |
-| **lint-staged** | Linting solo de archivos staged | `*.ts` → eslint --fix + prettier --write |
+|---|---|---|---|
+| **Ruff** | Linter + formateo unificado (reemplaza flake8, isort, black, pylint) | `line-length = 100`, `select = ["E", "F", "I", "N", "W"]` |
+| **pre-commit** | Git hooks | `.pre-commit-config.yaml` con hooks: ruff, trailing-whitespace, end-of-file-fixer |
+| **mypy** | Type checking estático (opcional, recomendado) | `strict = true` |
 | **Commitlint** | Validación de mensajes de commit | `conventional-changelog` (Angular convention) |
 
 **Convención de commits:**
@@ -849,10 +854,10 @@ ejemplo: feat(patient): agregar CRUD de perfil de paciente
 
 ### 4.4 Calidad y testing
 
-- **Unit tests**: Jest para backend y Vitest para frontend. Cobertura mínima: 70%
-- **Integration tests**: Supertest para endpoints de API
+- **Unit tests**: `pytest` + `pytest-django` para backend; Vitest para frontend. Cobertura mínima: 70%
+- **Integration tests**: `Django Test Client` + `APITestCase` (DRF) para endpoints de API
 - **E2E**: Playwright para Aurora Care (web)
-- **GitHub Actions**: Ejecutar tests automáticamente en cada push y PR
+- **GitHub Actions**: Ejecutar `pytest` + `ruff check` en cada push y PR
 
 ---
 
@@ -883,10 +888,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test:coverage
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements/base.txt -r requirements/local.txt
+      - run: ruff check .
+      - run: pytest --cov
   
   build-and-deploy:
     needs: test
