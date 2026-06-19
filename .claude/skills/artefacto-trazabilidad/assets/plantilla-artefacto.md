@@ -17,6 +17,7 @@ Last updated time: "{{FECHA}}"
 | Épica | {{EPICA_KEY}} — {{EPICA_NOMBRE}} |
 | Requerimientos | {{RF_IDS}} (ver [[Requerimientos]] · [[Trazabilidad RF-Épicas]]) |
 | Estado en Jira | {{ESTADO}} |
+| Tareas relacionadas | {{TAREAS_KEYS}} (enlazadas con "Relates"; vacío si no aplica) |
 | Enlace | https://project-aurora-alz.atlassian.net/browse/{{KEY}} |
 
 ## 1. Historia de usuario

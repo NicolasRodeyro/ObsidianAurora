@@ -1,6 +1,6 @@
 ---
 name: artefacto-trazabilidad
-description: Genera el "artefacto de trazabilidad" de una historia del backlog de Aurora en el formato que pide la cátedra (conecta la historia con sus decisiones de diseño/ADR, modelo de datos/DER, diagramas de modelado, código y casos de prueba con resultados). Recopila lo que ya exista en el repo y en Jira y deja scaffolding de lo faltante; no inventa. Salida en markdown bajo Document Hub/Trazabilidad/ y resumen/enlace en el ticket de Jira. Usar cuando el usuario pida "artefacto de trazabilidad", "trazabilidad de la historia/US", "documentar/trazar la historia AURA-XX", "artefacto de la historia".
+description: Genera el "artefacto de trazabilidad" de una historia del backlog de Aurora en el formato que pide la cátedra (conecta la historia con sus decisiones de diseño/ADR, modelo de datos/DER, diagramas de modelado, código y casos de prueba con resultados). Soporta un modo "task-first": derivar la Historia de Usuario a partir de una o varias Tareas/Análisis ya hechas (agrupándolas), crearla en Jira bajo su épica y enlazar las tareas, y recién después generar el artefacto. Recopila lo que ya exista en el repo y en Jira y deja scaffolding de lo faltante; no inventa. Salida en markdown bajo Document Hub/Trazabilidad/ y resumen/enlace en el ticket de Jira. Usar cuando el usuario pida "artefacto de trazabilidad", "trazabilidad de la historia/US", "documentar/trazar la historia AURA-XX", "artefacto de la historia", "derivar/generar una historia desde una tarea o análisis", "agrupar estas tareas en una historia y trazarla".
 version: 0.1.0
 ---
 
@@ -16,17 +16,33 @@ Principio de operación: **recopilar lo que ya exista** (Jira, ADRs, código, te
 
 ```
 /artefacto-trazabilidad
-→ "generá el artefacto de trazabilidad de AURA-60"
-→ "trazabilidad de esta historia: <pego la historia>"
-→ "documentá la historia del archivo docs/historia-login.md"
+→ "generá el artefacto de trazabilidad de AURA-60"           # historia existente
+→ "derivá una historia desde las tareas AURA-60 y AURA-61"   # modo task-first
+→ "trazabilidad de esta historia: <pego la historia>"        # manual
+→ "documentá la historia del archivo docs/historia-login.md" # archivo
 ```
 
-Acepta dos modos de entrada: **key de Jira** (ej. `AURA-60`) o **historia manual/archivo**. Si no se indica la historia, preguntar cuál documentar.
+Modos de entrada: **historia existente** (key de Jira tipo Historia), **task-first** (uno o varios keys de Tarea/Análisis → derivar la historia), o **historia manual/archivo**. Si no se indica nada, preguntar qué documentar.
+
+## Modo task-first (derivar la historia desde tareas)
+
+El equipo trabaja con **tareas técnicas**; este modo deriva la Historia de Usuario *después* de hacer el trabajo, sin cambiar el ritmo. Aplica solo a tareas que **construyen el producto** (código/diseño/pruebas), no a tareas de gestión/documentación. Por defecto se **agrupan varias tareas relacionadas en UNA historia** (1 tarea = 1 historia fragmenta el backlog; evitarlo salvo que el usuario lo pida).
+
+1. **Entrada:** uno o varios keys de Tarea/Análisis relacionados (ej. "desde AURA-60 y AURA-61").
+2. **Traer las tareas** con `mcp__atlassian__getJiraIssue` (summary, description, comments) y entender qué hicieron; sumar evidencia de código/tests/git si existe.
+3. **Proponer la Historia** en formato **user-centric**: *Como `<rol usuario: cuidador/paciente>` quiero `<objetivo>` para `<beneficio>`* + criterios de aceptación derivados de lo hecho. **No** redactar desde la mirada del desarrollador (ver `references/guia-catedra.md`). Identificar la **épica** (módulo) y los **RF** vía `Document Hub/Trazabilidad RF-Épicas.md`.
+4. **Mostrar la historia propuesta y esperar aprobación/edición.** No crear nada en Jira sin OK explícito.
+5. Tras el OK, **crear la Historia en Jira**: `mcp__atlassian__createJiraIssue` con `issueTypeName: "Historia"`, `projectKey: "AURA"`, `parent: "<ÉPICA>"` (la épica de producto del módulo, AURA-14…22), label `derivada-de-tarea`.
+6. **Enlazar cada tarea** a la historia con `mcp__atlassian__createIssueLink` tipo **`Relates`** (este proyecto no tiene "is implemented by"; `Relates` es el más cercano).
+7. Continuar con el **Proceso** de abajo para generar el artefacto, ya con la historia creada.
+
+> Jerarquía: "Tarea" e "Historia" están al mismo nivel (ambas cuelgan de la épica), así que la tarea **no** puede ser hija de la historia; se vinculan con issue link y se referencian en el artefacto.
 
 ## Proceso
 
 ### Paso 1 — Identificar la historia
-- **Key de Jira** (`AURA-XX`): traer la historia con `mcp__atlassian__getJiraIssue` (cloudId y proyecto en `CLAUDE.md`), campos `["summary","description","issuetype","status","parent","labels","comment"]`, formato markdown. Tomar título, descripción, criterios de aceptación, épica padre.
+- **Modo task-first** (uno o más keys de Tarea/Análisis): ejecutar primero la sección "Modo task-first" para obtener/crear la historia, y luego seguir.
+- **Key de Jira de una Historia** (`AURA-XX`): traer la historia con `mcp__atlassian__getJiraIssue` (cloudId y proyecto en `CLAUDE.md`), campos `["summary","description","issuetype","status","parent","labels","comment"]`, formato markdown. Tomar título, descripción, criterios de aceptación, épica padre.
 - **Manual / archivo**: usar el texto provisto o leer el archivo con `Read`.
 - Si falta la historia o es ambigua, preguntar antes de seguir.
 

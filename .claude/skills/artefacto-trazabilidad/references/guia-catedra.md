@@ -81,6 +81,21 @@ erDiagram
     EVENTO ||--o| ALERTA : dispara
 ```
 
+## Derivar historias desde tareas (task-first)
+
+Cuando la historia se deriva de tareas técnicas ya hechas, cuidar que quede como historia **de usuario**, no de implementación.
+
+- **Rol = usuario real** (cuidador, paciente, familiar), no "desarrollador/sistema". Anti-patrón a evitar: *"Como dev quiero crear el endpoint…"*. Forma correcta: *"Como cuidador quiero registrar la medicación para que el sistema emita los recordatorios"*.
+- **Agrupar**: varias tareas (back + front + datos + tests) suelen ser **una** historia. Buscar el incremento de valor común que entregan juntas. Hacer una historia por tarea solo si cada tarea es, por sí sola, un entregable de usuario.
+- **Criterios de aceptación** = lo observable que las tareas lograron, redactado como condición verificable (cada uno debería poder volverse un caso de prueba).
+- **Épica y RF**: ubicar la historia en la épica del módulo correspondiente y citar los RF que cubre (vía `Trazabilidad RF-Épicas.md`).
+- **Checklist de calidad** antes de proponerla:
+  - [ ] El rol es un usuario, no un componente técnico.
+  - [ ] El "para…" expresa beneficio, no la solución técnica.
+  - [ ] Agrupa coherentemente las tareas dadas (no quedó partida ni inflada).
+  - [ ] Tiene al menos un criterio de aceptación verificable.
+  - [ ] Mapea a una épica (AURA-14…22) y a uno o más RF.
+
 ## Convenciones de salida
 - Idioma español (es-AR).
 - Frontmatter YAML con `base: "[[Document Hub.base]]"` para que el artefacto aparezca en la base/grafo de Obsidian.
