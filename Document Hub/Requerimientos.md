@@ -376,3 +376,10 @@ Last updated time: 2026-05-04T19:05:00
 | RNF-41 | Administración de Rutinas y Medicación | Validar datos mínimos antes de guardar una rutina o tratamiento. | Baja |
 | RNF-42 | Administración de Rutinas y Medicación | Mantener consistencia entre recordatorios, alertas e historial. | Media |
 | RNF-43 | Administración de Rutinas y Medicación | Proteger información relacionada con tratamientos del paciente. | Alta |
+
+## Documentos relacionados
+- [[Funcionalidades del Sistema en el Hogar]]
+- [[Trazabilidad RF-Épicas]]
+- [[Arquitectura y Stack Tecnológico]]
+- [[Product Backlog Inicial]]
+- [[Índice Aurora]]

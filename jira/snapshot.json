@@ -1,0 +1,522 @@
+{
+  "source": "project-aurora-alz.atlassian.net",
+  "cloudId": "90fd6939-9992-4dac-a29c-53321dda6031",
+  "project": "AURA",
+  "lastSynced": "2026-06-19",
+  "total": 46,
+  "issues": [
+    {
+      "key": "AURA-1",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Terminar de Definir el Alcance del Proyecto"
+    },
+    {
+      "key": "AURA-2",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Terminar de Definir Funcionalidades del Sistema"
+    },
+    {
+      "key": "AURA-5",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Definir Arquitectura del Proyecto"
+    },
+    {
+      "key": "AURA-6",
+      "type": "Análisis",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Investigar sobre Demencia y enfermedades similares"
+    },
+    {
+      "key": "AURA-7",
+      "type": "Análisis",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Contacto con Profesional - Parte 1"
+    },
+    {
+      "key": "AURA-8",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Definir las Épicas"
+    },
+    {
+      "key": "AURA-9",
+      "type": "Tarea",
+      "status": "PAUSED/BLOCKED",
+      "statusCategory": "indeterminate",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Crear y Configurar Repos de Github"
+    },
+    {
+      "key": "AURA-10",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-12",
+      "labels": [],
+      "summary": "Terminar de Definir Roles y Tiempo por semana por miembro"
+    },
+    {
+      "key": "AURA-12",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "gestion",
+        "sprint-0"
+      ],
+      "summary": "Configuraciones Iniciales"
+    },
+    {
+      "key": "AURA-13",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [],
+      "summary": "Documentación para Proyecto"
+    },
+    {
+      "key": "AURA-14",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-home",
+        "modulo-1",
+        "mvp"
+      ],
+      "summary": "Interacción y Asistencia por Voz (Aurora Home)"
+    },
+    {
+      "key": "AURA-15",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-core",
+        "modulo-5",
+        "mvp"
+      ],
+      "summary": "Motor de IA y Memoria del Paciente (Aurora Core)"
+    },
+    {
+      "key": "AURA-16",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-core",
+        "modulo-4",
+        "mvp"
+      ],
+      "summary": "Alertas y Comunicación con el Cuidador"
+    },
+    {
+      "key": "AURA-17",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-care",
+        "modulo-9",
+        "mvp"
+      ],
+      "summary": "Administración de Rutinas y Medicación"
+    },
+    {
+      "key": "AURA-18",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-care",
+        "modulo-7",
+        "mvp"
+      ],
+      "summary": "Panel del Cuidador (Aurora Care)"
+    },
+    {
+      "key": "AURA-19",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-band",
+        "modulo-2",
+        "mvp"
+      ],
+      "summary": "Monitoreo Biométrico (Aurora Band)"
+    },
+    {
+      "key": "AURA-20",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "modulo-8",
+        "mvp",
+        "transversal"
+      ],
+      "summary": "Seguridad, Privacidad y Cumplimiento (Ley 25.326)"
+    },
+    {
+      "key": "AURA-21",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-core",
+        "modulo-6",
+        "vision"
+      ],
+      "summary": "Orquestación y Automatización"
+    },
+    {
+      "key": "AURA-22",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "aurora-core",
+        "modulo-3",
+        "mvp"
+      ],
+      "summary": "Detección de Eventos y Riesgos"
+    },
+    {
+      "key": "AURA-23",
+      "type": "Epic",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "obsoleta"
+      ],
+      "summary": "[OBSOLETA — absorbida por AURA-22] Detección de comportamiento anómalo"
+    },
+    {
+      "key": "AURA-24",
+      "type": "Epic",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "obsoleta"
+      ],
+      "summary": "[OBSOLETA — absorbida por AURA-22] Detección de estados fisiológicos/emocionales"
+    },
+    {
+      "key": "AURA-25",
+      "type": "Epic",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "obsoleta"
+      ],
+      "summary": "[OBSOLETA — absorbida por AURA-22] Sistema de geolocalización inteligente"
+    },
+    {
+      "key": "AURA-26",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-28",
+      "labels": [],
+      "summary": "Documento de Objetivo y Funcionalidades"
+    },
+    {
+      "key": "AURA-27",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-29",
+      "labels": [],
+      "summary": "Definir Branding"
+    },
+    {
+      "key": "AURA-28",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "gestion"
+      ],
+      "summary": "Requerimientos Funcionales y No Funcionales"
+    },
+    {
+      "key": "AURA-29",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "diseno",
+        "gestion"
+      ],
+      "summary": "Branding Inicial y UX"
+    },
+    {
+      "key": "AURA-30",
+      "type": "Tarea",
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-31",
+      "labels": [],
+      "summary": "Skills/rules para diseño - Parte 1"
+    },
+    {
+      "key": "AURA-31",
+      "type": "Epic",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": null,
+      "labels": [
+        "gestion",
+        "tooling"
+      ],
+      "summary": "Automatización IA"
+    },
+    {
+      "key": "AURA-32",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Crear Project Charter/ Plan de Proyecto"
+    },
+    {
+      "key": "AURA-33",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Crear Documento Working Agreement"
+    },
+    {
+      "key": "AURA-34",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Crear Documento de Gestión de la Configuración"
+    },
+    {
+      "key": "AURA-35",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Definir Documento de Arquitectura y Stack Tecnológico"
+    },
+    {
+      "key": "AURA-36",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Definir Documento de Plan de Testing"
+    },
+    {
+      "key": "AURA-37",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Definir User Story Mapping"
+    },
+    {
+      "key": "AURA-38",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Definir Backlog Inicial"
+    },
+    {
+      "key": "AURA-41",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Implementación de Informe de Sprint"
+    },
+    {
+      "key": "AURA-42",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Definición de Artefactos de Trazabilidad"
+    },
+    {
+      "key": "AURA-43",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Revisar granularidad del WBS: tratar de desagregar o agrupar las actividades de gestion de proyecto segun se requiera, para poder planificarlas en un diagrama de gantt o calendario correctamente "
+    },
+    {
+      "key": "AURA-44",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-28",
+      "labels": [],
+      "summary": "Revisar correcciones de los requerimientos funcionales y no funcionales"
+    },
+    {
+      "key": "AURA-45",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Agregar flujo de fondos "
+    },
+    {
+      "key": "AURA-46",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Agregar cronograma"
+    },
+    {
+      "key": "AURA-47",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Agregar US"
+    },
+    {
+      "key": "AURA-48",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": null,
+      "parent": null,
+      "labels": [],
+      "summary": "Agregar glosario general del proyecto "
+    },
+    {
+      "key": "AURA-49",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Buscar una forma mas linda de mostrar el analisis de costos "
+    },
+    {
+      "key": "AURA-50",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Crear un glosario en el documento de entrega a la profe"
+    },
+    {
+      "key": "AURA-51",
+      "type": "Tarea",
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-13",
+      "labels": [],
+      "summary": "Investigar un carrito de compras para un prototipo de Aurora Home."
+    }
+  ]
+}

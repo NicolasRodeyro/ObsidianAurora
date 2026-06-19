@@ -482,3 +482,9 @@ Last updated time: 2026-04-25T16:26:00
 > > - Conectividad (WiFi/Bluetooth)
 
 ---
+
+
+## Documentos relacionados
+- [[Requerimientos]]
+- [[Arquitectura y Stack Tecnológico]]
+- [[Índice Aurora]]
