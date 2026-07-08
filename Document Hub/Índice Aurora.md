@@ -25,6 +25,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Product Backlog Inicial]] — épicas e historias iniciales.
 - [[Trazabilidad RF-Épicas]] — matriz RF ↔ módulo ↔ épica.
 - [[Tablero Jira]] — snapshot del board AURA.
+- Artefactos de trazabilidad por historia → carpeta `Trazabilidad/` (generados con la skill `/artefacto-trazabilidad`).
 
 ## Arquitectura y diseño
 - [[Boceto de Arquitectura]] — esquema temprano.
