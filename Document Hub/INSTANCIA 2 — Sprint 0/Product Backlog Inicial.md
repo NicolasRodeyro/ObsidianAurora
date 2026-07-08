@@ -85,3 +85,9 @@ _Agrupa la integración del wearable comercial y los algoritmos de alertas._
     - La alerta debe incluir un acceso directo al mapa con las últimas coordenadas GPS conocidas.
 
 - **Prioridad:** Alta.
+
+## Documentos relacionados
+- [[Requerimientos]]
+- [[Trazabilidad RF-Épicas]]
+- [[Tablero Jira]]
+- [[Índice Aurora]]

@@ -282,3 +282,9 @@ Fecha:
 Jeremías Daniel Maldonado Gómez - Director de Proyecto
 
 Fecha: 
+
+## Documentos relacionados
+- [[Requerimientos]]
+- [[Arquitectura y Stack Tecnológico]]
+- [[Estudio Inicial]]
+- [[Índice Aurora]]

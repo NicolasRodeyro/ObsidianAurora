@@ -974,3 +974,9 @@ Dado que Aurora maneja datos sensibles de salud (biométricos, ubicación, medic
 - **Consentimiento**: El sistema debe registrar el consentimiento del paciente o su tutor legal para el tratamiento de datos, incluyendo alcance, finalidad y vigencia
 - **Anonimización**: Los datos usados para entrenamiento o mejora de modelos IA deben ser anonimizados (eliminar identificadores directos y cuasi-identificadores)
 - **Portal de derechos ARCO**: Aurora Care debe incluir una funcionalidad que permita al cuidador/tutor solicitar acceso, rectificación, cancelación u oposición sobre los datos del paciente
+
+## Documentos relacionados
+- [[Requerimientos]]
+- [[Boceto de Arquitectura]]
+- [[Diseño del Prototipo]]
+- [[Índice Aurora]]
