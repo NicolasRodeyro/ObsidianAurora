@@ -7,7 +7,6 @@ Category:
   - Documentación Interna
 Last updated time: 2026-05-05T20:36:00
 ---
-
 # Acta de Constitución del Proyecto (Project Charter)
 
 ## 1. Información General

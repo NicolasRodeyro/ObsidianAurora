@@ -2,6 +2,9 @@
 .obsidian/workspace-mobile.json
 .obsidian/cache/
 .obsidian/graph.json
+.obsidian/app.json
+.obsidian/community-plugins.json
+.obsidian/core-plugins.json
 .DS_Store
 Thumbs.db
 desktop.ini
