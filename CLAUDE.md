@@ -31,6 +31,13 @@ Sponsor: Virginia Santos. Cierre de ejecución: 05/10/2026 · Entrega final: 05/
 ObsidianAurora/            # vault de Obsidian, versionado en git
 ├── CLAUDE.md              # este archivo
 ├── Document Hub/          # toda la documentación (.md + PDFs + .base)
+│   └── Diseño UX-UI/      # manual de UX/UI (11 capítulos)
+├── Design/                # artefactos de diseño ejecutables
+│   ├── tokens/            # tokens.json (fuente de verdad) + tokens.css
+│   ├── previews/          # design system + 32 pantallas MVP en HTML (abrir index.html)
+│   ├── prototype/         # prototipo navegable (aurora-care.html) + WIRING.md
+│   ├── tools/             # contrast.py (verificación WCAG) + png_tools.py
+│   └── assets/branding/   # referencias del branding original
 ├── Backend/               # placeholder (vacío)
 ├── Frontend/              # placeholder (vacío)
 └── jira/snapshot.json     # snapshot machine-readable del board AURA
@@ -45,6 +52,9 @@ ObsidianAurora/            # vault de Obsidian, versionado en git
 - **Estudio Inicial**, **Investigacion sobre neurologia**, **Diseño del Prototipo**, **Boceto de Arquitectura**, **Presentación del Proyecto**, **Brainstorm de Nombres**, **Documento Presentacion Sprint 0**, **Horarios y Roles de los Miembros**.
 - **Trazabilidad RF-Épicas** — matriz RF ↔ módulo ↔ épica (generada).
 - **Tablero Jira** — snapshot legible del board.
+- **Manual de UX-UI Aurora** (`Diseño UX-UI/`) — índice del manual de diseño: marca, color (WCAG verificado por `Design/tools/contrast.py`), tipografía, personas, flujos, VUI, accesibilidad y handoff. Los tokens de `Design/tokens/tokens.css` son el contrato con el frontend.
+
+> ⚠️ **Figma MCP:** el plan Starter limita a 6 lecturas/mes y en la práctica bloquea también `generate_figma_design`. El push del design system a Figma está pendiente de la cuenta Education (o import manual con html.to.design). Detalle y caminos en `Document Hub/Diseño UX-UI/Handoff y Backlog de Diseño.md` §2. Archivo: https://www.figma.com/design/27gwCErUw8a5VMKYBr0KDb/Aurora
 
 ## Jira
 

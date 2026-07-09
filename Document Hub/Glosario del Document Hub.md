@@ -27,6 +27,9 @@ Recursos visuales asociados al preestudio y al prototipado.
 - [ChatGPT_Image_22_abr_2026_10_24_16_p.m..png](<Pre Estudio Inicial/Images/ChatGPT_Image_22_abr_2026_10_24_16_p.m..png>): imagen de apoyo visual generada para el proyecto.
 - [ChatGPT_Image_25_abr_2026_09_52_15_p.m..png](<Pre Estudio Inicial/Images/ChatGPT_Image_25_abr_2026_09_52_15_p.m..png>): imagen de apoyo visual generada para el proyecto.
 
+### `Diseño UX-UI`
+Manual de UX/UI del producto (11 capítulos): identidad de marca, color, tipografía, fundamentos visuales, proto-personas, journeys, arquitectura de información, user flows, VUI/diseño conversacional, accesibilidad y handoff. Punto de entrada: [Manual de UX-UI Aurora.md](<Diseño UX-UI/Manual de UX-UI Aurora.md>). Los artefactos ejecutables (design tokens, previews HTML de las 32 pantallas, prototipo navegable, herramientas de verificación WCAG) viven en `ObsidianAurora/Design/` (fuera del Document Hub, junto al código).
+
 ### `INSTANCIA 1 — Inicio de proyecto`
 Representa la etapa de arranque formal del proyecto. Según la guía UTN, aquí se concentran el `Estudio Inicial` y el `Plan de Proyecto`, para validar el entendimiento del problema, el alcance y la forma de trabajo.
 
