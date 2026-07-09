@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Care — Recuerdos, Actividad y Drop-in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="app.css">
+<style>
+  .mem-card { display:flex; gap: var(--space-3); background: var(--bg-surface); border:1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-3); box-shadow: var(--shadow-1); align-items:center; }
+  .mem-thumb { width: 64px; height: 64px; border-radius: var(--radius-md); flex:none; display:grid; place-items:center; color: var(--neutral-850); font-family: var(--font-heading); font-weight:700; }
+  .wave { display:flex; align-items:center; gap:3px; height:48px; justify-content:center; }
+  .wave i { width:4px; border-radius:2px; background: var(--violet-400); display:block; }
+</style>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-house" viewBox="0 0 24 24"><path d="M3 11 L12 3 L21 11 M5 10 V20 H19 V10"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10 H21 M8 3 V7 M16 3 V7"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4 H16 A3 3 0 0 1 19 7 V20 H8 A3 3 0 0 1 5 17 Z M19 16 H8 A3 3 0 0 0 5 17"/><path d="M12 8 C10.5 6.5 8.5 8 9.5 9.8 C10.2 11 12 12.2 12 12.2 C12 12.2 13.8 11 14.5 9.8 C15.5 8 13.5 6.5 12 8 Z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9.5 A6 6 0 0 1 18 9.5 C18 13.5 19 15.5 20 16.5 H4 C5 15.5 6 13.5 6 9.5 Z M10 20 A2.2 2.2 0 0 0 14 20"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7 H16 M20 7 H21 M4 12 H8 M12 12 H21 M4 17 H13 M17 17 H21"/><circle cx="18" cy="7" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="15" cy="17" r="2"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="6.5" rx="3.25" transform="rotate(-45 12 12)"/><path d="M9.7 9.7 L14.3 14.3"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11 A7 7 0 0 0 19 11 M12 18 V21"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4 C4.4 4 4 4.4 4 5 C4 13.3 10.7 20 19 20 C19.6 20 20 19.6 20 19 V15.8 L16.2 14.4 L14.5 16.1 C11.8 14.9 9.6 12.8 8.3 10 L10 8.3 L8.2 4 Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13 L9.5 17.5 L19 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6 L18 18 M18 6 L6 18"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5 V19 M5 12 H19"/></symbol>
+  <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 6 L15 12 L9 18"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 6 L9 12 L15 18"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 L21.5 19.5 H2.5 Z M12 9.5 V14"/><circle cx="12" cy="16.8" r="0.6"/></symbol>
+  <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M5 11.5 A10 10 0 0 1 19 11.5 M8.3 15 A5.2 5.2 0 0 1 15.7 15"/><circle cx="12" cy="18.4" r="1"/><path d="M4 4 L20 20"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20 C5.5 14.5 3.2 10.5 5.5 7.5 A4.2 4.2 0 0 1 12 8 A4.2 4.2 0 0 1 18.5 7.5 C20.8 10.5 18.5 14.5 12 20 Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L15.5 14.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21 C7.5 15.5 5.5 12.3 5.5 9.2 A6.5 6.5 0 0 1 18.5 9.2 C18.5 12.3 16.5 15.5 12 21 Z"/><circle cx="12" cy="9.2" r="2.4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21 C4.5 16.5 8 15 12 15 C16 15 19.5 16.5 19.5 21"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20 C2.5 16.3 5.5 15 9 15 C12.5 15 15.5 16.3 15.5 20 M16 5.5 A3.2 3.2 0 0 1 16 12 M17.5 15.2 C20 15.8 21.5 17.2 21.5 19.5"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8.5 7 L10 4 H14 L15.5 7"/><circle cx="12" cy="13.3" r="3.4"/></symbol>
+  <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 10 V14 H7.5 L13 18.5 V5.5 L7.5 10 Z M16.5 9 A5 5 0 0 1 16.5 15"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18 V6 L19 4 V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M14.5 5.5 L18.5 9.5 M4 20 L5.5 15.5 L15.5 5.5 L18.5 8.5 L8.5 18.5 Z"/></symbol>
+</svg>
+
+<h1 class="gallery-title">Recuerdos, Actividad y Drop-in</h1>
+<p class="gallery-sub">La base de conocimiento del RAG (con validación RN6), el centro de alertas con trazabilidad completa (RF-44, RN9) y la comunicación directa (RN15).</p>
+
+<div class="gallery">
+
+  <!-- RECUERDOS LISTA -->
+  <div><p class="frame-label">14 · Recuerdos</p>
+  <div class="phone"><div class="screen">
+    <div class="statusbar"><span>10:45</span><span>●●● ᯤ 87%</span></div>
+    <div class="topbar"><div class="title">Recuerdos</div><button class="btn btn-primary btn-sm"><svg class="ic"><use href="#i-plus"/></svg>Nuevo</button></div>
+    <div class="content">
+      <div class="alert-banner medium" style="padding: var(--space-3)">
+        <div class="ab-head"><div class="ab-icon" style="width:32px;height:32px"><svg class="ic" style="width:18px;height:18px"><use href="#i-clock"/></svg></div>
+          <div><div class="ab-title" style="font-size:var(--text-sm)">1 recuerdo de Diego espera tu validación</div></div>
+          <button class="btn btn-sm btn-secondary" style="margin-left:auto">Revisar</button></div>
+      </div>
+      <div class="hstack">
+        <span class="chip selected">Todos</span><span class="chip"><svg class="ic"><use href="#i-user"/></svg>Personas</span><span class="chip"><svg class="ic"><use href="#i-pin"/></svg>Lugares</span><span class="chip"><svg class="ic"><use href="#i-music"/></svg>Música</span>
+      </div>
+      <div class="mem-card"><div class="mem-thumb" style="background: var(--gradient-aurora)">💒</div>
+        <div style="flex:1"><div class="r-title">El casamiento en Alta Gracia</div><div class="r-sub">1972 · con Roberto · llovió y bailaron igual</div>
+        <div class="hstack" style="margin-top:4px"><span class="badge info">Evento</span><span class="badge ok">Usado por Aurora 6 veces</span></div></div>
+        <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
+      <div class="mem-card"><div class="mem-thumb" style="background: var(--mint)">🌿</div>
+        <div style="flex:1"><div class="r-title">El jardín de los malvones</div><div class="r-sub">Su orgullo: los malvones del patio</div>
+        <div class="hstack" style="margin-top:4px"><span class="badge info">Lugar</span></div></div>
+        <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
+      <div class="mem-card"><div class="mem-thumb" style="background: var(--peach)">🎵</div>
+        <div style="flex:1"><div class="r-title">«Por una cabeza» — Gardel</div><div class="r-sub">La bailaba con Roberto en la cocina</div>
+        <div class="hstack" style="margin-top:4px"><span class="badge info">Música</span><span class="badge ok">Calma en momentos difíciles</span></div></div>
+        <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
+      <div class="mem-card"><div class="mem-thumb" style="background: var(--sky)">👨‍👧</div>
+        <div style="flex:1"><div class="r-title">Roberto</div><div class="r-sub">Su marido · falleció en 2019 · hablar con cariño y en pasado</div>
+        <div class="hstack" style="margin-top:4px"><span class="badge info">Persona</span><span class="badge warn">Tema sensible</span></div></div>
+        <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><svg class="ic"><use href="#i-house"/></svg>Inicio</div>
+      <div class="tab"><svg class="ic"><use href="#i-calendar"/></svg>Rutinas</div>
+      <div class="tab active"><svg class="ic"><use href="#i-book"/></svg>Recuerdos</div>
+      <div class="tab"><svg class="ic"><use href="#i-bell"/></svg>Actividad</div>
+      <div class="tab"><svg class="ic"><use href="#i-sliders"/></svg>Ajustes</div>
+    </div>
+  </div></div></div>
+
+  <!-- ALTA DE RECUERDO -->
+  <div><p class="frame-label">15 · Nuevo recuerdo (prompts guiados)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Nuevo recuerdo</div></div>
+    <div class="content">
+      <div class="field"><label>¿Qué tipo de recuerdo es?</label>
+        <div class="hstack"><span class="chip selected"><svg class="ic"><use href="#i-user"/></svg>Persona</span><span class="chip"><svg class="ic"><use href="#i-pin"/></svg>Lugar</span><span class="chip">Evento</span><span class="chip"><svg class="ic"><use href="#i-music"/></svg>Música</span></div></div>
+      <div class="field"><label>¿Quién es?</label><input class="input" value="Elena, su hermana menor"></div>
+      <div class="field"><label>¿Qué tiene que saber Aurora?</label>
+        <textarea class="input">Viven a tres cuadras. Toman mate los jueves. Ana la llama «Nena».</textarea>
+        <span class="help">Escribilo como se lo contarías a alguien que cuida a Ana por primera vez.</span></div>
+      <div class="field"><label>¿Cómo debe tratarlo Aurora?</label>
+        <div class="seg"><button class="active">Tema alegre</button><button>Con cuidado</button><button>Evitar</button></div>
+        <span class="help">«Con cuidado» = Aurora lo menciona solo si Ana lo trae. «Evitar» = nunca lo nombra.</span></div>
+      <button class="btn btn-secondary btn-block"><svg class="ic"><use href="#i-camera"/></svg>Agregar foto o audio</button>
+      <button class="btn btn-primary btn-block">Guardar recuerdo</button>
+      <p class="muted" style="text-align:center">Como sos cuidador secundario, María lo validará antes de que Aurora lo use (RN6).</p>
+    </div>
+  </div></div></div>
+
+  <!-- COLA DE VALIDACION -->
+  <div><p class="frame-label">16 · Validación de aportes</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Para validar</div></div>
+    <div class="content">
+      <div class="card">
+        <div class="spread"><span class="badge info">Aporte de Diego</span><span class="muted">hace 2 h</span></div>
+        <div class="r-title" style="margin: var(--space-2) 0">«El viaje a Mar del Plata, 1985»</div>
+        <p class="muted">Fuimos toda la familia en el Falcon verde. A mamá le encantaba el faro. Tengo la foto de los cinco en la escollera.</p>
+        <div class="mem-thumb" style="background: var(--sky); width:100%; height:120px; margin: var(--space-3) 0; border-radius: var(--radius-md)">📷 foto adjunta</div>
+        <div class="hstack">
+          <button class="btn btn-primary" style="flex:1"><svg class="ic"><use href="#i-check"/></svg>Aprobar</button>
+          <button class="btn btn-secondary" style="flex:1"><svg class="ic"><use href="#i-edit"/></svg>Editar</button>
+          <button class="btn btn-ghost"><svg class="ic"><use href="#i-x"/></svg></button>
+        </div>
+        <p class="muted" style="margin-top: var(--space-2)">Al aprobar, Aurora podrá usarlo en conversaciones y reminiscencia.</p>
+      </div>
+      <div class="card" style="background: var(--violet-50); border-color: var(--violet-200)">
+        <div class="spread"><span class="badge info">Descubrimiento de Aurora</span><span class="muted">ayer 16:24</span></div>
+        <div class="r-title" style="margin: var(--space-2) 0">«Trabajé en la farmacia de Ruiz antes de casarme»</div>
+        <p class="muted">Ana lo contó durante la trivia de ayer. Aurora no lo usará hasta que lo valides (RN6).</p>
+        <div class="hstack" style="margin-top: var(--space-3)">
+          <button class="btn btn-primary btn-sm" style="flex:1"><svg class="ic"><use href="#i-check"/></svg>Es correcto</button>
+          <button class="btn btn-secondary btn-sm" style="flex:1"><svg class="ic"><use href="#i-edit"/></svg>Editar</button>
+          <button class="btn btn-ghost btn-sm"><svg class="ic"><use href="#i-x"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+
+  <!-- ACTIVIDAD: ALERTAS -->
+  <div><p class="frame-label">17 · Actividad — alertas</p>
+  <div class="phone"><div class="screen">
+    <div class="statusbar"><span>14:16</span><span>●●● ᯤ 82%</span></div>
+    <div class="topbar"><div class="title">Actividad</div></div>
+    <div class="content">
+      <div class="seg"><button class="active">Alertas</button><button>Terapias</button><button>Historial</button></div>
+      <div class="sect-label">Activas</div>
+      <div class="alert-banner high">
+        <div class="ab-head"><div class="ab-icon"><svg class="ic"><use href="#i-pill"/></svg></div>
+          <div><div class="ab-title">Sin confirmación de la toma de las 14:00</div><div class="ab-sub">Alta · hace 16 min · escalado a Diego en 4 min</div></div></div>
+        <div class="ab-actions"><button class="btn btn-sm btn-danger">Ver y resolver</button></div>
+      </div>
+      <div class="sect-label">Hoy</div>
+      <div class="list">
+        <div class="row"><div class="r-icon ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="r-main"><div class="r-title">Merienda sin confirmar → resuelta</div><div class="r-sub">Media · atendida por María 16:50</div></div>
+          <div class="r-end"><span class="time">16:45</span></div></div>
+      </div>
+      <div class="sect-label">Ayer</div>
+      <div class="list">
+        <div class="row"><div class="r-icon ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="r-main"><div class="r-title">Omisión de medicación → resuelta</div><div class="r-sub">Alta · drop-in de María · confirmó después</div></div>
+          <div class="r-end"><span class="time">14:15</span></div></div>
+        <div class="row"><div class="r-icon"><svg class="ic"><use href="#i-wifi-off"/></svg></div>
+          <div class="r-main"><div class="r-title">Aurora Home sin conexión 22 min</div><div class="r-sub">Baja · reconectó solo</div></div>
+          <div class="r-end"><span class="time">09:10</span></div></div>
+      </div>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><svg class="ic"><use href="#i-house"/></svg>Inicio</div>
+      <div class="tab"><svg class="ic"><use href="#i-calendar"/></svg>Rutinas</div>
+      <div class="tab"><svg class="ic"><use href="#i-book"/></svg>Recuerdos</div>
+      <div class="tab active"><span class="dot">1</span><svg class="ic"><use href="#i-bell"/></svg>Actividad</div>
+      <div class="tab"><svg class="ic"><use href="#i-sliders"/></svg>Ajustes</div>
+    </div>
+  </div></div></div>
+
+  <!-- DETALLE DE ALERTA -->
+  <div><p class="frame-label">18 · Detalle de alerta (deep link de la push)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Alerta · Alta</div></div>
+    <div class="content">
+      <div class="alert-banner high" style="box-shadow:none">
+        <div class="ab-head"><div class="ab-icon"><svg class="ic"><use href="#i-pill"/></svg></div>
+          <div><div class="ab-title">Sin confirmación de la toma de las 14:00</div><div class="ab-sub">Enalapril 10 mg · prioritaria</div></div></div>
+      </div>
+      <div class="sect-label">Qué hizo Aurora</div>
+      <div class="timeline">
+        <div class="t-item"><div class="t-dot info"><svg class="ic"><use href="#i-volume"/></svg></div>
+          <div class="t-body"><div class="t-title">Recordatorio emitido</div><div class="t-sub">«Ana, es la hora de la pastilla…»</div><div class="t-time">14:00</div></div></div>
+        <div class="t-item"><div class="t-dot info"><svg class="ic"><use href="#i-volume"/></svg></div>
+          <div class="t-body"><div class="t-title">Reintento</div><div class="t-sub">Sin respuesta de Ana</div><div class="t-time">14:10</div></div></div>
+        <div class="t-item"><div class="t-dot warn"><svg class="ic"><use href="#i-alert"/></svg></div>
+          <div class="t-body"><div class="t-title">Omisión registrada → alerta enviada</div><div class="t-sub">Push a María y Diego</div><div class="t-time">14:15</div></div></div>
+        <div class="t-item"><div class="t-dot neutral"><svg class="ic"><use href="#i-clock"/></svg></div>
+          <div class="t-body"><div class="t-title">Escalado programado</div><div class="t-sub">Llama la atención de Diego si nadie atiende 14:35</div></div></div>
+      </div>
+      <div class="sect-label">Qué podés hacer</div>
+      <button class="btn btn-primary btn-block"><svg class="ic"><use href="#i-mic"/></svg>Drop-in — hablar por el parlante</button>
+      <button class="btn btn-secondary btn-block"><svg class="ic"><use href="#i-phone"/></svg>Llamar al teléfono de Ana</button>
+      <button class="btn btn-ghost btn-block"><svg class="ic"><use href="#i-check"/></svg>Marcar como atendida…</button>
+    </div>
+  </div></div></div>
+
+  <!-- TIMELINE EVENTOS -->
+  <div><p class="frame-label">19 · Actividad — historial de eventos</p>
+  <div class="phone"><div class="screen">
+    <div class="statusbar"><span>18:20</span><span>●●● ᯤ 74%</span></div>
+    <div class="topbar"><div class="title">Actividad</div></div>
+    <div class="content">
+      <div class="seg"><button>Alertas</button><button>Terapias</button><button class="active">Historial</button></div>
+      <div class="hstack"><span class="chip selected">Todo</span><span class="chip">Medicación</span><span class="chip">Interacciones</span><span class="chip">Sistema</span></div>
+      <div class="sect-label">Hoy · miércoles 9</div>
+      <div class="timeline">
+        <div class="t-item"><div class="t-dot info"><svg class="ic"><use href="#i-mic"/></svg></div>
+          <div class="t-body"><div class="t-title">Reminiscencia (12 min)</div><div class="t-sub">Tema: el casamiento · participación alta · ánimo positivo</div><div class="t-time">18:05</div></div></div>
+        <div class="t-item"><div class="t-dot ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="t-body"><div class="t-title">Merienda confirmada</div><div class="t-time">16:52</div></div></div>
+        <div class="t-item"><div class="t-dot ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="t-body"><div class="t-title">Medicación 14:00 → confirmada tras drop-in</div><div class="t-sub">Alerta atendida por María</div><div class="t-time">14:19</div></div></div>
+        <div class="t-item"><div class="t-dot info"><svg class="ic"><use href="#i-heart"/></svg></div>
+          <div class="t-body"><div class="t-title">Ejercicio de memoria (10 min)</div><div class="t-sub">Categorías: flores · 8 respuestas</div><div class="t-time">10:30</div></div></div>
+        <div class="t-item"><div class="t-dot ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="t-body"><div class="t-title">Desayuno + medicación confirmados</div><div class="t-time">08:12</div></div></div>
+      </div>
+      <p class="muted" style="text-align:center">Los eventos no se eliminan: quedan como registro del cuidado (RN9).</p>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><svg class="ic"><use href="#i-house"/></svg>Inicio</div>
+      <div class="tab"><svg class="ic"><use href="#i-calendar"/></svg>Rutinas</div>
+      <div class="tab"><svg class="ic"><use href="#i-book"/></svg>Recuerdos</div>
+      <div class="tab active"><svg class="ic"><use href="#i-bell"/></svg>Actividad</div>
+      <div class="tab"><svg class="ic"><use href="#i-sliders"/></svg>Ajustes</div>
+    </div>
+  </div></div></div>
+
+  <!-- DROP-IN -->
+  <div><p class="frame-label">20 · Drop-in en curso (overlay)</p>
+  <div class="phone"><div class="screen" style="position:relative">
+    <div class="statusbar"><span>14:17</span><span>●●● ᯤ 82%</span></div>
+    <div class="topbar"><div class="title">Hola, María</div></div>
+    <div class="content" style="opacity:.3">
+      <div class="status-hero"><div class="avatar">A</div><div><div class="st-title">Ana necesita atención</div></div></div>
+    </div>
+    <div class="sheet-backdrop"><div class="sheet" style="text-align:center">
+      <div class="grab"></div>
+      <div style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight:600">Hablando por el parlante de Ana</div>
+      <p class="muted">Aurora ya le avisó: «Ana, María te va a decir algo».<br>Es un mensaje de una vía — Ana te escucha, vos no la escuchás (RN15).</p>
+      <div class="wave">
+        <i style="height:12px"></i><i style="height:26px"></i><i style="height:40px"></i><i style="height:22px"></i><i style="height:34px"></i><i style="height:16px"></i><i style="height:42px"></i><i style="height:28px"></i><i style="height:12px"></i><i style="height:30px"></i><i style="height:20px"></i>
+      </div>
+      <div style="font-variant-numeric: tabular-nums; font-weight:700; font-size: var(--text-2xl)">0:23 <span class="muted" style="font-weight:400; font-size:var(--text-sm)">/ máx 1:00</span></div>
+      <button class="btn btn-danger btn-block"><svg class="ic"><use href="#i-x"/></svg>Terminar</button>
+      <p class="muted">Al terminar, Aurora le pregunta a Ana si quiere responderte; te llega la transcripción.</p>
+    </div></div>
+  </div></div></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+/* ============================================================
+   AURORA — Design Tokens v1.0.0
+   Fuente de verdad: tokens.json (verificado por tools/contrast.py)
+   Uso: tema claro por defecto (Aurora Care); [data-theme="dark"]
+   para dark mode/identidad; [data-theme="device"] para el display
+   de Aurora Home.
+   ============================================================ */
+
+:root {
+  /* ---------- Primitivos: color ---------- */
+  --violet-50:  #F4F0FF;
+  --violet-100: #E7DEFF;
+  --violet-200: #CFBBFF;
+  --violet-300: #A884FF; /* [branding] Aurora Violet */
+  --violet-400: #9773FD; /* [branding] degradé inicio */
+  --violet-500: #7C5CEE;
+  --violet-600: #6E4FE0; /* [branding] degradé fin */
+  --violet-700: #5638BE;
+  --violet-800: #3F2792;
+  --violet-900: #2A1A64;
+
+  --lime-50:  #FBFDE9;
+  --lime-100: #F5FACB;
+  --lime-200: #EDF59D;
+  --lime-300: #E5F06F; /* [branding] Glow Lime */
+  --lime-400: #D3E24D;
+  --lime-500: #B4C531;
+  --lime-600: #8FA021;
+  --lime-700: #5F6C14;
+  --lime-800: #48520E;
+  --lime-900: #2E3407;
+
+  --neutral-0:   #FFFFFF;
+  --neutral-50:  #F5F7FC;
+  --neutral-100: #E9EDF7; /* [branding] N100 */
+  --neutral-200: #D2D9EA;
+  --neutral-300: #B8C0D9; /* [branding] N300 */
+  --neutral-400: #848DB0;
+  --neutral-500: #697298; /* [branding] N500 */
+  --neutral-600: #4D5679;
+  --neutral-700: #232B52; /* [branding] N700 */
+  --neutral-750: #171E42; /* [branding] Deep Indigo */
+  --neutral-800: #0F1530; /* [branding] N800 */
+  --neutral-850: #0B1026; /* [branding] Aurora Night */
+  --neutral-900: #070B1A; /* [branding] N900 */
+
+  --green-50:  #EDFAF3;
+  --green-100: #D6F3E4;
+  --green-300: #7FD6A8; /* [branding] Éxito */
+  --green-600: #1F8A57;
+  --green-700: #136343;
+
+  --blue-50:  #EEF4FF;
+  --blue-100: #DCE9FF;
+  --blue-300: #8EB8FF; /* [branding] Info */
+  --blue-600: #2E62D9;
+  --blue-700: #2450AE;
+
+  --amber-50:  #FFF7E8;
+  --amber-100: #FFEBC5;
+  --amber-300: #FFD27A; /* [branding] Advertencia */
+  --amber-600: #A96A00;
+  --amber-700: #8A5600;
+
+  --red-50:  #FDEDED;
+  --red-100: #FAD7D7;
+  --red-300: #F29B9B;
+  --red-500: #E84B4B; /* [branding] Emergencia/SOS */
+  --red-600: #C93535;
+  --red-700: #A62828;
+
+  --pink:  #F5A6D3; /* [branding] Aurora Pink */
+  --peach: #FFD6A8; /* [branding] Soft Peach */
+  --mint:  #BDEFD4; /* [branding] Aurora Mint */
+  --sky:   #BFD7FF; /* [branding] Sky Mist */
+  --lilac: #D9C5FF; /* [branding] Mist Lilac */
+
+  /* Gradientes de marca */
+  --gradient-brand: linear-gradient(135deg, var(--violet-400), var(--violet-600));
+  --gradient-aurora: linear-gradient(90deg, var(--violet-300), var(--pink), var(--peach), var(--mint), var(--sky));
+
+  /* ---------- Primitivos: tipografía ---------- */
+  --font-heading: 'Figtree', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-device: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', 'Inter', sans-serif;
+
+  --text-xs: 12px;   /* metadatos, timestamps */
+  --text-sm: 14px;   /* secundario, labels */
+  --text-md: 16px;   /* cuerpo base */
+  --text-lg: 18px;   /* cuerpo destacado */
+  --text-xl: 20px;   /* título de card */
+  --text-2xl: 24px;  /* título de sección */
+  --text-3xl: 30px;  /* título de pantalla */
+  --text-4xl: 36px;  /* hero/marketing */
+  --text-device-body: 32px;
+  --text-device-title: 48px;
+  --text-device-clock: 72px;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* ---------- Primitivos: espaciado (grilla 8pt) ---------- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --space-10: 80px;
+
+  /* ---------- Primitivos: radio / elevación / motion ---------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  --shadow-1: 0 1px 2px rgba(11, 16, 38, 0.06);
+  --shadow-2: 0 2px 8px rgba(11, 16, 38, 0.10);
+  --shadow-3: 0 8px 24px rgba(11, 16, 38, 0.14);
+
+  --motion-instant: 80ms;
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-slow: 400ms;
+  --motion-easing: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---------- Alias semánticos: TEMA CLARO (default Aurora Care) ---------- */
+  --bg-base: var(--neutral-50);
+  --bg-surface: var(--neutral-0);
+  --bg-subtle: var(--neutral-100);
+  --bg-brand-subtle: var(--violet-50);
+
+  --text-primary: var(--neutral-750);
+  --text-secondary: var(--neutral-600);
+  --text-muted: var(--neutral-500);
+  --text-inverse: var(--neutral-0);
+  --text-brand: var(--violet-600);
+
+  --border-default: var(--neutral-200);
+  --border-strong: var(--neutral-300);
+  --border-input: var(--neutral-400);
+
+  --action-primary-bg: var(--violet-600);
+  --action-primary-text: var(--neutral-0);
+  --action-secondary-border: var(--violet-600);
+  --action-secondary-text: var(--violet-600);
+  --accent-bg: var(--lime-300);
+  --accent-text: var(--neutral-850);
+  --focus-ring: var(--violet-400);
+
+  --success-bg: var(--green-100);
+  --success-text: var(--green-700);
+  --success-icon: var(--green-600);
+  --info-bg: var(--blue-100);
+  --info-text: var(--blue-700);
+  --info-icon: var(--blue-600);
+  --warning-bg: var(--amber-100);
+  --warning-text: var(--amber-700);
+  --warning-icon: var(--amber-600);
+  --danger-bg: var(--red-100);
+  --danger-text: var(--red-700);
+  --danger-solid-bg: var(--red-600);
+  --danger-solid-text: var(--neutral-0);
+}
+
+/* ---------- TEMA OSCURO (identidad / dark mode) ---------- */
+[data-theme="dark"] {
+  --bg-base: var(--neutral-850);
+  --bg-surface: var(--neutral-750);
+  --bg-subtle: var(--neutral-800);
+  --bg-brand-subtle: var(--violet-900);
+
+  --text-primary: var(--neutral-0);
+  --text-secondary: var(--neutral-300);
+  --text-muted: var(--neutral-400);
+  --text-inverse: var(--neutral-850);
+  --text-brand: var(--violet-300);
+
+  --border-default: var(--neutral-700);
+  --border-strong: var(--neutral-500);
+  --border-input: var(--neutral-500);
+
+  --action-primary-bg: var(--violet-500);
+  --action-primary-text: var(--neutral-0);
+  --action-secondary-border: var(--violet-300);
+  --action-secondary-text: var(--violet-300);
+  --focus-ring: var(--violet-300);
+
+  --success-bg: rgba(127, 214, 168, 0.14);
+  --success-text: var(--green-300);
+  --success-icon: var(--green-300);
+  --info-bg: rgba(142, 184, 255, 0.14);
+  --info-text: var(--blue-300);
+  --info-icon: var(--blue-300);
+  --warning-bg: rgba(255, 210, 122, 0.14);
+  --warning-text: var(--amber-300);
+  --warning-icon: var(--amber-300);
+  --danger-bg: rgba(232, 75, 75, 0.16);
+  --danger-text: var(--red-300);
+  --danger-solid-bg: var(--red-500);
+  --danger-solid-text: var(--neutral-0);
+}
+
+/* ---------- TEMA DEVICE (display Aurora Home) ---------- */
+[data-theme="device"] {
+  --bg-base: var(--neutral-900);
+  --bg-surface: var(--neutral-850);
+  --text-primary: var(--neutral-0);
+  --text-secondary: var(--neutral-300);
+  --accent-bg: var(--lime-300);
+  --accent-text: var(--neutral-850);
+  --danger-solid-bg: var(--red-500);
+  --danger-solid-text: var(--neutral-0);
+  --focus-ring: var(--violet-300);
+}
+
+/* ---------- Utilidades base ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

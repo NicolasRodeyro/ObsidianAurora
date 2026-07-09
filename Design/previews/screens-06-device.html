@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Home — Display y LED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="app.css">
+<style>
+  .listen-wave { display:flex; gap:5px; align-items:center; margin-top: 10px; }
+  .listen-wave i { width:6px; border-radius:3px; background: var(--violet-300); display:block; }
+</style>
+</head>
+<body>
+<h1 class="gallery-title">Aurora Home — Display y anillo LED</h1>
+<p class="gallery-sub">Los 6 estados base (VUI §5). Tipografía Atkinson Hyperlegible Next, mínimo 32 px, máximo 2 líneas, texto = lo que se habla (redundancia bimodal). La barra superior representa el anillo LED.</p>
+
+<div class="gallery">
+
+  <div><p class="frame-label">D1 · Reposo (siempre orienta: hora, fecha, próxima actividad)</p>
+  <div class="device-frame"><div class="sos-btn">SOS</div>
+    <div class="led off"></div>
+    <div class="device-screen">
+      <div class="d-clock">10:30</div>
+      <div class="d-body">miércoles 9 de julio</div>
+      <div class="d-small" style="margin-top:10px">A las 12:30 · almuerzo</div>
+    </div>
+  </div></div>
+
+  <div><p class="frame-label">D2 · Hablando (barrido aurora)</p>
+  <div class="device-frame"><div class="sos-btn">SOS</div>
+    <div class="led aurora"></div>
+    <div class="device-screen">
+      <div class="d-title">Hola, Ana</div>
+      <div class="d-body">Después del desayuno toca la pastilla de la presión.</div>
+    </div>
+  </div></div>
+
+  <div><p class="frame-label">D3 · Escuchando (respiración violeta)</p>
+  <div class="device-frame"><div class="sos-btn">SOS</div>
+    <div class="led listen"></div>
+    <div class="device-screen">
+      <div class="d-body" style="color:#fff">Te escucho…</div>
+      <div class="listen-wave"><i style="height:14px"></i><i style="height:30px"></i><i style="height:20px"></i><i style="height:38px"></i><i style="height:24px"></i><i style="height:16px"></i><i style="height:32px"></i></div>
+    </div>
+  </div></div>
+
+  <div><p class="frame-label">D4 · Recordatorio activo (pulso lima, espera confirmación)</p>
+  <div class="device-frame"><div class="sos-btn">SOS</div>
+    <div class="led lime"></div>
+    <div class="device-screen">
+      <div class="d-title d-accent">Tu pastilla de la presión</div>
+      <div class="d-body">Está en el cajón de la cocina.</div>
+      <div class="d-small" style="margin-top:8px">Decime «ya la tomé» cuando la tomes</div>
+    </div>
+  </div></div>
+
+  <div><p class="frame-label">D5 · SOS (pulso rojo + mensaje de calma cada 60 s)</p>
+  <div class="device-frame"><div class="sos-btn" style="box-shadow: 0 0 0 6px rgba(232,75,75,.35)">SOS</div>
+    <div class="led sos"></div>
+    <div class="device-screen">
+      <div class="d-title" style="color: var(--red-300)">Ayuda en camino</div>
+      <div class="d-body">Ya le avisé a María. Quedate donde estás, Ana.</div>
+      <div class="d-small" style="margin-top:8px">14:17</div>
+    </div>
+  </div></div>
+
+  <div><p class="frame-label">D6 · Sin conexión (ámbar; la hora y los recordatorios locales siguen)</p>
+  <div class="device-frame"><div class="sos-btn">SOS</div>
+    <div class="led amber"></div>
+    <div class="device-screen">
+      <div class="d-clock">10:30</div>
+      <div class="d-body">miércoles 9 de julio</div>
+      <div class="d-small" style="margin-top:10px; color: var(--amber-300)">Sin conexión · tus recordatorios siguen funcionando</div>
+    </div>
+  </div></div>
+
+</div>
+</body>
+</html>

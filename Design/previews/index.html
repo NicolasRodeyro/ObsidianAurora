@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora — Design Previews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--font-body); background: var(--neutral-850); color:#fff; min-height:100vh; padding: 48px 24px; }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  .hero { position:relative; overflow:hidden; border-radius: 24px; padding: 48px 40px; background: var(--neutral-800); margin-bottom: 40px; }
+  .hero::before { content:''; position:absolute; inset:0; background: linear-gradient(90deg, var(--violet-300), var(--pink), var(--peach), var(--mint), var(--sky)); opacity:.25; filter: blur(48px); transform: translateY(-60%); }
+  .hero > * { position:relative; }
+  h1 { font-family: var(--font-heading); letter-spacing:.12em; font-size: 40px; }
+  .tag { color: var(--neutral-300); margin-top: 4px; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  a.card { display:block; background: var(--neutral-800); border:1px solid var(--neutral-700); border-radius:16px; padding: 24px; text-decoration:none; color:#fff; transition: transform .16s ease, border-color .16s ease; }
+  a.card:hover { transform: translateY(-2px); border-color: var(--violet-300); }
+  a.card b { font-family: var(--font-heading); font-size: 18px; display:block; margin-bottom: 6px; }
+  a.card span { color: var(--neutral-300); font-size: 14px; }
+  a.card .n { display:inline-block; font-size: 11px; font-weight:700; letter-spacing:.08em; color: var(--lime-300); margin-bottom: 10px; }
+  .foot { margin-top: 40px; color: var(--neutral-400); font-size: 13px; line-height: 1.7; }
+  .foot code { color: var(--neutral-300); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>AURORA</h1>
+    <div class="tag">Luz que acompaña · previews del design system y las pantallas MVP</div>
+  </div>
+  <div class="grid">
+    <a class="card" href="foundations.html"><span class="n">FUNDAMENTOS</span><b>Foundations</b><span>Paleta, tipografía, espaciado, radios, elevación, temas.</span></a>
+    <a class="card" href="components.html"><span class="n">SISTEMA</span><b>Componentes</b><span>Botones, badges, listas, timeline, formularios, navegación.</span></a>
+    <a class="card" href="screens-01-auth-onboarding.html"><span class="n">PANTALLAS 01-07</span><b>Auth y Onboarding</b><span>Login, cuenta del hogar, wizard de 5 pasos, prueba en vivo.</span></a>
+    <a class="card" href="screens-02-core.html"><span class="n">PANTALLAS 08-13</span><b>Inicio, Rutinas y Medicación</b><span>Dashboard (2 estados), agenda, editor, tratamientos, cumplimiento.</span></a>
+    <a class="card" href="screens-03-recuerdos-actividad.html"><span class="n">PANTALLAS 14-20</span><b>Recuerdos, Actividad y Drop-in</b><span>Biografía, validación, alertas, detalle, historial, drop-in.</span></a>
+    <a class="card" href="screens-04-ajustes.html"><span class="n">PANTALLAS 21-26</span><b>Ajustes</b><span>Cuidadores, reglas de notificación, contactos, dispositivos, privacidad.</span></a>
+    <a class="card" href="screens-08-terapias.html"><span class="n">PANTALLAS 29-32</span><b>Terapias</b><span>Biblioteca, trivia autónoma, sesión guiada en dúo, descubrimientos.</span></a>
+    <a class="card" href="screens-05-desktop.html"><span class="n">PANTALLAS 27-28</span><b>Desktop 1440</b><span>Dashboard y rutinas con sidebar + panel lateral.</span></a>
+    <a class="card" href="screens-06-device.html"><span class="n">DISPOSITIVO</span><b>Aurora Home — display</b><span>Los 6 estados del display y el anillo LED.</span></a>
+    <a class="card" href="screens-07-vision.html"><span class="n">VISIÓN</span><b>Wireframes lo-fi</b><span>Zonas seguras, mapa, llamada automática, biometría, reportes, B2B.</span></a>
+  </div>
+  <p class="foot">
+    Tokens: <code>Design/tokens/tokens.json</code> (34/34 pares WCAG 2.2 ✓) · Manual: <code>Document Hub/Diseño UX-UI/</code> · Proyecto Aurora — Tesis UTN-FRC 2026.<br>
+    Estos previews son la referencia de implementación para Aurora Care (Next.js): mismos tokens, mismas clases conceptuales, mismos textos.
+  </p>
+</div>
+</body>
+</html>
