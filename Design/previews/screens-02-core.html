@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Care — Inicio, Rutinas y Medicación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="app.css">
+<style>
+  .day-nav { display:flex; align-items:center; gap: var(--space-2); }
+  .day-nav .today { flex:1; text-align:center; font-family: var(--font-heading); font-weight:600; font-size: var(--text-lg); }
+  .hour-block { display:flex; gap: var(--space-3); }
+  .hour-block .h { width: 52px; font-variant-numeric: tabular-nums; font-weight:600; color: var(--text-muted); font-size: var(--text-sm); padding-top: 14px; flex:none; }
+  .hour-block .list { flex:1; }
+</style>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-house" viewBox="0 0 24 24"><path d="M3 11 L12 3 L21 11 M5 10 V20 H19 V10"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10 H21 M8 3 V7 M16 3 V7"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4 H16 A3 3 0 0 1 19 7 V20 H8 A3 3 0 0 1 5 17 Z M19 16 H8 A3 3 0 0 0 5 17"/><path d="M12 8 C10.5 6.5 8.5 8 9.5 9.8 C10.2 11 12 12.2 12 12.2 C12 12.2 13.8 11 14.5 9.8 C15.5 8 13.5 6.5 12 8 Z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9.5 A6 6 0 0 1 18 9.5 C18 13.5 19 15.5 20 16.5 H4 C5 15.5 6 13.5 6 9.5 Z M10 20 A2.2 2.2 0 0 0 14 20"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7 H16 M20 7 H21 M4 12 H8 M12 12 H21 M4 17 H13 M17 17 H21"/><circle cx="18" cy="7" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="15" cy="17" r="2"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="6.5" rx="3.25" transform="rotate(-45 12 12)"/><path d="M9.7 9.7 L14.3 14.3"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11 A7 7 0 0 0 19 11 M12 18 V21"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4 C4.4 4 4 4.4 4 5 C4 13.3 10.7 20 19 20 C19.6 20 20 19.6 20 19 V15.8 L16.2 14.4 L14.5 16.1 C11.8 14.9 9.6 12.8 8.3 10 L10 8.3 L8.2 4 Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13 L9.5 17.5 L19 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6 L18 18 M18 6 L6 18"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5 V19 M5 12 H19"/></symbol>
+  <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 6 L15 12 L9 18"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 6 L9 12 L15 18"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 L21.5 19.5 H2.5 Z M12 9.5 V14"/><circle cx="12" cy="16.8" r="0.6"/></symbol>
+  <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M5 11.5 A10 10 0 0 1 19 11.5 M8.3 15 A5.2 5.2 0 0 1 15.7 15"/><circle cx="12" cy="18.4" r="1"/><path d="M4 4 L20 20"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20 C5.5 14.5 3.2 10.5 5.5 7.5 A4.2 4.2 0 0 1 12 8 A4.2 4.2 0 0 1 18.5 7.5 C20.8 10.5 18.5 14.5 12 20 Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L15.5 14.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21 C7.5 15.5 5.5 12.3 5.5 9.2 A6.5 6.5 0 0 1 18.5 9.2 C18.5 12.3 16.5 15.5 12 21 Z"/><circle cx="12" cy="9.2" r="2.4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21 C4.5 16.5 8 15 12 15 C16 15 19.5 16.5 19.5 21"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20 C2.5 16.3 5.5 15 9 15 C12.5 15 15.5 16.3 15.5 20 M16 5.5 A3.2 3.2 0 0 1 16 12 M17.5 15.2 C20 15.8 21.5 17.2 21.5 19.5"/></symbol>
+  <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 10 V14 H7.5 L13 18.5 V5.5 L7.5 10 Z M16.5 9 A5 5 0 0 1 16.5 15"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3 V6 M15 3 V6 M9 18 V21 M15 18 V21 M3 9 H6 M3 15 H6 M18 9 H21 M18 15 H21"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="3" y="8.5" width="15" height="7" rx="2"/><path d="M21 11 V13"/><rect x="5" y="10.5" width="7" height="3" rx="1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14 A8.5 8.5 0 1 1 10 4 A7 7 0 0 0 20 14 Z"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M14.5 5.5 L18.5 9.5 M4 20 L5.5 15.5 L15.5 5.5 L18.5 8.5 L8.5 18.5 Z"/></symbol>
+</svg>
+
+<h1 class="gallery-title">Inicio, Rutinas y Medicación</h1>
+<p class="gallery-sub">El corazón del MVP: el vistazo de 5 segundos (J2), la agenda del día y la gestión de medicación con margen de confirmación (RN7).</p>
+
+<div class="gallery">
+
+  <!-- INICIO NORMAL -->
+  <div><p class="frame-label">08 · Inicio — todo en orden</p>
+  <div class="phone"><div class="screen">
+    <div class="statusbar"><span>10:45</span><span>●●● ᯤ 87%</span></div>
+    <div class="topbar"><div class="title">Hola, María</div><span class="badge ok"><svg class="ic"><use href="#i-check"/></svg>Todo en orden</span></div>
+    <div class="content">
+      <div class="status-hero">
+        <div class="avatar">A</div>
+        <div><div class="st-title">Ana está bien</div><div class="st-sub">Habló con Aurora 10:42 · confirmó el desayuno</div></div>
+        <div class="ok-ring"><svg class="ic"><use href="#i-check"/></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><svg class="ic"><use href="#i-calendar"/></svg>Hoy le toca<span class="card-link">Ver agenda</span></div>
+        <div class="list" style="border:none">
+          <div class="row" style="padding-left:0;padding-right:0"><div class="r-icon brand"><svg class="ic"><use href="#i-pill"/></svg></div>
+            <div class="r-main"><div class="r-title">Enalapril 10 mg</div><div class="r-sub">Prioritaria</div></div>
+            <div class="r-end"><span class="time">14:00</span></div></div>
+          <div class="row" style="padding-left:0;padding-right:0"><div class="r-icon"><svg class="ic"><use href="#i-clock"/></svg></div>
+            <div class="r-main"><div class="r-title">Merienda</div><div class="r-sub">Importante</div></div>
+            <div class="r-end"><span class="time">16:30</span></div></div>
+          <div class="row" style="padding-left:0;padding-right:0"><div class="r-icon"><svg class="ic"><use href="#i-heart"/></svg></div>
+            <div class="r-main"><div class="r-title">Caminata en el patio</div><div class="r-sub">Normal</div></div>
+            <div class="r-end"><span class="time">17:00</span></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><svg class="ic"><use href="#i-cpu"/></svg>Dispositivos</div>
+        <div class="hstack">
+          <span class="badge ok">Aurora Home · conectado</span>
+          <span class="badge neutral">Pulsera · no vinculada</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><svg class="ic"><use href="#i-mic"/></svg>Resumen del día<span class="card-link">Ver todo</span></div>
+        <p class="muted">2 interacciones · 1 ejercicio de memoria completado · medicación de las 08:00 ✓</p>
+      </div>
+    </div>
+    <button class="fab"><svg class="ic"><use href="#i-mic"/></svg>Hablar con Ana</button>
+    <div class="tabbar">
+      <div class="tab active"><svg class="ic"><use href="#i-house"/></svg>Inicio</div>
+      <div class="tab"><svg class="ic"><use href="#i-calendar"/></svg>Rutinas</div>
+      <div class="tab"><svg class="ic"><use href="#i-book"/></svg>Recuerdos</div>
+      <div class="tab"><svg class="ic"><use href="#i-bell"/></svg>Actividad</div>
+      <div class="tab"><svg class="ic"><use href="#i-sliders"/></svg>Ajustes</div>
+    </div>
+  </div></div></div>
+
+  <!-- INICIO CON ALERTA -->
+  <div><p class="frame-label">09 · Inicio — alerta Alta activa</p>
+  <div class="phone"><div class="screen">
+    <div class="statusbar"><span>14:16</span><span>●●● ᯤ 82%</span></div>
+    <div class="topbar"><div class="title">Hola, María</div><span class="badge danger">1 alerta</span></div>
+    <div class="content">
+      <div class="alert-banner high">
+        <div class="ab-head"><div class="ab-icon"><svg class="ic"><use href="#i-pill"/></svg></div>
+          <div><div class="ab-title">Sin confirmación de la toma de las 14:00</div><div class="ab-sub">Enalapril 10 mg · prioritaria · Aurora reintentó 2 veces</div></div></div>
+        <div class="ab-actions">
+          <button class="btn btn-sm btn-danger"><svg class="ic"><use href="#i-mic"/></svg>Drop-in</button>
+          <button class="btn btn-sm btn-secondary"><svg class="ic"><use href="#i-phone"/></svg>Llamar</button>
+          <button class="btn btn-sm btn-ghost">Atendida</button>
+        </div>
+      </div>
+      <div class="status-hero">
+        <div class="avatar">A</div>
+        <div><div class="st-title">Ana necesita atención</div><div class="st-sub">Última interacción 13:05 · almuerzo confirmado</div></div>
+        <div class="ok-ring" style="background: var(--warning-bg); color: var(--warning-icon)"><svg class="ic"><use href="#i-alert"/></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><svg class="ic"><use href="#i-calendar"/></svg>Hoy le toca<span class="card-link">Ver agenda</span></div>
+        <div class="list" style="border:none">
+          <div class="row" style="padding-left:0;padding-right:0"><div class="r-icon warn"><svg class="ic"><use href="#i-pill"/></svg></div>
+            <div class="r-main"><div class="r-title">Enalapril 10 mg</div><div class="r-sub">Sin confirmación</div></div>
+            <div class="r-end"><span class="time">14:00</span><span class="badge warn">!</span></div></div>
+          <div class="row" style="padding-left:0;padding-right:0"><div class="r-icon"><svg class="ic"><use href="#i-clock"/></svg></div>
+            <div class="r-main"><div class="r-title">Merienda</div><div class="r-sub">Importante</div></div>
+            <div class="r-end"><span class="time">16:30</span></div></div>
+        </div>
+      </div>
+    </div>
+    <button class="fab"><svg class="ic"><use href="#i-mic"/></svg>Hablar con Ana</button>
+    <div class="tabbar">
+      <div class="tab active"><svg class="ic"><use href="#i-house"/></svg>Inicio</div>
+      <div class="tab"><svg class="ic"><use href="#i-calendar"/></svg>Rutinas</div>
+      <div class="tab"><svg class="ic"><use href="#i-book"/></svg>Recuerdos</div>
+      <div class="tab"><span class="dot">1</span><svg class="ic"><use href="#i-bell"/></svg>Actividad</div>
+      <div class="tab"><svg class="ic"><use href="#i-sliders"/></svg>Ajustes</div>
+    </div>
+  </div></div></div>
+
+  <!-- RUTINAS AGENDA -->
+  <div><p class="frame-label">10 · Rutinas — agenda del día</p>
+  <div class="phone"><div class="screen">
+    <div class="statusbar"><span>10:45</span><span>●●● ᯤ 87%</span></div>
+    <div class="topbar"><div class="title">Rutinas</div><button class="btn btn-primary btn-sm"><svg class="ic"><use href="#i-plus"/></svg>Nueva</button></div>
+    <div class="content">
+      <div class="seg"><button class="active">Rutinas</button><button>Medicación</button></div>
+      <div class="day-nav">
+        <div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div>
+        <div class="today">Hoy · miércoles 9 de julio</div>
+        <div class="back"><svg class="ic"><use href="#i-chev-r"/></svg></div>
+      </div>
+      <div class="hour-block"><div class="h">08:00</div>
+        <div class="list"><div class="row"><div class="r-icon ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="r-main"><div class="r-title">Desayuno + medicación</div><div class="r-sub">Confirmada 08:12</div></div>
+          <div class="r-end"><span class="badge ok">✓</span></div></div></div></div>
+      <div class="hour-block"><div class="h">12:30</div>
+        <div class="list"><div class="row"><div class="r-icon ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="r-main"><div class="r-title">Almuerzo</div><div class="r-sub">Confirmada 13:05</div></div>
+          <div class="r-end"><span class="badge ok">✓</span></div></div></div></div>
+      <div class="hour-block"><div class="h">14:00</div>
+        <div class="list"><div class="row"><div class="r-icon brand"><svg class="ic"><use href="#i-pill"/></svg></div>
+          <div class="r-main"><div class="r-title">Enalapril 10 mg</div><div class="r-sub">Prioritaria · margen 15 min</div></div>
+          <div class="r-end"><span class="badge neutral">Pendiente</span><svg class="ic chev"><use href="#i-chev-r"/></svg></div></div></div></div>
+      <div class="hour-block"><div class="h">16:30</div>
+        <div class="list"><div class="row"><div class="r-icon"><svg class="ic"><use href="#i-clock"/></svg></div>
+          <div class="r-main"><div class="r-title">Merienda</div><div class="r-sub">Importante · margen 30 min</div></div>
+          <div class="r-end"><svg class="ic chev"><use href="#i-chev-r"/></svg></div></div></div></div>
+      <div class="hour-block"><div class="h">17:00</div>
+        <div class="list"><div class="row"><div class="r-icon"><svg class="ic"><use href="#i-heart"/></svg></div>
+          <div class="r-main"><div class="r-title">Caminata en el patio</div><div class="r-sub">Normal · pausada esta semana</div></div>
+          <div class="r-end"><span class="badge neutral">Pausada</span></div></div></div></div>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><svg class="ic"><use href="#i-house"/></svg>Inicio</div>
+      <div class="tab active"><svg class="ic"><use href="#i-calendar"/></svg>Rutinas</div>
+      <div class="tab"><svg class="ic"><use href="#i-book"/></svg>Recuerdos</div>
+      <div class="tab"><svg class="ic"><use href="#i-bell"/></svg>Actividad</div>
+      <div class="tab"><svg class="ic"><use href="#i-sliders"/></svg>Ajustes</div>
+    </div>
+  </div></div></div>
+
+  <!-- EDITOR DE RUTINA -->
+  <div><p class="frame-label">11 · Editor de rutina</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Editar rutina</div><button class="btn btn-ghost btn-sm">Guardar</button></div>
+    <div class="content">
+      <div class="field"><label>Nombre</label><input class="input" value="Enalapril 10 mg"><span class="help">Aurora dice este nombre al recordarle.</span></div>
+      <div class="hstack" style="gap: var(--space-3)">
+        <div class="field" style="flex:1"><label>Horario</label><input class="input" value="14:00"></div>
+        <div class="field" style="flex:1"><label>Frecuencia</label><select class="input"><option>Todos los días</option></select></div>
+      </div>
+      <div class="field"><label>Prioridad</label>
+        <div class="seg"><button>Normal</button><button>Importante</button><button class="active">Prioritaria</button></div>
+        <span class="help">Prioritaria: si Ana no confirma, se envía una alerta con sonido y escalado a los demás cuidadores.</span></div>
+      <div class="field"><label>Margen de confirmación</label>
+        <div class="seg"><button>10 min</button><button class="active">15 min</button><button>30 min</button><button>60 min</button></div>
+        <span class="help">Tiempo de espera (con un reintento) antes de registrar la omisión.</span></div>
+      <div class="field"><label>Mensaje de voz (opcional)</label>
+        <textarea class="input">Ana, es la hora de la pastilla de la presión. Está en el cajón de la cocina.</textarea>
+        <button class="btn btn-secondary btn-sm" style="align-self:flex-start"><svg class="ic"><use href="#i-volume"/></svg>Escuchar cómo suena</button></div>
+      <div class="spread"><span style="font-weight:600; font-size:var(--text-sm)">Rutina activa</span><button class="toggle on" aria-label="activa"></button></div>
+    </div>
+  </div></div></div>
+
+  <!-- MEDICACION -->
+  <div><p class="frame-label">12 · Medicación — tratamientos</p>
+  <div class="phone"><div class="screen">
+    <div class="statusbar"><span>10:45</span><span>●●● ᯤ 87%</span></div>
+    <div class="topbar"><div class="title">Rutinas</div><button class="btn btn-primary btn-sm"><svg class="ic"><use href="#i-plus"/></svg>Nueva</button></div>
+    <div class="content">
+      <div class="seg"><button>Rutinas</button><button class="active">Medicación</button></div>
+      <div class="kpis">
+        <div class="kpi"><div class="k-val">96%</div><div class="k-lbl">Últimos 7 días</div></div>
+        <div class="kpi"><div class="k-val">3</div><div class="k-lbl">Tratamientos</div></div>
+        <div class="kpi"><div class="k-val">1</div><div class="k-lbl">Omisión 7d</div></div>
+      </div>
+      <div class="sect-label">Tratamientos activos</div>
+      <div class="list">
+        <div class="row"><div class="r-icon brand"><svg class="ic"><use href="#i-pill"/></svg></div>
+          <div class="r-main"><div class="r-title">Enalapril 10 mg</div><div class="r-sub">08:00 y 14:00 · indicado por Dra. Ferreyra</div></div>
+          <div class="r-end"><svg class="ic chev"><use href="#i-chev-r"/></svg></div></div>
+        <div class="row"><div class="r-icon brand"><svg class="ic"><use href="#i-pill"/></svg></div>
+          <div class="r-main"><div class="r-title">Memantina 20 mg</div><div class="r-sub">21:00 · con la cena</div></div>
+          <div class="r-end"><svg class="ic chev"><use href="#i-chev-r"/></svg></div></div>
+        <div class="row"><div class="r-icon brand"><svg class="ic"><use href="#i-pill"/></svg></div>
+          <div class="r-main"><div class="r-title">Vitamina D</div><div class="r-sub">Domingos 10:00</div></div>
+          <div class="r-end"><svg class="ic chev"><use href="#i-chev-r"/></svg></div></div>
+      </div>
+      <div class="card" style="background: var(--blue-50); border-color: var(--blue-100)">
+        <p style="font-size: var(--text-sm); color: var(--info-text)"><b>Aurora no sugiere ni cambia dosis.</b> Toda medicación la carga un cuidador según la indicación médica (RN3/RN4).</p>
+      </div>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><svg class="ic"><use href="#i-house"/></svg>Inicio</div>
+      <div class="tab active"><svg class="ic"><use href="#i-calendar"/></svg>Rutinas</div>
+      <div class="tab"><svg class="ic"><use href="#i-book"/></svg>Recuerdos</div>
+      <div class="tab"><svg class="ic"><use href="#i-bell"/></svg>Actividad</div>
+      <div class="tab"><svg class="ic"><use href="#i-sliders"/></svg>Ajustes</div>
+    </div>
+  </div></div></div>
+
+  <!-- HISTORIAL CUMPLIMIENTO -->
+  <div><p class="frame-label">13 · Historial de cumplimiento</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Enalapril 10 mg</div><button class="btn btn-ghost btn-sm"><svg class="ic"><use href="#i-edit"/></svg></button></div>
+    <div class="content">
+      <div class="meter"><div class="m-head"><span>Cumplimiento 30 días</span><span>57/60 tomas</span></div><div class="m-track"><div class="m-fill" style="width:95%"></div></div></div>
+      <div class="sect-label">Esta semana</div>
+      <div class="timeline">
+        <div class="t-item"><div class="t-dot ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="t-body"><div class="t-title">Confirmada</div><div class="t-sub">«Ya la tomé» · al primer aviso</div><div class="t-time">Hoy 08:12</div></div></div>
+        <div class="t-item"><div class="t-dot warn"><svg class="ic"><use href="#i-alert"/></svg></div>
+          <div class="t-body"><div class="t-title">Omitida → resuelta por María</div><div class="t-sub">Drop-in a las 14:17 · confirmó después</div><div class="t-time">Ayer 14:15</div></div></div>
+        <div class="t-item"><div class="t-dot ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="t-body"><div class="t-title">Confirmada</div><div class="t-sub">Tras un reintento</div><div class="t-time">Ayer 08:22</div></div></div>
+        <div class="t-item"><div class="t-dot ok"><svg class="ic"><use href="#i-check"/></svg></div>
+          <div class="t-body"><div class="t-title">Confirmada</div><div class="t-time">Lunes 14:03</div></div></div>
+      </div>
+      <button class="btn btn-secondary btn-block"><svg class="ic" style="width:20px;height:20px"><use href="#i-calendar"/></svg>Ver mes completo</button>
+    </div>
+  </div></div></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora — Wireframes de visión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="app.css">
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21 C7.5 15.5 5.5 12.3 5.5 9.2 A6.5 6.5 0 0 1 18.5 9.2 C18.5 12.3 16.5 15.5 12 21 Z"/><circle cx="12" cy="9.2" r="2.4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20 C5.5 14.5 3.2 10.5 5.5 7.5 A4.2 4.2 0 0 1 12 8 A4.2 4.2 0 0 1 18.5 7.5 C20.8 10.5 18.5 14.5 12 20 Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4 C4.4 4 4 4.4 4 5 C4 13.3 10.7 20 19 20 C19.6 20 20 19.6 20 19 V15.8 L16.2 14.4 L14.5 16.1 C11.8 14.9 9.6 12.8 8.3 10 L10 8.3 L8.2 4 Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4 V14 M7.5 10 L12 14.5 L16.5 10 M5 19 H19"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20 C2.5 16.3 5.5 15 9 15 C12.5 15 15.5 16.3 15.5 20 M16 5.5 A3.2 3.2 0 0 1 16 12 M17.5 15.2 C20 15.8 21.5 17.2 21.5 19.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 L21.5 19.5 H2.5 Z M12 9.5 V14"/><circle cx="12" cy="16.8" r="0.6"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 6 L9 12 L15 18"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="3" y="8.5" width="15" height="7" rx="2"/><path d="M21 11 V13"/><rect x="5" y="10.5" width="7" height="3" rx="1"/></symbol>
+</svg>
+
+<h1 class="gallery-title">Wireframes de visión (lo-fi)</h1>
+<p class="gallery-sub">Funcionalidad fuera del corte MVP (User Story Map), documentada para retomar — specs en el capítulo <em>Handoff y Backlog de Diseño</em> del manual. Trazo punteado = por diseñar en detalle.</p>
+
+<div class="gallery wf">
+
+  <!-- ZONAS SEGURAS -->
+  <div><p class="frame-label">V1 · Zonas seguras (geofencing, RF-70/RN11)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Zonas seguras</div></div>
+    <div class="content">
+      <div class="wf-box" style="height:280px">MAPA<br>zona = círculo con radio arrastrable<br>(centro: la casa de Ana)</div>
+      <div class="field"><label>Nombre de la zona</label><input class="input" value="Casa y manzana"></div>
+      <div class="field"><label>Radio</label><div class="seg"><button>100 m</button><button class="active">300 m</button><button>1 km</button></div></div>
+      <div class="field"><label>Si Ana sale de la zona</label><div class="seg"><button>Avisar (Alta)</button><button class="active">Crítica</button></div></div>
+      <div class="wf-note">Decisión pendiente: ¿zonas con horario (feria los sábados)? ¿varias zonas?</div>
+      <button class="btn btn-primary btn-block">Guardar zona</button>
+    </div>
+  </div></div></div>
+
+  <!-- ALERTA CON MAPA -->
+  <div><p class="frame-label">V2 · Alerta crítica: salida de zona (US 3.2)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="title small" style="color:var(--danger-text)">⚠ Crítica · hace 2 min</div></div>
+    <div class="content">
+      <div class="alert-banner critical">
+        <div class="ab-head"><div class="ab-icon"><svg class="ic"><use href="#i-pin"/></svg></div>
+          <div><div class="ab-title">Ana salió de la zona segura</div><div class="ab-sub">16:40 · última ubicación hace 30 s</div></div></div>
+      </div>
+      <div class="wf-box" style="height:240px">MAPA en vivo<br>último punto + recorrido<br>+ botón «cómo llegar»</div>
+      <button class="btn btn-danger btn-block"><svg class="ic"><use href="#i-phone"/></svg>Llamar a Ana</button>
+      <button class="btn btn-secondary btn-block">Voy en camino (avisa a los demás)</button>
+      <div class="wf-note">Si nadie responde en la ventana crítica → llamada automática (V3). Push &lt;30 s desde la detección.</div>
+    </div>
+  </div></div></div>
+
+  <!-- LLAMADA AUTOMATICA -->
+  <div><p class="frame-label">V3 · Escalado con llamada automática (RF-42)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Alerta crítica · trazabilidad</div></div>
+    <div class="content">
+      <div class="timeline">
+        <div class="t-item"><div class="t-dot danger"><svg class="ic"><use href="#i-alert"/></svg></div><div class="t-body"><div class="t-title">Caída detectada</div><div class="t-sub">Pulsera · confianza alta</div><div class="t-time">03:12</div></div></div>
+        <div class="t-item"><div class="t-dot danger"><svg class="ic"><use href="#i-phone"/></svg></div><div class="t-body"><div class="t-title">Push + WhatsApp a todos</div><div class="t-sub">Sin respuesta en 5 min</div><div class="t-time">03:12</div></div></div>
+        <div class="t-item"><div class="t-dot danger"><svg class="ic"><use href="#i-phone"/></svg></div><div class="t-body"><div class="t-title">Llamada automática a María</div><div class="t-sub">Mensaje TTS con instrucciones · atendió ✓</div><div class="t-time">03:17</div></div></div>
+      </div>
+      <div class="wf-note">Guion de la llamada TTS por definir con criterio médico. Confirmación en llamada = «presioná 1».</div>
+      <div class="wf-box" style="height:120px">Configuración: ventana crítica (5-15 min)<br>orden de llamadas = contactos de emergencia</div>
+    </div>
+  </div></div></div>
+
+  <!-- BIOMETRIA -->
+  <div><p class="frame-label">V4 · Dashboard biométrico (Aurora Band)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Salud y actividad</div><span class="badge ok" style="margin-left:auto"><svg class="ic" style="width:12px;height:12px"><use href="#i-battery"/></svg>72%</span></div>
+    <div class="content">
+      <div class="kpis">
+        <div class="kpi"><div class="k-val">72</div><div class="k-lbl">FC ahora</div></div>
+        <div class="kpi"><div class="k-val">3.240</div><div class="k-lbl">Pasos hoy</div></div>
+        <div class="kpi"><div class="k-val">7,2 h</div><div class="k-lbl">Sueño</div></div>
+      </div>
+      <div class="wf-box" style="height:140px">Gráfico FC 24 h<br>banda normal personalizada + eventos marcados</div>
+      <div class="wf-box" style="height:100px">Actividad semanal (barras)</div>
+      <div class="wf-note">Regla: tendencias, no diagnóstico. Anomalía → evento según umbrales configurables (RNF-21: sin indicaciones médicas).</div>
+    </div>
+  </div></div></div>
+
+  <!-- REPORTE MEDICO -->
+  <div><p class="frame-label">V5 · Reporte para el médico (RNF exportación)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Exportar reporte</div></div>
+    <div class="content">
+      <div class="field"><label>Período</label><div class="seg"><button>30 días</button><button class="active">90 días</button><button>Personalizado</button></div></div>
+      <div class="field"><label>Incluir</label></div>
+      <div class="list">
+        <div class="row"><div class="r-main"><div class="r-title">Cumplimiento de medicación</div></div><div class="r-end"><button class="toggle on"></button></div></div>
+        <div class="row"><div class="r-main"><div class="r-title">Eventos y alertas</div></div><div class="r-end"><button class="toggle on"></button></div></div>
+        <div class="row"><div class="r-main"><div class="r-title">Actividad cognitiva (participación)</div></div><div class="r-end"><button class="toggle on"></button></div></div>
+        <div class="row"><div class="r-main"><div class="r-title">Biometría (tendencias)</div></div><div class="r-end"><button class="toggle"></button></div></div>
+      </div>
+      <div class="wf-box" style="height:110px">Vista previa del PDF<br>1 página resumen + detalle</div>
+      <button class="btn btn-primary btn-block"><svg class="ic"><use href="#i-download"/></svg>Generar PDF</button>
+      <div class="wf-note">Destinataria: la neuróloga (actor externo — no usa el sistema). Formato validar con profesionales (riesgo R1).</div>
+    </div>
+  </div></div></div>
+
+  <!-- MULTI PACIENTE -->
+  <div><p class="frame-label">V6 · B2B: lista multi-paciente (Silvina)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="title small">Residencia Los Nogales</div><span class="badge danger" style="margin-left:auto">2 alertas</span></div>
+    <div class="content">
+      <div class="list">
+        <div class="row"><div class="r-icon danger"><svg class="ic"><use href="#i-alert"/></svg></div><div class="r-main"><div class="r-title">Rosa M. — hab. 12</div><div class="r-sub">Caída detectada · hace 1 min</div></div><div class="r-end"><span class="badge danger">Crítica</span></div></div>
+        <div class="row"><div class="r-icon warn"><svg class="ic"><use href="#i-alert"/></svg></div><div class="r-main"><div class="r-title">Juan P. — hab. 3</div><div class="r-sub">Medicación sin confirmar</div></div><div class="r-end"><span class="badge warn">Alta</span></div></div>
+        <div class="row"><div class="r-icon ok"><svg class="ic" style="width:18px;height:18px"><use href="#i-heart"/></svg></div><div class="r-main"><div class="r-title">Ana G. — hab. 7</div><div class="r-sub">Sin novedades</div></div></div>
+        <div class="row"><div class="r-icon ok"><svg class="ic" style="width:18px;height:18px"><use href="#i-heart"/></svg></div><div class="r-main"><div class="r-title">Elsa T. — hab. 9</div><div class="r-sub">Sin novedades</div></div></div>
+      </div>
+      <div class="wf-note">La IA por paciente reutiliza los 5 tabs del MVP (nota de escalabilidad, cap. Arquitectura de Información). Requiere: roles y permisos, triage, turnos de personal.</div>
+      <div class="wf-box" style="height:90px">Filtros: piso · severidad · turno</div>
+    </div>
+  </div></div></div>
+
+</div>
+</body>
+</html>
