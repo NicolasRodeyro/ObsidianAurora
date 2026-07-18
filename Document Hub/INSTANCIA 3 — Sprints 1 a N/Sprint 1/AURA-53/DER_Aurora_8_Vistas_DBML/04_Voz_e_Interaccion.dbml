@@ -1,0 +1,198 @@
+// Vista derivada del DER físico completo de Aurora.
+// Las tablas marcadas como referencia externa están resumidas para mantener el diagrama legible.
+
+Project aurora_view {
+  database_type: 'PostgreSQL'
+  Note: 'Conversaciones, audios, recordatorios, actividades cognitivas y sesiones drop-in.'
+}
+
+
+Table voice.interaction_sessions {
+  id uuid [pk]
+  patient_id uuid
+  initiator text
+  session_type text
+  status text
+  estimated_mood text
+  started_at timestamptz
+  ended_at timestamptz
+}
+
+Table voice.interaction_messages {
+  id uuid [pk]
+  session_id uuid
+  role text
+  content text
+  content_type text
+  metadata jsonb
+  created_at timestamptz
+}
+
+Table voice.voice_recordings {
+  id uuid [pk]
+  message_id uuid
+  file_path text
+  duration_ms int
+  file_size_bytes int
+  retention_expires_at date
+  created_at timestamptz
+}
+
+Table voice.reminders {
+  id uuid [pk]
+  patient_id uuid
+  type text
+  message_template text
+  schedule jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table voice.reminder_confirmations {
+  id uuid [pk]
+  reminder_id uuid
+  session_id uuid
+  response text
+  responded_at timestamptz
+}
+
+Table voice.activities {
+  id uuid [pk]
+  activity_type text
+  name text
+  category text
+  difficulty text
+  description text
+  configuration jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table voice.activity_sessions {
+  id uuid [pk]
+  patient_id uuid
+  activity_id uuid
+  session_id uuid
+  status text
+  score int
+  completion_percent smallint
+  duration_seconds int
+  memory_refs jsonb [note: 'Referencias lógicas de memoria; sin FK física.']
+  metrics jsonb
+  started_at timestamptz
+  ended_at timestamptz
+
+  Note: 'memory_refs contiene referencias lógicas y no posee foreign keys físicas.'
+}
+
+Table voice.drop_in_sessions {
+  id uuid [pk]
+  home_account_id uuid
+  patient_id uuid
+  caregiver_id uuid
+  status text
+  audio_mode text
+  requested_at timestamptz
+  started_at timestamptz
+  ended_at timestamptz
+  failure_reason text
+  metadata jsonb
+}
+
+Table core.home_accounts {
+  id uuid [pk]
+  name text
+  dot_identifier text [unique]
+  status text
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  status text
+
+  indexes {
+    (id, home_account_id) [unique]
+  }
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table core.caregivers {
+  id uuid [pk]
+  name text
+  email text
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table core.home_account_caregivers {
+  id uuid [pk]
+  home_account_id uuid
+  caregiver_id uuid
+  role text
+  status text
+
+  indexes {
+    (home_account_id, caregiver_id) [unique]
+  }
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+TableGroup domain_tables {
+  voice.interaction_sessions
+  voice.interaction_messages
+  voice.voice_recordings
+  voice.reminders
+  voice.reminder_confirmations
+  voice.activities
+  voice.activity_sessions
+  voice.drop_in_sessions
+}
+
+TableGroup external_context {
+  core.home_accounts
+  core.patients
+  core.caregivers
+  core.home_account_caregivers
+}
+
+// Relaciones visibles en esta vista
+
+Ref fk_15: voice.interaction_sessions.patient_id > core.patients.id
+
+Ref fk_16: voice.interaction_messages.session_id > voice.interaction_sessions.id
+
+Ref fk_17: voice.voice_recordings.message_id > voice.interaction_messages.id
+
+Ref fk_18: voice.reminders.patient_id > core.patients.id
+
+Ref fk_19: voice.reminder_confirmations.reminder_id > voice.reminders.id
+
+Ref fk_20: voice.reminder_confirmations.session_id > voice.interaction_sessions.id
+
+Ref fk_21: voice.activity_sessions.activity_id > voice.activities.id
+
+Ref fk_22: voice.activity_sessions.patient_id > core.patients.id
+
+Ref fk_23: voice.activity_sessions.session_id > voice.interaction_sessions.id
+
+Ref fk_24: voice.drop_in_sessions.home_account_id > core.home_accounts.id
+
+Ref fk_25: voice.drop_in_sessions.patient_id > core.patients.id
+
+Ref fk_26: voice.drop_in_sessions.caregiver_id > core.caregivers.id
+
+// Valida que el cuidador esté asociado a la cuenta DOT
+
+Ref fk_27: voice.drop_in_sessions.(home_account_id, caregiver_id) > core.home_account_caregivers.(home_account_id, caregiver_id)
+
+// Valida que el paciente pertenezca a la cuenta DOT
+
+Ref fk_28: voice.drop_in_sessions.(patient_id, home_account_id) > core.patients.(id, home_account_id)

@@ -1,0 +1,133 @@
+// Vista derivada del DER físico completo de Aurora.
+// Las tablas marcadas como referencia externa están resumidas para mantener el diagrama legible.
+
+Project aurora_view {
+  database_type: 'PostgreSQL'
+  Note: 'Identidad del hogar DOT, paciente, cuidadores, contactos, consentimientos y preferencias del cuidador.'
+}
+
+
+Table core.home_accounts {
+  id uuid [pk]
+  name text
+  dot_identifier text [unique]
+  status text
+  timezone text
+  configuration jsonb
+  created_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  dni text
+  birth_date date
+  fast_level smallint
+  medical_info jsonb
+  status text
+  created_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+
+  indexes {
+    (id, home_account_id) [unique, note: 'Soporta la FK compuesta usada por voice.drop_in_sessions']
+  }
+}
+
+Table core.caregivers {
+  id uuid [pk]
+  auth_provider text
+  auth_subject text
+  name text
+  email text
+  phone text
+  notification_prefs jsonb
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table core.home_account_caregivers {
+  id uuid [pk]
+  home_account_id uuid
+  caregiver_id uuid
+  role text
+  status text
+  associated_at timestamptz
+
+  indexes {
+    (home_account_id, caregiver_id) [unique, note: 'Evita asociaciones duplicadas y soporta la FK compuesta de drop_in_sessions']
+  }
+}
+
+Table core.emergency_contacts {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  relationship text
+  phone text
+  email text
+  priority smallint
+  created_at timestamptz
+}
+
+Table core.consent_records {
+  id uuid [pk]
+  patient_id uuid
+  consent_type text
+  status text
+  scope text
+  granted_at timestamptz
+  revoked_at timestamptz
+  expires_at timestamptz
+}
+
+Table caregiver.caregiver_dashboard_prefs {
+  id uuid [pk]
+  caregiver_id uuid
+  layout_config jsonb
+  refresh_intervals jsonb
+  updated_at timestamptz
+}
+
+Table caregiver.caregiver_notification_channels {
+  id uuid [pk]
+  caregiver_id uuid
+  channel text
+  destination text
+  enabled boolean
+  quiet_hours jsonb
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+TableGroup domain_tables {
+  core.home_accounts
+  core.patients
+  core.caregivers
+  core.home_account_caregivers
+  core.emergency_contacts
+  core.consent_records
+  caregiver.caregiver_dashboard_prefs
+  caregiver.caregiver_notification_channels
+}
+
+// Relaciones visibles en esta vista
+
+// Una cuenta DOT tiene como máximo un paciente
+
+Ref fk_01: core.home_accounts.id - core.patients.home_account_id
+
+Ref fk_02: core.home_account_caregivers.home_account_id > core.home_accounts.id
+
+Ref fk_03: core.home_account_caregivers.caregiver_id > core.caregivers.id
+
+Ref fk_04: core.emergency_contacts.patient_id > core.patients.id
+
+Ref fk_05: core.consent_records.patient_id > core.patients.id
+
+Ref fk_61: caregiver.caregiver_dashboard_prefs.caregiver_id > core.caregivers.id
+
+Ref fk_62: caregiver.caregiver_notification_channels.caregiver_id > core.caregivers.id

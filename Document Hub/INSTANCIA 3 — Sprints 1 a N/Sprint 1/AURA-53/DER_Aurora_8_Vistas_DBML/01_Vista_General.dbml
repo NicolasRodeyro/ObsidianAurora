@@ -1,0 +1,156 @@
+// Vista general resumida del DER de Aurora.
+// Conserva nombres físicos de tablas, pero muestra solamente campos clave para presentación.
+
+Project aurora_overview {
+  database_type: 'PostgreSQL'
+  Note: 'Vista ejecutiva del flujo principal: hogar y paciente, rutinas, voz, biometría, eventos, alertas, IA, orquestación y auditoría. Las columnas fueron reducidas deliberadamente.'
+}
+
+Table core.home_accounts {
+  id uuid [pk]
+  dot_identifier text [unique]
+  status text
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  status text
+}
+
+Table core.caregivers {
+  id uuid [pk]
+  name text
+  email text
+}
+
+Table core.home_account_caregivers {
+  id uuid [pk]
+  home_account_id uuid
+  caregiver_id uuid
+  role text
+  status text
+}
+
+Table routines.medications {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  dosage text
+  active boolean
+
+  Note: 'Representa el dominio de rutinas y medicación en la vista general.'
+}
+
+Table voice.interaction_sessions {
+  id uuid [pk]
+  patient_id uuid
+  session_type text
+  status text
+  started_at timestamptz
+}
+
+Table biometrics.patient_devices {
+  id uuid [pk]
+  patient_id uuid
+  device_type text
+  status text
+}
+
+Table biometrics.biometric_readings {
+  id bigint [pk, increment]
+  device_id uuid
+  reading_type text
+  recorded_at timestamptz
+}
+
+Table events.detected_events {
+  id uuid [pk]
+  patient_id uuid
+  source_biometric_reading_id bigint
+  source_interaction_session_id uuid
+  event_type text
+  severity text
+  status text
+}
+
+Table alerts.alerts {
+  id uuid [pk]
+  patient_id uuid
+  source_event_id uuid
+  level text
+  status text
+}
+
+Table ai.patient_memories {
+  id uuid [pk]
+  patient_id uuid
+  category text
+  content text
+}
+
+Table orchestration.action_flows {
+  id uuid [pk]
+  patient_id uuid
+  trigger_type text
+  active boolean
+}
+
+Table orchestration.workflow_executions {
+  id uuid [pk]
+  flow_id uuid
+  trigger_event_id uuid
+  status text
+}
+
+Table compliance.data_access_logs {
+  id bigint [pk]
+  patient_id uuid
+  accessed_by uuid
+  action text
+  accessed_at timestamptz
+}
+
+TableGroup identity {
+  core.home_accounts
+  core.patients
+  core.caregivers
+  core.home_account_caregivers
+}
+
+TableGroup care_operations {
+  routines.medications
+  voice.interaction_sessions
+  biometrics.patient_devices
+  biometrics.biometric_readings
+}
+
+TableGroup intelligence_and_response {
+  events.detected_events
+  alerts.alerts
+  ai.patient_memories
+  orchestration.action_flows
+  orchestration.workflow_executions
+  compliance.data_access_logs
+}
+
+// Una cuenta DOT tiene como máximo un paciente
+Ref overview_01: core.home_accounts.id - core.patients.home_account_id
+Ref overview_02: core.home_account_caregivers.home_account_id > core.home_accounts.id
+Ref overview_03: core.home_account_caregivers.caregiver_id > core.caregivers.id
+Ref overview_04: routines.medications.patient_id > core.patients.id
+Ref overview_05: voice.interaction_sessions.patient_id > core.patients.id
+Ref overview_06: biometrics.patient_devices.patient_id > core.patients.id
+Ref overview_07: biometrics.biometric_readings.device_id > biometrics.patient_devices.id
+Ref overview_08: events.detected_events.patient_id > core.patients.id
+Ref overview_09: events.detected_events.source_biometric_reading_id > biometrics.biometric_readings.id
+Ref overview_10: events.detected_events.source_interaction_session_id > voice.interaction_sessions.id
+Ref overview_11: alerts.alerts.patient_id > core.patients.id
+Ref overview_12: alerts.alerts.source_event_id > events.detected_events.id
+Ref overview_13: ai.patient_memories.patient_id > core.patients.id
+Ref overview_14: orchestration.action_flows.patient_id > core.patients.id
+Ref overview_15: orchestration.workflow_executions.flow_id > orchestration.action_flows.id
+Ref overview_16: orchestration.workflow_executions.trigger_event_id > events.detected_events.id
+Ref overview_17: compliance.data_access_logs.patient_id > core.patients.id
+Ref overview_18: compliance.data_access_logs.accessed_by > core.caregivers.id

@@ -1,0 +1,192 @@
+// Vista derivada del DER físico completo de Aurora.
+// Las tablas marcadas como referencia externa están resumidas para mantener el diagrama legible.
+
+Project aurora_view {
+  database_type: 'PostgreSQL'
+  Note: 'Dispositivos, lecturas biométricas, criterios de detección, geocercas y eventos detectados.'
+}
+
+
+Table biometrics.patient_devices {
+  id uuid [pk]
+  patient_id uuid
+  device_type text
+  manufacturer text
+  model text
+  firmware_version text
+  status text
+  battery_level smallint
+  last_seen_at timestamptz
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table biometrics.device_status_logs {
+  id bigint [pk, increment]
+  device_id uuid
+  status text
+  battery_level smallint
+  error_code text
+  recorded_at timestamptz
+}
+
+Table biometrics.biometric_readings {
+  id bigint [pk, increment]
+  device_id uuid
+  reading_type text
+  value jsonb
+  recorded_at timestamptz
+}
+
+Table events.detected_events {
+  id uuid [pk]
+  patient_id uuid
+  event_type text
+  severity text
+  source text
+  source_biometric_reading_id bigint
+  source_device_status_log_id bigint
+  source_interaction_session_id uuid
+  source_caregiver_id uuid
+  metadata jsonb
+  status text
+  detected_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+
+  Note: 'Las columnas source_* representan orígenes explícitos y opcionales del evento detectado.'
+}
+
+Table events.event_status_history {
+  id uuid [pk]
+  event_id uuid
+  previous_status text
+  new_status text
+  changed_by_type text
+  changed_by uuid
+  reason text
+  changed_at timestamptz
+}
+
+Table events.event_classifications {
+  id uuid [pk]
+  event_id uuid
+  classified_by text
+  severity text
+  reasoning text
+  confidence numeric
+  classified_at timestamptz
+}
+
+Table events.detection_criteria {
+  id uuid [pk]
+  patient_id uuid
+  criteria_type text
+  thresholds jsonb
+  schedule jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table events.geofence_zones {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  zone_type text
+  boundaries jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table events.geofence_exit_events {
+  id uuid [pk]
+  zone_id uuid
+  event_id uuid
+  exit_latitude numeric
+  exit_longitude numeric
+  exited_at timestamptz
+  returned_at timestamptz
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  status text
+
+  indexes {
+    (id, home_account_id) [unique]
+  }
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table core.caregivers {
+  id uuid [pk]
+  name text
+  email text
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table voice.interaction_sessions {
+  id uuid [pk]
+  patient_id uuid
+  session_type text
+  status text
+  started_at timestamptz
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Voz e interacción.'
+}
+
+TableGroup domain_tables {
+  biometrics.patient_devices
+  biometrics.device_status_logs
+  biometrics.biometric_readings
+  events.detected_events
+  events.event_status_history
+  events.event_classifications
+  events.detection_criteria
+  events.geofence_zones
+  events.geofence_exit_events
+}
+
+TableGroup external_context {
+  core.patients
+  core.caregivers
+  voice.interaction_sessions
+}
+
+// Relaciones visibles en esta vista
+
+Ref fk_29: biometrics.patient_devices.patient_id > core.patients.id
+
+Ref fk_30: biometrics.device_status_logs.device_id > biometrics.patient_devices.id
+
+Ref fk_31: biometrics.biometric_readings.device_id > biometrics.patient_devices.id
+
+Ref fk_32: events.detected_events.patient_id > core.patients.id
+
+Ref fk_33: events.detected_events.source_biometric_reading_id > biometrics.biometric_readings.id
+
+Ref fk_34: events.detected_events.source_device_status_log_id > biometrics.device_status_logs.id
+
+Ref fk_35: events.detected_events.source_interaction_session_id > voice.interaction_sessions.id
+
+Ref fk_36: events.detected_events.source_caregiver_id > core.caregivers.id
+
+Ref fk_37: events.event_status_history.event_id > events.detected_events.id
+
+Ref fk_38: events.event_classifications.event_id > events.detected_events.id
+
+Ref fk_39: events.event_status_history.changed_by > core.caregivers.id
+
+Ref fk_40: events.detection_criteria.patient_id > core.patients.id
+
+Ref fk_41: events.geofence_zones.patient_id > core.patients.id
+
+Ref fk_42: events.geofence_exit_events.zone_id > events.geofence_zones.id
+
+Ref fk_43: events.geofence_exit_events.event_id > events.detected_events.id

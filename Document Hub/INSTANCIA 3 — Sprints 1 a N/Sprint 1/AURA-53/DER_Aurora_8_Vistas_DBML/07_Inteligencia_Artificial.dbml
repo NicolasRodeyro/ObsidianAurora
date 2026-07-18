@@ -1,0 +1,120 @@
+// Vista derivada del DER físico completo de Aurora.
+// Las tablas marcadas como referencia externa están resumidas para mantener el diagrama legible.
+
+Project aurora_view {
+  database_type: 'PostgreSQL'
+  Note: 'Memoria del paciente, embeddings, estado cognitivo, decisiones y trazabilidad de interacciones LLM.'
+}
+
+
+Table ai.patient_memories {
+  id uuid [pk]
+  patient_id uuid
+  category text
+  content text
+  metadata jsonb
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table ai.memory_embeddings {
+  id uuid [pk]
+  memory_id uuid
+  chunk_index int
+  embedding vector
+  model_name text
+  model_version text
+  content_hash text
+  generated_at timestamptz
+}
+
+Table ai.cognitive_state_records {
+  id uuid [pk]
+  patient_id uuid
+  session_id uuid
+  state_type text
+  confidence numeric
+  multimodal_signals jsonb
+  estimated_at timestamptz
+}
+
+Table ai.ai_decisions {
+  id uuid [pk]
+  patient_id uuid
+  decision_type text
+  related_entity_type text
+  related_entity_id text [note: 'Referencia lógica según related_entity_type; sin FK física.']
+  model_used text
+  input_refs jsonb
+  output jsonb
+  reasoning text
+  confidence numeric
+  decided_at timestamptz
+
+  Note: 'related_entity_id es una referencia lógica polimórfica y no posee foreign key física.'
+}
+
+Table ai.llm_interaction_logs {
+  id uuid [pk]
+  patient_id uuid
+  session_id uuid
+  prompt_truncated text
+  response_truncated text
+  prompt_tokens int
+  response_tokens int
+  latency_ms int
+  model_used text
+  created_at timestamptz
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  status text
+
+  indexes {
+    (id, home_account_id) [unique]
+  }
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table voice.interaction_sessions {
+  id uuid [pk]
+  patient_id uuid
+  session_type text
+  status text
+  started_at timestamptz
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Voz e interacción.'
+}
+
+TableGroup domain_tables {
+  ai.patient_memories
+  ai.memory_embeddings
+  ai.cognitive_state_records
+  ai.ai_decisions
+  ai.llm_interaction_logs
+}
+
+TableGroup external_context {
+  core.patients
+  voice.interaction_sessions
+}
+
+// Relaciones visibles en esta vista
+
+Ref fk_54: ai.patient_memories.patient_id > core.patients.id
+
+Ref fk_55: ai.memory_embeddings.memory_id > ai.patient_memories.id
+
+Ref fk_56: ai.cognitive_state_records.patient_id > core.patients.id
+
+Ref fk_57: ai.cognitive_state_records.session_id > voice.interaction_sessions.id
+
+Ref fk_58: ai.ai_decisions.patient_id > core.patients.id
+
+Ref fk_59: ai.llm_interaction_logs.patient_id > core.patients.id
+
+Ref fk_60: ai.llm_interaction_logs.session_id > voice.interaction_sessions.id

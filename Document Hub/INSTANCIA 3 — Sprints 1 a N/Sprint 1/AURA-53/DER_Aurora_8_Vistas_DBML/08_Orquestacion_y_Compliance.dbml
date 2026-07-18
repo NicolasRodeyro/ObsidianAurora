@@ -1,0 +1,149 @@
+// Vista derivada del DER físico completo de Aurora.
+// Las tablas marcadas como referencia externa están resumidas para mantener el diagrama legible.
+
+Project aurora_view {
+  database_type: 'PostgreSQL'
+  Note: 'Flujos automáticos, ejecuciones, auditoría, retención de datos, accesos y metadatos criptográficos.'
+}
+
+
+Table orchestration.action_flows {
+  id uuid [pk]
+  patient_id uuid
+  trigger_type text
+  trigger_config jsonb
+  actions jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table orchestration.workflow_executions {
+  id uuid [pk]
+  flow_id uuid
+  trigger_event_id uuid
+  status text
+  results jsonb
+  started_at timestamptz
+  completed_at timestamptz
+}
+
+Table orchestration.orchestration_logs {
+  id bigint [pk]
+  execution_id uuid
+  source_module text
+  action text
+  payload jsonb
+  status text
+  error_message text
+  logged_at timestamptz
+}
+
+Table compliance.encryption_keys_metadata {
+  id uuid [pk]
+  key_identifier text [unique]
+  algorithm text
+  rotated_at date
+  expires_at date
+  active boolean
+  notes text
+}
+
+Table compliance.data_access_logs {
+  id bigint [pk]
+  patient_id uuid
+  accessed_by_type text
+  accessed_by uuid
+  accessed_table text
+  accessed_record_id text [note: 'Referencia auditable polimórfica; puede identificar registros uuid o bigint.']
+  action text
+  reason text
+  accessed_at timestamptz
+
+  Note: 'accessed_record_id se mantiene como text para auditar entidades con PK uuid o bigint.'
+}
+
+Table core.audit_logs {
+  id bigint [pk]
+  table_name text
+  record_id text [note: 'Referencia auditable polimórfica; puede identificar registros uuid o bigint.']
+  action text
+  changed_fields jsonb
+  changed_by_type text
+  changed_by uuid
+  changed_at timestamptz
+
+  Note: 'record_id se mantiene como text para auditar entidades con PK uuid o bigint.'
+}
+
+Table core.data_retention_policies {
+  id uuid [pk]
+  data_category text [unique]
+  retention_days int
+  action text
+  active boolean
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  status text
+
+  indexes {
+    (id, home_account_id) [unique]
+  }
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table core.caregivers {
+  id uuid [pk]
+  name text
+  email text
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table events.detected_events {
+  id uuid [pk]
+  patient_id uuid
+  event_type text
+  severity text
+  status text
+  detected_at timestamptz
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Biometría y eventos.'
+}
+
+TableGroup domain_tables {
+  orchestration.action_flows
+  orchestration.workflow_executions
+  orchestration.orchestration_logs
+  compliance.encryption_keys_metadata
+  compliance.data_access_logs
+  core.audit_logs
+  core.data_retention_policies
+}
+
+TableGroup external_context {
+  core.patients
+  core.caregivers
+  events.detected_events
+}
+
+// Relaciones visibles en esta vista
+
+Ref fk_06: core.audit_logs.changed_by > core.caregivers.id
+
+Ref fk_63: orchestration.action_flows.patient_id > core.patients.id
+
+Ref fk_64: orchestration.workflow_executions.flow_id > orchestration.action_flows.id
+
+Ref fk_65: orchestration.workflow_executions.trigger_event_id > events.detected_events.id
+
+Ref fk_66: orchestration.orchestration_logs.execution_id > orchestration.workflow_executions.id
+
+Ref fk_67: compliance.data_access_logs.patient_id > core.patients.id
+
+Ref fk_68: compliance.data_access_logs.accessed_by > core.caregivers.id
