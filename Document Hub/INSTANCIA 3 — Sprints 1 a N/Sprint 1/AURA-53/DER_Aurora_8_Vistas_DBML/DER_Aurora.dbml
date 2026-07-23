@@ -1,0 +1,735 @@
+// DER Aurora convertido desde Mermaid a DBML
+// No se agregaron defaults, NOT NULL ni reglas de borrado que no estuvieran expresadas en el DER fuente.
+
+Project aurora_database {
+  database_type: 'PostgreSQL'
+  Note: 'Modelo de datos de Aurora organizado por schemas funcionales. Una cuenta DOT por hogar, un paciente por cuenta y múltiples cuidadores asociados.'
+}
+
+Table core.home_accounts {
+  id uuid [pk]
+  name text
+  dot_identifier text [unique]
+  status text
+  timezone text
+  configuration jsonb
+  created_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  dni text
+  birth_date date
+  fast_level smallint
+  medical_info jsonb
+  status text
+  created_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+
+  indexes {
+    (id, home_account_id) [unique, note: 'Soporta la FK compuesta usada por voice.drop_in_sessions']
+  }
+}
+
+Table core.caregivers {
+  id uuid [pk]
+  auth_provider text
+  auth_subject text
+  name text
+  email text
+  phone text
+  notification_prefs jsonb
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table core.home_account_caregivers {
+  id uuid [pk]
+  home_account_id uuid
+  caregiver_id uuid
+  role text
+  status text
+  associated_at timestamptz
+
+  indexes {
+    (home_account_id, caregiver_id) [unique, note: 'Evita asociaciones duplicadas y soporta la FK compuesta de drop_in_sessions']
+  }
+}
+
+Table core.emergency_contacts {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  relationship text
+  phone text
+  email text
+  priority smallint
+  created_at timestamptz
+}
+
+Table core.consent_records {
+  id uuid [pk]
+  patient_id uuid
+  consent_type text
+  status text
+  scope text
+  granted_at timestamptz
+  revoked_at timestamptz
+  expires_at timestamptz
+}
+
+Table core.audit_logs {
+  id bigint [pk]
+  table_name text
+  record_id text [note: 'Referencia auditable polimórfica; puede identificar registros uuid o bigint.']
+  action text
+  changed_fields jsonb
+  changed_by_type text
+  changed_by uuid
+  changed_at timestamptz
+
+  Note: 'record_id se mantiene como text para auditar entidades con PK uuid o bigint.'
+}
+
+Table core.data_retention_policies {
+  id uuid [pk]
+  data_category text [unique]
+  retention_days int
+  action text
+  active boolean
+}
+
+Table routines.routines {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  category text
+  description text
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+}
+
+Table routines.routine_schedules {
+  id uuid [pk]
+  routine_id uuid
+  days_of_week jsonb
+  time_of_day time
+  recurrence jsonb
+  enabled boolean
+}
+
+Table routines.routine_compliance {
+  id uuid [pk]
+  routine_id uuid
+  schedule_id uuid
+  scheduled_date date
+  status text
+  completed_at timestamptz
+}
+
+Table routines.medications {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  active_ingredient text
+  dosage text
+  unit text
+  route text
+  instructions text
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table routines.medication_schedules {
+  id uuid [pk]
+  medication_id uuid
+  days_of_week jsonb
+  time_of_day time
+  quantity numeric
+  unit text
+  requires_confirmation boolean
+  enabled boolean
+}
+
+Table routines.medication_compliance {
+  id uuid [pk]
+  schedule_id uuid
+  medication_id uuid
+  scheduled_date date
+  status text
+  confirmed_at timestamptz
+  note text
+}
+
+Table voice.interaction_sessions {
+  id uuid [pk]
+  patient_id uuid
+  initiator text
+  session_type text
+  status text
+  estimated_mood text
+  started_at timestamptz
+  ended_at timestamptz
+}
+
+Table voice.interaction_messages {
+  id uuid [pk]
+  session_id uuid
+  role text
+  content text
+  content_type text
+  metadata jsonb
+  created_at timestamptz
+}
+
+Table voice.voice_recordings {
+  id uuid [pk]
+  message_id uuid
+  file_path text
+  duration_ms int
+  file_size_bytes int
+  retention_expires_at date
+  created_at timestamptz
+}
+
+Table voice.reminders {
+  id uuid [pk]
+  patient_id uuid
+  type text
+  message_template text
+  schedule jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table voice.reminder_confirmations {
+  id uuid [pk]
+  reminder_id uuid
+  session_id uuid
+  response text
+  responded_at timestamptz
+}
+
+Table voice.activities {
+  id uuid [pk]
+  activity_type text
+  name text
+  category text
+  difficulty text
+  description text
+  configuration jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table voice.activity_sessions {
+  id uuid [pk]
+  patient_id uuid
+  activity_id uuid
+  session_id uuid
+  status text
+  score int
+  completion_percent smallint
+  duration_seconds int
+  memory_refs jsonb [note: 'Referencias lógicas de memoria; sin FK física.']
+  metrics jsonb
+  started_at timestamptz
+  ended_at timestamptz
+
+  Note: 'memory_refs contiene referencias lógicas y no posee foreign keys físicas.'
+}
+
+Table voice.drop_in_sessions {
+  id uuid [pk]
+  home_account_id uuid
+  patient_id uuid
+  caregiver_id uuid
+  status text
+  audio_mode text
+  requested_at timestamptz
+  started_at timestamptz
+  ended_at timestamptz
+  failure_reason text
+  metadata jsonb
+}
+
+Table biometrics.patient_devices {
+  id uuid [pk]
+  patient_id uuid
+  device_type text
+  manufacturer text
+  model text
+  firmware_version text
+  status text
+  battery_level smallint
+  last_seen_at timestamptz
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table biometrics.device_status_logs {
+  id bigint [pk, increment]
+  device_id uuid
+  status text
+  battery_level smallint
+  error_code text
+  recorded_at timestamptz
+}
+
+Table biometrics.biometric_readings {
+  id bigint [pk, increment]
+  device_id uuid
+  reading_type text
+  value jsonb
+  recorded_at timestamptz
+}
+
+Table events.detected_events {
+  id uuid [pk]
+  patient_id uuid
+  event_type text
+  severity text
+  source text
+  source_biometric_reading_id bigint
+  source_device_status_log_id bigint
+  source_interaction_session_id uuid
+  source_caregiver_id uuid
+  metadata jsonb
+  status text
+  detected_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+
+  Note: 'Las columnas source_* representan orígenes explícitos y opcionales del evento detectado.'
+}
+
+Table events.event_status_history {
+  id uuid [pk]
+  event_id uuid
+  previous_status text
+  new_status text
+  changed_by_type text
+  changed_by uuid
+  reason text
+  changed_at timestamptz
+}
+
+Table events.event_classifications {
+  id uuid [pk]
+  event_id uuid
+  classified_by text
+  severity text
+  reasoning text
+  confidence numeric
+  classified_at timestamptz
+}
+
+Table events.detection_criteria {
+  id uuid [pk]
+  patient_id uuid
+  criteria_type text
+  thresholds jsonb
+  schedule jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table events.geofence_zones {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  zone_type text
+  boundaries jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table events.geofence_exit_events {
+  id uuid [pk]
+  zone_id uuid
+  event_id uuid
+  exit_latitude numeric
+  exit_longitude numeric
+  exited_at timestamptz
+  returned_at timestamptz
+}
+
+Table alerts.alerts {
+  id uuid [pk]
+  patient_id uuid
+  source_event_id uuid
+  level text
+  status text
+  message text
+  context jsonb
+  generated_at timestamptz
+  resolved_at timestamptz
+}
+
+Table alerts.alert_status_history {
+  id uuid [pk]
+  alert_id uuid
+  previous_status text
+  new_status text
+  changed_by_type text
+  changed_by uuid
+  reason text
+  changed_at timestamptz
+}
+
+Table alerts.alert_rules {
+  id uuid [pk]
+  patient_id uuid
+  event_type text
+  min_severity text
+  channels jsonb
+  escalation_config jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table alerts.alert_escalation_steps {
+  id uuid [pk]
+  rule_id uuid
+  step_order smallint
+  wait_minutes int
+  action text
+  target text
+  params jsonb
+}
+
+Table alerts.notification_logs {
+  id uuid [pk]
+  alert_id uuid
+  channel text
+  destination text
+  status text
+  external_id text
+  error_message text
+  sent_at timestamptz
+  delivered_at timestamptz
+}
+
+Table alerts.emergency_call_attempts {
+  id uuid [pk]
+  alert_id uuid
+  destination text
+  provider text
+  external_call_id text
+  attempt_number int
+  status text
+  started_at timestamptz
+  answered_at timestamptz
+  ended_at timestamptz
+  failure_reason text
+}
+
+Table alerts.alert_acknowledgments {
+  id uuid [pk]
+  alert_id uuid
+  caregiver_id uuid
+  response text
+  note text
+  acknowledged_at timestamptz
+}
+
+Table ai.patient_memories {
+  id uuid [pk]
+  patient_id uuid
+  category text
+  content text
+  metadata jsonb
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table ai.memory_embeddings {
+  id uuid [pk]
+  memory_id uuid
+  chunk_index int
+  embedding vector
+  model_name text
+  model_version text
+  content_hash text
+  generated_at timestamptz
+}
+
+Table ai.cognitive_state_records {
+  id uuid [pk]
+  patient_id uuid
+  session_id uuid
+  state_type text
+  confidence numeric
+  multimodal_signals jsonb
+  estimated_at timestamptz
+}
+
+Table ai.ai_decisions {
+  id uuid [pk]
+  patient_id uuid
+  decision_type text
+  related_entity_type text
+  related_entity_id text [note: 'Referencia lógica según related_entity_type; sin FK física.']
+  model_used text
+  input_refs jsonb
+  output jsonb
+  reasoning text
+  confidence numeric
+  decided_at timestamptz
+
+  Note: 'related_entity_id es una referencia lógica polimórfica y no posee foreign key física.'
+}
+
+Table ai.llm_interaction_logs {
+  id uuid [pk]
+  patient_id uuid
+  session_id uuid
+  prompt_truncated text
+  response_truncated text
+  prompt_tokens int
+  response_tokens int
+  latency_ms int
+  model_used text
+  created_at timestamptz
+}
+
+Table caregiver.caregiver_dashboard_prefs {
+  id uuid [pk]
+  caregiver_id uuid
+  layout_config jsonb
+  refresh_intervals jsonb
+  updated_at timestamptz
+}
+
+Table caregiver.caregiver_notification_channels {
+  id uuid [pk]
+  caregiver_id uuid
+  channel text
+  destination text
+  enabled boolean
+  quiet_hours jsonb
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table orchestration.action_flows {
+  id uuid [pk]
+  patient_id uuid
+  trigger_type text
+  trigger_config jsonb
+  actions jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table orchestration.workflow_executions {
+  id uuid [pk]
+  flow_id uuid
+  trigger_event_id uuid
+  status text
+  results jsonb
+  started_at timestamptz
+  completed_at timestamptz
+}
+
+Table orchestration.orchestration_logs {
+  id bigint [pk]
+  execution_id uuid
+  source_module text
+  action text
+  payload jsonb
+  status text
+  error_message text
+  logged_at timestamptz
+}
+
+Table compliance.encryption_keys_metadata {
+  id uuid [pk]
+  key_identifier text [unique]
+  algorithm text
+  rotated_at date
+  expires_at date
+  active boolean
+  notes text
+}
+
+Table compliance.data_access_logs {
+  id bigint [pk]
+  patient_id uuid
+  accessed_by_type text
+  accessed_by uuid
+  accessed_table text
+  accessed_record_id text [note: 'Referencia auditable polimórfica; puede identificar registros uuid o bigint.']
+  action text
+  reason text
+  accessed_at timestamptz
+
+  Note: 'accessed_record_id se mantiene como text para auditar entidades con PK uuid o bigint.'
+}
+
+TableGroup core_domain {
+  core.home_accounts
+  core.patients
+  core.caregivers
+  core.home_account_caregivers
+  core.emergency_contacts
+  core.consent_records
+  core.audit_logs
+  core.data_retention_policies
+}
+
+TableGroup routines_domain {
+  routines.routines
+  routines.routine_schedules
+  routines.routine_compliance
+  routines.medications
+  routines.medication_schedules
+  routines.medication_compliance
+}
+
+TableGroup voice_domain {
+  voice.interaction_sessions
+  voice.interaction_messages
+  voice.voice_recordings
+  voice.reminders
+  voice.reminder_confirmations
+  voice.activities
+  voice.activity_sessions
+  voice.drop_in_sessions
+}
+
+TableGroup biometrics_domain {
+  biometrics.patient_devices
+  biometrics.device_status_logs
+  biometrics.biometric_readings
+}
+
+TableGroup events_domain {
+  events.detected_events
+  events.event_status_history
+  events.event_classifications
+  events.detection_criteria
+  events.geofence_zones
+  events.geofence_exit_events
+}
+
+TableGroup alerts_domain {
+  alerts.alerts
+  alerts.alert_status_history
+  alerts.alert_rules
+  alerts.alert_escalation_steps
+  alerts.notification_logs
+  alerts.emergency_call_attempts
+  alerts.alert_acknowledgments
+}
+
+TableGroup ai_domain {
+  ai.patient_memories
+  ai.memory_embeddings
+  ai.cognitive_state_records
+  ai.ai_decisions
+  ai.llm_interaction_logs
+}
+
+TableGroup caregiver_domain {
+  caregiver.caregiver_dashboard_prefs
+  caregiver.caregiver_notification_channels
+}
+
+TableGroup orchestration_domain {
+  orchestration.action_flows
+  orchestration.workflow_executions
+  orchestration.orchestration_logs
+}
+
+TableGroup compliance_domain {
+  compliance.encryption_keys_metadata
+  compliance.data_access_logs
+}
+
+// Relaciones
+// Una cuenta DOT tiene como máximo un paciente
+Ref fk_01: core.home_accounts.id - core.patients.home_account_id
+Ref fk_02: core.home_account_caregivers.home_account_id > core.home_accounts.id
+Ref fk_03: core.home_account_caregivers.caregiver_id > core.caregivers.id
+Ref fk_04: core.emergency_contacts.patient_id > core.patients.id
+Ref fk_05: core.consent_records.patient_id > core.patients.id
+Ref fk_06: core.audit_logs.changed_by > core.caregivers.id
+Ref fk_07: routines.routines.patient_id > core.patients.id
+Ref fk_08: routines.routine_schedules.routine_id > routines.routines.id
+Ref fk_09: routines.routine_compliance.routine_id > routines.routines.id
+Ref fk_10: routines.routine_compliance.schedule_id > routines.routine_schedules.id
+Ref fk_11: routines.medications.patient_id > core.patients.id
+Ref fk_12: routines.medication_schedules.medication_id > routines.medications.id
+Ref fk_13: routines.medication_compliance.medication_id > routines.medications.id
+Ref fk_14: routines.medication_compliance.schedule_id > routines.medication_schedules.id
+Ref fk_15: voice.interaction_sessions.patient_id > core.patients.id
+Ref fk_16: voice.interaction_messages.session_id > voice.interaction_sessions.id
+Ref fk_17: voice.voice_recordings.message_id > voice.interaction_messages.id
+Ref fk_18: voice.reminders.patient_id > core.patients.id
+Ref fk_19: voice.reminder_confirmations.reminder_id > voice.reminders.id
+Ref fk_20: voice.reminder_confirmations.session_id > voice.interaction_sessions.id
+Ref fk_21: voice.activity_sessions.activity_id > voice.activities.id
+Ref fk_22: voice.activity_sessions.patient_id > core.patients.id
+Ref fk_23: voice.activity_sessions.session_id > voice.interaction_sessions.id
+Ref fk_24: voice.drop_in_sessions.home_account_id > core.home_accounts.id
+Ref fk_25: voice.drop_in_sessions.patient_id > core.patients.id
+Ref fk_26: voice.drop_in_sessions.caregiver_id > core.caregivers.id
+// Valida que el cuidador esté asociado a la cuenta DOT
+Ref fk_27: voice.drop_in_sessions.(home_account_id, caregiver_id) > core.home_account_caregivers.(home_account_id, caregiver_id)
+// Valida que el paciente pertenezca a la cuenta DOT
+Ref fk_28: voice.drop_in_sessions.(patient_id, home_account_id) > core.patients.(id, home_account_id)
+Ref fk_29: biometrics.patient_devices.patient_id > core.patients.id
+Ref fk_30: biometrics.device_status_logs.device_id > biometrics.patient_devices.id
+Ref fk_31: biometrics.biometric_readings.device_id > biometrics.patient_devices.id
+Ref fk_32: events.detected_events.patient_id > core.patients.id
+Ref fk_33: events.detected_events.source_biometric_reading_id > biometrics.biometric_readings.id
+Ref fk_34: events.detected_events.source_device_status_log_id > biometrics.device_status_logs.id
+Ref fk_35: events.detected_events.source_interaction_session_id > voice.interaction_sessions.id
+Ref fk_36: events.detected_events.source_caregiver_id > core.caregivers.id
+Ref fk_37: events.event_status_history.event_id > events.detected_events.id
+Ref fk_38: events.event_classifications.event_id > events.detected_events.id
+Ref fk_39: events.event_status_history.changed_by > core.caregivers.id
+Ref fk_40: events.detection_criteria.patient_id > core.patients.id
+Ref fk_41: events.geofence_zones.patient_id > core.patients.id
+Ref fk_42: events.geofence_exit_events.zone_id > events.geofence_zones.id
+Ref fk_43: events.geofence_exit_events.event_id > events.detected_events.id
+Ref fk_44: alerts.alerts.patient_id > core.patients.id
+Ref fk_45: alerts.alerts.source_event_id > events.detected_events.id
+Ref fk_46: alerts.alert_status_history.alert_id > alerts.alerts.id
+Ref fk_47: alerts.alert_status_history.changed_by > core.caregivers.id
+Ref fk_48: alerts.alert_rules.patient_id > core.patients.id
+Ref fk_49: alerts.alert_escalation_steps.rule_id > alerts.alert_rules.id
+Ref fk_50: alerts.notification_logs.alert_id > alerts.alerts.id
+Ref fk_51: alerts.emergency_call_attempts.alert_id > alerts.alerts.id
+Ref fk_52: alerts.alert_acknowledgments.alert_id > alerts.alerts.id
+Ref fk_53: alerts.alert_acknowledgments.caregiver_id > core.caregivers.id
+Ref fk_54: ai.patient_memories.patient_id > core.patients.id
+Ref fk_55: ai.memory_embeddings.memory_id > ai.patient_memories.id
+Ref fk_56: ai.cognitive_state_records.patient_id > core.patients.id
+Ref fk_57: ai.cognitive_state_records.session_id > voice.interaction_sessions.id
+Ref fk_58: ai.ai_decisions.patient_id > core.patients.id
+Ref fk_59: ai.llm_interaction_logs.patient_id > core.patients.id
+Ref fk_60: ai.llm_interaction_logs.session_id > voice.interaction_sessions.id
+Ref fk_61: caregiver.caregiver_dashboard_prefs.caregiver_id > core.caregivers.id
+Ref fk_62: caregiver.caregiver_notification_channels.caregiver_id > core.caregivers.id
+Ref fk_63: orchestration.action_flows.patient_id > core.patients.id
+Ref fk_64: orchestration.workflow_executions.flow_id > orchestration.action_flows.id
+Ref fk_65: orchestration.workflow_executions.trigger_event_id > events.detected_events.id
+Ref fk_66: orchestration.orchestration_logs.execution_id > orchestration.workflow_executions.id
+Ref fk_67: compliance.data_access_logs.patient_id > core.patients.id
+Ref fk_68: compliance.data_access_logs.accessed_by > core.caregivers.id
