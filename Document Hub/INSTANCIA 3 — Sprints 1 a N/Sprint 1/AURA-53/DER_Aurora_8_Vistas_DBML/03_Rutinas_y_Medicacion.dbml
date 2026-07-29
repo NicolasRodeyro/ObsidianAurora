@@ -1,0 +1,117 @@
+// Vista derivada del DER físico completo de Aurora.
+// Las tablas marcadas como referencia externa están resumidas para mantener el diagrama legible.
+
+Project aurora_view {
+  database_type: 'PostgreSQL'
+  Note: 'Programación y cumplimiento de rutinas y tratamientos del paciente.'
+}
+
+
+Table routines.routines {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  category text
+  description text
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+}
+
+Table routines.routine_schedules {
+  id uuid [pk]
+  routine_id uuid
+  days_of_week jsonb
+  time_of_day time
+  recurrence jsonb
+  enabled boolean
+}
+
+Table routines.routine_compliance {
+  id uuid [pk]
+  routine_id uuid
+  schedule_id uuid
+  scheduled_date date
+  status text
+  completed_at timestamptz
+}
+
+Table routines.medications {
+  id uuid [pk]
+  patient_id uuid
+  name text
+  active_ingredient text
+  dosage text
+  unit text
+  route text
+  instructions text
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table routines.medication_schedules {
+  id uuid [pk]
+  medication_id uuid
+  days_of_week jsonb
+  time_of_day time
+  quantity numeric
+  unit text
+  requires_confirmation boolean
+  enabled boolean
+}
+
+Table routines.medication_compliance {
+  id uuid [pk]
+  schedule_id uuid
+  medication_id uuid
+  scheduled_date date
+  status text
+  confirmed_at timestamptz
+  note text
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  status text
+
+  indexes {
+    (id, home_account_id) [unique]
+  }
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+TableGroup domain_tables {
+  routines.routines
+  routines.routine_schedules
+  routines.routine_compliance
+  routines.medications
+  routines.medication_schedules
+  routines.medication_compliance
+}
+
+TableGroup external_context {
+  core.patients
+}
+
+// Relaciones visibles en esta vista
+
+Ref fk_07: routines.routines.patient_id > core.patients.id
+
+Ref fk_08: routines.routine_schedules.routine_id > routines.routines.id
+
+Ref fk_09: routines.routine_compliance.routine_id > routines.routines.id
+
+Ref fk_10: routines.routine_compliance.schedule_id > routines.routine_schedules.id
+
+Ref fk_11: routines.medications.patient_id > core.patients.id
+
+Ref fk_12: routines.medication_schedules.medication_id > routines.medications.id
+
+Ref fk_13: routines.medication_compliance.medication_id > routines.medications.id
+
+Ref fk_14: routines.medication_compliance.schedule_id > routines.medication_schedules.id

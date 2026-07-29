@@ -1,0 +1,158 @@
+// Vista derivada del DER físico completo de Aurora.
+// Las tablas marcadas como referencia externa están resumidas para mantener el diagrama legible.
+
+Project aurora_view {
+  database_type: 'PostgreSQL'
+  Note: 'Generación de alertas, reglas, escalamiento, notificaciones, llamadas y confirmaciones.'
+}
+
+
+Table alerts.alerts {
+  id uuid [pk]
+  patient_id uuid
+  source_event_id uuid
+  level text
+  status text
+  message text
+  context jsonb
+  generated_at timestamptz
+  resolved_at timestamptz
+}
+
+Table alerts.alert_status_history {
+  id uuid [pk]
+  alert_id uuid
+  previous_status text
+  new_status text
+  changed_by_type text
+  changed_by uuid
+  reason text
+  changed_at timestamptz
+}
+
+Table alerts.alert_rules {
+  id uuid [pk]
+  patient_id uuid
+  event_type text
+  min_severity text
+  channels jsonb
+  escalation_config jsonb
+  active boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table alerts.alert_escalation_steps {
+  id uuid [pk]
+  rule_id uuid
+  step_order smallint
+  wait_minutes int
+  action text
+  target text
+  params jsonb
+}
+
+Table alerts.notification_logs {
+  id uuid [pk]
+  alert_id uuid
+  channel text
+  destination text
+  status text
+  external_id text
+  error_message text
+  sent_at timestamptz
+  delivered_at timestamptz
+}
+
+Table alerts.emergency_call_attempts {
+  id uuid [pk]
+  alert_id uuid
+  destination text
+  provider text
+  external_call_id text
+  attempt_number int
+  status text
+  started_at timestamptz
+  answered_at timestamptz
+  ended_at timestamptz
+  failure_reason text
+}
+
+Table alerts.alert_acknowledgments {
+  id uuid [pk]
+  alert_id uuid
+  caregiver_id uuid
+  response text
+  note text
+  acknowledged_at timestamptz
+}
+
+Table core.patients {
+  id uuid [pk]
+  home_account_id uuid
+  name text
+  status text
+
+  indexes {
+    (id, home_account_id) [unique]
+  }
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table core.caregivers {
+  id uuid [pk]
+  name text
+  email text
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Core y cuidadores.'
+}
+
+Table events.detected_events {
+  id uuid [pk]
+  patient_id uuid
+  event_type text
+  severity text
+  status text
+  detected_at timestamptz
+
+  Note: 'Referencia externa resumida. La definición completa está en la vista Biometría y eventos.'
+}
+
+TableGroup domain_tables {
+  alerts.alerts
+  alerts.alert_status_history
+  alerts.alert_rules
+  alerts.alert_escalation_steps
+  alerts.notification_logs
+  alerts.emergency_call_attempts
+  alerts.alert_acknowledgments
+}
+
+TableGroup external_context {
+  core.patients
+  core.caregivers
+  events.detected_events
+}
+
+// Relaciones visibles en esta vista
+
+Ref fk_44: alerts.alerts.patient_id > core.patients.id
+
+Ref fk_45: alerts.alerts.source_event_id > events.detected_events.id
+
+Ref fk_46: alerts.alert_status_history.alert_id > alerts.alerts.id
+
+Ref fk_47: alerts.alert_status_history.changed_by > core.caregivers.id
+
+Ref fk_48: alerts.alert_rules.patient_id > core.patients.id
+
+Ref fk_49: alerts.alert_escalation_steps.rule_id > alerts.alert_rules.id
+
+Ref fk_50: alerts.notification_logs.alert_id > alerts.alerts.id
+
+Ref fk_51: alerts.emergency_call_attempts.alert_id > alerts.alerts.id
+
+Ref fk_52: alerts.alert_acknowledgments.alert_id > alerts.alerts.id
+
+Ref fk_53: alerts.alert_acknowledgments.caregiver_id > core.caregivers.id
