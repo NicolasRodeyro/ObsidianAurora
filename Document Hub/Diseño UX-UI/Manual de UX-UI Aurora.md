@@ -65,4 +65,4 @@ Estos seis principios ordenan cualquier decisión de diseño en Aurora. Ante un 
 - [[Requerimientos]] — 91 RF / 43 RNF que este diseño materializa.
 - [[Investigacion sobre neurologia]] — base clínica de las decisiones de VUI y estimulación cognitiva.
 - [[Project Charter]] — alcance, restricciones y perfil clínico (FAST ≤5).
-- [[Arquitectura y Stack Tecnológico]] — Aurora Care es una PWA Next.js; los tokens CSS se consumen directo.
+- [[Arquitectura y Stack Tecnológico]] — Aurora Care es una app React Native + Expo; los tokens del sistema de diseño deben mapearse a estilos/componentes móviles.

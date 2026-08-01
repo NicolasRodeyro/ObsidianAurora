@@ -80,7 +80,7 @@ flowchart TB
 | Actor        | Descripción                                                                                                                                   |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Paciente** | Persona con Alzheimer o pérdida de memoria. Interactúa exclusivamente por voz con Aurora Home. No requiere habilidades técnicas.              |
-| **Cuidador** | Familiar o profesional que supervisa al paciente. Utiliza Aurora Care (app web/mobile) para monitorear, configurar rutinas y recibir alertas. |
+| **Cuidador** | Familiar o profesional que supervisa al paciente. Utiliza Aurora Care (app móvil) para monitorear, configurar rutinas y recibir alertas. |
 
 #### Sistemas externos
 
@@ -126,7 +126,7 @@ flowchart TB
             redis[("Redis<br/>Cache + Pub/Sub")]
         end
 
-        aurora_care["Aurora Care<br/>React / Next.js 14<br/>PWA"]
+        aurora_care["Aurora Care<br/>React Native + Expo<br/>App Android/iOS"]
     end
 
     subgraph ext["Servicios Externos"]
@@ -170,7 +170,7 @@ flowchart TB
 | **Base de Datos**       | Supabase (PostgreSQL 16 + pgvector)     | Datos relacionales (pacientes, cuidadores, eventos, rutinas) + vectores de embeddings para RAG + Auth + Realtime |
 | **Redis**               | Redis 7 (en Raspberry Pi + VPS)         | Caché local en RPi, cola de eventos offline; Redis compartido en VPS para pub-sub entre servicios             |
 | **n8n**                 | n8n (self-hosted)                       | Automatización de flujos: recordatorios por horario, escalado de alertas, reglas condicionales                |
-| **Aurora Care**         | React + Next.js 14 (PWA)                | Panel del cuidador responsive, notificaciones push, modo offline parcial                                      |
+| **Aurora Care**         | React Native + Expo + TypeScript        | App móvil del cuidador para Android/iOS, notificaciones push, modo offline parcial                            |
 | **Aurora Band Gateway** | Python / Django (módulo de Aurora Core) | API REST de ingesta de datos biométricos, gestión de estado de conexión, buffer de datos offline              |
 
 ---
@@ -198,9 +198,9 @@ flowchart TB
             supabase_d[("PostgreSQL + pgvector<br/>Auth + Realtime")]
         end
 
-        subgraph s3["AWS S3 + CloudFront — Estático"]
+        subgraph mobile_dist["Distribución móvil"]
             direction TB
-            aurora_care_d["Aurora Care<br/>Next.js SSG / PWA"]
+            aurora_care_d["Aurora Care<br/>Builds Android/iOS<br/>Expo / EAS"]
         end
     end
 
@@ -219,13 +219,12 @@ flowchart TB
 
     subgraph cg_devices["📱 Dispositivos del Cuidador"]
         direction TB
-        browser["Navegador Web / PWA<br/>Chrome · Safari · Firefox"]
+        mobile_app["App móvil Aurora Care<br/>Android · iOS"]
     end
 
     rpi -->|"REST / WebSocket — HTTPS/WSS (texto)"| vps
     band -->|"Datos biométricos — HTTPS REST"| vps
-    browser -->|"HTTPS"| s3
-    s3 -->|"Consume API — HTTPS + JWT"| vps
+    mobile_app -->|"HTTPS + JWT"| vps
 ```
 
 
@@ -241,7 +240,7 @@ flowchart TB
 
 - 1 VPS Hostinger (plan básico ~$4-8/mes) — Aurora Core, n8n, Worker IA, Aurora Band Gateway
 - Supabase Free Project ($0) — Base de datos PostgreSQL + pgvector (500 MB)
-- S3 + CloudFront (Free Tier 1TB/mes) — Aurora Care (frontend estático)
+- Google Play / App Store, o builds internos durante el MVP — Aurora Care
 - Redis en Raspberry Pi ($0) — caché local y cola de eventos
 - Alternativa on-premise: servidor local en el hogar del paciente con port forwarding/DuckDNS
 
@@ -312,39 +311,72 @@ Se adopta **Python con Django** como lenguaje y framework backend para Aurora Co
 
 #### Contexto
 
-Aurora Care es la aplicación que utiliza el cuidador para monitorear al paciente, configurar rutinas, recibir alertas y gestionar el sistema. Debe funcionar tanto en dispositivos móviles (notificaciones push, acceso rápido) como en computadoras de escritorio (gestión detallada).
+Aurora Care es la aplicación utilizada por los cuidadores para monitorear el estado del paciente, configurar rutinas y medicación, consultar historiales, administrar el entorno del hogar y recibir alertas ante eventos relevantes o críticos.
+
+Debido a que estas alertas pueden requerir una respuesta inmediata, la aplicación debe estar disponible principalmente en dispositivos móviles y permitir el uso confiable de notificaciones push, acceso rápido desde el celular e integración con funcionalidades propias del dispositivo.
+
+Aurora Care debe funcionar en Android e iOS, manteniendo una única base de código y permitiendo futuras integraciones con servicios del sistema operativo, dispositivos Bluetooth, ubicación, almacenamiento seguro y tareas ejecutadas en segundo plano.
 
 #### Drivers de decisión
 
-1. **Soporte mobile y desktop** con una sola base de código
-2. **Notificaciones push** en tiempo real para alertas críticas
-3. **Modo offline parcial** para visualizar datos sin conexión
-4. **Rapidez de desarrollo** con el equipo actual
-5. **SEO** no es relevante (app protegida por autenticación)
-6. **Compartir tipos** con el backend 
+1. **Android e iOS** con una única base de código
+2. **Notificaciones push nativas** para alertas críticas
+3. **Acceso a funcionalidades del dispositivo**: Bluetooth, ubicación, sensores y almacenamiento seguro
+4. **Tareas en segundo plano** cuando el sistema operativo lo permita
+5. **Integración futura con wearables** o datos biométricos
+6. **Deep links** para abrir alertas, mapas o pantallas específicas desde una notificación
+7. **Modo offline parcial** para consultar información reciente y almacenar temporalmente determinadas acciones
+8. **Compatibilidad con OAuth 2.0**
+9. **Herramientas de compilación, pruebas, distribución y actualización**
+10. **Capacidad de incorporar módulos nativos** cuando una funcionalidad lo requiera
 
 #### Decisión
 
-Se adopta **React + Next.js (PWA)** como framework frontend para Aurora Care.
+Se adopta **React Native con Expo** como framework frontend para Aurora Care.
+
+La aplicación se desarrollará para dispositivos móviles Android e iOS, utilizando una única base de código compartida entre ambas plataformas.
+
+Se utilizará **TypeScript** como lenguaje principal para mejorar el tipado, reducir errores y facilitar el mantenimiento del código.
+
+Se utilizará **Expo Router** para organizar la navegación, las rutas y la estructura de pantallas de la aplicación.
+
+Se utilizarán **Expo Development Builds** cuando sea necesario integrar funcionalidades que requieran configuración nativa, como notificaciones push, Bluetooth, ubicación, tareas en segundo plano, deep links, almacenamiento seguro o integraciones con sensores y dispositivos externos.
+
+Expo Go podrá utilizarse para pruebas iniciales de funcionalidades compatibles, pero no será considerado el entorno definitivo de desarrollo o validación.
+
+Durante el desarrollo, la aplicación podrá distribuirse mediante builds internos instalables. Para producción, podrá publicarse en Google Play Store y Apple App Store.
 
 **Fundamento:**
-- Next.js con App Router proporciona una base sólida para PWA con service workers
-- Despliegue estático (SSG) en S3 + CloudFront, sin necesidad de servidor Node.js en producción
-- Service Workers permiten modo offline parcial (caché de datos recientes)
-- Next.js 14 tiene soporte maduro para PWA mediante `next-pwa` o `@serwist/next`
+- React Native permite desarrollar aplicaciones móviles con componentes de React que se representan como componentes nativos de Android e iOS
+- Expo simplifica la configuración, compilación, distribución y mantenimiento inicial sin impedir el acceso a funcionalidades nativas mediante Development Builds y Configuration Plugins
+- TypeScript mejora la mantenibilidad de una app con flujos críticos, modelos compartidos y validaciones de dominio
+- La elección es coherente con el enfoque principalmente móvil de Aurora Care y con la necesidad de alertas confiables e integración con capacidades del dispositivo
 
 #### Consecuencias
 
 **Positivas:**
-- Una sola base de código para mobile y desktop (responsive + PWA)
-- Sin servidor Node.js en producción (SSG + S3 + CloudFront → costo mínimo)
-- Notificaciones push vía Service Worker + Push API
-- Despliegue simple: `next build && next export` → subir a S3
+- Una única base de código para Android e iOS
+- Reutilización de componentes, lógica de negocio y modelos de datos
+- Experiencia de usuario integrada con el sistema operativo
+- Acceso a notificaciones push nativas
+- Posibilidad de utilizar Bluetooth, ubicación, sensores y almacenamiento seguro
+- Compatibilidad con deep links desde notificaciones
+- Posibilidad de ejecutar determinadas tareas en segundo plano
+- Mejor preparación para futuras integraciones con wearables
+- Desarrollo inicial simplificado mediante Expo
+- Navegación estructurada mediante Expo Router
+- Posibilidad de incorporar módulos nativos mediante Development Builds
+- Distribución de builds internos antes de publicar la aplicación
 
 **Negativas:**
-- PWA no es una app nativa; ciertas APIs de hardware (bluetooth, sensores) pueden no estar disponibles
-- Service Workers tienen limitaciones en iOS Safari (notificaciones push no soportadas en iOS < 16.4)
-- La experiencia offline es parcial (no permite crear/modificar datos sin conexión)
+- Será necesario generar y mantener builds para Android e iOS
+- La publicación en producción requerirá cuentas de desarrollador, certificados y firmas digitales
+- Algunas funcionalidades deberán configurarse de manera diferente en cada sistema operativo
+- La aplicación deberá probarse en ambas plataformas y en diferentes versiones de Android e iOS
+- Determinadas librerías podrán requerir Configuration Plugins o modificaciones de código nativo
+- Las tareas en segundo plano estarán sujetas a restricciones propias de Android e iOS
+- Algunas funcionalidades no podrán probarse directamente mediante Expo Go
+- El modo offline requerirá una estrategia específica de almacenamiento local, sincronización y resolución de conflictos
 
 ---
 
@@ -407,7 +439,7 @@ Se adopta **Supabase (PostgreSQL 16 + pgvector)** como plataforma de datos.
 
 #### Contexto
 
-Aurora integra múltiples subsistemas (voz, IoT, IA, automatización, notificaciones, panel web) que deben coordinarse de manera confiable. El patrón arquitectónico define cómo se estructuran y comunican estos componentes.
+Aurora integra múltiples subsistemas (voz, IoT, IA, automatización, notificaciones, app del cuidador) que deben coordinarse de manera confiable. El patrón arquitectónico define cómo se estructuran y comunican estos componentes.
 
 #### Drivers de decisión
 
@@ -469,7 +501,7 @@ Aurora maneja datos sensibles de salud (biométricos, ubicación, medicación, h
 
 1. **Cumplimiento de privacidad**: los datos de salud requieren autenticación fuerte y cifrado
 2. **Multi-tenant**: cada cuidador asociado a uno o más pacientes, con datos estrictamente separados
-3. **Múltiples canales**: acceso desde Aurora Care (web), API para Aurora Home, y potencialmente app mobile
+3. **Múltiples canales**: acceso desde Aurora Care (app móvil) y API para Aurora Home
 4. **Costo**: preferencia por solución gratuita o de bajo costo en etapa inicial
 5. **Bajo mantenimiento**: el equipo no debe administrar infraestructura de autenticación compleja
 
@@ -601,7 +633,7 @@ Se adopta una estrategia **híbrida multicloud + local**:
 - **Aurora Core** (API + workers) → **VPS Hostinger** (plan económico, ~$4-8/mes) con Docker Compose
 - **Base de datos** → **Supabase** (PostgreSQL + pgvector, Free Project) — o **RDS PostgreSQL Free Tier** como alternativa si se supera el Free Tier de Supabase
 - **Redis** → **Ejecutado en la Raspberry Pi** (Aurora Home) para caché local y cola de mensajería offline. Alternativa cloud si se necesita Redis compartido entre servicios
-- **Aurora Care** (frontend) → **S3 + CloudFront** (AWS Free Tier 1TB/mes) o **Hostinger VPS** (misma instancia)
+- **Aurora Care** (frontend) → **builds Android/iOS** mediante Expo/EAS, con distribución interna durante el MVP y publicación en tiendas para producción
 - **n8n** → Misma instancia VPS que Aurora Core
 - **Aurora Home** → **Raspberry Pi 4/5** en el hogar del paciente
 - **AWS Free Tier** → Uso complementario para S3/CloudFront y como respaldo si Hostinger no es suficiente
@@ -795,30 +827,34 @@ backend/
   manage.py
   Dockerfile
 frontend/
+  app/          (Expo Router)
+    (auth)/
+    (tabs)/
+      index.tsx
+      routines.tsx
+      memories.tsx
+      activity.tsx
+      settings.tsx
+    alert/
+      [id].tsx
   src/
-    app/        (Next.js App Router)
-      (auth)/
-      dashboard/
-      patient/
-      alerts/
-      routines/
-      settings/
     components/
       ui/
       shared/
       features/
-    lib/
+    services/
       api/
-      hooks/
-      utils/
-      types/
-    public/
-      sw.js       (Service Worker)
+    hooks/
+    stores/
+    utils/
+    types/
+  assets/
+  app.json
+  eas.json
 infra/
   docker/
     docker-compose.yml
     Dockerfile.backend
-    Dockerfile.frontend
   terraform/
     main.tf
     variables.tf
@@ -854,9 +890,9 @@ ejemplo: feat(patient): agregar CRUD de perfil de paciente
 
 ### 4.4 Calidad y testing
 
-- **Unit tests**: `pytest` + `pytest-django` para backend; Vitest para frontend. Cobertura mínima: 70%
+- **Unit tests**: `pytest` + `pytest-django` para backend; Jest + React Native Testing Library para frontend. Cobertura mínima: 70%
 - **Integration tests**: `Django Test Client` + `APITestCase` (DRF) para endpoints de API
-- **E2E**: Playwright para Aurora Care (web)
+- **E2E**: Maestro o Detox para flujos críticos de Aurora Care en Android/iOS emulados
 - **GitHub Actions**: Ejecutar `pytest` + `ruff check` en cada push y PR
 
 ---
@@ -909,8 +945,8 @@ jobs:
       - name: Deploy to staging
         run: ... (SSH + Docker pull + restart)
       
-      - name: Deploy frontend to S3
-        run: ... (aws s3 sync)
+      - name: Build Aurora Care internal app
+        run: ... (eas build --profile preview --platform all)
 ```
 
 ### 5.3 Estrategia de releases
@@ -935,7 +971,7 @@ jobs:
 
 - **PostgreSQL dump (Supabase)**: Backup vía `pg_dump` semanal, almacenado en S3 (5 GB gratis) o en el VPS
 - **Configuración n8n**: Exportada a JSON y versionada en Git (no incluye credenciales)
-- **Código y assets**: Versionado en Git (GitHub); el frontend estático se regenera desde CI/CD
+- **Código y assets**: Versionado en Git (GitHub); los builds móviles de Aurora Care se regeneran desde CI/CD
 
 ---
 
