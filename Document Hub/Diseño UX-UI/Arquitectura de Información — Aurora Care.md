@@ -9,11 +9,11 @@ Last updated time: 2026-07-08T21:40:00
 ---
 # Arquitectura de Información — Aurora Care
 
-Capítulo 7 del [[Manual de UX-UI Aurora]]. Cubre la PWA del cuidador (mobile 390 / desktop 1440). Los RF citados refieren a [[Requerimientos]].
+Capítulo 7 del [[Manual de UX-UI Aurora]]. Cubre la app móvil del cuidador (base 390 px; tablet/pantalla amplia como vistas de referencia no prioritarias). Los RF citados refieren a [[Requerimientos]].
 
 ## 1. Modelo de navegación
 
-**Mobile: bottom tab bar de 5 ítems** (pulgar, una mano, entre tareas). **Desktop: sidebar** con los mismos ítems + atajos.
+**Mobile: bottom tab bar de 5 ítems** (pulgar, una mano, entre tareas). **Tablet/vista ampliada**: sidebar con los mismos ítems + atajos como referencia de escalabilidad, sin cambiar la prioridad móvil del MVP.
 
 | Tab | Ícono (Lucide) | Contiene | Por qué es tab |
 | --- | --- | --- | --- |
@@ -92,7 +92,7 @@ flowchart TD
 
 ## 4. Estados obligatorios
 
-Cada pantalla se diseña con sus 5 estados: **ideal · vacío** (primer uso, con CTA educativo) · **cargando** (skeleton) · **error/parcial** · **offline** (PWA: último dato sincronizado + timestamp visible — nunca datos viejos que parezcan actuales).
+Cada pantalla se diseña con sus 5 estados: **ideal · vacío** (primer uso, con CTA educativo) · **cargando** (skeleton) · **error/parcial** · **offline** (datos locales sincronizados + timestamp visible — nunca datos viejos que parezcan actuales).
 
 El estado **sin wearable** (RN10) no es un error: el dashboard reordena y muestra lo que sí sabe (interacciones de voz, rutinas), con un módulo «Conectar pulsera» discreto (visión).
 

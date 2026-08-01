@@ -51,7 +51,7 @@ Aurora tiene una particularidad de diseño: **quien usa la app no es quien recib
 | **Edad / contexto** | 52 años, hija de Ana. Trabaja jornada completa; pasa por lo de su madre casi todos los días. Casada, dos hijos adolescentes. |
 | **Rol en Aurora** | **Administradora de la cuenta del hogar**: hizo el onboarding, configura rutinas y medicación, carga recuerdos, responde alertas. Su dispositivo es el principal registrado. |
 | **Relación con la tecnología** | WhatsApp, home banking, apps de uso diario. Competente pero sin paciencia para interfaces confusas: la app se usa **entre tareas, con estrés de fondo**. |
-| **Superficie que usa** | Aurora Care en el teléfono a diario; la web en la notebook para configuraciones largas (biografía, rutinas). |
+| **Superficie que usa** | Aurora Care en el teléfono a diario; una vista ampliada en tablet/pantalla grande sería útil para configuraciones largas (biografía, rutinas), pero no es requisito para completar tareas. |
 
 **Necesita**: reducir supervisión física constante · estado del paciente de un vistazo · alertas confiables (pocas y accionables — la fatiga por falsas alarmas es un problema documentado del Estudio Inicial) · historial ordenado para el neurólogo · repartir la carga con su hermano · **saber cómo ayudar**: no es terapeuta, y quiere hacer algo más que vigilar — las sesiones guiadas (J5, F8) le dan un rol activo con instrucciones concretas.
 
@@ -73,7 +73,7 @@ Aurora tiene una particularidad de diseño: **quien usa la app no es quien recib
 | --- | --- |
 | **Edad / contexto** | 47 años, hijo de Ana, vive en Buenos Aires. Visita una vez por mes. |
 | **Rol en Aurora** | Cuidador registrado en la cuenta del hogar con **su dispositivo asociado** (sin cuenta propia — regla del alcance MVP). Recibe alertas, consulta estado, hace drop-in, carga recuerdos a validar. |
-| **Relación con la tecnología** | Alta. Mobile-only: no va a abrir la versión web nunca. |
+| **Relación con la tecnología** | Alta. Mobile-only: no va a depender de una vista ampliada para consultar el sistema. |
 | **Superficie que usa** | Aurora Care en el teléfono, en momentos muertos (viajes, esperas) y ante alertas. |
 
 **Necesita**: visibilidad para no depender del resumen de María · participar en el cuidado desde lejos (drop-in de voz, cargar fotos/recuerdos) · recibir solo lo importante — es respaldo de escalado, no primera línea.
@@ -85,7 +85,7 @@ Aurora tiene una particularidad de diseño: **quien usa la app no es quien recib
 2. El escalado de alertas (RF-41) sigue el orden de contactos configurado: si María no responde en N minutos, le llega a Diego con ese contexto («María no respondió aún»).
 3. Drop-in **unidireccional** a un toque (RN15), con aviso previo a Ana por el parlante para no sobresaltarla.
 4. Carga de recuerdos con validación (RN6): Diego propone, María (admin) aprueba — el flujo debe ser liviano para no desincentivar el aporte.
-5. Mobile-first al 100%: ninguna función de consulta puede requerir desktop.
+5. Mobile-first al 100%: ninguna función de consulta puede requerir pantalla amplia.
 
 ---
 
@@ -100,7 +100,7 @@ Aurora tiene una particularidad de diseño: **quien usa la app no es quien recib
 
 ## Matriz persona × superficie × prioridad
 
-| | Aurora Home (voz+display) | Aurora Care mobile | Aurora Care desktop | Prioridad de diseño |
+| | Aurora Home (voz+display) | Aurora Care mobile | Aurora Care vista ampliada | Prioridad de diseño |
 | --- | --- | --- | --- | --- |
 | **Ana** | ●●● única superficie | — | — | Alta — MVP |
 | **María** | (escucha los drop-in) | ●●● diaria | ●● configuración | **Máxima — MVP** |

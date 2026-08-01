@@ -13,7 +13,7 @@ Capítulo 4 del [[Manual de UX-UI Aurora]]: iconografía, espaciado, grilla, rad
 
 ## 1. Iconografía
 
-**Set base: [Lucide](https://lucide.dev)** (fork mantenido de Feather, licencia ISC, +1500 íconos, paquete oficial React) — estilo de línea consistente con la estética liviana de la marca.
+**Set base: [Lucide](https://lucide.dev)** (fork mantenido de Feather, licencia ISC, +1500 íconos, paquetes compatibles con React y React Native) — estilo de línea consistente con la estética liviana de la marca.
 
 | Regla | Valor |
 | --- | --- |
@@ -39,9 +39,9 @@ Escala: `4, 8, 12, 16, 24, 32, 40, 48, 64, 80` (tokens `--space-1…10`). Regla 
 | --- | --- | --- |
 | `mobile` | 390 px (diseño base) | 1 columna, márgenes 16, **bottom tab bar** de 5 ítems |
 | `tablet` | 768 px | Contenido a 2 columnas donde aplique, márgenes 24 |
-| `desktop` | 1440 px (diseño clave) | **Sidebar** de navegación 240 px + contenido máx. 1040 px centrado |
+| `wide` | 1024+ px (referencia de pantalla amplia) | Sidebar opcional + contenido máx. 1040 px centrado |
 
-Mobile-first: el cuidador secundario usa casi exclusivamente el teléfono ([[Proto-personas]]); la configuración pesada (onboarding, biografía) se disfruta más en desktop pero debe ser 100% posible en mobile.
+Mobile-first: el cuidador secundario usa casi exclusivamente el teléfono ([[Proto-personas]]); la configuración pesada (onboarding, biografía) puede beneficiarse de pantallas amplias, pero debe ser 100% posible en mobile.
 
 ## 4. Radios
 
@@ -79,7 +79,7 @@ En tema oscuro la elevación se expresa por **color de superficie** (`neutral-85
 
 **Principios:**
 1. **Funcional, no decorativo**: el movimiento comunica causa-efecto (de dónde vino el modal, qué card se actualizó). Nada se anima "porque sí".
-2. **Respetar `prefers-reduced-motion`**: ya implementado en `tokens.css` — todas las animaciones colapsan a instantáneas.
+2. **Respetar reducción de movimiento del sistema**: el token ya está definido y la app debe mapearlo a la API de accesibilidad correspondiente — todas las animaciones colapsan a instantáneas.
 3. **Las alertas críticas no parpadean**: una alerta SOS aparece con un slide firme y **queda estática**; el parpadeo continuo aumenta la ansiedad y puede disparar fotosensibilidad (WCAG 2.3.1). El pulso lento (1 ciclo/2 s) queda solo para el anillo LED del dispositivo.
 4. En el display del dispositivo, las transiciones son **lentas y suaves** (400 ms+): los cambios bruscos de pantalla confunden al paciente.
 
@@ -87,7 +87,7 @@ En tema oscuro la elevación se expresa por **color de superficie** (`neutral-85
 
 | Estado | Tratamiento |
 | --- | --- |
-| Hover | Fondo 4-8% del color de acción / `shadow-2` en cards |
+| Hover (solo puntero) | Fondo 4-8% del color de acción / `shadow-2` en cards |
 | Pressed | Escala 0.98 + fondo 12% |
 | Focus visible | **Anillo 2 px `--focus-ring` + offset 2 px** — nunca se elimina el outline |
 | Disabled | 40% de opacidad + cursor default; nunca ocultar la acción primaria de una pantalla |

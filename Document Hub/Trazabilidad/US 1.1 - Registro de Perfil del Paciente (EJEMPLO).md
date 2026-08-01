@@ -32,7 +32,7 @@ Last updated time: "2026-06-19T20:05:00"
 
 ## 2. Decisiones de diseño (ADR)
 Decisiones técnicas que esta historia usa (ver [[Arquitectura y Stack Tecnológico]]):
-- **ADR-002** — Frontend Aurora Care (React + Next.js): la UI de registro vive acá.
+- **ADR-002** — Frontend Aurora Care (React Native + Expo): la UI de registro vive acá.
 - **ADR-003** — Supabase (PostgreSQL + pgvector): persistencia de `pacientes` y `cuidadores`.
 - **ADR-005** — Auth0: autenticación del cuidador; *Organizations* de Auth0 con el criterio "una organización = un paciente", que respalda la regla de **un perfil por hogar**.
 - **Privacidad (sección 6)** — Ley 25.326: cifrado de PII a nivel de columna con **pgcrypto** y derechos ARCO.
@@ -88,7 +88,7 @@ classDiagram
 ```mermaid
 sequenceDiagram
     participant C as Cuidador
-    participant Care as Aurora Care (Next.js)
+    participant Care as Aurora Care (React Native + Expo)
     participant Auth as Auth0
     participant Core as Aurora Core (Django/DRF)
     participant DB as Supabase (PostgreSQL)
@@ -109,7 +109,7 @@ sequenceDiagram
 | Tipo | Ubicación / referencia |
 | --- | --- |
 | Backend (Django/DRF) | _pendiente — aún sin código en `Backend/`_ |
-| Frontend (Next.js) | _pendiente — aún sin código en `Frontend/`_ |
+| Frontend (React Native + Expo) | _pendiente — aún sin código en `Frontend/`_ |
 | Commit / PR | _pendiente_ |
 
 > [!todo] Completar con paths reales cuando se implemente la historia.
