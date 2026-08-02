@@ -63,7 +63,7 @@ Visible a 2-3 metros por una persona mayor: los tamaños son ~2× los de la app.
 
 ## 4. Carga técnica
 
-- App (Next.js): `next/font/google` con `Figtree` e `Inter` variables, subset `latin` + `latin-ext`, `display: swap`.
+- App (React Native + Expo): fuentes `Figtree` e `Inter` empaquetadas con `expo-font`; carga controlada antes de mostrar la UI inicial.
 - Device (Raspberry Pi, render local): archivos `woff2/ttf` de Atkinson Hyperlegible Next empaquetados con la imagen del SO — el display no depende de red.
 - Previews HTML: Google Fonts CDN (solo para diseño).
 

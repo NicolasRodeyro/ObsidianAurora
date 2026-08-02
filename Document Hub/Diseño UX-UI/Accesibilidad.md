@@ -17,9 +17,9 @@ Capítulo 10 del [[Manual de UX-UI Aurora]]. Piso normativo: **[WCAG 2.2](https:
 | --- | --- |
 | 1.4.3 / 1.4.11 Contraste | 34/34 pares de tokens verificados por script ([[Color]] §5); tokens nuevos no entran sin pasar `contrast.py` |
 | 1.4.4 Resize text | Layout funcional al 200% de zoom; unidades relativas en Care |
-| 1.4.10 Reflow | PWA responsive desde 320 px sin scroll horizontal |
+| 1.4.10 Reflow | App móvil adaptable desde 320 px sin scroll horizontal ni cortes de contenido |
 | 1.4.12 Text spacing | Line-height ≥1.5 en cuerpo ([[Tipografía]]) |
-| 2.1 Teclado | Toda la app operable por teclado (sidebar desktop incluida); orden de foco = orden visual |
+| 2.1 Teclado | Toda la app operable con teclado externo cuando aplique (incluida la sidebar en vistas ampliadas); orden de foco = orden visual |
 | 2.4.7 / 2.4.13 Focus | Anillo de foco 2 px `--focus-ring` + offset, nunca suprimido ([[Fundamentos Visuales]] §7) |
 | 2.3.1 Destellos | Nada parpadea >3/s; las alertas críticas son estáticas (el pulso lento vive solo en el LED del dispositivo) |
 | 2.5.8 Target size | Controles ≥44×44 px (por encima del mínimo 24×24 de WCAG) |

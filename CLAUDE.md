@@ -9,11 +9,11 @@ Ecosistema de software + hardware para **acompañar y monitorear pacientes con A
 ### Componentes
 - **Aurora Home** — asistente de voz en el hogar (Raspberry Pi; STT/TTS en el borde).
 - **Aurora Band** — wearable biométrico comercial (HR, movimiento, GPS); se consume su API, no se modifica su firmware.
-- **Aurora Care** — app web/móvil para cuidadores (monitoreo, configuración, alertas).
+- **Aurora Care** — app móvil para cuidadores (monitoreo, configuración, alertas).
 - **Aurora Core** — backend/orquestación en la nube (IA, RAG, detección de eventos, integración).
 
 ### Stack (ver ADRs en `Document Hub/Arquitectura y Stack Tecnológico.md`)
-Backend **Python + Django/DRF** · Frontend **React + Next.js 14 (PWA)** · DB **Supabase (PostgreSQL + pgvector)** · Auth **Auth0** · Orquestación **n8n** · STT local **Whisper.cpp** · Infra **Hostinger VPS + AWS + Redis en RPi** · Observabilidad **Loki + Prometheus**.
+Backend **Python + Django/DRF** · Frontend **React Native + Expo + TypeScript** · DB **Supabase (PostgreSQL + pgvector)** · Auth **Auth0** · Orquestación **n8n** · STT local **Whisper.cpp** · Infra **Hostinger VPS + AWS + Redis en RPi** · Observabilidad **Loki + Prometheus**.
 
 ## Equipo
 | Persona | Roles |
