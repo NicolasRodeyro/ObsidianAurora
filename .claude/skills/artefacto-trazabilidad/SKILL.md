@@ -30,8 +30,9 @@ El equipo trabaja con **tareas técnicas**; este modo deriva la Historia de Usua
 
 1. **Entrada:** uno o varios keys de Tarea/Análisis relacionados (ej. "desde AURA-60 y AURA-61").
 2. **Traer las tareas** con `mcp__atlassian__getJiraIssue` (summary, description, comments) y entender qué hicieron; sumar evidencia de código/tests/git si existe.
-3. **Proponer la Historia** en formato **user-centric**: *Como `<rol usuario: cuidador/paciente>` quiero `<objetivo>` para `<beneficio>`* + criterios de aceptación derivados de lo hecho. **No** redactar desde la mirada del desarrollador (ver `references/guia-catedra.md`). Identificar la **épica** (módulo) y los **RF** vía `Document Hub/Trazabilidad RF-Épicas.md`.
-4. **Mostrar la historia propuesta y esperar aprobación/edición.** No crear nada en Jira sin OK explícito.
+3. **Buscar Historia existente antes de proponer una nueva.** Usando `mcp__atlassian__searchJiraIssuesUsingJql` con `jql = "project = AURA AND issuetype = Historia AND parent = <ÉPICA> ORDER BY created DESC"`, verificar si ya existe una Historia en la misma épica que cubra el trabajo de las tareas. Si existe: usar esa Historia como base (modo historia existente) e informar al usuario. Solo si no existe, proceder a proponer una nueva.
+4. **Proponer la Historia** en formato **user-centric**: *Como `<rol usuario: cuidador/paciente>` quiero `<objetivo>` para `<beneficio>`* + criterios de aceptación derivados de lo hecho. **No** redactar desde la mirada del desarrollador (ver `references/guia-catedra.md`). Identificar la **épica** (módulo) y los **RF** vía `Document Hub/Trazabilidad RF-Épicas.md`.
+5. **Mostrar la historia propuesta y esperar aprobación/edición.** No crear nada en Jira sin OK explícito.
 5. Tras el OK, **crear la Historia en Jira**: `mcp__atlassian__createJiraIssue` con `issueTypeName: "Historia"`, `projectKey: "AURA"`, `parent: "<ÉPICA>"` (la épica de producto del módulo, AURA-14…22), label `derivada-de-tarea`.
 6. **Enlazar cada tarea** a la historia con `mcp__atlassian__createIssueLink` tipo **`Relates`** (este proyecto no tiene "is implemented by"; `Relates` es el más cercano).
 7. Continuar con el **Proceso** de abajo para generar el artefacto, ya con la historia creada.
@@ -56,12 +57,26 @@ Leer, en este orden y solo lo necesario:
 ### Paso 3 — Recopilar evidencia (lo que exista)
 - **ADR**: buscar en el doc de Arquitectura ADRs que apliquen a la historia (`Grep` por palabras clave). Si la historia implicó una **decisión técnica nueva** que aún no tiene ADR, anotarlo como pendiente (proponer crear ADR-0XX), no inventarlo.
 - **DER / modelo de datos**: si la historia toca datos, reflejar el modelo afectado (`erDiagram` Mermaid). Si no modifica datos, marcar "sin cambios en el modelo".
-- **Código**: `Glob`/`Grep` en `Backend/` y `Frontend/` por entidades, endpoints o componentes de la historia. Listar archivos/paths reales. Si aún no hay código, dejar placeholder.
+- **Código**: `Glob`/`Grep` en `Backend/` y `Frontend/` por entidades, endpoints o componentes de la historia. Si esas carpetas están vacías, buscar repos hermanos del vault (ej. `../AuroraCareFront`, `../AuroraCore`) con `find` desde el directorio padre. Listar archivos/paths reales. Si aún no hay código, dejar placeholder.
+- **Compliance RF-76/79/81**: si la historia toca alguno de estos RF (autenticación, cifrado, consentimiento), leer automáticamente `Document Hub/INSTANCIA 3 — Sprints 1 a N/Investigación — Almacenamiento de Datos y Ley 25.326.md` para referenciar la decisión técnica relevante en el artefacto (sección ADR y criterios de aceptación).
 - **Tests**: buscar tests relacionados (`*test*`, `*spec*`). Extraer casos existentes; nunca inventar resultados de ejecución.
 - **Git**: `git log --oneline --all --grep <KEY>` para commits/PRs que referencien la historia.
 
+### Paso 3.5 — Inferir qué secciones aplican
+
+Antes de generar, evaluar cada sección según el contenido de la historia y la evidencia recopilada. **Solo generar lo que aplique; omitir lo que no** (no dejar placeholders vacíos para secciones irrelevantes — reemplazar con una línea explicativa: "No aplica — [motivo]").
+
+| Sección | Generar si… | Omitir si… |
+| --- | --- | --- |
+| **DER** (`erDiagram`) | La historia crea, modifica o elimina entidades/atributos/relaciones en la BD | Es una historia puramente de UI/navegación/configuración sin cambios en el modelo de datos |
+| **Diagrama de clases** (`classDiagram`) | La historia introduce o cambia entidades de dominio, servicios o sus relaciones en el código | La lógica es trivial (CRUD directo sin dominio propio) o ya está cubierta por el DER |
+| **Diagrama de secuencia** (`sequenceDiagram`) | Hay ≥2 componentes/actores con una interacción que conviene mostrar paso a paso (ej. Care → Core → Supabase) | La historia involucra un solo servicio o la interacción es obvia (una pantalla que llama a un endpoint) |
+| **Diagrama de estados** (`stateDiagram-v2`) | Una entidad de la historia tiene un ciclo de vida con estados nombrados y transiciones definidas (ej. Alerta: generada→enviada→atendida→cerrada) | No hay ciclo de vida con estados — la entidad se crea y se modifica sin transiciones formalizadas |
+
+Documentar la decisión con una línea al inicio de cada subsección omitida: ej. `> DTE no aplica: el perfil del paciente no tiene ciclo de vida con estados transicionables.`
+
 ### Paso 4 — Generar diagramas de modelado (Mermaid)
-Generar solo los que apliquen a la historia: `classDiagram`, `sequenceDiagram`, `stateDiagram-v2`, `erDiagram`. Mantener consistencia con los diagramas C4/Mermaid del doc de Arquitectura. Snippets y criterios de "cuándo aplica cada uno" en `references/guia-catedra.md`.
+Generar solo los diagramas que resultaron **aplicables en Paso 3.5**. Mantener consistencia con los diagramas C4/Mermaid del doc de Arquitectura. Snippets y criterios de "cuándo aplica cada uno" en `references/guia-catedra.md`.
 
 ### Paso 5 — Armar el artefacto
 Partir de `assets/plantilla-artefacto.md`. Completar cada sección con lo recopilado. Marcar lo faltante de forma inequívoca con bloques `> [!todo]` y con la **checklist de completitud** al final. Conservar el frontmatter (para que aparezca en la base de Obsidian y el grafo).
