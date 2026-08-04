@@ -1,0 +1,4 @@
+interface:
+  display_name: "Artefacto de Trazabilidad"
+  short_description: "Trazabilidad verificable por historia"
+  default_prompt: "Usa $artefacto-trazabilidad para generar o actualizar el artefacto de AURA-XX del Sprint N."
