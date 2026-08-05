@@ -2,8 +2,8 @@
   "source": "project-aurora-alz.atlassian.net",
   "cloudId": "90fd6939-9992-4dac-a29c-53321dda6031",
   "project": "AURA",
-  "lastSynced": "2026-06-19",
-  "total": 46,
+  "lastSynced": "2026-07-19",
+  "total": 75,
   "issues": [
     {
       "key": "AURA-1",
@@ -58,8 +58,8 @@
     {
       "key": "AURA-8",
       "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-12",
       "labels": [],
@@ -68,8 +68,8 @@
     {
       "key": "AURA-9",
       "type": "Tarea",
-      "status": "PAUSED/BLOCKED",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "nicolasrodeyro",
       "parent": "AURA-12",
       "labels": [],
@@ -283,8 +283,8 @@
     {
       "key": "AURA-27",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "nicolasrodeyro",
       "parent": "AURA-29",
       "labels": [],
@@ -411,8 +411,8 @@
     {
       "key": "AURA-41",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-13",
       "labels": [],
@@ -421,8 +421,8 @@
     {
       "key": "AURA-42",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-13",
       "labels": [],
@@ -431,8 +431,8 @@
     {
       "key": "AURA-43",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
+      "status": "En curso",
+      "statusCategory": "indeterminate",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-13",
       "labels": [],
@@ -441,8 +441,8 @@
     {
       "key": "AURA-44",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Haik Kilic",
       "parent": "AURA-28",
       "labels": [],
@@ -451,8 +451,8 @@
     {
       "key": "AURA-45",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Mateo Romero Plaza",
       "parent": "AURA-13",
       "labels": [],
@@ -461,8 +461,8 @@
     {
       "key": "AURA-46",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Octavio Escudero",
       "parent": "AURA-13",
       "labels": [],
@@ -491,8 +491,8 @@
     {
       "key": "AURA-49",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Octavio Escudero",
       "parent": "AURA-13",
       "labels": [],
@@ -501,8 +501,8 @@
     {
       "key": "AURA-50",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Mateo Romero Plaza",
       "parent": "AURA-13",
       "labels": [],
@@ -510,13 +510,358 @@
     },
     {
       "key": "AURA-51",
-      "type": "Tarea",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
-      "assignee": "Mateo Romero Plaza",
+      "type": "Análisis",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Haik Kilic",
       "parent": "AURA-13",
       "labels": [],
       "summary": "Investigar un carrito de compras para un prototipo de Aurora Home."
+    },
+    {
+      "key": "AURA-52",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-31",
+      "labels": [],
+      "summary": "Sub RAG para flujo de información entre Jira y Obsidian"
+    },
+    {
+      "key": "AURA-53",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-15",
+      "labels": [],
+      "summary": "Diseño de BD"
+    },
+    {
+      "key": "AURA-54",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-18",
+      "labels": [],
+      "summary": "Login - Aurora Care"
+    },
+    {
+      "key": "AURA-55",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-18",
+      "labels": [],
+      "summary": "Modulo Paciente - Aurora Care"
+    },
+    {
+      "key": "AURA-56",
+      "type": "Tarea",
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-18",
+      "labels": [],
+      "summary": "Módulo Terapias Cognitivas"
+    },
+    {
+      "key": "AURA-57",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-18",
+      "labels": [],
+      "summary": "Módulo Recordatorios"
+    },
+    {
+      "key": "AURA-58",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-18",
+      "labels": [],
+      "summary": "Módulo Recetario"
+    },
+    {
+      "key": "AURA-59",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-29",
+      "labels": [],
+      "summary": "Vistas Paciente UI"
+    },
+    {
+      "key": "AURA-60",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "nicolasrodeyro",
+      "parent": "AURA-29",
+      "labels": [],
+      "summary": "Vistas Terapias UI"
+    },
+    {
+      "key": "AURA-61",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-29",
+      "labels": [],
+      "summary": "Vistas Recordatorio UI"
+    },
+    {
+      "key": "AURA-62",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
+      "parent": "AURA-29",
+      "labels": [],
+      "summary": "Vistas Recetario UI"
+    },
+    {
+      "key": "AURA-63",
+      "type": "Tarea",
+      "status": "PAUSED/BLOCKED",
+      "statusCategory": "indeterminate",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-18",
+      "labels": [],
+      "summary": "Implementar Conexión entre Care y la BD"
+    },
+    {
+      "key": "AURA-64",
+      "type": "Análisis",
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-19",
+      "labels": [],
+      "summary": "Investigación Pulsera para Aurora Band"
+    },
+    {
+      "key": "AURA-65",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "diseno",
+        "transversal"
+      ],
+      "summary": "Design System — tokens, componentes y verificación WCAG AA"
+    },
+    {
+      "key": "AURA-66",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "diseno",
+        "transversal"
+      ],
+      "summary": "Manual de UX/UI Aurora (11 capítulos)"
+    },
+    {
+      "key": "AURA-67",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "diseno",
+        "transversal"
+      ],
+      "summary": "Prototipo navegable de Aurora Care + wiring para Figma"
+    },
+    {
+      "key": "AURA-68",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "aurora-care",
+        "diseno"
+      ],
+      "summary": "Vistas Auth y Onboarding UI"
+    },
+    {
+      "key": "AURA-69",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "aurora-care",
+        "diseno"
+      ],
+      "summary": "Vistas Alertas y Actividad UI"
+    },
+    {
+      "key": "AURA-70",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "aurora-care",
+        "diseno"
+      ],
+      "summary": "Vistas Ajustes UI"
+    },
+    {
+      "key": "AURA-71",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "aurora-home",
+        "diseno"
+      ],
+      "summary": "Vistas Dispositivo — Aurora Home Display UI"
+    },
+    {
+      "key": "AURA-72",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "aurora-care",
+        "diseno"
+      ],
+      "summary": "Vistas Desktop — Aurora Care (1440) UI"
+    },
+    {
+      "key": "AURA-73",
+      "type": "Tarea",
+      "status": "In Revision",
+      "statusCategory": "indeterminate",
+      "assignee": null,
+      "parent": "AURA-29",
+      "labels": [
+        "diseno",
+        "vision"
+      ],
+      "summary": "Wireframes de Visión (V1–V6)"
+    },
+    {
+      "key": "AURA-74",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-18",
+      "labels": [
+        "aurora-care",
+        "derivada-de-diseno",
+        "mvp"
+      ],
+      "summary": "US-D1 — Sesión guiada de terapia"
+    },
+    {
+      "key": "AURA-75",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-18",
+      "labels": [
+        "aurora-care",
+        "derivada-de-diseno",
+        "mvp"
+      ],
+      "summary": "US-D2 — Biblioteca de actividades terapéuticas"
+    },
+    {
+      "key": "AURA-76",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-15",
+      "labels": [
+        "aurora-core",
+        "derivada-de-diseno",
+        "mvp"
+      ],
+      "summary": "US-D3 — Descubrimientos con validación"
+    },
+    {
+      "key": "AURA-77",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-15",
+      "labels": [
+        "aurora-core",
+        "derivada-de-diseno",
+        "mvp"
+      ],
+      "summary": "US-D4 — Dificultad adaptativa"
+    },
+    {
+      "key": "AURA-78",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-18",
+      "labels": [
+        "mvp",
+        "aurora-care",
+        "derivada-de-diseno"
+      ],
+      "summary": "Registro y perfil del paciente"
+    },
+    {
+      "key": "AURA-79",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-18",
+      "labels": [
+        "mvp",
+        "aurora-care",
+        "derivada-de-diseno"
+      ],
+      "summary": "Gestión de rutinas y recordatorios (interfaz del cuidador)"
+    },
+    {
+      "key": "AURA-80",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-18",
+      "labels": [
+        "mvp",
+        "aurora-care",
+        "derivada-de-diseno"
+      ],
+      "summary": "Gestión de medicación y recetario (interfaz del cuidador)"
     }
   ]
 }
