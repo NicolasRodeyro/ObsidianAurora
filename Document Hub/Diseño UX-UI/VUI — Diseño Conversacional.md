@@ -88,7 +88,7 @@ Plantillas con variables `{}`; el LLM parafrasea dentro de estas estructuras (RF
 ### G8 · Modo degradado / sin conexión (ADR-008)
 > Recordatorios locales cacheados suenan igual. Para lo demás:
 > «Perdoname, Ana, ahora no puedo ayudarte con eso. {En un rato vuelvo a estar bien}. {Tu medicación de las 14 sigue programada}.»
-> — TTS local (Piper), mismas reglas de tono. El display muestra el estado sin tecnicismos («Sin conexión»).
+> — TTS local (Piper), mismas reglas de tono. El LED ámbar indica el estado sin depender de una pantalla.
 
 ### G9 · Trivia y lógica simple con aprendizaje (F9 de [[User Flows]])
 > «Ana, ¿jugamos a las preguntas? Es sobre cosas de tu época. Primera: ¿quién cantaba "Por una cabeza"?»
@@ -99,27 +99,27 @@ Plantillas con variables `{}`; el LLM parafrasea dentro de estas estructuras (RF
 
 ### G10 · Sesión guiada — Aurora en dúo con el cuidador (F8)
 > Aurora pasa a **rol de apoyo**: el protagonista es el cuidador. Habla solo cuando el paso lo indica.
-> - *Apertura*: reproduce la música del recuerdo, muestra la foto en el display y calla.
+> - *Apertura*: reproduce la música del recuerdo; la foto se muestra en Care si el cuidador la usa y Aurora calla.
 > - *Aporte puntual* (cuando la app lo indica): «{María}, ¿le preguntamos a Ana por el vestido que llevaba ese día?» — dispara, no dirige.
 > - *Cierre con calma* (si el cuidador lo pide desde la app): baja la música gradualmente y despide: «Qué lindo recordar juntas. {Gracias por contarme, Ana}.»
 > - Regla dura: en sesión guiada Aurora **no hace preguntas en cadena** ni corrige lo que el cuidador dice; máximo 1 intervención por paso.
 
-## 5. Estados del dispositivo — anillo LED + display
+## 5. Estados del dispositivo — anillo LED + audio
 
-El LED y el display son **redundantes entre sí** (accesibilidad auditiva/visual) y consistentes con [[Color]] §4.
+El MVP no incorpora display. El LED indica estados técnicos no sensibles y el audio comunica la interacción al paciente; Care conserva texto y diagnóstico en su interfaz. El LED nunca es la única confirmación de una acción relevante.
 
-| Estado | Anillo LED | Display (Atkinson, [[Tipografía]]) | Audio |
+| Estado | Anillo LED | Audio |
 | --- | --- | --- | --- |
-| **Reposo** | Apagado | Hora 72 px + fecha + próxima actividad, brillo bajo | — |
-| **Saludando / hablando** | Barrido aurora suave (gradiente) | Texto de lo que dice (≤2 líneas, 32 px+) | Voz |
-| **Escuchando** | Respiración violeta `violet-300` (ciclo 2 s) | «Te escucho…» + onda simple | Earcon apertura |
-| **Pensando** | Giro lento violeta tenue | Mantiene contexto | Earcon/muletilla §3 |
-| **Recordatorio activo** | Pulso lima `lime-300` (1/2 s) | Título del recordatorio 48 px | Voz + campanita suave |
-| **SOS** | Pulso rojo `red-500` (1/2 s) | «Ayuda en camino» + hora | Mensaje de calma cada 60 s |
-| **Sin conexión** | Ámbar fijo tenue `amber-300` | Hora (siempre funciona) + «Sin conexión» | Solo recordatorios locales |
-| **Modo noche** (configurable) | Apagado | Hora tenue brillo mínimo o display off | Volumen −30% |
+| **Reposo** | Apagado | — |
+| **Saludando / hablando** | Barrido aurora suave (gradiente) | Voz |
+| **Escuchando** | Respiración violeta `violet-300` (ciclo 2 s) | Earcon apertura |
+| **Pensando** | Giro lento violeta tenue | Earcon/muletilla §3 |
+| **Recordatorio activo** | Pulso lima `lime-300` (1/2 s) | Voz + campanita suave |
+| **SOS** | Pulso rojo `red-500` (1/2 s) | Mensaje de calma cada 60 s |
+| **Sin conexión** | Ámbar fijo tenue `amber-300` | Solo recordatorios locales |
+| **Modo noche** (configurable) | Apagado | Volumen −30% |
 
-**Reglas del display**: nunca más de 2 líneas · sin abreviaturas («martes 8 de julio») · el texto mostrado coincide con lo hablado (refuerzo bimodal) · transiciones lentas ≥400 ms ([[Fundamentos Visuales]] §6).
+**Reglas de señalización**: no depender sólo del color; cada LED se acompaña de audio cuando hay una interacción con el paciente y Care expone texto/ícono/estado para el cuidador. La hora, fecha y próxima actividad se responden por voz cuando se solicitan.
 
 ## 6. Métricas de calidad conversacional (para el piloto)
 
