@@ -9,7 +9,7 @@ Last updated time: 2026-07-08T22:10:00
 ---
 # Accesibilidad
 
-Capítulo 10 del [[Manual de UX-UI Aurora]]. Piso normativo: **[WCAG 2.2](https://www.w3.org/TR/WCAG22/) nivel AA** en Aurora Care y en el display de Aurora Home. Encima del piso: pautas específicas para deterioro cognitivo (paciente) y uso bajo estrés (cuidadores).
+Capítulo 10 del [[Manual de UX-UI Aurora]]. Piso normativo: **[WCAG 2.2](https://www.w3.org/TR/WCAG22/) nivel AA** en Aurora Care. Aurora Home no incorpora display en el MVP: combina voz y LED para estados locales no sensibles, y Care ofrece el texto/diagnóstico al cuidador.
 
 ## 1. Compromisos WCAG 2.2 AA (y cómo se cumplen)
 
@@ -30,15 +30,15 @@ Capítulo 10 del [[Manual de UX-UI Aurora]]. Piso normativo: **[WCAG 2.2](https:
 
 ## 2. Accesibilidad cognitiva — el paciente
 
-El display y la voz de Aurora Home se diseñan para una persona con GDS ≤5. Referencia adicional: [W3C Making Content Usable for People with Cognitive Disabilities](https://www.w3.org/TR/coga-usable/).
+La voz y las señales LED de Aurora Home se diseñan para una persona con GDS ≤5. Referencia adicional: [W3C Making Content Usable for People with Cognitive Disabilities](https://www.w3.org/TR/coga-usable/).
 
 1. **Cero aprendizaje requerido** (RNF del Estudio Inicial): no hay menúes, gestos ni comandos que memorizar. Aurora inicia las interacciones; el único control físico es el botón SOS rojo.
 2. **Lenguaje literal**: sin metáforas, ironía ni frases hechas — se interpretan mal con deterioro cognitivo. «Es la hora de tu pastilla», no «no te olvides de tus remediitos».
-3. **Redundancia bimodal**: lo hablado se muestra y lo mostrado se habla ([[VUI — Diseño Conversacional]] §5) — cubre pérdida auditiva y visual parcial, frecuentes en +75.
-4. **Orientación permanente**: fecha, hora y próxima actividad siempre en el display — apoyo directo a la memoria prospectiva ([[Investigacion sobre neurologia]]).
-5. **Sin presión temporal**: los diálogos no expiran castigar el silencio; el cierre del micrófono a los 10 s termina con despedida amable y la información queda en el display.
+3. **Señalización multimodal disponible**: Aurora acompaña las interacciones por voz con LED no semántico; Care ofrece texto, ícono y estado al cuidador. La ausencia de pantalla limita la redundancia visual para el paciente y debe validarse en HIL con acompañamiento profesional.
+4. **Orientación por voz**: Aurora responde de forma inmediata fecha, hora y próxima actividad cuando se consulta, y las mantiene en los recordatorios configurados ([[Investigacion sobre neurologia]]).
+5. **Sin presión temporal**: los diálogos no castigan el silencio; el cierre del micrófono a los 10 s termina con despedida amable y Care conserva la configuración para el cuidador.
 6. **Sin registro de fracaso frente al paciente**: los ejercicios no puntúan en voz alta ni muestran errores; las métricas van solo al historial del cuidador.
-7. **El dispositivo no debe poder desconfigurarse por el paciente** ([[Investigacion sobre neurologia]], nota final): sin controles táctiles de configuración en el display; todo se administra desde Care.
+7. **El dispositivo no debe poder desconfigurarse por el paciente** ([[Investigacion sobre neurologia]], nota final): no hay controles de configuración locales; todo se administra desde Care.
 
 ## 3. Uso bajo estrés — el cuidador
 
