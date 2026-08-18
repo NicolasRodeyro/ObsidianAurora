@@ -17,20 +17,22 @@ Capítulo 8 del [[Manual de UX-UI Aurora]]. Flujos MVP en detalle; los de visió
 flowchart TD
     A[Descarga la app] --> B[Crear cuenta del hogar<br/>email + contraseña]
     B --> C{¿Dispositivo Aurora Home<br/>encendido?}
-    C -- Sí --> D[Ingresar código de 6 dígitos<br/>que muestra el display]
+    C -- Sí --> D[Escanear QR público<br/>del dispositivo]
     C -- "Todavía no" --> C2[Guía de encendido<br/>con foto del dispositivo] --> D
-    D --> E([Vinculación verificada<br/>con Aurora Core])
-    E --> F[Paso 2 · Perfil del paciente<br/>nombre · fecha nac. · nivel GDS<br/>+ para qué se usa cada dato]
-    F --> G[Paso 3 · Rutinas base<br/>plantillas: medicación / comidas / descanso]
-    G -- "Omitir por ahora" --> H
-    G --> H[Paso 4 · Primer recuerdo<br/>prompt guiado + foto opcional]
-    H -- Omitir --> I
-    H --> I[Paso 5 · Invitar cuidadores<br/>link por WhatsApp]
-    I --> J[Prueba en vivo:<br/>«Escuchá cómo saluda Aurora»]
-    J --> K[🏠 Inicio con checklist<br/>de pasos pendientes]
+    D --> E[Conectar al hotspot temporal<br/>y configurar Wi-Fi en el portal local]
+    E --> F[Escuchar código temporal de Aurora<br/>e ingresarlo en Care]
+    F --> G([Vinculación verificada<br/>con Aurora Core])
+    G --> H[Paso 2 · Perfil del paciente<br/>nombre · fecha nac. · nivel GDS<br/>+ para qué se usa cada dato]
+    H --> I[Paso 3 · Rutinas base<br/>plantillas: medicación / comidas / descanso]
+    I -- "Omitir por ahora" --> J
+    I --> J[Paso 4 · Primer recuerdo<br/>prompt guiado + foto opcional]
+    J -- Omitir --> K
+    J --> K[Paso 5 · Invitar cuidadores<br/>link por WhatsApp]
+    K --> L[Prueba en vivo:<br/>«Escuchá cómo saluda Aurora»]
+    L --> M[🏠 Inicio con checklist<br/>de pasos pendientes]
 ```
 
-**Reglas**: los pasos 3-5 son omitibles y quedan como checklist en Inicio · guardado automático por paso (si abandona, retoma donde estaba) · la cuenta es **única por hogar** (RN1); los cuidadores se asocian por **dispositivo**, sin cuentas propias.
+**Reglas**: el QR contiene sólo serial, identificador público y versión de provisioning; no lleva Wi-Fi, credenciales ni el código temporal. Aurora dicta un código de seis dígitos, de un uso, válido por dos minutos y con cinco intentos máximos; Care lo envía a Core, nunca directamente a Home. Sin el código no hay activación: una fotografía del QR no alcanza. Los pasos 3-5 son omitibles y quedan como checklist en Inicio · guardado automático por paso (si abandona, retoma donde estaba) · la cuenta es **única por hogar** (RN1); los cuidadores se asocian por **dispositivo**, sin cuentas propias.
 
 ## F2 · ABMC de rutina (MVP)
 
@@ -110,7 +112,7 @@ flowchart TD
     C -- No --> Y[«El dispositivo está sin conexión»<br/>+ última vez visto]
     C -- Sí --> D([Home anuncia: «Ana, Diego<br/>te va a decir algo» · 3 s])
     D --> E[Diego graba/habla<br/>máx 60 s · UI con onda de audio]
-    E --> F([Reproducción en el parlante<br/>display: «Mensaje de Diego»])
+    E --> F([Reproducción en el parlante<br/>Aurora anuncia: «Mensaje de Diego»])
     F --> G{¿Ana quiere responder?<br/>Aurora pregunta}
     G -- Sí --> H([STT transcribe → llega a Diego<br/>como mensaje en la app])
     G -- No --> I([Fin · registrado en historial])
@@ -130,15 +132,15 @@ flowchart TD
 
 ## F8 · Sesión guiada de terapia — cuidador + Aurora en dúo (MVP)
 
-La app hace de **coach del cuidador no experto** mientras Aurora Home acompaña en vivo. El protagonista es el cuidador; Aurora aporta la música, las fotos en el display y las preguntas disparadoras.
+La app hace de **coach del cuidador no experto** mientras Aurora Home acompaña en vivo. El protagonista es el cuidador; Aurora aporta música y preguntas disparadoras, mientras las fotos se muestran en Care cuando el cuidador las utiliza.
 
 ```mermaid
 flowchart TD
     A[Actividad → Terapias<br/>elige «Sesión de reminiscencia»] --> B[Pantalla previa:<br/>qué recuerdo usar · duración 10-15 min<br/>consejos: sin apuro, sin corregir]
-    B --> C([Aurora Home se prepara:<br/>música del recuerdo lista,<br/>foto en el display])
+    B --> C([Aurora Home se prepara:<br/>música del recuerdo lista])
     C --> D[Paso 1 · Preparación<br/>«Sentate frente a Ana, sin TV de fondo»]
     D --> E[Paso 2 · Apertura<br/>Aurora pone la música ·<br/>la app sugiere: «preguntale por la primera vez que la escuchó»]
-    E --> F[Paso 3 · Exploración<br/>preguntas disparadoras en la app ·<br/>Aurora muestra fotos y suma datos del recuerdo por voz]
+    E --> F[Paso 3 · Exploración<br/>preguntas disparadoras y fotos en Care ·<br/>Aurora suma datos del recuerdo por voz]
     F --> G{¿Ana se angustia<br/>o se cansa?}
     G -- Sí --> H[Botón «Cerrar con calma»:<br/>Aurora baja la música,<br/>la app da el cierre sugerido]
     G -- No --> I[Paso 4 · Cierre<br/>«Agradecele que te haya contado»<br/>Aurora despide con calidez]

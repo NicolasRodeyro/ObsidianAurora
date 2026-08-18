@@ -89,9 +89,9 @@ La orquestación completa de los datos, el filtrado de eventos, el análisis pre
    4. Ingeniería de Prompts y Base de Conocimiento (RAG) para terapias cognitivas
    5. Programar Lógica de Alertas y Clasificación de Eventos.
 3. **Desarrollo de Interfaces de Usuario (Aurora Care)**
-   1. Diseño UX/UI de la aplicación web *Aurora Care* (Figma)
-   2. Desarrollar Frontend (PWA/Mobile).
-   3. Implementación del sistema de notificaciones en tiempo real (WebSockets / Push)
+   1. Diseño UX/UI de la aplicación móvil *Aurora Care* (Figma)
+   2. Desarrollar Frontend React Native con Expo.
+   3. Implementación del sistema de notificaciones en tiempo real (WebSockets / push nativas)
    4. Programar Dashboards de Historial y Reportes.
 4. **Hardware e Interfaz de Voz (Aurora Home)**
    1. Ensamblado y configuración del sistema operativo en hardware (Raspberry Pi)
