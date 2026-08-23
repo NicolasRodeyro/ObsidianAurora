@@ -1,0 +1,69 @@
+---
+base: "[[Document Hub.base]]"
+Category:
+  - Documentación Interna
+historia: "AURA-95"
+epica: "AURA-14"
+Last updated time: "2026-08-23T00:00:00"
+---
+# Artefacto de Trazabilidad — AURA-95 AH-M03 — Fundación local resiliente (SQLite, outbox, resiliencia)
+
+> [!draft] **Scaffolding** generado automáticamente. La **identidad** (historia, épica, RF, estado, enlace, código) está rellena con datos reales de Jira y del repo. Las secciones de análisis (ADR, DER, diagramas, criterios detallados, casos de prueba) quedan como `[!todo]` para completar en equipo. **No inventar** resultados de pruebas ni ADRs.
+
+> **Para qué:** conectar esta historia con sus decisiones de diseño, modelo de datos, código y pruebas.
+> **Para quién:** equipo (durante el desarrollo) y docente (evaluación de calidad técnica).
+
+| Campo | Valor |
+| --- | --- |
+| Historia | **AURA-95** — AH-M03 — Fundación local resiliente (SQLite, outbox, resiliencia) |
+| Épica | AURA-14 — Interacción y Asistencia por Voz (Aurora Home) |
+| Requerimientos | RF-01–14 (ver [[Requerimientos]] · [[Trazabilidad RF-Épicas]]) |
+| Estado en Jira | En curso |
+| Enlace | https://project-aurora-alz.atlassian.net/browse/AURA-95 |
+
+## 1. Historia de usuario
+> [!todo] **Como** {rol} **quiero** {objetivo} **para** {beneficio}.
+
+### Criterios de aceptación
+> [!todo] Derivar de la descripción del ticket en Jira (AURA-95).
+- [ ] {criterio_1}
+- [ ] {criterio_2}
+
+## 2. Decisiones de diseño (ADR)
+> [!todo] Enlazar los ADR aplicables de [[Arquitectura y Stack Tecnológico]]. Si hubo decisión técnica nueva sin ADR, crear `ADR-0XX`. Si no, indicar "Sin ADR nuevo".
+
+## 3. Modelo de datos (DER)
+> [!todo] Si esta historia modifica el modelo de datos, reflejar las entidades afectadas (`erDiagram`). Si no, indicar "Sin cambios en el DER". Ver [[DER - Base de Datos Aurora]].
+
+## 4. Diagramas de modelado
+> [!todo] Incluir solo los que apliquen (clases / secuencia / estados) y borrar el resto.
+
+## 5. Código relacionado
+| Tipo | Ubicación / referencia |
+| --- | --- |
+| Aurora Home | Repo `AuroraHome` — branch `codex/persistencia-local-m03` |
+| Persistencia | `src/aurora_home/infrastructure/persistence/` (sqlite_store, migrations, recovery) |
+| Tests | `tests/integration/test_sqlite_store.py`, `test_outbox_delivery.py`, `test_sos_persistence.py` |
+
+> [!todo] Completar con paths y commits/PRs faltantes.
+
+## 6. Casos de prueba
+| ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
+| --- | --- | --- | --- | --- |
+| CP-AURA-95-01 | {precondición} | {pasos} | {esperado} | Pendiente |
+
+> [!todo] Cada criterio de aceptación debería tener al menos un caso. No registrar "Pasó/Falló" sin ejecución real.
+
+## 7. Matriz de trazabilidad
+| Historia | RF | ADR | DER | Diagramas | Código | Casos de prueba |
+| --- | --- | --- | --- | --- | --- | --- |
+| AURA-95 | RF-01–14 | {—} | {sí/—} | {—} | {ver §5} | {CP-…} |
+
+## Checklist de completitud (cátedra)
+- [ ] Historia y criterios de aceptación
+- [ ] ADR correspondiente (si hubo decisión técnica nueva)
+- [ ] DER actualizado (si modificó el modelo de datos)
+- [ ] Diagramas de modelado relevantes
+- [ ] Casos de prueba con precondición, pasos y resultado esperado
+- [ ] Resultados de ejecución de las pruebas
+- [ ] Referencias a código (paths/commits/PRs)
