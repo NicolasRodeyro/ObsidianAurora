@@ -79,8 +79,4 @@ tipo: informe-sprint
 
 ## Retrospectiva
 
-> [!todo] Completar con:
-> - **Qué salió bien** en este sprint
-> - **Qué mejorar** para el próximo
-> - **Impedimentos** encontrados y cómo se resolvieron
-> - **Velocidad real** (cantidad de tickets cerrados vs planeados)
+> [!info] La retrospectiva de este sprint se consolidó en la **[[Mega Retro Sprints 0-2]]** (retro combinada de los 3 sprints). Ver ahí hallazgos, aprendizajes y acciones.
