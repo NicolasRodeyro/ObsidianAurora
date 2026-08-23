@@ -113,3 +113,82 @@ Paginación: `?page=1&page_size=20` → `{ "count", "next", "previous", "results
 ## 8. Modo dev sin Auth0 (opcional)
 
 El backend tiene bypass en dev: con `AUTH_DEV_MODE=True` acepta el token estático `aurora-local-token` (`config/settings/base.py`). Útil para mockear auth mientras tanto, pero **no vale para validar flujos reales** (login social, refresh, claims).
+
+## 9. Endpoints principales que consume el frontend
+
+### Sesión / Onboarding
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET | `/auth/me/` | Datos del cuidador autenticado |
+| GET | `/households/current/` | Hogar actual (patient_id, caregiver_ids, device_ids) |
+| GET | `/session/context/` | Contexto completo (usuario, hogar, paciente, dispositivos, onboarding) |
+| PATCH | `/onboarding/` | Avanzar/completar onboarding |
+
+### Pacientes y dispositivos
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET | `/patients/{id}/status` | Estado actual del paciente |
+| GET | `/patients/{id}/biometrics` | Últimos datos biométricos |
+| GET | `/devices?patient={id}` | Dispositivos conectados (Home, Band) |
+
+### Rutinas y medicación (RN7)
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET/POST/PUT/DELETE | `/routines/{id}` | CRUD rutinas |
+| GET/POST/PUT/DELETE | `/medications/{id}` | CRUD medicación |
+| POST | `/routines/compliance/{id}/confirm` | Confirmar cumplimiento rutina |
+| POST | `/routines/compliance/{id}/mark-missed` | Marcar rutina perdida |
+| POST | `/medications/compliance/{id}/confirm` | Confirmar toma de medicación |
+| POST | `/medications/compliance/{id}/mark-omitted` | Registrar omisión |
+| GET | `/routines/compliance/?patient={id}` | Historial cumplimiento rutinas |
+| GET | `/medications/compliance/?patient={id}` | Historial cumplimiento medicación |
+
+### Recuerdos / RAG (RN6)
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET/POST/PUT/DELETE | `/ai/memories/{id}` | CRUD recuerdos activos |
+| GET/POST | `/ai/contributions/{id}` | Contribuciones de recuerdos |
+| POST | `/ai/contributions/{id}/approve` | Aprobar contribución |
+| POST | `/ai/contributions/{id}/approve-edited` | Aprobar con ediciones |
+| POST | `/ai/contributions/{id}/reject` | Rechazar contribución |
+| POST | `/ai/contributions/from-therapy-discovery/` | Crear desde descubrimiento terapéutico |
+
+### Terapias / Actividades (F8/F9)
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET | `/interactions/activities/` | Catálogo de actividades |
+| GET/POST | `/interactions/activity-sessions/{id}` | Sesiones de actividad |
+| POST | `/interactions/activity-sessions/{id}/complete` | Finalizar actividad |
+| POST | `/interactions/activity-sessions/{id}/close-calmly` | Cerrar calmadamente |
+| GET/POST | `/interactions/activity-sessions/{id}/messages` | Mensajes de sesión |
+
+### Drop-in (RN15)
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET | `/interactions/drop-in-sessions/authorization?patient={id}` | Verificar autorización |
+| POST | `/interactions/drop-in-sessions/` | Iniciar drop-in |
+| POST | `/interactions/drop-in-sessions/{id}/end` | Finalizar |
+| POST | `/interactions/drop-in-sessions/{id}/fail` | Marcar fallido |
+
+### Alertas
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET | `/alerts/?patient={id}&status=active` | Alertas activas |
+| POST | `/alerts/{id}/acknowledge` | Confirmar atención |
+
+### Settings / Notificaciones (RF-45)
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET/PATCH | `/settings/notification-rules/{id}` | Preferencias de notificación |
+
+### Cuidadores
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET/POST | `/caregivers/invitations/` | CRUD invitaciones (admin) |
+| POST | `/caregivers/{id}/revoke` | Revocar cuidador |
+
+### Privacidad
+| Método | Endpoint | Propósito |
+|---|---|---|
+| GET | `/compliance/data-access-logs?patient={id}` | Logs de acceso a datos |
+| POST | `/compliance/data-requests` | Solicitudes RGPD (exportar/borrar)
