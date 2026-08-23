@@ -2,8 +2,8 @@
   "source": "project-aurora-alz.atlassian.net",
   "cloudId": "90fd6939-9992-4dac-a29c-53321dda6031",
   "project": "AURA",
-  "lastSynced": "2026-07-19",
-  "total": 75,
+  "lastSynced": "2026-08-23",
+  "total": 91,
   "issues": [
     {
       "key": "AURA-1",
@@ -58,8 +58,8 @@
     {
       "key": "AURA-8",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-12",
       "labels": [],
@@ -158,7 +158,7 @@
       "assignee": null,
       "parent": null,
       "labels": [
-        "aurora-care",
+        "aurora-core",
         "modulo-9",
         "mvp"
       ],
@@ -318,8 +318,8 @@
     {
       "key": "AURA-30",
       "type": "Tarea",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Haik Kilic",
       "parent": "AURA-31",
       "labels": [],
@@ -411,8 +411,8 @@
     {
       "key": "AURA-41",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-13",
       "labels": [],
@@ -421,8 +421,8 @@
     {
       "key": "AURA-42",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-13",
       "labels": [],
@@ -431,8 +431,8 @@
     {
       "key": "AURA-43",
       "type": "Tarea",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-13",
       "labels": [],
@@ -521,8 +521,8 @@
     {
       "key": "AURA-52",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-31",
       "labels": [],
@@ -541,9 +541,9 @@
     {
       "key": "AURA-54",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": "Octavio Escudero",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [],
       "summary": "Login - Aurora Care"
@@ -551,9 +551,9 @@
     {
       "key": "AURA-55",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": "nicolasrodeyro",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [],
       "summary": "Modulo Paciente - Aurora Care"
@@ -561,8 +561,8 @@
     {
       "key": "AURA-56",
       "type": "Tarea",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "nicolasrodeyro",
       "parent": "AURA-18",
       "labels": [],
@@ -571,9 +571,9 @@
     {
       "key": "AURA-57",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": "nicolasrodeyro",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [],
       "summary": "Módulo Recordatorios"
@@ -581,9 +581,9 @@
     {
       "key": "AURA-58",
       "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": "Octavio Escudero",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [],
       "summary": "Módulo Recetario"
@@ -591,8 +591,8 @@
     {
       "key": "AURA-59",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "nicolasrodeyro",
       "parent": "AURA-29",
       "labels": [],
@@ -601,8 +601,8 @@
     {
       "key": "AURA-60",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "nicolasrodeyro",
       "parent": "AURA-29",
       "labels": [],
@@ -611,8 +611,8 @@
     {
       "key": "AURA-61",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-29",
       "labels": [],
@@ -621,8 +621,8 @@
     {
       "key": "AURA-62",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
+      "status": "Finalizada",
+      "statusCategory": "done",
       "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-29",
       "labels": [],
@@ -651,9 +651,9 @@
     {
       "key": "AURA-65",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-29",
       "labels": [
         "diseno",
@@ -664,9 +664,9 @@
     {
       "key": "AURA-66",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-29",
       "labels": [
         "diseno",
@@ -677,9 +677,9 @@
     {
       "key": "AURA-67",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-29",
       "labels": [
         "diseno",
@@ -690,9 +690,9 @@
     {
       "key": "AURA-68",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-29",
       "labels": [
         "aurora-care",
@@ -703,9 +703,9 @@
     {
       "key": "AURA-69",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-29",
       "labels": [
         "aurora-care",
@@ -716,9 +716,9 @@
     {
       "key": "AURA-70",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "nicolasrodeyro",
       "parent": "AURA-29",
       "labels": [
         "aurora-care",
@@ -729,9 +729,9 @@
     {
       "key": "AURA-71",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "nicolasrodeyro",
       "parent": "AURA-29",
       "labels": [
         "aurora-home",
@@ -742,9 +742,9 @@
     {
       "key": "AURA-72",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-29",
       "labels": [
         "aurora-care",
@@ -755,9 +755,9 @@
     {
       "key": "AURA-73",
       "type": "Tarea",
-      "status": "In Revision",
-      "statusCategory": "indeterminate",
-      "assignee": null,
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Jeremías Daniel Maldonado Gómez",
       "parent": "AURA-29",
       "labels": [
         "diseno",
@@ -768,9 +768,9 @@
     {
       "key": "AURA-74",
       "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [
         "aurora-care",
@@ -782,9 +782,9 @@
     {
       "key": "AURA-75",
       "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [
         "aurora-care",
@@ -824,44 +824,255 @@
     {
       "key": "AURA-78",
       "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [
-        "mvp",
         "aurora-care",
-        "derivada-de-diseno"
+        "derivada-de-diseno",
+        "mvp"
       ],
       "summary": "Registro y perfil del paciente"
     },
     {
       "key": "AURA-79",
       "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
       "parent": "AURA-18",
       "labels": [
-        "mvp",
         "aurora-care",
-        "derivada-de-diseno"
+        "derivada-de-diseno",
+        "mvp"
       ],
       "summary": "Gestión de rutinas y recordatorios (interfaz del cuidador)"
     },
     {
       "key": "AURA-80",
       "type": "Historia",
+      "status": "En curso",
+      "statusCategory": "indeterminate",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-18",
+      "labels": [
+        "aurora-care",
+        "derivada-de-diseno",
+        "mvp"
+      ],
+      "summary": "Gestión de medicación y recetario (interfaz del cuidador)"
+    },
+    {
+      "key": "AURA-81",
+      "type": "Epic",
       "status": "Tareas por hacer",
       "statusCategory": "new",
       "assignee": null,
-      "parent": "AURA-18",
+      "parent": null,
       "labels": [
-        "mvp",
-        "aurora-care",
-        "derivada-de-diseno"
+        "aurora-core",
+        "backend",
+        "mvp"
       ],
-      "summary": "Gestión de medicación y recetario (interfaz del cuidador)"
+      "summary": "Backend AuroraCore — API REST para Panel del Cuidador"
+    },
+    {
+      "key": "AURA-82",
+      "type": "Historia",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Haik Kilic",
+      "parent": "AURA-20",
+      "labels": [
+        "aurora-core",
+        "auth",
+        "backend",
+        "mvp"
+      ],
+      "summary": "Integración Auth0: autenticación JWT en AuroraCore"
+    },
+    {
+      "key": "AURA-83",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-81",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp",
+        "setup"
+      ],
+      "summary": "Setup inicial del proyecto AuroraCore (estructura, BD, entorno)"
+    },
+    {
+      "key": "AURA-84",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-81",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp"
+      ],
+      "summary": "API REST: CRUD de Paciente (perfil, biografía, preferencias)"
+    },
+    {
+      "key": "AURA-85",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-81",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp"
+      ],
+      "summary": "API REST: Dashboard del Cuidador (estado actual del paciente)"
+    },
+    {
+      "key": "AURA-86",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-81",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp"
+      ],
+      "summary": "API REST: CRUD de Zonas Seguras (geofencing por paciente)"
+    },
+    {
+      "key": "AURA-87",
+      "type": "Historia",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-17",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp"
+      ],
+      "summary": "API REST: CRUD de Rutinas del Paciente"
+    },
+    {
+      "key": "AURA-88",
+      "type": "Historia",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-17",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp"
+      ],
+      "summary": "API REST: CRUD de Medicación y Recetario del Paciente"
+    },
+    {
+      "key": "AURA-89",
+      "type": "Historia",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Octavio Escudero",
+      "parent": "AURA-17",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp"
+      ],
+      "summary": "API REST: Registro de Cumplimiento de Rutinas y Toma de Medicación"
+    },
+    {
+      "key": "AURA-90",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-14",
+      "labels": [
+        "retroactivo",
+        "sprint-1"
+      ],
+      "summary": "AH-M01 - Crear base inicial del repositorio Aurora Home"
+    },
+    {
+      "key": "AURA-91",
+      "type": "Tarea",
+      "status": "Finalizada",
+      "statusCategory": "done",
+      "assignee": "Mateo Romero Plaza",
+      "parent": "AURA-14",
+      "labels": [
+        "retroactivo",
+        "sprint-1"
+      ],
+      "summary": "AH-M02 - Definir contratos v1 y simulador local Home-Core"
+    },
+    {
+      "key": "AURA-92",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-81",
+      "labels": [],
+      "summary": "Deploy de AuroraCareBack en Render (entorno dev)"
+    },
+    {
+      "key": "AURA-93",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-20",
+      "labels": [],
+      "summary": "ADR formal de cifrado de PII (Ley 25.326)"
+    },
+    {
+      "key": "AURA-94",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-81",
+      "labels": [],
+      "summary": "Endpoint GET /api/me (perfil del cuidador autenticado)"
+    },
+    {
+      "key": "AURA-95",
+      "type": "Tarea",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-14",
+      "labels": [
+        "aurora-home",
+        "mvp"
+      ],
+      "summary": "AH-M03 — Fundación local resiliente (SQLite, outbox y resiliencia ante reinicios)"
+    },
+    {
+      "key": "AURA-96",
+      "type": "Historia",
+      "status": "Tareas por hacer",
+      "statusCategory": "new",
+      "assignee": null,
+      "parent": "AURA-16",
+      "labels": [
+        "aurora-core",
+        "backend",
+        "mvp"
+      ],
+      "summary": "API REST: Acuse de recibo de alertas por el cuidador (endpoint acknowledge)"
     }
   ]
 }
