@@ -25,11 +25,14 @@ Working dir: `/home/jeremaldonado/Escritorio/Tesis-Obsidian`
 
 | Directorio | Remoto | Base |
 | --- | --- | --- |
-| `AuroraCareBack` | `AuroraMemory/AuroraCareBack` | `main` |
+| `AuroraCareBack` | `AuroraMemory/AuroraCore` | `main` |
 | `AuroraCareFront` | `AuroraMemory/AuroraCareFront` | `main` |
-| `AuroraCore` | `AuroraMemory/AuroraCore` | `main` |
 | `AuroraHome` | `AuroraMemory/AuroraHome` | `main` |
 | `ObsidianAurora` | `NicolasRodeyro/ObsidianAurora` | `main` |
+
+> ⚠️ **El repo del backend se llama `AuroraCore` en GitHub.** `AuroraMemory/AuroraCareBack` fue renombrado y hoy redirige, así que `gh pr create -R AuroraMemory/AuroraCareBack` abre la PR en `AuroraMemory/AuroraCore` sin avisar. Usá el nombre nuevo para que la URL de la PR sea la real.
+>
+> ⚠️ **El directorio local `AuroraCore/` es un clon duplicado del mismo repo**, desactualizado (verificado el 2026-08-29: 1 commit adelante, 56 atrás). No trabajes ahí: la copia viva del backend es `AuroraCareBack/`. Conviene borrar el duplicado.
 
 Los repos de `AuroraMemory/*` son privados y sólo los ve la cuenta `SantoriniRings`. **Antes de cualquier `gh`:**
 

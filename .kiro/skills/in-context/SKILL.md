@@ -12,11 +12,11 @@ Skill de contexto rápido para el proyecto de tesis **Aurora** (NO Craftech). Ju
 ## Datos fijos del proyecto
 
 - **Repos** (working dir: `/home/jeremaldonado/Escritorio/Tesis-Obsidian`):
-  - `AuroraCareBack` → `AuroraMemory/AuroraCareBack`
+  - `AuroraCareBack` → `AuroraMemory/AuroraCore` (el repo fue renombrado; el nombre viejo redirige)
   - `AuroraCareFront` → `AuroraMemory/AuroraCareFront`
-  - `AuroraCore` → `AuroraMemory/AuroraCore`
   - `AuroraHome` → `AuroraMemory/AuroraHome`
   - `ObsidianAurora` → `NicolasRodeyro/ObsidianAurora`
+  - `AuroraCore` → **clon duplicado y desactualizado del backend**. No es un componente aparte: es el mismo repo que `AuroraCareBack`. Reportalo como basura a limpiar, no como un repo divergido que haya que sincronizar.
 - **Jira:** project key `AURA`, cloudId `90fd6939-9992-4dac-a29c-53321dda6031`, site `project-aurora-alz.atlassian.net`.
 - **Contexto de épicas y tickets:** `ObsidianAurora/CLAUDE.md` (mapa de épicas ↔ módulos ↔ RF) y `ObsidianAurora/jira/snapshot.json` (snapshot del board).
 - **Cuenta de GitHub:** los repos de `AuroraMemory/*` son privados y sólo los ve el usuario `SantoriniRings`.
