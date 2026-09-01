@@ -194,8 +194,11 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
 /* ============================================================
    ESCENA 0 — Placa de apertura
    ============================================================ */
-.s0 { place-content: center; justify-items: center; text-align: center; }
-.isotipo { width: 260px; height: 260px; }
+.s0 {
+  place-content: center; justify-items: center; text-align: center;
+  font-family: "Figtree", var(--font-body);
+}
+.isotipo { width: 260px; height: 260px; object-fit: contain; }
 .wordmark-big {
   font-family: var(--font-heading); font-weight: 800;
   font-size: 112px; letter-spacing: .16em; color: #fff;
@@ -207,6 +210,11 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
   margin-top: 54px; padding-top: 26px; border-top: 1px solid rgba(229, 240, 111, .28);
   font-size: 21px; letter-spacing: .17em; text-transform: uppercase; color: #E5F06F; font-weight: 600;
 }
+.s0 .isotipo { width: 310px; height: 310px; }
+.s0 .wordmark-big { font-family: "Figtree", var(--font-heading); font-size: 130px; font-weight: 700; }
+.s0 .tagline-big { font-size: 38px; font-weight: 700; }
+.s0 .opening-logline { font-size: 29px; }
+.s0 .opening-foot { font-size: 23px; }
 .sweepband {
   position: absolute; left: 0; top: 0; width: 46%; height: 100%;
   background: linear-gradient(90deg, transparent, rgba(229, 240, 111, .10), rgba(168, 132, 255, .16), transparent);
@@ -471,10 +479,22 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
 /* ============================================================
    ESCENA 6 — Cierre
    ============================================================ */
-.s6 { place-content: center; justify-items: center; text-align: center; }
-.credits { display: grid; grid-template-columns: repeat(2, auto); gap: 18px 96px; margin-top: 52px; text-align: left; }
-.credit b { font-family: var(--font-heading); font-size: 27px; color: #fff; font-weight: 600; display: block; }
-.credit span { font-size: 18px; color: #848DB0; }
+.s6 {
+  place-content: center; justify-items: center; text-align: center;
+  font-family: "Figtree", var(--font-body);
+}
+.closing-isotipo { width: 220px; height: 220px; object-fit: contain; }
+.s6 .wordmark-big { font-family: "Figtree", var(--font-heading); font-size: 90px; font-weight: 700; }
+.s6 .tagline-big { font-size: 31px; font-weight: 700; }
+.s6 .credits { width: 880px; margin-top: 42px; text-align: left; }
+.s6 .credits-label {
+  font-size: 19px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: #D9C5FF; margin-bottom: 18px;
+}
+.s6 .members { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 96px; }
+.s6 .credit b { font-family: "Figtree", var(--font-heading); font-size: 30px; color: #fff; font-weight: 700; display: block; }
+.s6 .teacher { margin-top: 30px; }
+.s6 .teacher .credits-label { margin-bottom: 8px; }
 .closing-foot { margin-top: 56px; font-size: 19px; letter-spacing: .16em; text-transform: uppercase; color: #697298; }
 .aurora-line { width: 460px; height: 3px; background: var(--gradient-aurora); border-radius: 2px; margin: 44px auto 0; transform-origin: center; }
 
@@ -660,19 +680,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
   <section class="scene s0" data-at="0" data-dur="8">
     <div class="sweepband a a-sweep" style="--dur:3.4s;--ease:cubic-bezier(.4,0,.2,1)"></div>
 
-    <svg class="isotipo a a-scale" style="--d:.15s;--dur:1.4s" viewBox="0 0 200 200" aria-hidden="true">
-      <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(168,132,255,.35)" stroke-width="1.5"/>
-      <g clip-path="url(#ball)">
-        <rect x="24" y="24" width="152" height="152" fill="#0F1530"/>
-        <path d="M24 118 C60 76 96 132 132 84 C152 58 168 62 176 52 L176 24 L24 24 Z" fill="url(#domo)" opacity=".92"/>
-        <path d="M24 96 C58 118 92 70 128 96 C150 112 166 100 176 92 L176 24 L24 24 Z" fill="url(#domo)" opacity=".55"/>
-        <path d="M24 150 L58 122 L86 146 L116 116 L150 148 L176 130 L176 176 L24 176 Z" fill="#171E42"/>
-        <path d="M24 158 L60 132 L90 154 L120 126 L152 156 L176 140 L176 176 L24 176 Z" fill="#0B1026"/>
-        <circle cx="72" cy="52" r="1.8" fill="#fff"/><circle cx="126" cy="44" r="1.4" fill="#fff"/>
-        <circle cx="150" cy="70" r="1.6" fill="#fff"/><circle cx="56" cy="80" r="1.2" fill="#fff"/>
-      </g>
-      <circle cx="100" cy="100" r="76" fill="none" stroke="rgba(217,197,255,.5)" stroke-width="1.5"/>
-    </svg>
+    <img class="isotipo a a-scale" style="--d:.15s;--dur:1.4s" src="../../Design/assets/branding/logo_aurora.png" alt="Logo de Aurora">
 
     <div class="wordmark-big a a-rise" style="--d:.5s;--dur:1.2s">AURORA</div>
     <div class="tagline-big a a-fade" style="--d:1s;--dur:1s">Luz que acompaña</div>
@@ -1396,30 +1404,24 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
 
   <!-- ===================== BLOQUE 6 · CIERRE · 2:42 → 2:54 ===================== -->
   <section class="scene s6" data-at="162" data-dur="12">
-    <svg class="isotipo a a-scale" style="--d:.1s;--dur:1.2s;width:170px;height:170px" viewBox="0 0 200 200" aria-hidden="true">
-      <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(168,132,255,.35)" stroke-width="1.5"/>
-      <g clip-path="url(#ball)">
-        <rect x="24" y="24" width="152" height="152" fill="#0F1530"/>
-        <path d="M24 118 C60 76 96 132 132 84 C152 58 168 62 176 52 L176 24 L24 24 Z" fill="url(#domo)" opacity=".92"/>
-        <path d="M24 96 C58 118 92 70 128 96 C150 112 166 100 176 92 L176 24 L24 24 Z" fill="url(#domo)" opacity=".55"/>
-        <path d="M24 150 L58 122 L86 146 L116 116 L150 148 L176 130 L176 176 L24 176 Z" fill="#171E42"/>
-        <path d="M24 158 L60 132 L90 154 L120 126 L152 156 L176 140 L176 176 L24 176 Z" fill="#0B1026"/>
-        <circle cx="72" cy="52" r="1.8" fill="#fff"/><circle cx="126" cy="44" r="1.4" fill="#fff"/>
-        <circle cx="150" cy="70" r="1.6" fill="#fff"/><circle cx="56" cy="80" r="1.2" fill="#fff"/>
-      </g>
-      <circle cx="100" cy="100" r="76" fill="none" stroke="rgba(217,197,255,.5)" stroke-width="1.5"/>
-    </svg>
+    <img class="closing-isotipo a a-scale" style="--d:.1s;--dur:1.2s" src="../../Design/assets/branding/logo_aurora.png" alt="Logo de Aurora">
 
-    <div class="wordmark-big a a-fade" style="--d:.4s;font-size:76px">AURORA</div>
-    <div class="tagline-big a a-fade" style="--d:.7s;font-size:27px">Luz que acompaña</div>
+    <div class="wordmark-big a a-fade" style="--d:.4s">AURORA</div>
+    <div class="tagline-big a a-fade" style="--d:.7s">Luz que acompaña</div>
 
     <div class="credits">
-      <div class="credit a a-riseSm" style="--d:1.4s"><b>Jeremías Maldonado Gómez</b><span>PM · DevOps · UX/UI</span></div>
-      <div class="credit a a-riseSm" style="--d:1.6s"><b>Mateo Romero Plaza</b><span>Backend · DBA · Analista Funcional</span></div>
-      <div class="credit a a-riseSm" style="--d:1.8s"><b>Haik Kilic Aslan</b><span>Backend · Analista Funcional</span></div>
-      <div class="credit a a-riseSm" style="--d:2s"><b>Nicolás Rodeyro Contarino</b><span>UX/UI · DBA · IA · Frontend</span></div>
-      <div class="credit a a-riseSm" style="--d:2.2s"><b>Octavio Escudero</b><span>DevOps · Frontend · QA</span></div>
-      <div class="credit a a-riseSm" style="--d:2.4s"><b>Virginia Santos</b><span>Sponsor</span></div>
+      <div class="credits-label a a-fade" style="--d:1.2s">Integrantes</div>
+      <div class="members">
+        <div class="credit a a-riseSm" style="--d:1.4s"><b>Jeremías Maldonado Gómez</b></div>
+        <div class="credit a a-riseSm" style="--d:1.6s"><b>Mateo Romero Plaza</b></div>
+        <div class="credit a a-riseSm" style="--d:1.8s"><b>Haik Kilic Aslan</b></div>
+        <div class="credit a a-riseSm" style="--d:2s"><b>Nicolás Rodeyro Contarino</b></div>
+        <div class="credit a a-riseSm" style="--d:2.2s"><b>Octavio Escudero</b></div>
+      </div>
+      <div class="teacher a a-riseSm" style="--d:2.4s">
+        <div class="credits-label">Profesora</div>
+        <div class="credit"><b>Mgter Ing. Santos, Virginia</b></div>
+      </div>
     </div>
 
     <div class="aurora-line a a-growX" style="--d:3s;--dur:1.2s"></div>
@@ -1571,6 +1573,58 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     [56,  'Desafíos superados'], [88, 'Demostración'], [142,'Resultados'], [162,'Cierre']
   ];
 
+  /* ---------- Locuciones ----------
+     Cada archivo comienza en el segundo indicado. Al compartir el reloj
+     maestro con las escenas, Play, Pausa y la barra de tiempo mantienen
+     también las voces perfectamente alineadas al adelantar o retroceder. */
+  var VOICES = [
+    [0.0,   'Placa apertura.mp3'],
+    [8.0,   'Problemática.mp3'],
+    [30.0,  'Solución propuesta.mp3'],
+    [56.0,  'Desafíos superados.mp3'],
+    [88.5,  'demostracion_aurora_1.mp3'],
+    [93.0,  'demostracion_ana.mp3'],
+    [95.0,  'demostracion_aurora_2.mp3'],
+    [98.0,  'demostracion_narrador_1.mp3'],
+    [108.0, 'demostracion_narrador_2.mp3'],
+    [121.0, 'demostracion_maria.mp3'],
+    [124.0, 'demostraicion_aurora_3.mp3'],
+    [128.0, 'demostracion_narrador_3.mp3'],
+    [142.0, 'Resultados y próximos pasos.mp3'],
+    [162.0, 'Cierre y créditos.mp3']
+  ].map(function (voice, index, allVoices) {
+    var audio = new Audio(encodeURI(voice[1]));
+    audio.preload = 'auto';
+    return {
+      at: voice[0],
+      until: index < allVoices.length - 1 ? allVoices[index + 1][0] : TOTAL,
+      file: voice[1],
+      audio: audio,
+      rate: 1
+    };
+  });
+
+  // No hay un archivo para el tono de alerta, así que se reproduce un aviso
+  // breve y discreto en 1:46 sin afectar el resto de las locuciones.
+  var alertContext = null, alertPlayed = false;
+  function playAlertTone() {
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    if (!alertContext) alertContext = new AudioCtx();
+    alertContext.resume().catch(function () {});
+    [0, 0.28].forEach(function (offset) {
+      var osc = alertContext.createOscillator();
+      var gain = alertContext.createGain();
+      osc.type = 'sine'; osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.0001, alertContext.currentTime + offset);
+      gain.gain.exponentialRampToValueAtTime(0.16, alertContext.currentTime + offset + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, alertContext.currentTime + offset + 0.16);
+      osc.connect(gain); gain.connect(alertContext.destination);
+      osc.start(alertContext.currentTime + offset);
+      osc.stop(alertContext.currentTime + offset + 0.18);
+    });
+  }
+
   /* ============================================================
      Motor de reproducción
 
@@ -1668,8 +1722,51 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     return -1;
   }
 
+  function syncVoices(force) {
+    var active = -1;
+    for (var i = 0; i < VOICES.length; i++) if (t >= VOICES[i].at) active = i;
+
+    VOICES.forEach(function (voice, index) {
+      var audio = voice.audio;
+      var available = voice.until - voice.at;
+      if (isFinite(audio.duration) && audio.duration > 0) {
+        // Solo se acelera cuando una locución no entra en su ventana. Las
+        // breves conservan su ritmo y dejan la pausa visual prevista.
+        voice.rate = Math.max(1, audio.duration / available);
+        audio.playbackRate = voice.rate;
+      }
+
+      var offset = Math.max(0, t - voice.at) * voice.rate;
+      var finished = isFinite(audio.duration) && offset >= audio.duration - 0.02;
+      var shouldPlay = playing && index === active && !finished;
+
+      if (!shouldPlay) {
+        if (!audio.paused) audio.pause();
+        if (t < voice.at && audio.currentTime !== 0) {
+          try { audio.currentTime = 0; } catch (e) {}
+        }
+        return;
+      }
+
+      // El ajuste ocasional corrige pequeños desfasajes sin reescribir el
+      // reproductor en cada fotograma.
+      if (force || audio.paused || Math.abs(audio.currentTime - offset) > 0.3) {
+        try { audio.currentTime = offset; } catch (e) {}
+        audio.play().catch(function () {});
+      }
+    });
+
+    if (playing && t >= 106 && t < 108 && !alertPlayed) {
+      alertPlayed = true;
+      playAlertTone();
+    } else if (t < 106 || t >= 108) {
+      alertPlayed = false;
+    }
+  }
+
   function render() {
     renderScenes(t);
+    syncVoices(false);
 
     elFill.style.width = (Math.min(t, TOTAL) / TOTAL * 100) + '%';
     elTcode.textContent = fmt(t) + ' / 2:54';
@@ -1710,11 +1807,12 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     if (!ready) { wantPlay = true; return; }   // se arranca solo al terminar de cargar
     if (t >= TOTAL) t = 0;
     playing = true; lastTs = null; started = true;
+    syncVoices(true);
     document.getElementById('cue').classList.add('hide');
     document.getElementById('rm-warn').classList.remove('show'); // nunca en cuadro al grabar
     syncPlayBtn();
   }
-  function pause() { playing = false; syncPlayBtn(); }
+  function pause() { playing = false; syncVoices(false); syncPlayBtn(); }
   function toggle(){ playing ? pause() : play(); }
   /* Saltar es solo mover el reloj: el cuadro se reconstruye entero desde t. */
   function seek(to){ t = Math.max(0, Math.min(TOTAL, to)); render(); }
@@ -1834,7 +1932,16 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
                                    render0.addEventListener('error', res, {once:true}); })
     : Promise.resolve();
 
-  Promise.all([fontsReady, imgReady]).then(function () {
+  var voicesReady = Promise.all(VOICES.map(function (voice) {
+    var audio = voice.audio;
+    if (audio.readyState >= 1) return Promise.resolve();
+    return new Promise(function (res) {
+      audio.addEventListener('loadedmetadata', res, {once:true});
+      audio.addEventListener('error', res, {once:true});
+    });
+  }));
+
+  Promise.all([fontsReady, imgReady, voicesReady]).then(function () {
     // Dos cuadros: uno para que el estilo con las fuentes reales se resuelva,
     // otro para que las animaciones CSS ya existan y getAnimations las vea.
     requestAnimationFrame(function () { requestAnimationFrame(boot); });
