@@ -13,6 +13,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Horarios y Roles de los Miembros]] — capacidad del equipo.
 - [[Documento Presentacion Sprint 0]] — cierre del Sprint 0.
 - [[Presentación del Proyecto]] — pitch y diferenciación.
+- `INSTANCIA 4/video-aurora.html` — render animado del video de presentación (1920×1080, 2:54), listo para grabar.
 
 ## Análisis y requerimientos
 - [[Estudio Inicial]] — problema y oportunidad.
