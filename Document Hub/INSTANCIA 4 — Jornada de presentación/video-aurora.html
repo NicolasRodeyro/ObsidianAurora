@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../Design/tokens/tokens.css">
-<link rel="stylesheet" href="../../Design/assets/branding/previews/app.css">
+<link rel="stylesheet" href="../../Design/previews/app.css">
 <style>
 /* ============================================================
    AURORA — Página de render del video de presentación
@@ -685,7 +685,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     <div class="wordmark-big a a-rise" style="--d:0.466s;--dur:1.117s">AURORA</div>
     <div class="tagline-big a a-fade" style="--d:0.931s;--dur:0.931s">Luz que acompaña</div>
     <p class="opening-logline a a-riseSm" style="--d:1.49s;--dur:0.931s">
-      Un ecosistema para que una persona con perdida de memoria siga viviendo en su casa.
+      Un ecosistema para que una persona con pérdida de memoria siga viviendo en su casa.
     </p>
     <div class="opening-foot a a-fade" style="--d:2.235s;--dur:1.117s">
       Proyecto Final · Ingeniería en Sistemas de Información · UTN FRC · 2026
@@ -1525,7 +1525,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     [116.48,'demostracion_maria.mp3'],
     [119.48,'demostraicion_aurora_3.mp3'],
     [123.16,'demostracion_narrador_3.mp3'],
-    [133.59,'Resultados y próximos pasos.mp3'],
+    [133.59,'Resultado final.mp3'],
     [153.79,'Cierre y créditos.mp3']
   ].map(function (voice, index, allVoices) {
     var audio = new Audio(encodeURI(voice[1]));
@@ -1535,7 +1535,11 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
       until: index < allVoices.length - 1 ? allVoices[index + 1][0] : TOTAL,
       file: voice[1],
       audio: audio,
-      rate: 1
+      rate: 1,
+      // Tercer valor opcional en cada fila de VOICES: multiplicador de volumen
+      // (0–1) para bajar un clip puntual que quedó más fuerte que el resto.
+      // El <audio> nativo no puede amplificar por encima de 1.
+      gain: voice[2] !== undefined ? voice[2] : 1
     };
   });
 
@@ -1681,6 +1685,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
         if (offset < FADE_IN) vol = offset / FADE_IN;
         var remaining = available - offset;
         if (remaining < FADE_OUT) vol = Math.min(vol, Math.max(0, remaining / FADE_OUT));
+        vol = Math.max(0, Math.min(1, vol * voice.gain));
       }
       if (audio.volume !== vol) { try { audio.volume = vol; } catch (e) {} }
 
