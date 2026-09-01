@@ -418,13 +418,6 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
    ocupa todo, las burbujas absolutas se anclan a la caja del aparato y se van
    de cuadro. Por eso el layer llena el visual y centra su contenido. */
 .layer { grid-area: 1 / 1; position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
-/* Escenas con burbuja de diálogo: el padding va en .layer, no en .layerbox, para
-   que .layer siga midiendo todo el alto — la burbuja se ancla a él y tiene que
-   caer al pie del visual, no al pie del área recortada. */
-.has-speech .layer { padding-bottom: 180px; }
-.has-speech .phone-scale  { transform: scale(.92); }
-.has-speech .device-scale { transform: scale(1.35); }
-
 /* pantallas del dispositivo apiladas para cross-fade */
 .device-frame { position: relative; }
 .device-frame .led { position: relative; }
@@ -438,7 +431,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
 /* Centrada con márgenes auto, NO con translateX: la animación a-beat anima
    transform y borraría el centrado. */
 .speech {
-  position: absolute; left: 0; right: 0; margin: 0 auto; bottom: 8px; width: 820px;
+  position: absolute; left: 0; right: 0; margin: 0 auto; bottom: 160px; width: 820px;
   background: rgba(11, 16, 38, .92); border: 1px solid #2E3766; border-left: 4px solid #E5F06F;
   border-radius: 16px; padding: 22px 30px;
 }
@@ -448,6 +441,13 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
 .speech.ana .who { color: #BFD7FF; }
 .speech.maria { border-left-color: #F5A6D3; }
 .speech.maria .who { color: #F5A6D3; }
+
+/* Demostración 1: se libera espacio bajo el dispositivo para el diálogo y
+   los subtítulos sin modificar el encuadre de las otras dos demostraciones. */
+.s4a .device-scale { transform: translateY(-140px) scale(1.18); }
+.s4a .speech { width: 620px; padding: 16px 22px; border-radius: 14px; }
+.s4a .speech .who { font-size: 14px; }
+.s4a .speech .said { font-size: 26px; margin-top: 6px; line-height: 1.25; }
 
 /* onda de escucha */
 .listen-wave { display: flex; gap: 6px; align-items: center; margin-top: 12px; height: 42px; }
@@ -502,14 +502,16 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
    Subtítulos quemados (opcional) + teleprompter
    ============================================================ */
 #burn {
-  position: absolute; left: 50%; bottom: 74px; transform: translateX(-50%);
-  width: 1400px; text-align: center; pointer-events: none; z-index: 60; display: none;
+  position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%);
+  width: 1120px; text-align: center; pointer-events: none; z-index: 60; display: none;
 }
 #burn.show { display: block; }
 #burn p {
-  display: inline-block; background: rgba(7, 11, 26, .82); color: #fff;
-  font-size: 34px; line-height: 1.35; font-weight: 500; padding: 12px 24px;
-  border-radius: 8px; white-space: pre-line; text-shadow: 0 2px 6px rgba(0, 0, 0, .8);
+  display: inline-block; max-width: 100%; box-sizing: border-box;
+  background: rgba(7, 11, 26, .68); color: #fff;
+  font-size: 30px; line-height: 1.28; font-weight: 600; padding: 10px 20px;
+  border: 1px solid rgba(217, 197, 255, .22); border-radius: 8px; white-space: pre-line;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, .9); box-shadow: 0 4px 20px rgba(0, 0, 0, .24);
 }
 #burn p:empty { display: none; }
 
@@ -1248,9 +1250,9 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
                     <p style="margin-top:var(--space-2)">Cuando Ana la reconozca, preguntale:</p>
                     <p style="font-size:var(--text-lg);font-weight:600;color:var(--violet-700);margin-top:var(--space-2)">«¿Te acordás de la primera vez que la escuchaste?»</p>
                   </div>
-                  <div class="a a-riseSm" style="--d:0.862s;background:var(--neutral-850);color:#fff;border-radius:var(--radius-md);padding:var(--space-3);display:flex;gap:var(--space-3);align-items:center;font-size:var(--text-sm)">
+                  <div class="a a-beat" style="--d:0.4s;--dur:3.13s;background:var(--neutral-850);color:#fff;border-radius:var(--radius-md);padding:var(--space-3);display:flex;gap:var(--space-3);align-items:center;font-size:var(--text-sm)">
                     <div class="a a-pulse" style="--dur:1.725s;width:32px;height:32px;border-radius:50%;background:var(--gradient-aurora);flex:none"></div>
-                    <div><b>Aurora ahora:</b> suena «Por una cabeza» bajito y el display muestra la foto del casamiento.</div>
+                    <div><b>Aurora está hablando</b><br>«Ana, estaba pensando en tu casamiento de Neta Gracia.»</div>
                   </div>
                   <div class="card a a-riseSm" style="--d:1.176s">
                     <div style="display:flex;gap:var(--space-2);font-size:var(--text-sm)"><b style="flex:none">💡</b><span>Dejala terminar aunque repita o mezcle detalles — no la corrijas, lo importante es la emoción, no la exactitud.</span></div>
@@ -1302,8 +1304,8 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     </div>
   </section>
 
-  <!-- ===================== BLOQUE 5 · RESULTADOS · 2:13 → 2:33 ===================== -->
-  <section class="scene s5" data-at="133.19" data-dur="20.2">
+  <!-- ===================== BLOQUE 5 · RESULTADOS · 2:13 → 2:29 ===================== -->
+  <section class="scene s5" data-at="133.19" data-dur="16.2">
     <div>
       <div class="kicker a a-fade" style="--d:0.202s">El resultado</div>
       <h2 class="title a a-rise" style="--d:0.404s;font-size:64px">Un ecosistema completo,<br><span class="lime">funcionando en la casa de Ana</span></h2>
@@ -1337,8 +1339,8 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     </div>
   </section>
 
-  <!-- ===================== BLOQUE 6 · CIERRE · 2:33 → 2:49 ===================== -->
-  <section class="scene s6" data-at="153.39" data-dur="16.1">
+  <!-- ===================== BLOQUE 6 · CIERRE · 2:29 → 2:45 ===================== -->
+  <section class="scene s6" data-at="149.39" data-dur="16.1">
     <img class="closing-isotipo a a-scale" style="--d:0.134s;--dur:1.61s" src="../../Design/assets/branding/logo_aurora.png" alt="Logo de Aurora">
 
     <div class="wordmark-big a a-fade" style="--d:0.537s">AURORA</div>
@@ -1382,7 +1384,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     <h1>Listo para grabar</h1>
     <p>
       Poné el navegador en pantalla completa (<b>F11</b>) y ocultá los controles con <b>H</b>.<br>
-      Arrancá la grabación en OBS y después apretá <b>Espacio</b>: el video dura <b>2:49</b>.<br>
+      Arrancá la grabación en OBS y después apretá <b>Espacio</b>: el video dura <b>2:45,5</b>.<br>
       El primer cuadro queda congelado hasta que le des play, así podés cortar la cabeza en la edición.
     </p>
     <button class="go" id="cue-go">Empezar (Espacio)</button>
@@ -1405,7 +1407,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     <div class="ticks" id="ticks"></div>
   </div>
   <div class="ctrls">
-    <span class="tcode" id="tcode">0:00.0 / 2:49</span>
+    <span class="tcode" id="tcode">0:00.0 / 2:45.5</span>
     <button id="btn-play">▶ Play</button>
     <button id="btn-reset">↻ Reiniciar</button>
     <span class="blocklbl" id="blocklbl"></span>
@@ -1418,7 +1420,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     <button data-jump="102.27">4b · Alerta</button>
     <button data-jump="119.08">4c · Terapia</button>
     <button data-jump="133.19">5 · Resultados</button>
-    <button data-jump="153.39">6 · Cierre</button>
+    <button data-jump="149.39">6 · Cierre</button>
     <span class="spacer"></span>
     <button id="btn-prompt">T · Teleprompter</button>
     <button id="btn-burn">S · Subtítulos</button>
@@ -1435,7 +1437,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
 (function () {
   'use strict';
 
-  var TOTAL = 169.5; // 2:49 (audio recortado, sin aceleración)
+  var TOTAL = 165.5; // 2:45,5
   var stage  = document.getElementById('stage');
   var scenes = Array.prototype.slice.call(stage.querySelectorAll('.scene'));
 
@@ -1462,50 +1464,51 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
 
   /* ---------- Cues de locución / subtítulos (del guion) ---------- */
   var CUES = [
-    [0.87, 4.12,  'Aurora: luz que acompaña.'],
-    [4.12, 7.85,  'Un ecosistema para que una persona\ncon Alzheimer siga viviendo en su casa.'],
+    [0.87, 2.80,  'Aurora, luz que acompaña.'],
+    [2.80, 7.85,  'Un ecosistema para que una persona con pérdida\nde memoria siga viviendo en su casa.'],
     [8.26, 11.95, 'Ana tiene 76 años, Alzheimer leve,\ny vive sola en la casa de siempre.'],
     [11.95, 14.41,'Su hija María trabaja todo el día.'],
     [14.41, 19.33,'Entre las dos hay un hueco de horas que\nhoy se cubre con anotaciones y visitas:'],
-    [19.33, 25.89,'la pastilla que no se tomó, la salida\nde noche, el aviso que llega tarde.'],
-    [26.36, 28.34,'Aurora son tres piezas.'],
-    [28.34, 31.72,'Aurora Home, la voz sin pantalla en la casa.'],
-    [31.72, 35.22,'Aurora Core, el cerebro en la nube.'],
-    [35.22, 38.72,'Y Aurora Care, la app del cuidador.'],
-    [38.72, 46.30,'Ana le habla a Home y un anillo de luz\nle dice qué está haciendo.'],
-    [46.30, 56.21,'María ve el estado de su mamá de un vistazo.\nAurora no reemplaza al cuidador: le devuelve tiempo.'],
-    [56.71, 59.21,'Tres decisiones nos costaron trabajo.'],
-    [59.21, 63.71,'Primera: el audio de Ana\nno sale de la casa.'],
+    [19.33, 25.89,'la pastilla que no se tomó, la salida de noche\no un aviso que llega tarde.'],
+    [26.36, 29.10,'Aurora se compone de tres piezas\nque trabajan juntas:'],
+    [29.10, 32.76,'Aurora Home, una voz que acompaña\na Ana en su casa.'],
+    [32.76, 36.72,'Aurora Core, el cerebro en la nube,\nque procesa la información,'],
+    [36.72, 41.59,'y Aurora Care, la aplicación desde la que\nMaría puede acompañar a su mamá.'],
+    [41.59, 47.07,'Ana simplemente le habla a Aurora Home y una luz\nle indica que Aurora la está escuchando.'],
+    [47.07, 51.64,'María, desde Aurora Care, puede ver el estado\nde su mamá desde un vistazo.'],
+    [51.64, 56.21,'Porque Aurora no busca reemplazar al cuidador,\nbusca acompañarla y devolverle el tiempo.'],
+    [56.71, 59.21,'Tres decisiones que nos costaron un trabajo.'],
+    [59.21, 63.71,'La primera: el audio de Ana\nno sale de la casa.'],
     [63.71, 67.21,'La transcripción corre en la Raspberry Pi;\na la nube viaja texto, nunca voz.'],
-    [67.21, 69.71,'Segunda: la latencia.'],
+    [67.21, 69.71,'La segunda: la latencia.'],
     [69.71, 74.20,'Para alguien con deterioro cognitivo,\nun silencio largo es «no funcionó».'],
-    [74.20, 78.20,'Medimos el pipeline y lo acotamos\npor debajo de tres segundos y medio.'],
-    [78.20, 81.20,'Tercera: sin internet,\nAurora sigue cuidando.'],
-    [81.20, 88.20,'Recordatorios y alertas críticas se guardan\nen el dispositivo y se reenvían al reconectar.'],
-    [88.70, 92.82,'AURORA: Ana, es la hora de la pastilla.\nEstá en el cajón de la cocina.'],
-    [92.82, 94.57,'ANA: ¿Cuál era?'],
-    [94.57, 97.58,'AURORA: La blanca chiquita,\nla de la presión.'],
-    [97.58, 101.65,'El recordatorio se confirma por voz y queda\nregistrado en la app de María.'],
-    [101.65, 102.67,'[tono de alerta]'],
-    [102.67, 109.04,'Aurora Core cruza las rutinas, lo que Ana\nresponde y el tiempo sin interacción,'],
-    [109.04, 113.82,'y clasifica el evento en cuatro niveles:\nescala solo lo que hay que escalar.'],
-    [113.82, 116.48,'María abre un drop-in de voz desde la app.'],
-    [116.48, 119.48,'MARÍA: Mamá, ¿estás bien?\nYa salgo para allá.'],
-    [119.48, 123.16,'AURORA: Ana, estaba pensando en tu\ncasamiento en Alta Gracia.'],
-    [123.16, 126.89,'Las sesiones de estimulación se adaptan\na lo que Ana logra.'],
-    [126.89, 133.59,'Y si aparece un recuerdo nuevo, Aurora lo deja\npendiente de que un cuidador lo apruebe.'],
-    [134.09, 139.65,'Hoy Aurora es un sistema completo:\nHome, Core y Care funcionando juntos.'],
-    [139.65, 144.70,'Ana recibe acompañamiento en su casa\nlas 24 horas, incluso sin internet.'],
-    [144.70, 149.75,'Cada respuesta llega en menos de\ntres segundos y medio.'],
-    [149.75, 153.79,'Y las alertas escalan en cuatro niveles,\nsolo lo necesario.'],
-    [154.44, 158.37,'Aurora, luz que acompaña.'],
-    [158.37, 165.57,'Un proyecto de Jeremías Maldonado, Mateo Romero,\nHaik Kilic, Nicolás Rodeyro y Octavio Escudero.'],
-    [165.57, 169.50,'UTN Facultad Regional Córdoba, 2026.']
+    [74.20, 78.20,'Medimos el pipeline y lo acotamos\na menos de tres segundos y medio.'],
+    [78.20, 81.20,'La tercera: Aurora sigue cuidando\nincluso sin internet.'],
+    [81.20, 88.20,'Los recordatorios y las alertas críticas se guardan\nen el dispositivo y se reenvían cuando vuelve la conexión.'],
+    [88.70, 92.28,'Ana, es la hora de la pastilla,\nestá en el cajón de la cocina.'],
+    [92.82, 94.02,'¿Cuál era?'],
+    [94.57, 97.05,'La blanca chiquita, la de la presión.'],
+    [97.58, 102.12,'El recordatorio se confirma por voz y queda\nregistrado en la aplicación de María.'],
+    [102.12, 102.67,'[tono de alerta]'],
+    [102.67, 108.79,'Aurora cruza las rutinas, lo que Ana responde\ny el tiempo sin interacción.'],
+    [108.79, 113.38,'Luego clasifica el evento en cuatro niveles\ny escala solo el que hay que escalar.'],
+    [113.38, 115.94,'María abre una comunicación por voz\ndesde la app:'],
+    [116.48, 118.94,'Mamá, ¿estás bien? Ya salgo para allá.'],
+    [119.48, 122.61,'Ana, estaba pensando en tu casamiento\nde Neta Gracia.'],
+    [123.16, 126.70,'Las sesiones de estimulación se adaptan\na lo que Ana logra.'],
+    [126.70, 133.06,'Si aparece un nuevo recuerdo, Aurora lo deja\npendiente de que un cuidador lo apruebe.'],
+    [134.04, 138.46,'Hoy Aurora es un sistema completo:\nHome, Core y Care funcionando juntos.'],
+    [138.46, 142.47,'Ana recibe acompañamiento en su casa\nlas 24 horas, incluso sin internet.'],
+    [142.47, 146.48,'Cada respuesta llega en menos de\ntres segundos y medio.'],
+    [146.48, 149.69,'Y las alertas escalan en cuatro niveles,\nsolo lo necesario.'],
+    [150.44, 154.37,'Aurora, luz que acompaña.'],
+    [154.37, 161.57,'Un proyecto de Jeremías Maldonado Gómez, Mateo Romero Plaza,\nHai Kilic Alan, Nicolás Roderico Costarino y Octavio Escudero.'],
+    [161.57, 165.50,'UTN Facultad Regional Córdoba. 2026.']
   ];
 
   var BLOCKS = [
     [0,     'Placa de apertura'], [7.45, 'Problemática'], [25.49, 'Solución propuesta'],
-    [55.81, 'Desafíos superados'], [88.3, 'Demostración'], [133.19,'Resultados'], [153.39,'Cierre']
+    [55.81, 'Desafíos superados'], [88.3, 'Demostración'], [133.19,'Resultados'], [149.39,'Cierre']
   ];
 
   /* ---------- Locuciones ----------
@@ -1525,8 +1528,8 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     [116.48,'demostracion_maria.mp3'],
     [119.48,'demostraicion_aurora_3.mp3'],
     [123.16,'demostracion_narrador_3.mp3'],
-    [133.59,'Resultado final.mp3'],
-    [153.79,'Cierre y créditos.mp3']
+    [133.59,'Resultado final.mp3', 1.16],
+    [149.79,'Cierre y créditos.mp3']
   ].map(function (voice, index, allVoices) {
     var audio = new Audio(encodeURI(voice[1]));
     audio.preload = 'auto';
@@ -1535,11 +1538,10 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
       until: index < allVoices.length - 1 ? allVoices[index + 1][0] : TOTAL,
       file: voice[1],
       audio: audio,
-      rate: 1,
-      // Tercer valor opcional en cada fila de VOICES: multiplicador de volumen
-      // (0–1) para bajar un clip puntual que quedó más fuerte que el resto.
-      // El <audio> nativo no puede amplificar por encima de 1.
-      gain: voice[2] !== undefined ? voice[2] : 1
+      // Tercer valor opcional: velocidad de reproducción. Cuarto: volumen
+      // (0–1), para bajar un clip puntual que quedó más fuerte que el resto.
+      rate: voice[2] !== undefined ? voice[2] : 1,
+      gain: voice[3] !== undefined ? voice[3] : 1
     };
   });
 
@@ -1661,9 +1663,6 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     return -1;
   }
 
-  var FADE_IN = 0.4;      // fundido de entrada de cada voz (s)
-  var FADE_OUT = 0.6;     // fundido de salida antes del corte (s)
-
   function syncVoices(force) {
     var active = -1;
     for (var i = 0; i < VOICES.length; i++) if (t >= VOICES[i].at) active = i;
@@ -1671,23 +1670,15 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     VOICES.forEach(function (voice, index) {
       var audio = voice.audio;
       var available = voice.until - voice.at;
-      // Sin aceleración: el audio se recortó para entrar natural (rate=1).
-      voice.rate = 1;
       audio.playbackRate = voice.rate;
 
       var offset = Math.max(0, t - voice.at) * voice.rate;
       var finished = isFinite(audio.duration) && offset >= audio.duration - 0.02;
       var shouldPlay = playing && index === active && !finished;
 
-      // Envelope de volumen: fade-in al arrancar, fade-out antes de entregar.
-      var vol = 1;
-      if (shouldPlay) {
-        if (offset < FADE_IN) vol = offset / FADE_IN;
-        var remaining = available - offset;
-        if (remaining < FADE_OUT) vol = Math.min(vol, Math.max(0, remaining / FADE_OUT));
-        vol = Math.max(0, Math.min(1, vol * voice.gain));
-      }
-      if (audio.volume !== vol) { try { audio.volume = vol; } catch (e) {} }
+      // Las locuciones ya dejan margen antes de la siguiente. Sin fundidos de
+      // volumen, la primera y la última palabra se escuchan completas.
+      if (audio.volume !== voice.gain) { try { audio.volume = voice.gain; } catch (e) {} }
 
       if (!shouldPlay) {
         if (!audio.paused) audio.pause();
@@ -1718,7 +1709,7 @@ p.lead { font-size: 29px; line-height: 1.45; color: #B8C0D9; max-width: 26ch; ma
     syncVoices(false);
 
     elFill.style.width = (Math.min(t, TOTAL) / TOTAL * 100) + '%';
-    elTcode.textContent = fmt(t) + ' / 2:49';
+    elTcode.textContent = fmt(t) + ' / 2:45.5';
 
     var b = BLOCKS[0];
     for (var i = 0; i < BLOCKS.length; i++) if (t >= BLOCKS[i][0]) b = BLOCKS[i];
