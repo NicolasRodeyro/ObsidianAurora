@@ -8,12 +8,16 @@ Ecosistema de software + hardware para **acompañar y monitorear pacientes con A
 
 ### Componentes
 - **Aurora Home** — asistente de voz en el hogar (Raspberry Pi; STT/TTS en el borde).
-- **Aurora Band** — wearable biométrico comercial (HR, movimiento, GPS); se consume su API, no se modifica su firmware.
+- **Aurora Band** — wearable biométrico comercial (HR, movimiento, GPS); se consume su API, no se modifica su firmware. **Fuera del MVP** (decisión del 29/08/2026 por restricción presupuestaria); se conserva como visión de futuras versiones.
 - **Aurora Care** — app móvil para cuidadores (monitoreo, configuración, alertas).
-- **Aurora Core** — backend/orquestación en la nube (IA, RAG, detección de eventos, integración).
+- **Aurora Core** — backend central en la nube (API REST y WebSocket, lógica de dominio, alertas y notificaciones). Antes se llamaba AuroraCareBack; no existe un backend aparte para el panel del cuidador.
+- **Aurora Worker IA** — backend de IA (FastAPI): inferencia con el modelo de lenguaje, memoria del paciente y resúmenes. Aurora Core no llama al modelo directamente.
 
-### Stack (ver ADRs en `Document Hub/Arquitectura y Stack Tecnológico.md`)
-Backend **Python + Django/DRF** · Frontend **React Native + Expo + TypeScript** · DB **Supabase (PostgreSQL + pgvector)** · Auth **Auth0** · Orquestación **n8n** · STT local **Whisper.cpp** · Infra **Hostinger VPS + AWS + Redis en RPi** · Observabilidad **Loki + Prometheus**.
+### Stack (ver ADRs en `Document Hub/INSTANCIA 2 — Sprint 0/Arquitectura y Stack Tecnológico.md`)
+Backend **Python + Django/DRF** (Aurora Core) y **FastAPI** (Aurora Worker IA) · Frontend **React Native + Expo + TypeScript** · DB **Supabase (PostgreSQL 16 + pgvector)** · Auth **Supabase Auth** (migrado desde Auth0) · Orquestación **n8n** (alcance acotado) · Voz **Azure Speech** en la nube con respaldo local (**Whisper.cpp** y **Piper**) · LLM **Gemini** (configurable) · Infra **Hostinger VPS** (Docker Compose + Traefik) con **Redis 7** en el backend; Aurora Home usa **SQLite** · Monitoreo y logging: no hay por ahora (previstos Prometheus, Loki y Grafana).
+
+## Repositorios de código
+Cuatro repositorios en la organización `AuroraMemory`: **AuroraCore** (backend central; antes AuroraCareBack), **AuroraCareFront** (app móvil Aurora Care), **AuroraHome** (asistente de voz en la Raspberry Pi) y **Aurora-Worker-IA** (servicio de IA). La documentación vive en este vault (`ObsidianAurora`).
 
 ## Equipo
 | Persona | Roles |
@@ -30,7 +34,8 @@ Sponsor: Virginia Santos. Cierre de ejecución: 05/10/2026 · Entrega final: 05/
 ```
 ObsidianAurora/            # vault de Obsidian, versionado en git
 ├── CLAUDE.md              # este archivo
-├── Document Hub/          # toda la documentación (.md + PDFs + .base)
+├── Document Hub/          # toda la documentación, ordenada por las instancias de la cátedra (INSTANCIA 1 a 5)
+├── Correcciones - 12-10-2026/  # instrucciones de la profesora, registro de aplicación y figuras (C4, AS-IS/TO-BE)
 │   └── Diseño UX-UI/      # manual de UX/UI (11 capítulos)
 ├── Design/                # artefactos de diseño ejecutables
 │   ├── tokens/            # tokens.json (fuente de verdad) + tokens.css
@@ -45,8 +50,8 @@ ObsidianAurora/            # vault de Obsidian, versionado en git
 
 ### Documentos clave (`Document Hub/`)
 - **Project Charter** — alcance, presupuesto, riesgos, stakeholders, WBS.
-- **Requerimientos** — 91 RF + 43 RNF en 9 módulos funcionales (fuente autoritativa).
-- **Arquitectura y Stack Tecnológico** — modelo C4 + 9 ADRs + pautas de código.
+- **Requerimientos** — 98 RF + 52 RNF: 9 módulos funcionales más el módulo 10 de privacidad, consentimiento y derechos (RF-92 a RF-98 y RNF-44 a RNF-52, agregados el 16/10/2026). Fuente autoritativa.
+- **Arquitectura y Stack Tecnológico** — modelo C4 + 12 ADRs + pautas de código.
 - **Funcionalidades del Sistema en el Hogar** — componentes por módulo.
 - **Product Backlog Inicial** — épicas/historias iniciales (parcial).
 - **Estudio Inicial**, **Investigacion sobre neurologia**, **Diseño del Prototipo**, **Boceto de Arquitectura**, **Presentación del Proyecto**, **Brainstorm de Nombres**, **Documento Presentacion Sprint 0**, **Horarios y Roles de los Miembros**.

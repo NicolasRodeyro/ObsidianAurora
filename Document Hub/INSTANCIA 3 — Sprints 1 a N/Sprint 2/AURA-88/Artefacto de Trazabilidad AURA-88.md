@@ -41,7 +41,7 @@ Last updated time: "2026-08-23T00:00:00"
 ## 5. Código relacionado
 | Tipo | Ubicación / referencia |
 | --- | --- |
-| Backend | Repo `AuroraCareBack` — `apps/routines/` (modelo Medication) |
+| Backend | Repo `AuroraCore` (entonces `AuroraCareBack`) — `apps/routines/` (modelo Medication) |
 | Tests | `apps/routines/tests/` |
 
 > [!todo] Completar con paths y commits/PRs faltantes.

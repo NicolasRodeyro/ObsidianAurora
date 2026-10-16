@@ -41,7 +41,7 @@ Last updated time: "2026-08-23T00:00:00"
 ## 5. Código relacionado
 | Tipo | Ubicación / referencia |
 | --- | --- |
-| Backend | Repo `AuroraCareBack` — `apps/alerts/views.py` (acción `acknowledge` en `AlertViewSet`) |
+| Backend | Repo `AuroraCore` (entonces `AuroraCareBack`) — `apps/alerts/views.py` (acción `acknowledge` en `AlertViewSet`) |
 | Tests | `apps/alerts/tests/test_alert_acknowledge_api.py` |
 
 > [!todo] Completar con paths y commits/PRs faltantes.

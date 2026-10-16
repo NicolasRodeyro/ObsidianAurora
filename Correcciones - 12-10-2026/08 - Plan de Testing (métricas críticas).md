@@ -167,3 +167,11 @@ La fila P2 conserva sus ejemplos y reemplaza "desconexión no notificada de la p
 2. **Usuarios reales para el STT:** cuántos y quiénes (con consentimiento).
 3. **Armar los conjuntos de casos** (frases de respuesta, preguntas con respuesta conocida, preguntas adversarias). Puedo generarlos como borrador para que los revisen.
 4. **RPO / RTO:** confirmar con DevOps los plazos de respaldo y restauración.
+
+---
+
+## 9. Estado de aplicación en el Docs (15/10/2026)
+
+Aplicado en el Google Doc (Plan de Testing): la sección 4 pasó a «Criterios de Validación y Métricas de Aceptación» (4.1 a 4.8) con las tablas de validación de alertas, omisión, confirmación por voz, STT, conectividad y evaluación de IA/RAG; la sección 7 nueva de trazabilidad (requisito, función crítica, prueba, métrica); y se actualizaron la tabla de niveles de prueba, la de criticidad P1/P2 y los textos sueltos (Appium para la app móvil, cobertura de 80 % del código nuevo, merge hacia staging, sin referencias a IoT). La condición 5 de 4.1 se redactó como «si hay más de un cuidador asociado, todos reciben el aviso», porque el escalamiento por falta de respuesta es de futuras versiones. Las metas quedan como propuesta del equipo hasta su aprobación.
+
+Dos datos marcados `[A COMPLETAR]` (ver `10 - Pendientes…`): la pérdida máxima de datos y el tiempo de restauración de la base (tabla 4.5; propuesta 24 h y 4 h) y las cifras actuales de pruebas de los cuatro repositorios (4.7). Pendiente: armar los conjuntos de casos y definir los usuarios reales para el STT (sección 8).

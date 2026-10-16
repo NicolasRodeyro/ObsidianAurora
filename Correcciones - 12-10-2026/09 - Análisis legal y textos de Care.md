@@ -90,7 +90,7 @@ Cada servicio que procesa datos de pacientes actúa como **encargado** y debe es
 | Proveedor | Qué trata | País | Contrato a documentar |
 | ----- | ----- | ----- | ----- |
 | Microsoft Azure Speech | Audio y texto de voz | EE. UU. (East US) | Términos de protección de datos de Azure `[VERIFICAR qué suscripción y términos se aceptaron; hoy es nivel gratuito]` |
-| OpenAI y/o Gemini (vía Worker IA) | Texto de conversaciones y memorias | EE. UU. | Términos de API y de protección de datos `[VERIFICAR retención y entrenamiento]` |
+| Google Gemini (vía Worker IA; modelo `gemini-3.5-flash-lite`, confirmado por el equipo el 15/10/2026) | Texto de conversaciones y memorias | EE. UU. | Términos de API y de protección de datos `[VERIFICAR retención y entrenamiento]` |
 | Supabase | Toda la base de datos y la autenticación | **EE. UU.** (región `us-east-1`, Virginia) | DPA de Supabase |
 | Hostinger | VPS donde corren Core, Worker IA y n8n | **EE. UU.** (Boston) | Términos del proveedor |
 | Expo (notificaciones push) | Token del dispositivo y el contenido de la notificación | EE. UU. | Términos de Expo; por eso las notificaciones no deben llevar datos personales (RF-98) |
@@ -278,7 +278,7 @@ Este dato también determina quién firma los acuerdos con proveedores (sección
 | **Supabase** | Base de datos y cuentas de usuario | Todos los datos de la cuenta y del paciente | **Estados Unidos** (región `us-east-1`, Virginia) |
 | **Hostinger** | Servidores donde funciona Aurora | Todos los datos que pasan por el sistema | **Estados Unidos** (Boston) |
 | **Microsoft Azure** | Convertir voz a texto y texto a voz | Audio de las conversaciones y texto a sintetizar | **Estados Unidos** (región East US) |
-| **`[OpenAI y/o Google (Gemini)]`** | Generar las respuestas del asistente | Texto de la conversación y datos de contexto (rutinas, medicación, recuerdos) | **Estados Unidos** |
+| **Google (Gemini)** | Generar las respuestas del asistente | Texto de la conversación y datos de contexto (rutinas, medicación, recuerdos) | **Estados Unidos** |
 | **Expo** | Enviar notificaciones al celular del cuidador | Identificador del dispositivo; el mensaje no contiene datos personales | **Estados Unidos** |
 
 **6. Dónde se almacenan y procesan tus datos (transferencia internacional).**
@@ -345,7 +345,7 @@ Los tres son **independientes** y ninguno está atado a la aceptación de los T�
 > * **Supabase** (base de datos, Virginia)
 > * **Hostinger** (servidores, Boston)
 > * **Microsoft Azure** (voz, East US)
-> * **`[OpenAI y/o Google]`** (respuestas del asistente)
+> * **Google (Gemini)** (respuestas del asistente)
 > * **Expo** (notificaciones)
 >
 > Sé que Argentina no reconoce a Estados Unidos como un país con nivel de protección adecuado, y que doy mi consentimiento expreso a esta transferencia. Sé que si no lo doy, Aurora no puede funcionar. Puedo retirarlo cuando quiera, y entonces Aurora deja de funcionar.

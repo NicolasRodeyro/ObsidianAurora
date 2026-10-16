@@ -41,7 +41,7 @@ Last updated time: "2026-08-23T00:00:00"
 ## 5. Código relacionado
 | Tipo | Ubicación / referencia |
 | --- | --- |
-| Backend | Repo `AuroraCareBack` — `apps/routines/` (views, serializers, `nested_urls.py`) |
+| Backend | Repo `AuroraCore` (entonces `AuroraCareBack`) — `apps/routines/` (views, serializers, `nested_urls.py`) |
 | Tests | `apps/routines/tests/test_routine_create_api.py` |
 
 > [!todo] Completar con paths y commits/PRs faltantes.

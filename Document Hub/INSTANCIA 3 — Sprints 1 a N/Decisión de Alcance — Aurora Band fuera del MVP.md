@@ -23,7 +23,7 @@ La restricción es económica y temporal, no un cambio de visión del producto. 
 
 ## Análisis técnico — qué es de Band y qué no
 
-### AuroraCareBack — `apps/biometrics` se conserva
+### AuroraCore (entonces AuroraCareBack) — `apps/biometrics` se conserva
 
 La app mezcla dos responsabilidades:
 

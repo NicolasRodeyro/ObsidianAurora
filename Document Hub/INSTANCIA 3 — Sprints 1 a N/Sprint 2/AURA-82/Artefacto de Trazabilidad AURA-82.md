@@ -41,7 +41,7 @@ Last updated time: "2026-08-23T00:00:00"
 ## 5. Código relacionado
 | Tipo | Ubicación / referencia |
 | --- | --- |
-| Backend | Repo `AuroraCareBack` — `apps/common/auth0.py` (validación JWT RS256 contra JWKS) |
+| Backend | Repo `AuroraCore` (entonces `AuroraCareBack`) — `apps/common/auth0.py` (validación JWT RS256 contra JWKS) |
 | Config | `config/urls.py`, `config/settings/production.py` |
 
 > [!todo] Completar con paths y commits/PRs faltantes.

@@ -5,8 +5,11 @@ Last edited by: Haik Kilic
 Created by: Mateo Romero Plaza
 Category:
   - Análisis
-Last updated time: 2026-05-04T19:05:00
+Last updated time: 2026-10-16
 ---
+
+> **Estado de alcance (16/10/2026).** Los módulos 2 (Monitoreo biométrico) y 3 (Detección y eventos de riesgo), la llamada automática de emergencia, el escalamiento de alertas y la detección de salida de zona segura son de **futuras versiones** (Aurora Band quedó fuera del MVP por la decisión del 29/08/2026). El corte del MVP es el del User Story Mapping. Se agregaron el **módulo 10** (RF-92 a RF-98) y los **RNF-44 a RNF-52** de privacidad, consentimiento y datos sensibles.
+
 ---
 
 ## 1. Módulo de Interacción con el Paciente
@@ -233,6 +236,32 @@ Last updated time: 2026-05-04T19:05:00
 
 ---
 
+## 10. Módulo de Privacidad, Consentimiento y Derechos del Titular
+
+### Requerimientos funcionales
+
+- Registrar el consentimiento informado antes de tratar datos del paciente, con tipo, versión de la política, alcance, fecha de aceptación y quién lo registró (RF-92).
+- Permitir revocar el consentimiento en cualquier momento desde Aurora Care, con los efectos definidos en la política de privacidad (RF-93).
+- Atender solicitudes del titular o su representante de acceso (exportar), rectificación y supresión, registrando tipo, estado y responsable (RF-94).
+- Informar al cuidador, en el consentimiento, qué datos salen del hogar y a qué proveedores (RF-95).
+- Depurar automáticamente los datos que superaron su plazo de retención y dejar constancia (RF-96).
+- Registrar el acceso a los datos del paciente: quién, qué, cuándo y con qué motivo (RF-97).
+- No incluir datos personales en el texto visible de las notificaciones (RF-98).
+
+### Requerimientos no funcionales
+
+- Cifrar en reposo el 100 % de los campos identificatorios (nombre, DNI y contactos de emergencia) (RNF-44).
+- Usar TLS 1.2 o superior en todas las comunicaciones externas y rechazar HTTP plano (RNF-45).
+- Contar con un procedimiento documentado y probado para rotar la clave de cifrado sin migraciones masivas (RNF-46).
+- No usar datos reales de pacientes en desarrollo ni en staging (RNF-47).
+- No almacenar en Aurora Home audio más allá de un buffer circular de 5 minutos (RNF-48).
+- Resolver las solicitudes de acceso en 10 días corridos y las de rectificación, actualización o supresión en 5 días hábiles (Ley 25.326, arts. 14 y 16) (RNF-49).
+- No usar datos de pacientes para entrenar o ajustar modelos sin consentimiento específico y sin eliminar los identificadores (RNF-50).
+- Exigir que los proveedores de voz e IA no conserven el audio ni el texto, y verificar su configuración con una lista de control en cada cambio (RNF-51).
+- No exponer la credencial del proveedor de voz en los dispositivos: tokens de corta duración o credenciales revocables por dispositivo (RNF-52). Estado actual: no cumple.
+
+---
+
 ## **Tabla de requerimientos funcionales**
 
 | ID | Módulo | Requerimiento funcional | Dificultad |
@@ -328,6 +357,13 @@ Last updated time: 2026-05-04T19:05:00
 | RF-89 | Administración de Rutinas y Medicación | Registrar omisión de medicación cuando no exista confirmación. | Media |
 | RF-90 | Administración de Rutinas y Medicación | Visualizar historial de cumplimiento de rutinas. | Baja |
 | RF-91 | Administración de Rutinas y Medicación | Visualizar historial de cumplimiento de medicación. | Baja |
+| RF-92 | Privacidad, Consentimiento y Derechos | Registrar el consentimiento informado, con tipo, versión de la política, alcance, fecha y quién lo registró. | Media |
+| RF-93 | Privacidad, Consentimiento y Derechos | Permitir revocar el consentimiento desde Aurora Care, con los efectos definidos en la política de privacidad. | Media |
+| RF-94 | Privacidad, Consentimiento y Derechos | Atender solicitudes de acceso, rectificación y supresión, registrando tipo, estado y responsable. | Media |
+| RF-95 | Privacidad, Consentimiento y Derechos | Informar en el consentimiento qué datos salen del hogar y a qué proveedores. | Baja |
+| RF-96 | Privacidad, Consentimiento y Derechos | Depurar automáticamente los datos que superaron su plazo de retención y dejar constancia. | Media |
+| RF-97 | Privacidad, Consentimiento y Derechos | Registrar el acceso a los datos del paciente: quién, qué, cuándo y con qué motivo. | Media |
+| RF-98 | Privacidad, Consentimiento y Derechos | No incluir datos personales en el texto visible de las notificaciones. | Baja |
 
 ## **Tabla de requerimientos no funcionales**
 
@@ -376,6 +412,15 @@ Last updated time: 2026-05-04T19:05:00
 | RNF-41 | Administración de Rutinas y Medicación | Validar datos mínimos antes de guardar una rutina o tratamiento. | Baja |
 | RNF-42 | Administración de Rutinas y Medicación | Mantener consistencia entre recordatorios, alertas e historial. | Media |
 | RNF-43 | Administración de Rutinas y Medicación | Proteger información relacionada con tratamientos del paciente. | Alta |
+| RNF-44 | Privacidad, Consentimiento y Derechos | Cifrar en reposo el 100 % de los campos identificatorios (nombre, DNI y contactos). | Alta |
+| RNF-45 | Privacidad, Consentimiento y Derechos | Usar TLS 1.2 o superior en todas las comunicaciones externas; rechazar HTTP plano. | Media |
+| RNF-46 | Privacidad, Consentimiento y Derechos | Contar con un procedimiento documentado y probado para rotar la clave de cifrado. | Media |
+| RNF-47 | Privacidad, Consentimiento y Derechos | No usar datos reales de pacientes en desarrollo ni en staging. | Media |
+| RNF-48 | Privacidad, Consentimiento y Derechos | No almacenar audio en Aurora Home más allá de un buffer circular de 5 minutos. | Media |
+| RNF-49 | Privacidad, Consentimiento y Derechos | Resolver acceso en 10 días corridos y rectificación o supresión en 5 días hábiles. | Baja |
+| RNF-50 | Privacidad, Consentimiento y Derechos | No usar datos de pacientes para entrenar modelos sin consentimiento específico y sin anonimizar. | Media |
+| RNF-51 | Privacidad, Consentimiento y Derechos | Exigir que los proveedores de voz e IA no conserven el audio ni el texto; verificarlo con una lista de control. | Media |
+| RNF-52 | Privacidad, Consentimiento y Derechos | No exponer la credencial del proveedor de voz en los dispositivos. | Alta |
 
 ## Documentos relacionados
 - [[Funcionalidades del Sistema en el Hogar]]

@@ -20,9 +20,10 @@ Aurora está pensado como un sistema integral de apoyo domiciliario que permita:
 Según la documentación actual del proyecto, Aurora se compone de los siguientes bloques:
 
 - **Aurora Home**: asistente de voz orientado a la interacción cotidiana con el paciente.
-- **Aurora Band**: pulsera o dispositivo biométrico para capturar señales y eventos relevantes.
+- **Aurora Band**: pulsera o dispositivo biométrico (fuera del alcance del MVP desde 29/08/2026; ver la decisión de alcance en `Document Hub/`).
 - **Aurora Care**: aplicación para cuidadores, enfocada en monitoreo, alertas y configuración.
-- **Aurora Core**: núcleo de orquestación, automatización, análisis de datos e integración entre componentes.
+- **Aurora Core**: backend central (Django/DRF) de orquestación, detección de eventos e integración entre componentes (antes «AuroraCareBack»).
+- **Aurora Worker IA**: servicio de IA (FastAPI) que atiende los pedidos de Aurora Core.
 
 ## Alcance funcional esperado
 
@@ -46,7 +47,7 @@ Entre las capacidades definidas hasta el momento se incluyen:
 `-- README.md
 ```
 
-- `Backend/`: carpeta destinada a documentación relacionada con el backend del proyecto.
+- `Backend/`: carpeta destinada a documentación relacionada con el backend del proyecto (el código vive en repositorios aparte; ver `CLAUDE.md`).
 - `Frontend/`: carpeta destinada a documentación relacionada con el frontend del proyecto.
 - `Document Hub/`: documentación funcional, de análisis, alcance, prototipos y material de soporte del proyecto.
 
@@ -58,7 +59,7 @@ Actualmente este repositorio se encuentra en una etapa inicial de organización 
 
 Dentro de `Document Hub/` se encuentran documentos relevantes para entender el proyecto, entre ellos:
 
-- `Project Charter.md`
+- `Project Charter.md` (Plan de Proyecto, Instancia 1)
 - `Requerimientos.md`
 - `Boceto de Arquitectura.md`
 - `Diseño del Prototipo.md`

@@ -2,7 +2,7 @@
 base: "[[Document Hub.base]]"
 Category:
   - Documentación Interna
-Last updated time: 2026-07-09T11:40:00
+Last updated time: 2026-10-16
 ---
 # Índice Aurora (Mapa de Contenido)
 
@@ -12,18 +12,26 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Project Charter]] — alcance, presupuesto, riesgos, stakeholders, WBS.
 - [[Horarios y Roles de los Miembros]] — capacidad del equipo.
 - [[Documento Presentacion Sprint 0]] — cierre del Sprint 0.
+- [[Historial de revisión]] — versiones del documento «Proyecto Aurora 2026» (carátula única).
+- [[Desarrollo del Proyecto — Sprints 0, 1 y 2]] — equipo, stack, sprints y estado del desarrollo (Instancia 3).
 - [[Presentación del Proyecto]] — pitch y diferenciación.
+- [[Jornada de Presentación]] — paper, póster y video de la jornada del 06/10/2026 (link a la carpeta de Drive).
 - `INSTANCIA 4/video-aurora.html` — render animado del video de presentación (1920×1080, 2:54), listo para grabar.
 
 ## Análisis y requerimientos
-- [[Estudio Inicial]] — problema y oportunidad.
+- [[Estudio Inicial Aurora]] — problema y oportunidad.
+- [[Glosario del Dominio]] — términos del dominio (Instancia 2).
 - [[Investigacion sobre neurologia]] — base clínica (Alzheimer / demencia).
-- [[Requerimientos]] — **91 RF + 43 RNF** en 9 módulos (fuente autoritativa).
+- [[Requerimientos]] — **98 RF + 52 RNF** en 10 módulos (fuente autoritativa).
 - [[Funcionalidades del Sistema en el Hogar]] — componentes por módulo.
 - [[Brainstorm de Nombres]] — naming.
 
 ## Producto y backlog
 - [[Product Backlog Inicial]] — épicas e historias iniciales.
+- [[User Story Map]] — mapa de historias.
+- [[Plan de Testing]] — estrategia, métricas críticas y línea base de pruebas.
+- [[Gestion de la Configuracion]] — repositorios, ramas, commits y CI/CD.
+- [[Working Agreement]] — acuerdos de trabajo del equipo.
 - [[Trazabilidad RF-Épicas]] — matriz RF ↔ módulo ↔ épica.
 - [[Tablero Jira]] — snapshot del board AURA.
 - Artefactos de trazabilidad por historia → carpeta `Trazabilidad/` (generados con la skill `/artefacto-trazabilidad`).

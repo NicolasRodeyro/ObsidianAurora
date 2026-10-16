@@ -41,7 +41,7 @@ Last updated time: "2026-08-23T00:00:00"
 ## 5. Código relacionado
 | Tipo | Ubicación / referencia |
 | --- | --- |
-| Backend | Repo `AuroraCareBack` — `apps/routines/` (compliance) |
+| Backend | Repo `AuroraCore` (entonces `AuroraCareBack`) — `apps/routines/` (compliance) |
 | Tests | `apps/routines/tests/test_compliance_api.py` |
 
 > [!todo] Completar con paths y commits/PRs faltantes.

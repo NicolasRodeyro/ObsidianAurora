@@ -219,3 +219,9 @@ Al enviar audio y texto a Azure, los datos salen de Argentina. La Ley 25.326 (ar
 ### 8.6 Texto sugerido para el ADR (resumen)
 
 > **ADR-011 — Voz en la nube con respaldo local.** *Contexto:* las pruebas con el dispositivo mostraron que el reconocimiento y la síntesis locales no alcanzan la latencia ni la calidad que necesita un paciente con Alzheimer (p95 de síntesis de 8,02 s frente a una meta de 2 s; el reconocimiento local obligaba al paciente a repetirse). *Decisión:* usar Azure Speech como proveedor principal de reconocimiento y síntesis, acotado a las ventanas de interacción, con Whisper.cpp y Piper como respaldo sin conexión. La clasificación de las respuestas a recordatorios se realiza localmente con salida de vocabulario cerrado. *Consecuencias:* el audio y el texto de las interacciones salen del hogar durante esas ventanas, por lo que se informa en el consentimiento y se documenta la transferencia internacional; el proveedor declara no retener los datos de las llamadas en tiempo real. *Riesgos aceptados:* dependencia de un proveedor externo y de conectividad; nivel gratuito sujeto a cambios; credencial alojada en el dispositivo (a corregir).
+
+---
+
+## 9. Estado de aplicación en el Docs (15/10/2026)
+
+Aplicado en el Google Doc: grupo 15 de Requerimientos Funcionales (RF-92 a RF-98) y los nueve RNF nuevos (RNF-44 a RNF-52) en Requerimientos No Funcionales; en Arquitectura, la sección 6 reorganizada (6.1 marco regulatorio corregido, 6.2 datos que trata Aurora, 6.3 retención con justificación, 6.4 controles verificables, 6.5 consentimiento, 6.6 voz en la nube y transferencia internacional, 6.7 trazabilidad). Pendiente en el repo: agregar RF-92 a RF-98 y RNF-44 a RNF-52 a `Requerimientos.md`.

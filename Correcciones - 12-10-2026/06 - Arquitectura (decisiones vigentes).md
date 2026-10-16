@@ -29,7 +29,7 @@ Cada fila indica la decisión **vigente**, su fuente en los repos, y lo que el d
 | **Clasificación de la respuesta a un recordatorio** (¿confirmó la medicación?) | Un modelo local (Qwen3 vía llama.cpp) es el camino primario, con salida **acotada a un vocabulario fijo** (CONFIRMO / RECHAZO / NINGUNA); cualquier otra salida se descarta. La decisión de qué hacer con la respuesta es determinista y está en Aurora Home (ADR-HOME-011) | `AuroraHome/Docs/05-calidad-roadmap-y-decisiones.md` | ⚠️ No figura en el documento |
 | **Orquestación** | n8n para disparar interacciones diarias; alcance acotado | `AuroraCore/apps/interactions` (comando de interacciones diarias) | ⚠️ Presentado como pieza general de orquestación; la épica AURA-21 está marcada `vision` |
 | **Despliegue** | **VPS Hostinger** con Docker Compose y Traefik (TLS con Let's Encrypt). Dos entornos en el mismo VPS: `staging-api.…` y `api.…` | `AuroraCore/deploy/`, `.env.example` | ⚠️ El documento dice "Hostinger / AWS / on-premise" para staging y producción |
-| **AWS** | **No se despliegan recursos propios de AWS.** (La base de Supabase está alojada en infraestructura de AWS, pero eso es del proveedor.) | `deploy/.env.example` | ⚠️ AWS figura como parte de la infraestructura (Free Tier, S3, respaldo) `[verificar el uso de boto3 en Core antes de afirmarlo del todo]` |
+| **AWS** | **No se despliegan recursos propios de AWS.** (La base de Supabase está alojada en infraestructura de AWS, pero eso es del proveedor.) | `deploy/.env.example` | ⚠️ AWS figura como parte de la infraestructura (Free Tier, S3, respaldo) Verificado el 14/10/2026: `boto3` se usa solo como cliente S3-compatible de **Supabase Storage** (fotos de recuerdos y adjuntos); no hay recursos propios de AWS. |
 | **Observabilidad** | Sentry (Core) y chequeos de salud; métricas en Prometheus en Home y Worker | `requirements/production.txt` | ⚠️ El documento describe Loki + Prometheus + Grafana + Uptime Kuma como pila vigente; **no encontré Loki ni Grafana en los repos** |
 | **Notificaciones externas** | Solo **Expo Push** en el MVP | `apps/notifications` | ⚠️ El documento lista WhatsApp/Telegram, telefonía y SMTP como sistemas externos |
 | **Aurora Band Gateway** | **No desplegado.** Fuera del MVP | Decisión del 29/08/2026 | ❌ Figura como contenedor del sistema |
@@ -123,3 +123,11 @@ Se agrega al comienzo de la sección 3 (ADR):
 2. **Hoy se usa el nivel gratuito (F0)** de Azure Speech, con una cuota de 500.000 caracteres mensuales en la síntesis (ADR-HOME-010). El propio ADR advierte que las condiciones pueden cambiar. Para pacientes reales se necesita el nivel pago.
 3. **Región del recurso de Azure: `eastus` (Este de EE. UU.).** Es un dato necesario para la sección de transferencia internacional de datos (archivo 07): el audio y el texto se procesan en Estados Unidos.
 4. **Contraste útil para el documento:** la comunicación entre Aurora Home y Core **sí usa una credencial propia de cada dispositivo** (`X-Device-API-Key`), con rotación y ventana de gracia, y Core solo guarda su *hash*. Es el modelo que habría que replicar para la credencial de Azure.
+
+---
+
+## 7. Estado de aplicación en el Docs (14/10/2026)
+
+Aplicado en el Google Doc: 1.3, 2.1, 2.2, 2.3, gobierno y estado de los ADR, enmiendas de los ADR-001, 004, 005, 006, 007, 008 y 009, ADR-010 y ADR-011 nuevos, 4.2, 5.1, 5.3, 5.4, 5.5, 6.3 (cifrado), glosario (Supabase, Worker IA, Expo Push, Fernet y correcciones) y nota de actualización en el resumen de Sprints. Pendiente: reemplazar a mano los tres diagramas C4 (ver `figuras/`) y los `[A COMPLETAR]` de 5.4 y 5.5. La minimización de datos (6.3) se trata con el archivo 07.
+
+Confirmado por el equipo el 14/10/2026: se usa el plan gratuito (Free) de Supabase; la autenticación migró de Auth0 a Supabase Auth; Supabase Storage guarda recursos como fotos y audios. En el Plan de Proyecto 6.2 el monto de $15 USD para persistencia quedó rotulado como estimado para un plan pago (hoy $0).
