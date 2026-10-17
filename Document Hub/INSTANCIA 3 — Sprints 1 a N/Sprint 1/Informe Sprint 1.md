@@ -155,6 +155,8 @@ Al cierre se incorporaron al backlog las historias derivadas del diseño (AURA-7
 
 ## 8. Registro de riesgos (cambios en este sprint)
 
+Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
+
 | Riesgo | Cambio | Acción |
 |---|---|---|
 | R2 — Pulsera biométrica no disponible | Se confirma: AURA-64 sigue pausada sin avance | Se sigue con la decisión de alcance del Sprint 3. |

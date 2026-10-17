@@ -159,6 +159,8 @@ En la última semana del sprint (7 y 8/09) se cargaron los tickets del Sprint 5:
 
 ## 8. Registro de riesgos (cambios en este sprint)
 
+Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
+
 | Riesgo | Cambio | Acción |
 |---|---|---|
 | R6 — Hardware difícil de conseguir en Argentina | **Mitigado**: Aurora Home funciona sobre Raspberry Pi real con diagnósticos | Se mantiene. |

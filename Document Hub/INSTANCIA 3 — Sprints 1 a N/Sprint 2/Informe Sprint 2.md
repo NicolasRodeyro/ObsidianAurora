@@ -135,6 +135,8 @@ El foco pasó del diseño al backend: prioridad para el Sprint 3 fue autenticaci
 
 ## 8. Registro de riesgos (cambios en este sprint)
 
+Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
+
 | Riesgo | Cambio | Acción |
 |---|---|---|
 | R7 — Sobrecarga o falta de constancia | Se repite en la retro | Seguimiento por sprint. |

@@ -15,6 +15,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Historial de revisión]] — versiones del documento «Proyecto Aurora 2026» (carátula única).
 - [[Desarrollo del Proyecto — Sprints 0, 1 y 2]] — equipo, stack, sprints y estado del desarrollo (Instancia 3).
 - Informes de sprint (Instancia 3): [[Informe Sprint 1]] · [[Informe Sprint 2]] · [[Informe Sprint 3]] · [[Informe Sprint 4]] · [[Informe Sprint 5]] · [[Informe Sprint 6]] (parcial). La numeración sigue la documentación; la equivalencia con Jira está en [[Desarrollo del Proyecto — Sprints 0, 1 y 2]].
+- [[Registro de Riesgos]] — riesgos del proyecto (R1 a R22) con su estado y evolución por sprint.
 - [[Presentación del Proyecto]] — pitch y diferenciación.
 - [[Jornada de Presentación]] — paper, póster y video de la jornada del 06/10/2026 (link a la carpeta de Drive).
 - `INSTANCIA 4/video-aurora.html` — render animado del video de presentación (1920×1080, 2:54), listo para grabar.

@@ -117,6 +117,8 @@ Si todos esos tickets entraran, el sprint tendría 21 tickets abiertos para 19 d
 
 ## 8. Registro de riesgos (estado actual)
 
+Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
+
 | Riesgo | Estado | Acción |
 |---|---|---|
 | Entrega final el 05/11 | Quedan 19 días con 13 tickets abiertos; los 6 entregables de la Instancia 5 están cargados (AURA-187 a 192) pero **sin responsable** | Asignar responsables esta semana. |

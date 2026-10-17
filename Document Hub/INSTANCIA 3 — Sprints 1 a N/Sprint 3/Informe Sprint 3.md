@@ -189,6 +189,8 @@ Con el backend operativo, la prioridad pasó a **conectar los componentes**. El 
 
 ## 8. Registro de riesgos (cambios en este sprint)
 
+Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
+
 | Riesgo | Cambio | Acción |
 |---|---|---|
 | R5 — Filtración de datos sensibles | **Se materializó un defecto interno**: escritura entre hogares en 5 endpoints, hallada y corregida el 22/08 | Aislamiento por hogar unificado; falta cifrar PII (ADR-010, AURA-93/97). |

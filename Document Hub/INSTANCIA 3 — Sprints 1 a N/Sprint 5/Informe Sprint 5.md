@@ -162,6 +162,8 @@ Al cierre, el foco pasa a **cerrar el MVP**: terminar el Drop-in en vivo y sus e
 
 ## 8. Registro de riesgos (cambios en este sprint)
 
+Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
+
 | Riesgo | Cambio | Acción |
 |---|---|---|
 | R5 — Seguridad de datos | Se cerraron cifrado de PII (ADR-010) y consentimiento obligatorio; falta AURA-147 (gestión de secretos) | Priorizar AURA-147 en el Sprint 6. |
