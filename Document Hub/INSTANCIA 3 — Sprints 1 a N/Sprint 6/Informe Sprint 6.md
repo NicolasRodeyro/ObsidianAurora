@@ -33,7 +33,7 @@ Equipo y roles como en el [[Informe Sprint 1]]. El sprint dura 22 días (3,1 sem
 
 ## 3. Sprint Backlog
 
-El sprint tiene **14 tickets**: 13 arrastrados del Sprint 5 y 1 nuevo (AURA-186, documentación). Estado al 17/10:
+El sprint tiene **20 tickets**: 13 arrastrados del Sprint 5 y 7 nuevos de documentación (AURA-186 y los 6 entregables de la Instancia 5, AURA-187 a 192, creados el 17/10). Estado al 17/10:
 
 | Key | Tipo | Resumen | Responsable (Jira) | Origen | Estado al 17/10 |
 |---|---|---|---|---|---|
@@ -51,10 +51,16 @@ El sprint tiene **14 tickets**: 13 arrastrados del Sprint 5 y 1 nuevo (AURA-186,
 | AURA-164 | Error | Compliance sin filtro de fecha: Care infiere «hoy» por paginación y oculta estados reales | Haik | Arrastrado del Sprint 5 | En curso |
 | AURA-173 | Error | El cuidador principal se auto-provisiona sin can_drop_in, bloqueando Drop-in por defecto | Haik | Arrastrado del Sprint 5 | Tareas por hacer |
 | AURA-186 | Tarea | Actualizar la documentación del proyecto en el Docs y en el repositorio (correcciones de la cátedra del 12/10/2026) | Mateo | Nuevo (documentación) | En curso |
+| AURA-187 | Tarea | Instancia 5 · Documentación del proceso actualizado post-implementación | Sin asignar | Nuevo (Instancia 5, creado el 17/10) | Tareas por hacer |
+| AURA-188 | Tarea | Instancia 5 · Instructivos de uso (Aurora Care y Aurora Home) | Sin asignar | Nuevo (Instancia 5, creado el 17/10) | Tareas por hacer |
+| AURA-189 | Tarea | Instancia 5 · Manual de instalación y operación | Sin asignar | Nuevo (Instancia 5, creado el 17/10) | Tareas por hacer |
+| AURA-190 | Tarea | Instancia 5 · Análisis de impacto ambiental | Sin asignar | Nuevo (Instancia 5, creado el 17/10) | Tareas por hacer |
+| AURA-191 | Tarea | Instancia 5 · Retrospectiva de proyecto | Sin asignar | Nuevo (Instancia 5, creado el 17/10) | Tareas por hacer |
+| AURA-192 | Tarea | Instancia 5 · Presentación y demostración final (05/11) | Sin asignar | Nuevo (Instancia 5, creado el 17/10) | Tareas por hacer |
 
-**Cómo leer el avance:** hay 7 tickets finalizados de 14 (50 %), pero **5 de esos cierres son depuración del tablero** (AURA-64, 74, 78, 97 y 98), que ya estaban resueltos en la práctica, y 2 son subtareas que ya estaban finalizadas (AURA-99 y 101). El avance real del sprint es **cero tickets de producto cerrados** en estos 4 días.
+**Cómo leer el avance:** hay 7 tickets finalizados de 20 (35 %), pero **5 de esos cierres son depuración del tablero** (AURA-64, 74, 78, 97 y 98), que ya estaban resueltos en la práctica, y 2 son subtareas que ya estaban finalizadas (AURA-99 y 101). El avance real del sprint es **cero tickets de producto cerrados** en estos 4 días.
 
-Quedan abiertos **7 tickets**: AURA-76 (demostración de validación de recuerdos), 104 (memoria contextual, en revisión), 109 (pantalla de privacidad, en revisión), 134 (Drop-in en vivo, en revisión), 164 y 173 (errores) y 186 (documentación).
+Quedan abiertos **13 tickets**: seis de producto (AURA-76, demostración de validación de recuerdos; 104, memoria contextual, en revisión; 109, pantalla de privacidad, en revisión; 134, Drop-in en vivo, en revisión; 164 y 173, errores) y siete de documentación (AURA-186 a 192). **Los siete de documentación todavía no tienen avance, y seis de ellos no tienen responsable.**
 
 ## 4. Sprint Review
 
@@ -65,7 +71,7 @@ Quedan abiertos **7 tickets**: AURA-76 (demostración de validación de recuerdo
 
 | Métrica | Meta | Sprint 6 al 17/10 | Lectura |
 |---|---|---|---|
-| Cumplimiento del sprint | ≥ 80 % | **En curso** (7 de 14 cerrados; 0 de producto) | A mitad de camino no es una medida confiable. |
+| Cumplimiento del sprint | ≥ 80 % | **En curso** (7 de 20 cerrados; 0 de producto) | A mitad de camino no es una medida confiable. |
 | Desvío de cierre | ≤ 2 días | **Se mide el 05/11** | Planificado: 05/11. |
 | Carga por integrante | nadie sobre su capacidad | **No medible en horas** | Ver propuesta de estimación en el punto 7. |
 | Trabajo arrastrado | causa registrada | **Se mide al cierre** | Cualquier ticket que no se cierre pasa al backlog final. |
@@ -78,39 +84,51 @@ Quedan abiertos **7 tickets**: AURA-76 (demostración de validación de recuerdo
 > [!todo] Retrospectiva
 > Se realiza al cierre del sprint. Para esta última retro conviene incluir una mirada de **todo el proyecto**, que es además un entregable de la Instancia 5.
 
-## 7. Backlog repriorizado: propuesta (a confirmar por el equipo)
+## 7. Backlog repriorizado
 
-Esta sección es una **propuesta del Scrum Master**: no se cambió nada en Jira. Hay dos problemas para resolver:
+Cambios al 17/10/2026 y decisiones pendientes:
 
-**a) La documentación y la presentación casi no están en el tablero.** El objetivo del sprint menciona la documentación del Docs y la presentación, pero hay un solo ticket (AURA-186). La Instancia 5 pide cinco entregables: manual de instalación y operación, documentación del proceso actualizada, retrospectiva del proyecto, instructivos de uso y análisis de impacto ambiental. **Lo que no está en el tablero no se puede planificar ni medir**, así que se propone crear un ticket por cada uno, más uno para preparar la presentación del 05/11 y otro para la demostración de AURA-76.
+**a) Los entregables de la Instancia 5 ya están en el tablero.** El objetivo del sprint menciona la documentación y la presentación, y hasta el 17/10 había un solo ticket (AURA-186). Ese día se cargaron 6 tickets más, en este sprint y bajo la épica AURA-13 «Documentación para Proyecto», **sin responsable asignado todavía**:
 
-**b) Hay 9 tickets sin sprint.** Propuesta para el Sprint 6:
+| Ticket | Entregable |
+|---|---|
+| AURA-187 | Documentación del proceso actualizado post-implementación |
+| AURA-188 | Instructivos de uso (Aurora Care y Aurora Home) |
+| AURA-189 | Manual de instalación y operación (depende de AURA-147 y 148) |
+| AURA-190 | Análisis de impacto ambiental |
+| AURA-191 | Retrospectiva de proyecto |
+| AURA-192 | Presentación y demostración final del 05/11, incluida la demostración documentada de AURA-76 y AURA-134 |
 
-| Ticket | Propuesta | Motivo |
+Con estos tickets el sprint pasa de 14 a 20, de los cuales 13 están abiertos. **Falta repartir los responsables**: un ticket sin responsable no avanza.
+
+**b) Los 9 tickets sin sprint se dejan como están** (decisión del 17/10/2026): AURA-110, 111, 147, 148, 167, 168, 175, 176 y 180 siguen fuera de cualquier sprint. Esta tabla recoge la propuesta del Scrum Master, que **no se aplicó**, como referencia de lo que implica no hacerlo:
+
+| Ticket | Propuesta (no aplicada) | Motivo |
 |---|---|---|
-| AURA-110 y 111 | Entran | Errores que muestran información falsa al cuidador («todo en orden» cuando falla la carga; datos de demostración en «Alerta atendida»). Riesgo R8. |
-| AURA-175 | Entra | El botón «Llamar» del detalle de alerta está siempre deshabilitado: afecta una función de emergencia. |
-| AURA-176 | Entra con 110 | Migrar `Promise.all` a `allSettled` evita que una falla parcial rompa la pantalla entera. |
-| AURA-147 | Entra | Gestión de secretos y variables de entorno: seguridad (R5). |
-| AURA-148 | Entra (mínimo) | Respaldo diario de la base de datos, que la documentación declara como pendiente. |
-| AURA-167 y 168 | Entran | Ya están en revisión; falta cerrarlos. |
+| AURA-110 y 111 | Entrar | Errores que muestran información falsa al cuidador («todo en orden» cuando falla la carga; datos de demostración en «Alerta atendida»). Riesgo R8. |
+| AURA-175 | Entrar | El botón «Llamar» del detalle de alerta está siempre deshabilitado: afecta una función de emergencia. |
+| AURA-176 | Entrar con 110 | Migrar `Promise.all` a `allSettled` evita que una falla parcial rompa la pantalla entera. |
+| AURA-147 | Entrar | Gestión de secretos y variables de entorno: seguridad (R5). También es insumo del manual de instalación (AURA-189). |
+| AURA-148 | Entrar (mínimo) | Respaldo diario de la base de datos, que la documentación declara como pendiente. Insumo de AURA-189. |
+| AURA-167 y 168 | Entrar | Ya están en revisión; falta cerrarlos. |
 | AURA-180 | Fuera del MVP | Cambiar la cadencia de reconfirmación es una decisión de producto; queda en el backlog posterior. |
 
-Con esa propuesta el sprint quedaría con unos 22 tickets abiertos para 19 días. Dado que los sprints anteriores arrastraron más de la mitad, **conviene recortar antes que sumar**: priorizar lo que impacta en la demostración y en la seguridad, y dejar fuera lo demás de forma explícita.
+Si todos esos tickets entraran, el sprint tendría 21 tickets abiertos para 19 días. Dado que los sprints anteriores arrastraron más de la mitad, **conviene recortar antes que sumar**; mientras no entren, los riesgos R5 y R8 de la sección 8 siguen abiertos y hay que aceptarlos de forma explícita.
 
 ## 8. Registro de riesgos (estado actual)
 
 | Riesgo | Estado | Acción |
 |---|---|---|
-| Entrega final el 05/11 | Quedan 19 días con 7 tickets abiertos y la documentación de la Instancia 5 sin planificar | Cargar los entregables en Jira y asignar responsables esta semana. |
-| R5 — Seguridad | Secretos (AURA-147) sin gestionar | Entra al sprint. |
-| R8 — Falso negativo | AURA-110, 111, 164 y 175 abiertos | Entran al sprint. |
+| Entrega final el 05/11 | Quedan 19 días con 13 tickets abiertos; los 6 entregables de la Instancia 5 están cargados (AURA-187 a 192) pero **sin responsable** | Asignar responsables esta semana. |
+| R5 — Seguridad | Secretos (AURA-147) sin gestionar; el ticket está fuera de todo sprint | Decisión del 17/10: no entra. Aceptar el riesgo de forma explícita o reconsiderar; además es insumo del manual de instalación (AURA-189). |
+| R8 — Falso negativo | AURA-110, 111, 164 y 175 abiertos; AURA-164 está en el sprint y los otros tres fuera | Decisión del 17/10: 110, 111 y 175 no entran. Aceptar el riesgo de forma explícita o reconsiderar. |
 | R7 — Sobrecarga | Concentración en Octavio y Mateo; cierre con apuro en el sprint anterior | Repartir desde el inicio y no acumular al final. |
-| Nuevo — Sin respaldo ni monitoreo | AURA-148 por hacer | Respaldo diario como mínimo. |
+| Nuevo — Sin respaldo ni monitoreo | AURA-148 por hacer y fuera de todo sprint | Como mínimo, documentar la recomendación de respaldo diario en el manual (AURA-189). |
 | Nuevo — Dependencia de la demostración | Drop-in en vivo y validación de recuerdos todavía no se demostraron | Ensayo de la demostración antes del 02/11. |
 
 ## 9. Artefactos previstos
 
-- Entregables de la Instancia 5 (carpeta `INSTANCIA 5 — Fin de proyecto/`).
+- Entregables de la Instancia 5, en la carpeta `INSTANCIA 5 — Fin de proyecto/`: documentación del proceso (AURA-187), instructivos de uso (AURA-188), manual de instalación y operación (AURA-189), análisis de impacto ambiental (AURA-190) y retrospectiva de proyecto (AURA-191).
 - Documento corregido (Docs de Google) y su réplica en el repositorio (AURA-186).
-- Evidencia de demostración de AURA-76 (capturas o video).
+- Guion de la presentación del 05/11 y evidencia de la demostración de AURA-76 y AURA-134, con capturas o video (AURA-192).
+- Informe de este sprint completo, con la Sprint Review y la retrospectiva, al cierre.
