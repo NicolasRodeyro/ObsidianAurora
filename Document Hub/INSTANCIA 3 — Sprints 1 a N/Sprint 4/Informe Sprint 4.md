@@ -172,7 +172,7 @@ Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
 
 ## 9. Artefactos producidos
 
-- Trazabilidad: AURA-90, 91 y 95 (carpetas `Sprint 3/AURA-xx/`).
+- Trazabilidad: AURA-90, 91 y 95 (carpetas `Sprint 3/AURA-xx/`) y, de este sprint, [[Artefacto de Trazabilidad AURA-85]] (dashboard del cuidador), [[Artefacto de Trazabilidad AURA-86]] (zonas seguras) y [[Artefacto de Trazabilidad AURA-151 a 156]] (Aurora Home local).
 - Documentación de Aurora Home en `AuroraHome/Docs/` (plan de implementación y evidencia del E2E con Core).
 - Contrato OpenAPI de Home normalizado y *contract tests* (AURA-102).
 - Plantilla de PR y skill `pr-flow` (`.kiro/skills/pr-flow` en el vault).

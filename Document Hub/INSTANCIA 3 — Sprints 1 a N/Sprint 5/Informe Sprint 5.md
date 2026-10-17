@@ -179,3 +179,4 @@ Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
 - Documentación técnica de AuroraCore (`docs/`), de AuroraHome (`Docs/`) y del Worker IA.
 - Plan de Testing con línea base de ejecución: AuroraCore 1.579 pruebas, AuroraHome 1.902, AuroraCare 1.190 y Aurora Worker IA 196 ([[Plan de Testing]], sección 4.7).
 - Catálogo de terapias cognitivas de la psicopedagoga (AURA-184).
+- Trazabilidad: [[Artefacto de Trazabilidad AURA-98]] (consentimiento), [[Artefacto de Trazabilidad AURA-105]] (memoria y consulta con IA), [[Artefacto de Trazabilidad AURA-106]] (alertas push), [[Artefacto de Trazabilidad AURA-131]] (heartbeat y comandos), [[Artefacto de Trazabilidad AURA-134]] (Drop-in, en revisión), [[Artefacto de Trazabilidad AURA-149]] (sesiones diarias) y [[Artefacto de Trazabilidad AURA-163]] (recuerdos con fotos).
