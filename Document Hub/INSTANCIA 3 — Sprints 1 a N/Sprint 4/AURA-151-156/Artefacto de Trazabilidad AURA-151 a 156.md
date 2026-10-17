@@ -22,7 +22,7 @@ Last updated time: "2026-10-17T00:00:00"
 
 ## 1. Historia de usuario
 > [!note] Historia derivada
-> Esta historia se redactó a posteriori a partir de las tareas de Jira indicadas arriba (modo *task-first*). **No se creó en Jira**: queda como propuesta del equipo.
+> Esta historia se redactó a posteriori a partir de las tareas de Jira indicadas arriba (modo *task-first*), porque el trabajo se registró en Jira como tareas técnicas. La historia **vive en este artefacto** y no se carga en Jira, que es de uso interno del equipo. Conviene que el equipo revise el texto.
 
 **Como** paciente con Alzheimer **quiero** que Aurora me recuerde en voz alta mi medicación, escuche mi respuesta y, aunque no haya internet, deje registrado si la tomé **para** no olvidarla y para que mi cuidador pueda saberlo después.
 
@@ -114,4 +114,3 @@ sequenceDiagram
 > [!todo] Pendiente
 > - Decidir cómo resolver la desviación de latencia de voz (p95 de 8,02 s frente a 2 s).
 > - Pendientes de HIL: SOS con botón físico durante una conversación y demostración del micrófono desconectado.
-> - Si el equipo aprueba la historia derivada, crearla en Jira y enlazar las tareas con «Relates».

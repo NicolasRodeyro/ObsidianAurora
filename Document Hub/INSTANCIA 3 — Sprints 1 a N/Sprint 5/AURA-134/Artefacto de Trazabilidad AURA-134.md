@@ -22,7 +22,7 @@ Last updated time: "2026-10-17T00:00:00"
 
 ## 1. Historia de usuario
 > [!note] Historia derivada
-> Esta historia se redactó a posteriori a partir de las tareas de Jira indicadas arriba (modo *task-first*). **No se creó en Jira**: queda como propuesta del equipo.
+> Esta historia se redactó a posteriori a partir de las tareas de Jira indicadas arriba (modo *task-first*), porque el trabajo se registró en Jira como tareas técnicas. La historia **vive en este artefacto** y no se carga en Jira, que es de uso interno del equipo. Conviene que el equipo revise el texto.
 
 **Como** cuidador autorizado **quiero** escuchar en vivo a mi familiar y hablarle a través de Aurora Home **para** comprobar que está bien sin tener que ir hasta la casa.
 
