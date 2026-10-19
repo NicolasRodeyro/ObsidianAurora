@@ -110,15 +110,15 @@ stateDiagram-v2
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-106-01 | Alerta con regla de push y token activo | 1. Generar la alerta. | Se envía la notificación y se guarda el ticket | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-106-02 | Alerta clínica | 1. Generar la alerta y revisar el texto del push. | El cuerpo no contiene el mensaje clínico | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-106-03 | Token ya registrado | 1. Registrar el mismo token otra vez. | No se duplica | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-106-04 | Cuidador vinculado y alerta activa | 1. `POST` de acuse. 2. Repetirlo. | La primera vez guarda alerta y cuidador y escribe el historial; la segunda no cambia nada | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-106-05 | Cuidador de otro hogar | 1. Dar acuse. | Se rechaza | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-106-06 | Alertas activas y cerradas | 1. Listar con el filtro de activas. | Solo las activas | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-106-01 | Alerta con regla de push y token activo | 1. Generar la alerta. | Se envía la notificación y se guarda el ticket | OK (17/10): `test_push_notifications.py` (5)* |
+| CP-AURA-106-02 | Alerta clínica | 1. Generar la alerta y revisar el texto del push. | El cuerpo no contiene el mensaje clínico | OK (17/10): mismo archivo* |
+| CP-AURA-106-03 | Token ya registrado | 1. Registrar el mismo token otra vez. | No se duplica | OK (17/10): mismo archivo* |
+| CP-AURA-106-04 | Cuidador vinculado y alerta activa | 1. `POST` de acuse. 2. Repetirlo. | La primera vez guarda alerta y cuidador y escribe el historial; la segunda no cambia nada | OK (17/10): `test_alert_acknowledge_api.py` (6)* |
+| CP-AURA-106-05 | Cuidador de otro hogar | 1. Dar acuse. | Se rechaza | OK (17/10): mismo archivo* |
+| CP-AURA-106-06 | Alertas activas y cerradas | 1. Listar con el filtro de activas. | Solo las activas | OK (17/10): `test_alert_active_filter_api.py` (3)* |
 | CP-AURA-106-07 | Feed de alertas de Care | 1. Ejecutar las pruebas de `alerts` de Care. | Todas pasan | OK (17/10): `jest src/features/alerts`, 46 pruebas |
 
-\* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
+\* **Ejecución de AuroraCore (17/10/2026):** las pruebas se corrieron con `pytest` sobre SQLite (no se pudo levantar PostgreSQL en la máquina de revisión). La suite completa de AuroraCore pasó el 16/10/2026 sobre PostgreSQL con 1.579 pruebas y sin fallas (ejecución del equipo, ver [[Plan de Testing]], sección 4.7). Repetida el 17/10 sobre SQLite, pasaron 1.574 de 1.579; las 5 restantes usan SQL propio de PostgreSQL y no se pueden ejecutar en SQLite.
 
 **Ejecución de AuroraCare (17/10/2026):** las pruebas se corrieron con `npx jest <carpeta>` sobre el código actual.
 

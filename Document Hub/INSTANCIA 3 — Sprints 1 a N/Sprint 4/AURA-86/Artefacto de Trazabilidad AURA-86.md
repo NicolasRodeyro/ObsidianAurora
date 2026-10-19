@@ -92,13 +92,13 @@ stateDiagram-v2
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-86-01 | Cuidador vinculado al paciente | 1. `POST` de una zona con límites válidos. | 201 y la zona queda activa | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-86-02 | Cuidador vinculado | 1. `POST` con radio, latitud, longitud o tipo inválidos. | 400 en cada caso | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-86-03 | El paciente ya tiene 5 zonas activas | 1. `POST` una sexta. | Se rechaza (máximo 5 activas) | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-86-04 | 5 zonas, una inactiva | 1. Crear una nueva. | Se permite | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-86-05 | Zona activa | 1. Activar de nuevo. | 400 | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-86-06 | Cuidador no vinculado | 1. Listar, crear o modificar zonas. | No ve ni modifica zonas ajenas | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-86-07 | Zona existente | 1. Registrar una salida de zona. | Se crea el evento de salida | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-86-01 | Cuidador vinculado al paciente | 1. `POST` de una zona con límites válidos. | 201 y la zona queda activa | OK (17/10): `test_geofencing.py` (21)* |
+| CP-AURA-86-02 | Cuidador vinculado | 1. `POST` con radio, latitud, longitud o tipo inválidos. | 400 en cada caso | OK (17/10): `test_geofencing.py` (21)* |
+| CP-AURA-86-03 | El paciente ya tiene 5 zonas activas | 1. `POST` una sexta. | Se rechaza (máximo 5 activas) | OK (17/10): `test_geofencing.py` (21)* |
+| CP-AURA-86-04 | 5 zonas, una inactiva | 1. Crear una nueva. | Se permite | OK (17/10): `test_geofencing.py` (21)* |
+| CP-AURA-86-05 | Zona activa | 1. Activar de nuevo. | 400 | OK (17/10): `test_geofencing.py` (21)* |
+| CP-AURA-86-06 | Cuidador no vinculado | 1. Listar, crear o modificar zonas. | No ve ni modifica zonas ajenas | OK (17/10): `test_geofencing.py` (21)* |
+| CP-AURA-86-07 | Zona existente | 1. Registrar una salida de zona. | Se crea el evento de salida | OK (17/10): `test_geofencing.py` (21)* |
 
 \* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
 
@@ -117,5 +117,4 @@ stateDiagram-v2
 - [x] Referencias a código (paths/commits/PRs)
 
 > [!todo] Pendiente
-> - Registrar el resultado de cada caso ejecutando la suite de AuroraCore con la base de datos de prueba.
 > - Detección de salida con ubicación real: depende de Aurora Band (fuera del MVP).

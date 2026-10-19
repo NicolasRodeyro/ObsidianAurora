@@ -113,15 +113,15 @@ stateDiagram-v2
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-134-01 | Cuidador vinculado con permiso, Home activo | 1. Pedir la autorización. | Las seis verificaciones en verde | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-134-02 | Cuidador sin permiso de Drop-in | 1. Pedir la autorización. | Informa el permiso faltante | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-134-03 | Home sin señal reciente | 1. Autorizar o crear la sesión. | Se rechaza | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-134-04 | Sesión creada | 1. Pedir el token de media del cuidador y del Home. | Token de vida corta y misma sala | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-134-05 | Sesión terminada o fallida | 1. Terminar o fallar la sesión. | Se envía `drop_in_end` al Home | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-134-06 | Home sin sesión activa | 1. `GET home/drop-in/active/`. | 204 | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-134-01 | Cuidador vinculado con permiso, Home activo | 1. Pedir la autorización. | Las seis verificaciones en verde | OK (17/10): `test_drop_in_media_api.py` (11)* |
+| CP-AURA-134-02 | Cuidador sin permiso de Drop-in | 1. Pedir la autorización. | Informa el permiso faltante | OK (17/10): mismo archivo* |
+| CP-AURA-134-03 | Home sin señal reciente | 1. Autorizar o crear la sesión. | Se rechaza | OK (17/10): mismo archivo* |
+| CP-AURA-134-04 | Sesión creada | 1. Pedir el token de media del cuidador y del Home. | Token de vida corta y misma sala | OK (17/10): mismo archivo* |
+| CP-AURA-134-05 | Sesión terminada o fallida | 1. Terminar o fallar la sesión. | Se envía `drop_in_end` al Home | OK (17/10): mismo archivo* |
+| CP-AURA-134-06 | Home sin sesión activa | 1. `GET home/drop-in/active/`. | 204 | OK (17/10): `test_home_drop_in_api.py` (5)* |
 | CP-AURA-134-07 | Home y Care con el flujo | 1. Ejecutar `drop_in or livekit` en Home y `dropIn` en Care. | Pasan | OK (17/10): Home 51 pruebas; Care 24 pruebas |
 
-\* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
+\* **Ejecución de AuroraCore (17/10/2026):** las pruebas se corrieron con `pytest` sobre SQLite (no se pudo levantar PostgreSQL en la máquina de revisión). La suite completa de AuroraCore pasó el 16/10/2026 sobre PostgreSQL con 1.579 pruebas y sin fallas (ejecución del equipo, ver [[Plan de Testing]], sección 4.7). Repetida el 17/10 sobre SQLite, pasaron 1.574 de 1.579; las 5 restantes usan SQL propio de PostgreSQL y no se pueden ejecutar en SQLite.
 
 **Ejecución de AuroraHome (17/10/2026):** las pruebas se corrieron con `python -m pytest tests -k <grupo>` sobre el código actual de la rama principal del repositorio.
 
@@ -138,7 +138,7 @@ stateDiagram-v2
 - [x] DER actualizado (si modificó el modelo de datos)
 - [x] Diagramas de modelado relevantes (clases/secuencia/estados, según aplique)
 - [x] Casos de prueba con precondición, pasos y resultado esperado
-- [ ] Resultados de ejecución de las pruebas
+- [x] Resultados de ejecución de las pruebas
 - [x] Referencias a código (paths/commits/PRs)
 
 > [!todo] Pendiente

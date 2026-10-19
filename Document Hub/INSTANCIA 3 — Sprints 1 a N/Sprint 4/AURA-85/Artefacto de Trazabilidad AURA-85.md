@@ -85,12 +85,12 @@ sequenceDiagram
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-85-01 | Cuidador vinculado a un hogar con datos | 1. Autenticarse. 2. `GET /api/v1/session/summary/`. | 200 con paciente, alertas, eventos, rutinas y medicación | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-85-02 | El hogar tiene alertas atendidas y cerradas | 1. Pedir el resumen. | Esas alertas no aparecen; las activas vienen de más a menos graves | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-85-03 | El hogar tiene más de 10 eventos | 1. Pedir el resumen. | Solo vienen los 10 más recientes | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-85-04 | Rutinas y medicaciones, algunas ya cumplidas | 1. Pedir el resumen. | Solo aparecen las pendientes del día | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-85-05 | Usuario autenticado sin perfil de cuidador | 1. Pedir el resumen. | 403 | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-85-06 | Usuario sin cuenta de hogar | 1. Pedir el resumen. | 404 | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-85-01 | Cuidador vinculado a un hogar con datos | 1. Autenticarse. 2. `GET /api/v1/session/summary/`. | 200 con paciente, alertas, eventos, rutinas y medicación | OK (17/10): `test_session_summary.py` (13)* |
+| CP-AURA-85-02 | El hogar tiene alertas atendidas y cerradas | 1. Pedir el resumen. | Esas alertas no aparecen; las activas vienen de más a menos graves | OK (17/10): `test_session_summary.py` (13)* |
+| CP-AURA-85-03 | El hogar tiene más de 10 eventos | 1. Pedir el resumen. | Solo vienen los 10 más recientes | OK (17/10): `test_session_summary.py` (13)* |
+| CP-AURA-85-04 | Rutinas y medicaciones, algunas ya cumplidas | 1. Pedir el resumen. | Solo aparecen las pendientes del día | OK (17/10): `test_session_summary.py` (13)* |
+| CP-AURA-85-05 | Usuario autenticado sin perfil de cuidador | 1. Pedir el resumen. | 403 | OK (17/10): `test_session_summary.py` (13)* |
+| CP-AURA-85-06 | Usuario sin cuenta de hogar | 1. Pedir el resumen. | 404 | OK (17/10): `test_session_summary.py` (13)* |
 | CP-AURA-85-07 | Dashboard con etiquetas de evento y ánimo | 1. Abrir Inicio con datos reales. | Las etiquetas se ven en español y la duración media no es negativa | OK (17/10): `metricsAdapters.test.ts` dentro del grupo `metrics` de Care, 47 pruebas |
 
 \* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
@@ -112,5 +112,4 @@ sequenceDiagram
 - [x] Referencias a código (paths/commits/PRs)
 
 > [!todo] Pendiente
-> - Registrar el resultado de cada caso de AuroraCore ejecutando la suite con la base de datos de prueba.
 > - El indicador de datos desactualizados (*stale*) se basa en lecturas biométricas; con Aurora Band fuera del MVP no aporta información y conviene ocultarlo o redefinirlo.

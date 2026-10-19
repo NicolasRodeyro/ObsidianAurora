@@ -95,22 +95,22 @@ stateDiagram-v2
 | Tipo | Ubicación / referencia |
 | --- | --- |
 | Backend | `AuroraCore/apps/patients/models.py` (`ConsentRecord`), `apps/patients/views.py` y `serializers.py`, `apps/session/views.py` (alta del hogar) |
-| Backend (tests) | `apps/patients/tests/test_consent_api.py` (17), `apps/session/tests/test_setup_consent.py` (14) |
+| Backend (tests) | `apps/patients/tests/test_consent_api.py` (17), `apps/session/tests/test_setup_consent.py` (21) |
 | Frontend | `AuroraCare/app/onboarding.tsx`, `src/features/patients/api/` (`privacyConsentSync`) |
 | Commit / PR | `e4aaacf` (API de consentimiento, RF-81), `c3bbaf3` y `a9f03fe` (AURA-160), `e529371` y PR #77 (AURA-170, obligatorio) |
 
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-98-01 | Alta de hogar con consentimiento | 1. `POST households/setup/`. | Se crean paciente y consentimiento en la misma operación | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-98-02 | Alta ya completada | 1. Reintentar el alta. | Devuelve el mismo consentimiento | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-98-03 | Alta sin consentimiento | 1. `POST` sin consentimiento. | Se rechaza (obligatorio) | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-98-04 | Consentimiento otorgado | 1. Intentar otorgar la misma versión otra vez. | Se rechaza | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-98-05 | Consentimiento otorgado | 1. Revocar. 2. Revocar de nuevo. | La primera funciona; la segunda devuelve 400 | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-98-06 | Usuario sin sesión | 1. Pedir los consentimientos. | No autorizado | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-98-01 | Alta de hogar con consentimiento | 1. `POST households/setup/`. | Se crean paciente y consentimiento en la misma operación | OK (17/10): `test_setup_consent.py` (21)* |
+| CP-AURA-98-02 | Alta ya completada | 1. Reintentar el alta. | Devuelve el mismo consentimiento | OK (17/10): mismo archivo* |
+| CP-AURA-98-03 | Alta sin consentimiento | 1. `POST` sin consentimiento. | Se rechaza (obligatorio) | OK (17/10): mismo archivo* |
+| CP-AURA-98-04 | Consentimiento otorgado | 1. Intentar otorgar la misma versión otra vez. | Se rechaza | OK (17/10): `test_consent_api.py` (17)* |
+| CP-AURA-98-05 | Consentimiento otorgado | 1. Revocar. 2. Revocar de nuevo. | La primera funciona; la segunda devuelve 400 | OK (17/10): mismo archivo* |
+| CP-AURA-98-06 | Usuario sin sesión | 1. Pedir los consentimientos. | No autorizado | OK (17/10): mismo archivo* |
 | CP-AURA-98-07 | Care envía el consentimiento | 1. Ejecutar `privacyConsentSync` de Care. | Pasa | OK (17/10): 18 pruebas |
 
-\* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
+\* **Ejecución de AuroraCore (17/10/2026):** las pruebas se corrieron con `pytest` sobre SQLite (no se pudo levantar PostgreSQL en la máquina de revisión). La suite completa de AuroraCore pasó el 16/10/2026 sobre PostgreSQL con 1.579 pruebas y sin fallas (ejecución del equipo, ver [[Plan de Testing]], sección 4.7). Repetida el 17/10 sobre SQLite, pasaron 1.574 de 1.579; las 5 restantes usan SQL propio de PostgreSQL y no se pueden ejecutar en SQLite.
 
 **Ejecución de AuroraCare (17/10/2026):** las pruebas se corrieron con `npx jest <carpeta>` sobre el código actual.
 

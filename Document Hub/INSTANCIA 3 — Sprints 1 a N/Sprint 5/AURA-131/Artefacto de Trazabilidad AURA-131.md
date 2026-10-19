@@ -115,15 +115,15 @@ stateDiagram-v2
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-131-01 | Dispositivo con clave válida | 1. Abrir el socket de comandos. | Se une a su grupo y figura en línea | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-131-02 | Socket sin clave o con clave ajena | 1. Conectar. | Se rechaza como no autorizado | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-131-03 | Comando pendiente | 1. Listar comandos. 2. Confirmar (ack). 3. Repetir el ack. | Pasa a entregado y luego a confirmado; el primer ack gana | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-131-04 | Comando vencido | 1. Listar. 2. Confirmar. | No se entrega; el ack devuelve conflicto y queda `expired` | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-131-05 | Dispositivo revocado | 1. Conectar el socket. | Recibe *safe mode* y se cierra | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-131-06 | Comando de otro dispositivo | 1. Confirmar un comando ajeno. | No se modifica | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-131-01 | Dispositivo con clave válida | 1. Abrir el socket de comandos. | Se une a su grupo y figura en línea | OK (17/10): `test_home_commands_ws.py` (9)* |
+| CP-AURA-131-02 | Socket sin clave o con clave ajena | 1. Conectar. | Se rechaza como no autorizado | OK (17/10): mismo archivo* |
+| CP-AURA-131-03 | Comando pendiente | 1. Listar comandos. 2. Confirmar (ack). 3. Repetir el ack. | Pasa a entregado y luego a confirmado; el primer ack gana | OK (17/10): `test_home_commands_api.py` (19)* |
+| CP-AURA-131-04 | Comando vencido | 1. Listar. 2. Confirmar. | No se entrega; el ack devuelve conflicto y queda `expired` | OK (17/10): mismo archivo* |
+| CP-AURA-131-05 | Dispositivo revocado | 1. Conectar el socket. | Recibe *safe mode* y se cierra | OK (17/10): `test_home_commands_ws.py` (9)* |
+| CP-AURA-131-06 | Comando de otro dispositivo | 1. Confirmar un comando ajeno. | No se modifica | OK (17/10): `test_home_commands_api.py` (19)* |
 | CP-AURA-131-07 | Home con heartbeat y canal de comandos | 1. Ejecutar los grupos `heartbeat or command or credential` de Home. | Todas pasan | OK (17/10): 245 pruebas |
 
-\* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
+\* **Ejecución de AuroraCore (17/10/2026):** las pruebas se corrieron con `pytest` sobre SQLite (no se pudo levantar PostgreSQL en la máquina de revisión). La suite completa de AuroraCore pasó el 16/10/2026 sobre PostgreSQL con 1.579 pruebas y sin fallas (ejecución del equipo, ver [[Plan de Testing]], sección 4.7). Repetida el 17/10 sobre SQLite, pasaron 1.574 de 1.579; las 5 restantes usan SQL propio de PostgreSQL y no se pueden ejecutar en SQLite. De las pruebas de este artefacto, `test_device_credential_defaults_and_hash_only_storage` (en `test_device_credentials.py`) es una de las que no corren en SQLite, porque consulta con SQL directo y el identificador UUID se guarda con otro formato; las otras 20 del archivo pasan.
 
 **Ejecución de AuroraHome (17/10/2026):** las pruebas se corrieron con `python -m pytest tests -k <grupo>` sobre el código actual de la rama principal del repositorio.
 

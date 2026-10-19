@@ -150,4 +150,4 @@ Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
 - Manual de UX/UI Aurora (11 capítulos): [[Manual de UX-UI Aurora]].
 - Prototipo navegable: `Design/prototype/aurora-care.html`.
 - [[Investigación — Almacenamiento de Datos y Ley 25.326]] y [[Investigación — Despliegue e Infraestructura]].
-- Artefactos de trazabilidad AURA-75 a AURA-80 (carpeta `Trazabilidad/`).
+- Trazabilidad de las historias AURA-74 a AURA-80: ver [[Historias de producto AURA-74 a 80]].

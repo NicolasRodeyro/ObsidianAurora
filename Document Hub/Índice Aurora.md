@@ -13,9 +13,10 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Horarios y Roles de los Miembros]] — capacidad del equipo.
 - [[Documento Presentacion Sprint 0]] — cierre del Sprint 0.
 - [[Historial de revisión]] — versiones del documento «Proyecto Aurora 2026» (carátula única).
-- [[Desarrollo del Proyecto — Sprints 0, 1 y 2]] — equipo, stack, sprints y estado del desarrollo (Instancia 3).
-- Informes de sprint (Instancia 3): [[Informe Sprint 1]] · [[Informe Sprint 2]] · [[Informe Sprint 3]] · [[Informe Sprint 4]] · [[Informe Sprint 5]] · [[Informe Sprint 6]] (parcial). La numeración sigue la documentación; la equivalencia con Jira está en [[Desarrollo del Proyecto — Sprints 0, 1 y 2]].
+- [[Desarrollo del Proyecto — Sprints 0, 1 y 2]] — equipo, stack, numeración de sprints y mapa del desarrollo (Instancia 3).
+- Informes de sprint (Instancia 3): [[Informe Sprint 0]] · [[Informe Sprint 1]] · [[Informe Sprint 2]] · [[Informe Sprint 3]] · [[Informe Sprint 4]] · [[Informe Sprint 5]] · [[Informe Sprint 6]] (parcial). La numeración sigue la documentación; la equivalencia con Jira está en [[Desarrollo del Proyecto — Sprints 0, 1 y 2]].
 - [[Registro de Riesgos]] — riesgos del proyecto (R1 a R22) con su estado y evolución por sprint.
+- [[Estado consolidado y tendencias]] · [[Trabajo pendiente y próximos pasos]] · [[Anexos del desarrollo del proyecto]] — cierre de la Instancia 3 al 17/10/2026.
 - [[Presentación del Proyecto]] — pitch y diferenciación.
 - [[Jornada de Presentación]] — paper, póster y video de la jornada del 06/10/2026 (link a la carpeta de Drive).
 - `INSTANCIA 4/video-aurora.html` — render animado del video de presentación (1920×1080, 2:54), listo para grabar.
@@ -36,7 +37,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Working Agreement]] — acuerdos de trabajo del equipo.
 - [[Trazabilidad RF-Épicas]] — matriz RF ↔ módulo ↔ épica.
 - [[Tablero Jira]] — snapshot del board AURA.
-- Artefactos de trazabilidad por historia → carpeta `Trazabilidad/` (generados con la skill `/artefacto-trazabilidad`).
+- Artefactos de trazabilidad por historia → carpeta de cada sprint en `INSTANCIA 3 — Sprints 1 a N/` (generados con la skill `/artefacto-trazabilidad`).
 
 ## Arquitectura y diseño
 - [[Boceto de Arquitectura]] — esquema temprano.

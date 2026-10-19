@@ -95,7 +95,7 @@ El MCP se autentica con la cuenta `jeremias.gomez@craftech.io`, invitada al proy
 3. Regenerar la tabla de [[Tablero Jira]] a partir del JSON. Commit.
 
 ## Skills del proyecto (`.claude/skills/`)
-- **`/artefacto-trazabilidad`** — genera el artefacto de trazabilidad de una historia (ADR ↔ DER ↔ diagramas ↔ código ↔ tests) según la cátedra. Salida en `Document Hub/Trazabilidad/` + comentario en Jira. Recopila lo que exista y deja scaffolding del resto.
+- **`/artefacto-trazabilidad`** — genera el artefacto de trazabilidad de una historia (ADR ↔ DER ↔ diagramas ↔ código ↔ tests) según la cátedra. Salida en `Document Hub/INSTANCIA 3 — Sprints 1 a N/Sprint N/AURA-xx/` + comentario en Jira. Recopila lo que exista y deja scaffolding del resto.
 
 ## Convenciones del vault
 - Cada doc en `Document Hub/` usa **frontmatter YAML** (`base: "[[Document Hub.base]]"`, `Category`, timestamps). `Document Hub.base` es una vista-tabla de Obsidian que cataloga los docs.

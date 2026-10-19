@@ -97,15 +97,15 @@ sequenceDiagram
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-163-01 | Aporte pendiente con foto | 1. Aprobar el aporte. | Los adjuntos se copian a la memoria | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-163-02 | Aporte con foto, aprobado con edición | 1. Aprobar editando. | Los adjuntos se copian igual | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-163-03 | Recuerdo con foto del hogar | 1. Pedir la URL de la foto. | URL firmada con el TTL configurado | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-163-04 | Foto de otro hogar | 1. Pedir la URL. | 404 y el almacenamiento no se toca | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-163-05 | Recuerdo sin adjuntos | 1. Pedir la URL. | 404 | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-163-06 | Storage caído | 1. Pedir la URL. | 503 con indicador de reintento | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-163-01 | Aporte pendiente con foto | 1. Aprobar el aporte. | Los adjuntos se copian a la memoria | OK (17/10): `test_memory_contributions_api.py` (3)* |
+| CP-AURA-163-02 | Aporte con foto, aprobado con edición | 1. Aprobar editando. | Los adjuntos se copian igual | OK (17/10): mismo archivo* |
+| CP-AURA-163-03 | Recuerdo con foto del hogar | 1. Pedir la URL de la foto. | URL firmada con el TTL configurado | OK (17/10): `test_memory_attachment_signed_url.py` (9)* |
+| CP-AURA-163-04 | Foto de otro hogar | 1. Pedir la URL. | 404 y el almacenamiento no se toca | OK (17/10): mismo archivo* |
+| CP-AURA-163-05 | Recuerdo sin adjuntos | 1. Pedir la URL. | 404 | OK (17/10): mismo archivo* |
+| CP-AURA-163-06 | Storage caído | 1. Pedir la URL. | 503 con indicador de reintento | OK (17/10): mismo archivo* |
 | CP-AURA-163-07 | Pantallas de recuerdos de Care | 1. Ejecutar las pruebas de `memories` de Care. | Pasan | OK (17/10): `jest src/features/memories`, 27 pruebas |
 
-\* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
+\* **Ejecución de AuroraCore (17/10/2026):** las pruebas se corrieron con `pytest` sobre SQLite (no se pudo levantar PostgreSQL en la máquina de revisión). La suite completa de AuroraCore pasó el 16/10/2026 sobre PostgreSQL con 1.579 pruebas y sin fallas (ejecución del equipo, ver [[Plan de Testing]], sección 4.7). Repetida el 17/10 sobre SQLite, pasaron 1.574 de 1.579; las 5 restantes usan SQL propio de PostgreSQL y no se pueden ejecutar en SQLite.
 
 **Ejecución de AuroraCare (17/10/2026):** las pruebas se corrieron con `npx jest <carpeta>` sobre el código actual.
 

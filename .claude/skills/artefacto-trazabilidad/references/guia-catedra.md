@@ -100,4 +100,4 @@ Cuando la historia se deriva de tareas técnicas ya hechas, cuidar que quede com
 - Idioma español (es-AR).
 - Frontmatter YAML con `base: "[[Document Hub.base]]"` para que el artefacto aparezca en la base/grafo de Obsidian.
 - Enlazar con `[[wikilinks]]` a [[Requerimientos]], [[Arquitectura y Stack Tecnológico]] y [[Trazabilidad RF-Épicas]].
-- Ubicación: `Document Hub/Trazabilidad/<KEY> - <slug>.md`.
+- Ubicación: `Document Hub/INSTANCIA 3 — Sprints 1 a N/Sprint N/AURA-xx/Artefacto de Trazabilidad AURA-xx.md`.

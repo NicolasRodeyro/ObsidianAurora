@@ -171,4 +171,4 @@ Registro completo y vigente de todos los riesgos: [[Registro de Riesgos]].
 - [[Plan de Testing]] (AURA-36)
 - [[Product Backlog Inicial]] (AURA-38)
 - [[User Story Map]] (AURA-37)
-- Artefactos de trazabilidad de AURA-54 a AURA-62 (carpetas `Sprint 1/AURA-xx/`).
+- Artefactos de trazabilidad de las historias AURA-54 a AURA-58 (carpetas `Sprint 1/AURA-xx/`).

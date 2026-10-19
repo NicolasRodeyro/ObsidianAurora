@@ -101,29 +101,32 @@ stateDiagram-v2
 | --- | --- |
 | Backend | `AuroraCore/apps/ai/query_service.py`, `worker_client.py`, `views.py`, `serializers.py`, `models.py` |
 | Backend (rutas) | `config/urls.py`: `patient-query` (Care) y `home/patient-query/` (dispositivo) |
-| Backend (tests) | `apps/ai/tests/test_patient_query_api.py` (18 pruebas), `apps/biometrics/tests/test_home_patient_query_serializer.py`, `apps/ai/tests/test_memory_contributions_api.py` |
+| Backend (tests) | `apps/ai/tests/test_patient_query_api.py` (19 pruebas), `apps/biometrics/tests/test_home_patient_query_serializer.py` (9), `apps/ai/tests/test_memory_contributions_api.py` (3) |
 | Home | `AuroraHome/src/aurora_home/application/patient_query_responder.py` |
 | Commit / PR | `68b8bdf` (24/09, endpoint RAG), `a5babef` (24/09, consulta autenticada por dispositivo), `fee68e4` (01/10, historial opcional), `79c2a99` (contexto clínico en la consulta) |
 
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-105-01 | Paciente con memorias y Worker IA simulado | 1. `POST` con una pregunta. | 200 con respuesta y registro de auditoría | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-105-02 | Memoria marcada como sensible | 1. Consultar. | La memoria no aparece en el payload enviado al Worker | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-105-03 | Paciente de otro hogar | 1. Consultar. | 404 y el Worker no se invoca | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-105-04 | El Worker devuelve error | 1. Consultar. | 503, auditoría de la falla e indicador de reintento | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-105-05 | Pregunta vacía | 1. `POST` con pregunta vacía. | 400 | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-105-06 | Más de 10 alertas activas | 1. Consultar. | Solo se reenvían 10 | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-105-01 | Paciente con memorias y Worker IA simulado | 1. `POST` con una pregunta. | 200 con respuesta y registro de auditoría | OK (17/10): `test_patient_query_api.py` (19)* |
+| CP-AURA-105-02 | Memoria marcada como sensible | 1. Consultar. | La memoria no aparece en el payload enviado al Worker | OK (17/10): mismo archivo* |
+| CP-AURA-105-03 | Paciente de otro hogar | 1. Consultar. | 404 y el Worker no se invoca | OK (17/10): mismo archivo* |
+| CP-AURA-105-04 | El Worker devuelve error | 1. Consultar. | 503, auditoría de la falla e indicador de reintento | OK (17/10): mismo archivo* |
+| CP-AURA-105-05 | Pregunta vacía | 1. `POST` con pregunta vacía. | 400 | OK (17/10): mismo archivo* |
+| CP-AURA-105-06 | Más de 10 alertas activas | 1. Consultar. | Solo se reenvían 10 | OK (17/10): mismo archivo* |
 | CP-AURA-105-07 | Home con el responder de consulta | 1. Ejecutar las pruebas de `patient_query` de Home. | Todas pasan | OK (17/10): grupo `patient_query`, 102 pruebas |
+| CP-AURA-105-08 | Worker IA con la consulta al paciente | 1. Ejecutar `tests/test_patient_query.py` del Worker IA. | Todas pasan | OK (17/10): 73 pruebas (suite completa del Worker IA: 196) |
 
-\* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
+\* **Ejecución de AuroraCore (17/10/2026):** las pruebas se corrieron con `pytest` sobre SQLite (no se pudo levantar PostgreSQL en la máquina de revisión). La suite completa de AuroraCore pasó el 16/10/2026 sobre PostgreSQL con 1.579 pruebas y sin fallas (ejecución del equipo, ver [[Plan de Testing]], sección 4.7). Repetida el 17/10 sobre SQLite, pasaron 1.574 de 1.579; las 5 restantes usan SQL propio de PostgreSQL y no se pueden ejecutar en SQLite.
 
 **Ejecución de AuroraHome (17/10/2026):** las pruebas se corrieron con `python -m pytest tests -k <grupo>` sobre el código actual de la rama principal del repositorio.
+
+**Ejecución del Worker IA (17/10/2026):** `python -m pytest tests` sobre el código actual del servicio.
 
 ## 7. Matriz de trazabilidad de la historia
 | Historia | RF | ADR | DER | Diagramas | Código | Casos de prueba |
 | --- | --- | --- | --- | --- | --- | --- |
-| AURA-105 | RF-47 a 50, 77 | ADR-003, 004, 010, 012 | `PatientMemory`, `MemoryContribution`, `MemoryEmbedding`, `LLMInteractionLog` | Secuencia, estados | `apps/ai/query_service.py` | CP-AURA-105-01 a 07 |
+| AURA-105 | RF-47 a 50, 77 | ADR-003, 004, 010, 012 | `PatientMemory`, `MemoryContribution`, `MemoryEmbedding`, `LLMInteractionLog` | Secuencia, estados | `apps/ai/query_service.py` | CP-AURA-105-01 a 08 |
 
 ## Checklist de completitud (cátedra)
 - [x] Historia y criterios de aceptación

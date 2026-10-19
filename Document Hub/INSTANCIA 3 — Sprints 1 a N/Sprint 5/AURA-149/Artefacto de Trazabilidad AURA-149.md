@@ -95,7 +95,7 @@ sequenceDiagram
 | Tipo | Ubicación / referencia |
 | --- | --- |
 | Backend | `AuroraCore/apps/interactions/models.py` (`DailyInteraction`, `ActivitySession`, `CustomTherapy`, `TherapyMedia`), `apps/biometrics/assets.py`, `apps/biometrics/models.py` (`Asset`) |
-| Backend (tests) | `apps/interactions/tests/test_daily_interactions_generation.py` (19), `test_daily_plan_api.py`, `test_daily_plan_editing.py`, `test_daily_plan_outcomes.py`, `apps/biometrics/tests/test_home_activity_plan.py`, `test_assets.py` (24) |
+| Backend (tests) | `apps/interactions/tests/test_daily_interactions_generation.py` (19), `test_daily_plan_api.py` (31), `test_daily_plan_editing.py` (35), `test_daily_plan_outcomes.py` (16), `apps/biometrics/tests/test_home_activity_plan.py` (19), `test_assets.py` (24) |
 | Worker IA | `Aurora-Worker-IA` — plan diario de sesiones cognitivas (commit `feat(worker-ia)` del 14/09) |
 | Home | `AuroraHome/src/aurora_home/application/activity_plan.py`, `activity_runtime.py`, `activity_execution.py`, `activity_session.py`, `asset_cache.py` |
 | Commit / PR | `7822c72` (28/09, planes versionados con assets, CORE-009), `9c657ae` (URL firmada, AURA-163), `9d5ac5d` (29/09, Home ejecuta las sesiones, AURA-172), `61c68ca` (23/09, API del plan diario para Care) |
@@ -103,22 +103,27 @@ sequenceDiagram
 ## 6. Casos de prueba
 | ID | Precondición | Pasos | Resultado esperado | Resultado de ejecución |
 | --- | --- | --- | --- | --- |
-| CP-AURA-149-01 | Paciente con datos, Worker IA simulado | 1. Generar el plan del día. 2. Repetir la generación. | Una sola fila para ese día, actualizada | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-149-02 | Dos pacientes, uno falla | 1. Ejecutar la generación nocturna. | El que falla no impide el plan del otro | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-149-03 | Generación exitosa | 1. Revisar los registros. | Hay log del modelo y decisión de IA | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-149-04 | Plan generado | 1. Editar el plan como cuidador. | El cambio se guarda y el plan conserva su versión | Cubierto por la suite del 16/10 (1.579 OK)* |
-| CP-AURA-149-05 | Asset vencido o revocado | 1. Pedir el asset. | No se activa ni resuelve una URL | Cubierto por la suite del 16/10 (1.579 OK)* |
+| CP-AURA-149-01 | Paciente con datos, Worker IA simulado | 1. Generar el plan del día. 2. Repetir la generación. | Una sola fila para ese día, actualizada | OK (17/10): `test_daily_interactions_generation.py` (19)* |
+| CP-AURA-149-02 | Dos pacientes, uno falla | 1. Ejecutar la generación nocturna. | El que falla no impide el plan del otro | OK (17/10): mismo archivo* |
+| CP-AURA-149-03 | Generación exitosa | 1. Revisar los registros. | Hay log del modelo y decisión de IA | OK (17/10): mismo archivo* |
+| CP-AURA-149-04 | Plan generado | 1. Editar el plan como cuidador. | El cambio se guarda y el plan conserva su versión | OK (17/10): `test_daily_plan_editing.py` (35)* |
+| CP-AURA-149-05 | Asset vencido o revocado | 1. Pedir el asset. | No se activa ni resuelve una URL | OK (17/10): `test_assets.py` (24)* |
 | CP-AURA-149-06 | Plan sintético en Home | 1. Ejecutar las pruebas de `activity` de Home. | Todas pasan | OK (17/10): grupo `activity`, 218 pruebas |
-| CP-AURA-149-07 | Aurora Care con el plan | 1. Ejecutar las pruebas de terapias de Care. | Pasan | Pendiente: no se ejecutó la carpeta `therapies` de Care en esta revisión |
+| CP-AURA-149-07 | Aurora Care con el plan | 1. Ejecutar las pruebas de terapias de Care. | Pasan | OK (17/10): `jest src/features/therapies`, 289 pruebas (26 archivos) |
+| CP-AURA-149-08 | Worker IA con el generador del plan diario | 1. Ejecutar `tests/test_daily_plan.py` del Worker IA. | Todas pasan | OK (17/10): 47 pruebas (suite completa del Worker IA: 196) |
 
-\* **Ejecución de AuroraCore:** la suite completa pasó el 16/10/2026 (1.579 pruebas, sin fallas; ejecución del equipo, ver [[Plan de Testing]], sección 4.7). No se registró el resultado de cada caso por separado; para hacerlo hay que correr la suite con la base de datos de prueba (Docker).
+\* **Ejecución de AuroraCore (17/10/2026):** las pruebas se corrieron con `pytest` sobre SQLite (no se pudo levantar PostgreSQL en la máquina de revisión). La suite completa de AuroraCore pasó el 16/10/2026 sobre PostgreSQL con 1.579 pruebas y sin fallas (ejecución del equipo, ver [[Plan de Testing]], sección 4.7). Repetida el 17/10 sobre SQLite, pasaron 1.574 de 1.579; las 5 restantes usan SQL propio de PostgreSQL y no se pueden ejecutar en SQLite.
 
 **Ejecución de AuroraHome (17/10/2026):** las pruebas se corrieron con `python -m pytest tests -k <grupo>` sobre el código actual de la rama principal del repositorio.
+
+**Ejecución de AuroraCare (17/10/2026):** las pruebas se corrieron con `npx jest <carpeta>` sobre el código actual.
+
+**Ejecución del Worker IA (17/10/2026):** `python -m pytest tests` sobre el código actual del servicio.
 
 ## 7. Matriz de trazabilidad de la historia
 | Historia | RF | ADR | DER | Diagramas | Código | Casos de prueba |
 | --- | --- | --- | --- | --- | --- | --- |
-| AURA-149, 137, 157, 172 | RF-09 a 14, 52 | ADR-003, 004, 008, 012 | `DailyInteraction`, `ActivitySession`, `Asset` | Secuencia | `apps/interactions/*`, `activity_*.py` | CP-AURA-149-01 a 07 |
+| AURA-149, 137, 157, 172 | RF-09 a 14, 52 | ADR-003, 004, 008, 012 | `DailyInteraction`, `ActivitySession`, `Asset` | Secuencia | `apps/interactions/*`, `activity_*.py` | CP-AURA-149-01 a 08 |
 
 ## Checklist de completitud (cátedra)
 - [x] Historia y criterios de aceptación
@@ -126,9 +131,8 @@ sequenceDiagram
 - [x] DER actualizado (si modificó el modelo de datos)
 - [x] Diagramas de modelado relevantes (clases/secuencia/estados, según aplique)
 - [x] Casos de prueba con precondición, pasos y resultado esperado
-- [ ] Resultados de ejecución de las pruebas
+- [x] Resultados de ejecución de las pruebas
 - [x] Referencias a código (paths/commits/PRs)
 
 > [!todo] Pendiente
-> - Ejecutar las pruebas de terapias de AuroraCare y las del Worker IA para completar la columna de resultados.
 > - La adaptación de dificultad según el desempeño (RF-52, AURA-77) se documenta en su propio artefacto.
