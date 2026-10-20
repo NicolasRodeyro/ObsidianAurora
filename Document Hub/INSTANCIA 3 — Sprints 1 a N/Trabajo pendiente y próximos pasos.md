@@ -27,7 +27,8 @@ Al 17/10/2026 faltan tres semanas para la entrega final del 05/11. Lo pendiente 
 
 - Registrar el ADR de la heurística determinista de dificultad adaptativa (AURA-77) y el ADR de LiveKit como proveedor de media (propuesto como ADR-013).
 - Agregar pruebas de API para `mark-omitted` (AURA-89) y para los endpoints de contactos de emergencia (AURA-84).
-- Medir la cobertura de pruebas, que hoy no se calcula.
+- Cobertura de pruebas: Aurora Home mide líneas y ramas con un mínimo de 80 %; Aurora Core exige 80 % de líneas, sin ramas; Aurora Care no tiene umbral. Decidir si se agrega el gate de ramas a Core y el umbral a Care, o si se ajusta la meta del Plan de Testing.
+- Definir si corregir un registro de medicación o rutina ya confirmado u omitido es una regla válida (hoy los endpoints confirm y mark-omitted lo permiten): si lo es, documentarlo en el diagrama de estados; si no, restringirlo en el código.
 
 ## 4. Proceso y documentación
 

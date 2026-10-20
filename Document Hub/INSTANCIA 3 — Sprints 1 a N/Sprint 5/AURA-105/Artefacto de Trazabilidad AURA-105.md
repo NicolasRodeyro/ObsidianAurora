@@ -6,14 +6,14 @@ historia: "AURA-105"
 epica: "AURA-15"
 Last updated time: "2026-10-17T00:00:00"
 ---
-# Artefacto de Trazabilidad — AURA-105 Consulta a la memoria del paciente con IA (RAG)
+# Artefacto de Trazabilidad — AURA-105 Consulta a la memoria del paciente con IA (consulta contextual)
 
 > **Para qué:** conectar esta historia con sus decisiones de diseño, modelo de datos, código y pruebas.
 > **Para quién:** equipo (durante el desarrollo) y docente (evaluación de calidad técnica).
 
 | Campo | Valor |
 | --- | --- |
-| Historia | **AURA-105** — Consulta a la memoria del paciente con IA (RAG) |
+| Historia | **AURA-105** — Consulta a la memoria del paciente con IA (consulta contextual) |
 | Épica | AURA-15 — Motor de IA y Memoria del Paciente |
 | Requerimientos | RF-47, RF-48, RF-49, RF-50, RF-77 (ver [[Requerimientos]] · [[Trazabilidad RF-Épicas]]) |
 | Estado en Jira | Finalizada (Sprint 5; Jira «SCRUM Sprint 6»). AURA-104 (esquema de memoria contextual) sigue en revisión |
@@ -34,7 +34,7 @@ Last updated time: "2026-10-17T00:00:00"
 
 ## 2. Decisiones de diseño (ADR)
 - **ADR-004** — Core nunca llama al LLM directamente: usa el Worker IA externo (FastAPI).
-- **ADR-003** — PostgreSQL con pgvector para la memoria.
+- **ADR-003** — PostgreSQL con pgvector, previsto para la búsqueda vectorial de la memoria (hoy la consulta es contextual, sin búsqueda vectorial).
 - **ADR-010** — Cifrado de datos identificatorios: el payload se sanitiza antes de salir.
 - **ADR-012** — Diseño de API (`/api/v1/`, autenticación del cuidador y de dispositivo).
 

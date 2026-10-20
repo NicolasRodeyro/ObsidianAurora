@@ -300,12 +300,12 @@ La elección resulta adecuada para Aurora Care debido a su enfoque principalment
 
 **Contexto**
 
-Aurora requiere persistencia para datos relacionales (pacientes, cuidadores, eventos, rutinas, alertas, configuraciones) y datos vectoriales (embeddings para RAG — Retrieval-Augmented Generation — en el motor de IA). Se evaluaron opciones de base de datos única vs. especializadas.
+Aurora requiere persistencia para datos relacionales (pacientes, cuidadores, eventos, rutinas, alertas, configuraciones) y datos vectoriales previstos a futuro (embeddings para RAG — Retrieval-Augmented Generation — en el motor de IA). En el MVP la memoria del paciente se consulta de forma contextual, sin búsqueda vectorial: el motor de IA toma las memorias aprobadas y neutrales y las envía como contexto. Se evaluaron opciones de base de datos única vs. especializadas.
 
 **Drivers de decisión**
 
 1. **Consistencia y confiabilidad** para datos de salud (eventos, alertas, medicación)
-2. **Búsqueda vectorial** eficiente para RAG (memoria del paciente, contexto conversacional)
+2. **Búsqueda vectorial** eficiente para el RAG previsto a futuro (memoria del paciente, contexto conversacional)
 3. **Costo** en Free Tier / bajos recursos
 4. **Simplicidad operativa** (preferible una sola base de datos)
 5. **Respaldo y recuperación** ante fallas
@@ -327,7 +327,7 @@ Se adopta **Supabase (PostgreSQL 16 + pgvector)** como plataforma de datos.
 - Incluye autenticación, Realtime (WebSocket), Storage y APIs automáticas, reduciendo servicios externos
 - Plan Free Project (500 MB DB, 2 GB storage, 50k MAU) es suficiente para prototipo y validación
 - Al estar basado en PostgreSQL puro, no hay vendor lock-in: se puede migrar a PostgreSQL estándar en cualquier momento
-- pgvector proporciona búsqueda vectorial HNSW integrada, suficiente para RAG (memoria del paciente)
+- pgvector proporciona búsqueda vectorial HNSW integrada, suficiente para el RAG previsto (memoria del paciente). Hoy el MVP no usa búsqueda vectorial: consulta las memorias aprobadas como contexto (hasta 20 por consulta) y guarda los embeddings como JSON; pgvector queda disponible en Supabase para esa evolución
 
 **Consecuencias**
 
@@ -737,20 +737,20 @@ Se adopta **API REST (HTTP)** como protocolo de comunicación entre Aurora Band 
 
 **Contexto**
 
-Aurora guarda datos de salud de pacientes con Alzheimer (FAST ≤5). La Ley 25.326 exige proteger los datos personales identificativos (nombre y DNI), y el cifrado debe ser verificable y auditable. La base de datos es Supabase Cloud (PostgreSQL 16), que no permite habilitar la extensión pgcrypto.
+Aurora guarda datos de salud de pacientes con Alzheimer (FAST ≤5). La Ley 25.326 exige proteger los datos personales identificativos (nombre y DNI), y el cifrado debe ser verificable y auditable. La base de datos es Supabase Cloud (PostgreSQL 16).
 
 **Drivers de decisión**
 
 - Cumplimiento normativo (Ley 25.326).
-- Restricción de infraestructura: Supabase Cloud no permite pgcrypto.
+- Cifrado en la aplicación: la clave no viaja a la base de datos ni queda en los registros de consultas.
 - Portabilidad: sin depender de extensiones de PostgreSQL.
 - Rotación de claves sin migraciones de base de datos.
 - Transparencia para el ORM: los serializers y la lógica de negocio reciben y devuelven texto plano.
 
 **Alternativas consideradas**
 
-- pgcrypto (extensión de PostgreSQL): no viable, porque Supabase Cloud no la permite.
-- AES-GCM sobre columnas bytea mediante pgcrypto: no viable, por la misma razón.
+- pgcrypto (extensión de PostgreSQL, disponible en Supabase): descartada, porque cifra dentro de la base: la clave viaja en cada consulta SQL y puede quedar en los registros de consultas.
+- AES-GCM sobre columnas bytea mediante pgcrypto: descartada, por la misma razón.
 - Fernet (biblioteca cryptography de Python) en campos personalizados de Django: elegida.
 
 **Decisión**
@@ -772,7 +772,7 @@ La clave se toma de la variable de entorno FERNET_KEY; en producción es obligat
 
 - No se puede buscar, filtrar ni ordenar por campos cifrados en SQL; el ordenamiento por nombre se hace en la aplicación.
 - Overhead mínimo de CPU y unos 50 bytes de almacenamiento por campo.
-- La búsqueda por DNI se resolverá más adelante con un hash determinístico (decisión futura).
+- La búsqueda por nombre y DNI se resuelve con un hash determinístico con sal (columnas name_hash y dni_hash), implementado el 23/08/2026; el dato en claro no se guarda.
 - Solo se cifran los campos identificativos listados; el resto de los datos (por ejemplo, el texto de las conversaciones) no se cifra a nivel de aplicación.
 
 ### ADR-011: Voz en la nube con respaldo local

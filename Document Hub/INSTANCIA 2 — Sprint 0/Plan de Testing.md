@@ -25,8 +25,8 @@ Se aplicará un enfoque de pruebas integral en múltiples capas para aislar erro
 | **Nivel / Área de Testing** | **Objetivo en Aurora** | **Herramientas / Métodos Propuestos** | **Ejemplos de Casos Clave** |
 | --- | --- | --- | --- |
 | Unitario | Validar el funcionamiento aislado de reglas de negocio centrales sin dependencias externas (bases de datos o hardware). | Jest / PyTest / JUnit (según stack) | ● Algoritmo de clasificación de riesgo de eventos.<br>● Cálculo de omisiones de rutinas y medicación en el tiempo estipulado. |
-| Integración | Asegurar la correcta comunicación entre los microservicios, la base de datos y la recepción de eventos desde Aurora Home. | Postman / Supertest / Testcontainers | ● Recepción de eventos desde Aurora Home (respuestas a recordatorios y eventos sincronizados tras un corte).<br>● Entrega de notificaciones push (Expo Push) con recibo de entrega. |
-| End-to-End (E2E) | Verificar el flujo de usuario completo, desde que ocurre un evento en el ambiente físico (o app) hasta el reflejo en la interfaz. | Appium (app móvil) | ● Flujo: omisión de medicación → alerta → notificación entregada al dispositivo del cuidador → acción del cuidador (ver 4.2).<br>● Flujo de configuración de perfil de paciente e historial biográfico.<br>● Salida de zona segura → notificación: futuras versiones. |
+| Integración | Asegurar la correcta comunicación entre los microservicios, la base de datos y la recepción de eventos desde Aurora Home. | Postman / Supertest / Testcontainers | ● Recepción de eventos desde Aurora Home (respuestas a recordatorios y eventos sincronizados tras un corte).<br>● Entrega de notificaciones push (Expo Push) con recibo del proveedor (FCM o APNs). |
+| End-to-End (E2E) | Verificar el flujo de usuario completo, desde que ocurre un evento en el ambiente físico (o app) hasta el reflejo en la interfaz. | Appium (app móvil) | ● Flujo: omisión de medicación → alerta → notificación entregada al proveedor de push y recibida en el dispositivo de prueba del cuidador → acción del cuidador (ver 4.2).<br>● Flujo de configuración de perfil de paciente e historial biográfico.<br>● Salida de zona segura → notificación: futuras versiones. |
 | Inteligencia Artificial (IA) y RAG | Garantizar la precisión, relevancia y seguridad de las interacciones basadas en modelos LLM y memoria contextual (RAG). | Prompt Evaluation Frameworks / Pruebas de validación humana en circuito | ● Fidelidad a la memoria del paciente, sin invención de datos personales.<br>● Sin consejo ni diagnóstico médico: conjunto de preguntas adversarias.<br>● Derivación al cuidador, resistencia a inyección de instrucciones y respuesta ante falla del proveedor. Criterios y metas en 4.6. |
 | Resiliencia (Aurora Home y servicios) | Verificar la robustez del sistema ante fallas de conectividad y asegurar la continuidad operativa en escenarios degradados. | Corte de red simulado / Chaos Testing básico | ● Aurora Home sin internet: los recordatorios se emiten con voz local y las respuestas se guardan en la cola local.<br>● Reconexión: la cola se sincroniza sin pérdida ni duplicados.<br>● Reinicio inesperado y caída de Aurora Core, del Worker IA o de los proveedores de voz e IA (ver 4.5). |
 | Seguridad y Privacidad | Asegurar el cumplimiento estricto de la Ley 25.326 de Protección de Datos Personales y prevenir vulnerabilidades. | OWASP ZAP / Auditorías de seguridad manuales | ● Pentesting en Endpoints: Pruebas de vulnerabilidad contra inyecciones y accesos no autorizados a historiales médicos.<br>● Notificaciones Seguras: Validación de que las notificaciones push no exponen datos sensibles de forma visible.<br>● Consentimiento y derechos: pruebas de RF-92 a RF-98 y RNF-44 a RNF-52 (alta con consentimiento, revocación, cifrado de campos identificatorios y depuración por plazo de retención). |
@@ -38,12 +38,12 @@ Las metas de esta sección son una propuesta del equipo y se convierten en crite
 
 ### 4.1 Qué significa «validada» para una alerta crítica
 
-Una alerta crítica se considera válida solo si se cumplen todas estas condiciones en la prueba:
+Una alerta crítica se considera válida solo si se cumplen todas estas condiciones en la prueba (en Aurora Core, el estado «delivered» significa que el proveedor de push aceptó la notificación; no confirma que haya llegado al teléfono, algo que se verifica en los dispositivos de prueba):
 
 | **#** | **Condición de validación** | **Cómo se comprueba** |
 | --- | --- | --- |
 | 1 | El evento se registró con fecha, tipo, gravedad y paciente correctos | Consulta a la base |
-| 2 | La notificación fue entregada al dispositivo del cuidador (recibo de entrega positivo), no solo enviada | Recibo de Expo Push |
+| 2 | La notificación fue entregada al proveedor de push (recibo positivo de Expo), no solo enviada | Recibo de Expo Push y recepción en los dispositivos de prueba |
 | 3 | La entrega ocurrió dentro del tiempo máximo (ver 4.2) | Diferencia de marcas de tiempo |
 | 4 | El texto visible no expone datos personales | Inspección del contenido de la notificación |
 | 5 | Si hay más de un cuidador asociado, todos los configurados reciben el aviso (el escalamiento por falta de respuesta es de futuras versiones) | Escenario con varios cuidadores |
@@ -55,7 +55,7 @@ Una alerta crítica se considera válida solo si se cumplen todas estas condicio
 | --- | --- | --- |
 | **Tasa de falsos negativos (omisión crítica sin alerta entregada)** | 0 en el conjunto de escenarios de prueba (mínimo 30 escenarios por tipo: medicación, rutina prioritaria y Aurora Home desconectado) | Suite E2E con omisiones simuladas |
 | **Tasa de falsos positivos (alerta por omisión cuando sí se cumplió)** | Hasta 10 % de las alertas del piloto; hasta 5 % en escenarios simulados | Escenarios con confirmación tardía; marca «falsa alerta» del cuidador en el piloto |
-| **Tiempo máximo de notificación (desde que Aurora Core registra la omisión hasta la entrega al dispositivo)** | p95 de hasta 30 s; máximo absoluto de 60 s | Marcas de tiempo del evento y del recibo, sobre al menos 100 alertas |
+| **Tiempo máximo de notificación (desde que Aurora Core registra la omisión hasta la entrega al proveedor de push; en los dispositivos de prueba, hasta la recepción)** | p95 de hasta 30 s; máximo absoluto de 60 s | Marcas de tiempo del evento y del recibo, sobre al menos 100 alertas |
 | **Alertas duplicadas por el mismo evento** | 0 | Escenarios con reintentos |
 | **Entrega con la aplicación cerrada o el celular bloqueado** | Al menos 98 % en los dispositivos de prueba | Prueba en Android e iOS |
 
@@ -110,7 +110,7 @@ El umbral anterior («99 % de precisión») no tenía método. Se reemplaza por 
 
 ### 4.7 Cobertura de código y pruebas automáticas
 
-- **Cobertura:** al menos 80 % de las líneas y ramas del código nuevo, con un gate en el CI de cada repositorio.
+- **Cobertura:** meta de al menos 80 % de las líneas y ramas del código nuevo. Estado actual del gate en el CI: Aurora Home mide líneas y ramas con un mínimo de 80 %; Aurora Core exige 80 % de líneas sobre todo el código, sin ramas; Aurora Care todavía no tiene umbral de cobertura. La meta se mantiene hasta que el equipo decida cómo cerrar la diferencia.
 - **Escenarios críticos:** 100 % con prueba unitaria y E2E (omisión y alerta, confirmación, modo sin conexión y consentimiento; ver la matriz de la sección 7).
 - **Crashes:** ninguno en flujos normales durante las pruebas E2E de la aplicación.
 - **Línea base:** medida el 16/10/2026: Aurora Home, 1.902 pruebas pasando (20 omitidas); Aurora Care, 1.190 pasando (148 suites); Aurora Worker IA, 196 pasando. Aurora Core, 1.579 pasando (con una base PostgreSQL real; 9 pruebas de extremo a extremo contra un Core en vivo no se ejecutan por defecto).
