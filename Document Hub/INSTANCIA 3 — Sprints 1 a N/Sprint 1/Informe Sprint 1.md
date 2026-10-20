@@ -112,7 +112,7 @@ Se usan las métricas que el equipo definió en el Plan de Proyecto. En los Spri
 
 **Tendencia:** el Sprint 0 cerró 16 tickets y el Sprint 1, 23. El volumen creció y casi todo el trabajo fue de documentación y diseño, donde el cumplimiento es más fácil de lograr. Lo que se destaca como señal de alerta es el desvío: el sprint se mantuvo abierto 46 días en vez de 21.
 
-Los puntos de historia se usaron solo en los Sprints 0 y 1: en este, 62 puntos planificados y 56 entregados (90 %). Después de este sprint los tickets dejaron de estimarse. El Plan de Proyecto declara que no se usa velocidad en puntos, por eso esta cifra es solo informativa.
+Los puntos de historia se usaron solo en los Sprints 0 y 1: en este, 44 puntos planificados y 38 entregados (86 %), sumando los puntos de los tickets del sprint (AURA-48 no tiene estimación). Después de este sprint los tickets dejaron de estimarse. El Plan de Proyecto declara que no se usa velocidad en puntos, por eso esta cifra es solo informativa.
 
 ## 6. Retrospectiva
 

@@ -27,7 +27,7 @@ La columna «Autoría principal» se basa en la autoría real de los repositorio
 
 ## 2. Tendencia de las métricas
 
-Las métricas son las que fija el Plan de Proyecto. Solo se pueden medir los sprints que tuvieron tickets cargados y cerrados en Jira: el Sprint 0 fue de definición y el Sprint 2 («SCRUM Sprint 3» de Jira) quedó sin tickets, por lo que no tienen medición.
+Las métricas son las que fija el Plan de Proyecto. El «cumplimiento del sprint» es la proporción de tickets finalizados sobre los comprometidos al inicio; si se cuenta también lo que se agregó durante el sprint, da 39 % en el Sprint 3, 43 % en el Sprint 4 y 72 % en el Sprint 5. Solo se pueden medir los sprints que tuvieron tickets cargados y cerrados en Jira: el Sprint 0 fue de definición y el Sprint 2 («SCRUM Sprint 3» de Jira) quedó sin tickets, por lo que no tienen medición.
 
 | Métrica | Meta | Sprint 1 | Sprint 3 | Sprint 4 | Sprint 5 | Sprint 6 |
 | --- | --- | --- | --- | --- | --- | --- |

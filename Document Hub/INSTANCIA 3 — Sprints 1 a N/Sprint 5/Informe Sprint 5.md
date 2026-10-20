@@ -122,7 +122,7 @@ El sprint tuvo **47 tickets propios**: **28 al inicio** (la mayoría arrastrados
 
 | Métrica | Meta | Sprint 5 | Lectura |
 |---|---|---|---|
-| Cumplimiento del sprint | ≥ 80 % | **61 %** (17 de 28 comprometidos al inicio; 34 de 47 contando lo agregado) | No se cumple, pero es el mejor valor desde el Sprint 1. |
+| Cumplimiento del sprint | ≥ 80 % | **61 %** (17 de 28 comprometidos al inicio); contando lo agregado, 72 % (34 de 47) | No se cumple, pero es el mejor valor desde el Sprint 1. |
 | Desvío de cierre | ≤ 2 días | **+7 días** (07/10 → 14/10) | No se cumple. |
 | Carga por integrante | nadie sobre su capacidad | **No medible en horas** | Octavio tiene el 32 % de los tickets con el 18 % de la capacidad, y Nicolás el 2 % con el 26 %. |
 | Trabajo arrastrado | causa registrada | **13 tickets (28 %)** | Causas en el punto 3. |

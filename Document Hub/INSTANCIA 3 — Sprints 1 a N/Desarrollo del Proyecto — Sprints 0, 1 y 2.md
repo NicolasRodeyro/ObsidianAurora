@@ -83,3 +83,7 @@ Documentos transversales: [[Registro de Riesgos]], [[Estado consolidado y tenden
 
 > [!note] Espejo en el Google Doc
 > Este conjunto de documentos se publica unificado en el Google Doc del proyecto, que es lo que ve la docente. Cualquier cambio acá debe reflejarse allí.
+>
+> La versión del Doc es la **compacta** (19/10/2026): en las fichas de trazabilidad no repite el párrafo «Para qué», el checklist de completitud, las notas al pie de ejecución ni los diagramas que no aplican, y reemplaza el mini-DER por la lista de entidades. Las fichas de este vault conservan el detalle completo.
+>
+> Del mismo modo, las dos investigaciones del Sprint 2 ([[Investigación — Almacenamiento de Datos y Ley 25.326]] e [[Investigación — Despliegue e Infraestructura]]) figuran en el Doc como síntesis de una página cada una; el texto completo está en la pestaña «Anexos» del Doc (Anexos C y D) y acá en el vault. En el Estudio Inicial del Doc, los esquemas AS-IS/TO-BE aparecen una sola vez, en el «Mapa global de procesos del Entorno».

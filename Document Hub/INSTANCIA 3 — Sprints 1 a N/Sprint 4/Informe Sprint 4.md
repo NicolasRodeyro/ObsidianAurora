@@ -114,7 +114,7 @@ El sprint tuvo **37 tickets**: **19 al inicio**, todos arrastrados del Sprint 3,
 
 | Métrica | Meta | Sprint 4 | Lectura |
 |---|---|---|---|
-| Cumplimiento del sprint | ≥ 80 % | **47 %** (9 de 19 comprometidos al inicio; 16 de 37 contando lo agregado) | No se cumple. Igual que el Sprint 3, pero esta vez los 19 tickets del compromiso eran deuda heredada. |
+| Cumplimiento del sprint | ≥ 80 % | **47 %** (9 de 19 comprometidos al inicio); contando lo agregado, 43 % (16 de 37) | No se cumple. Igual que el Sprint 3, pero esta vez los 19 tickets del compromiso eran deuda heredada. |
 | Desvío de cierre | ≤ 2 días | **+1 día** (16/09 → 17/09) | Se cumple. |
 | Carga por integrante | nadie sobre su capacidad | **No medible en horas** | Mateo tiene el 35 % de los tickets con el 19 % de la capacidad. |
 | Trabajo arrastrado | causa registrada | **21 tickets (57 %)** | Causas en el punto 3. |

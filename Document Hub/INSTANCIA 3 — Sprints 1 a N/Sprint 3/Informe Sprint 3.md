@@ -111,7 +111,7 @@ Se finalizaron **13** tickets dentro del sprint y **20** pasaron al Sprint 4.
 
 | Métrica | Meta | Sprint 3 | Lectura |
 |---|---|---|---|
-| Cumplimiento del sprint | ≥ 80 % | **47 %** (9 de 19 comprometidos al inicio; 13 de 33 contando lo agregado) | No se cumple. Se comprometieron más tickets de los que se podían terminar y se sumó trabajo nuevo. |
+| Cumplimiento del sprint | ≥ 80 % | **47 %** (9 de 19 comprometidos al inicio); contando lo agregado, 39 % (13 de 33) | No se cumple. Se comprometieron más tickets de los que se podían terminar y se sumó trabajo nuevo. |
 | Desvío de cierre | ≤ 2 días | **+3 días** (25/08 → 28/08) | Casi en la meta. Es una mejora enorme frente a los +25 días del Sprint 1. |
 | Carga por integrante | nadie sobre su capacidad | **No medible en horas** | Octavio tiene el 42 % de los tickets con el 18 % de la capacidad. Es una señal de sobrecarga. |
 | Trabajo arrastrado | causa registrada | **20 tickets (61 %)** | Causas en el punto 3. |

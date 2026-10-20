@@ -16,7 +16,7 @@ Last updated time: "2026-10-17T00:00:00"
 | Historia | **AURA-77** — US-D4 Dificultad adaptativa |
 | Épica | AURA-15 — Motor de IA y Memoria del Paciente |
 | Requerimientos | RF-14, RF-52 (ver [[Requerimientos]] · [[Trazabilidad RF-Épicas]]) |
-| Estado en Jira | Finalizada (Sprint 4; Jira «SCRUM Sprint 5») |
+| Estado en Jira | Finalizada (cerrada en el Sprint 5, Jira «SCRUM Sprint 6»; el código se terminó en el Sprint 4, entre el 07/09 y el 09/09) |
 | Tareas relacionadas | AURA-149 (el plan diario de sesiones usa la recomendación de dificultad) |
 | Enlace | https://project-aurora-alz.atlassian.net/browse/AURA-77 |
 
