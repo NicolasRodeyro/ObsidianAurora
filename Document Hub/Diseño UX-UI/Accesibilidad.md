@@ -5,11 +5,16 @@ Last edited by: Jeremías Maldonado Gómez
 Created by: Jeremías Maldonado Gómez
 Category:
   - Diseño UX/UI
-Last updated time: 2026-07-08T22:10:00
+Last updated time: 2026-10-21T00:00:00
 ---
 # Accesibilidad
 
 Capítulo 10 del [[Manual de UX-UI Aurora]]. Piso normativo: **[WCAG 2.2](https://www.w3.org/TR/WCAG22/) nivel AA** en Aurora Care. Aurora Home no incorpora display en el MVP: combina voz y LED para estados locales no sensibles, y Care ofrece el texto/diagnóstico al cuidador.
+
+> [!warning] Contradicción documentada — el display del dispositivo (21/10/2026)
+> Esta cabecera dice que el MVP **no incorpora display**, pero [[Proto-personas]], [[Tipografía]], [[Identidad de Marca]] y [[Fundamentos Visuales]] **sí diseñan** el display del dispositivo, y existe la pantalla `Design/previews/screens-06-device.html`.
+> **Las dos afirmaciones conviven y no se borra ninguna:** el diseño se conserva como referencia y el MVP no incorpora display como superficie. La consecuencia práctica para accesibilidad es la que ya dice §2 (punto 3): la ausencia de pantalla limita la redundancia visual del paciente, y hay que validarla en HIL con acompañamiento profesional.
+> **Alcance de la feature de recuerdos (US-D5 a US-D7):** el display del dispositivo queda **fuera del alcance**. La línea de tiempo y la ficha de persona viven en **Aurora Care**; en el dispositivo se recorre **por voz**, con redundancia de voz y LED. Ver [[VUI — Diseño Conversacional]] §5.
 
 ## 1. Compromisos WCAG 2.2 AA (y cómo se cumplen)
 

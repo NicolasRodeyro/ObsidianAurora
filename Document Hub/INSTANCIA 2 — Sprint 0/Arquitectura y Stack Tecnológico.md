@@ -5,7 +5,7 @@ Last edited by: Octavio Escudero
 Created by: Octavio Escudero
 Category:
   - Documentación Interna
-Last updated time: 2026-10-16
+Last updated time: 2026-10-21
 ---
 
 # Arquitectura y Stack Tecnológico Aurora
@@ -115,6 +115,18 @@ El diagrama de despliegue muestra cómo se distribuyen físicamente los contened
 **Gobierno de los ADR.** Cada ADR tiene un estado: Propuesto, Aceptado, Reemplazado por ADR-N o Rechazado. Solo los ADR aceptados describen la arquitectura vigente. Las tecnologías que aparecen en una tabla o en un diagrama deben corresponder a un ADR aceptado; las alternativas se anotan dentro del ADR, y nunca en las tablas de contenedores o de despliegue. Cuando un ADR cambia de estado, se actualizan en la misma tarea los diagramas C4 y las secciones que lo mencionan. En el repositorio, cada ADR vive en docs/adr/ junto al código que gobierna.
 
 **Estado al 12/10/2026.** ADR-001 a ADR-004: aceptados. ADR-005: aceptado con enmienda (proveedor: Supabase Auth). ADR-006: reemplazado por ADR-011. ADR-007 y ADR-008: aceptados con enmienda. ADR-009: aceptado, sin implementar (fuera del MVP). ADR-010 y ADR-011: aceptados.
+
+**Estado al 21/10/2026.** ADR-012: aceptado. ADR-014, ADR-015 y ADR-016: aceptados (feature de recuerdos; decisiones tomadas en Aurora Core el 20/10/2026).
+
+**Numeración del registro de ADR.** El vault tiene su propia numeración y no coincide con la del repositorio `AuroraCore`: en el vault, ADR-011 ya es «Voz en la nube con respaldo local» y ADR-012 es «Diseño de API», y además **ADR-013 está reservado** para la decisión de LiveKit como proveedor de media, pendiente desde el artefacto de AURA-134. Por eso los tres ADR de la feature de recuerdos se registran como ADR-014, ADR-015 y ADR-016, y cada entrada declara su archivo de origen:
+
+| ADR del vault | ADR de `AuroraCore` | Decisión | Archivo de origen |
+| --- | --- | --- | --- |
+| ADR-014 | ADR-011 | Taxonomía de dos niveles y anclaje temporal de los recuerdos | `docs/adr/ADR-011-taxonomia-y-ancla-temporal-de-recuerdos.md` |
+| ADR-015 | ADR-012 | Personas de la vida del paciente | `docs/adr/ADR-012-personas-vida-del-paciente.md` |
+| ADR-016 | ADR-013 | Recuerdos diarios de corto plazo | `docs/adr/ADR-013-recuerdos-diarios-corto-plazo.md` |
+
+Las tres entradas están **aceptadas como decisión de diseño**; la implementación es por fases y no está completa. Cada ADR declara en «Estado de implementación» qué está construido y qué no.
 
 ### ADR-001: Lenguaje y Framework Backend
 
@@ -873,6 +885,276 @@ Negativas (trade-offs):
 - La API key de cada dispositivo es una credencial más que proteger; su rotación y revocación tienen un proceso propio (AURA-130).
 - El chequeo de compatibilidad cubre solo la superficie de Aurora Home; la de Aurora Care depende de las pruebas.
 
+### ADR-014: Taxonomía de dos niveles y anclaje temporal de los recuerdos
+
+| Campo | Valor |
+| --- | --- |
+| ID | ADR-014 |
+| Fecha | Octubre 2026 (decisión tomada el 20/10/2026) |
+| Estado | Aceptado |
+| Decisores | Equipo Aurora |
+| Origen | `AuroraCore` → `docs/adr/ADR-011-taxonomia-y-ancla-temporal-de-recuerdos.md` |
+
+**Contexto**
+
+La memoria publicada del paciente (`PatientMemory`) y el aporte que un cuidador valida antes de que exista (`MemoryContribution`) no tenían taxonomía ni temporalidad. Los cinco campos que clasificaban un recuerdo eran texto libre:
+
+| Campo | Estado anterior | Consecuencia observable |
+| --- | --- | --- |
+| `category` | `CharField` sin `choices` | El mismo hecho se etiquetaba `familia`, `family`, `persona`, `lenguaje` o `ejercicio` según quién lo escribió: conviven en el código y en los datos. |
+| `sensitivity` | `CharField` con default `neutral`, sin `choices` | El código comparaba por igualdad con `neutral`; un typo dejaba la memoria invisible para la IA y visible en la API de Care: falla silenciosa de privacidad. |
+| `status` | `CharField` con default `active`, sin `choices` | No existía archivar: el `DELETE` era duro. |
+| `source` | `CharField` con default `caregiver`, sin `choices` | El origen real del dato se perdía al publicar. |
+| `occurred_at` | No existía | El único tiempo era `created_at`, que es la fecha de **carga** y no la del **suceso**: una línea de tiempo biográfica construida sobre esa fecha miente. |
+
+A esto se sumaba una duplicidad de contenido: la memoria tenía `content` y `body`, ambos escribibles por API; la búsqueda indexaba `content` y el Worker IA leía `body or content`, de modo que un `PATCH` de `body` dejaba la búsqueda desincronizada de lo que ve la IA.
+
+Y había un vocabulario de categoría **ya publicado** que no se podía romper sin tocar el contrato con el alta del hogar y con el catálogo de juegos: el `ChoiceField` del onboarding y el diccionario de sustantivos de los juegos.
+
+**Drivers de decisión**
+
+1. **Trazabilidad clínica**: una memoria publicada tiene que seguir la cadena aporte → validación → publicación, sin atajos.
+2. **Privacidad por defecto**: la clasificación de sensibilidad no puede depender de que un humano escriba la cadena exacta.
+3. **Honestidad temporal**: el ancla de un recuerdo debe reflejar lo que el paciente o el cuidador saben, no lo que el sistema puede afirmar. En deterioro cognitivo la respuesta honesta suele ser «principios de los 70», no una fecha.
+4. **No romper contratos vivos**: el vocabulario de `category` ya está en el alta del hogar y en los juegos; cambiarlo rompe el flujo de alta y las actividades.
+5. **Interoperabilidad con Aurora Home y con el Worker IA**: el cambio de taxonomía tiene que ser aditivo en el contrato publicado.
+6. **Poder corregir sin perder historia**: archivar, no borrar.
+7. **Cerrar defectos que hoy degradan la calidad del dato**: pérdida de `metadata` al aprobar con ediciones, publicación sin validación y un contador que nunca se incrementa.
+
+**Alternativas consideradas**
+
+- **`category` libre más `tags`:** costo bajo y cobertura alta para las actividades, pero no resuelve la fragmentación que ya está en los datos ni habilita un eje jerárquico y consultable. Descartada.
+- **Taxonomía de un nivel (`category` + `tags`):** alcanza para distinguir «personas» de «lugares», pero «hijo» y «nieto» quedan en la misma bolsa que «pareja», y la terapia de reminiscencia necesita distinguir la etapa de la vida. Descartada.
+- **Taxonomía de dos niveles (`category` + `subcategory` + `tags`):** los dos ejes son consultables y combinables, la compatibilidad con el alta y los juegos es total y el riesgo de que el nivel 2 crezca sin control se mitiga con el vocabulario cerrado y `tags` como salida. **Elegida.**
+- **`occurred_at` como fecha y hora exacta:** precisión falsa; el modelo y el cuidador responden «ponele una fecha» y la lectura clínica se degrada («23/08/1974 03:12» sugiere una precisión que nadie tiene). Descartada.
+- **`occurred_at` (fecha) + `occurred_precision` + nota de precisión:** la precisión queda declarada, la carga de valores inventados es baja y «principios de los 70» pasa a ser un dato, no un defecto. **Elegida.**
+- **Dos campos de texto (`content` y `body`) con escritura libre:** es el estado actual y la fuente de la desincronización. Descartada.
+- **`body` como fuente de verdad y `content` derivado al guardar:** costo bajo, consistencia total y sin migración destructiva. **Elegida.**
+
+**Decisión**
+
+Se adopta una taxonomía de dos niveles con vocabulario cerrado, un anclaje temporal honesto y una única fuente de verdad entre `content` y `body`.
+
+1. **Nivel 1 — `category`:** vocabulario cerrado de 6 valores que preserva exactamente los canónicos ya publicados: `person`, `place`, `event`, `music`, `routine`, `other`. Cambiarlos rompería el alta del hogar y los juegos; el problema real no era la lista, era que la lista no se aplicaba.
+2. **Nivel 2 — `subcategory`:** vocabulario cerrado por categoría. Para `person`: `pareja`, `hijo`, `hija`, `nieto`, `nieta`, `padre`, `madre`, `hermano`, `hermana`, `primo`, `prima`, `abuelo`, `abuela`, `amigo`, `vecino`, `cuidador`, `otro`; y los equivalentes acotados para `place`, `event`, `music` y `routine`. Toda categoría admite `other` como salida controlada; la coherencia entre los dos niveles la valida el serializer, no el modelo.
+3. **`tags`:** lista JSON de texto libre, máximo 10 por recuerdo, normalizada a minúsculas y sin duplicados. Es el único campo de clasificación abierto y existe para que el cuidador pueda decir «baile de graduación» sin forzar la taxonomía.
+4. **Ancla temporal:** tres campos. `occurred_at` es la fecha del suceso en la zona horaria del hogar y es **independiente** de `created_at`; `occurred_precision` declara la granularidad (`day`, `month`, `year`, `decade`, `unknown`); `occurred_precision_note` da el matiz en texto libre. Si la precisión no es `unknown`, la fecha es obligatoria; la granularidad `decade` exige la nota para desambiguar.
+5. **Estados, sensibilidad y origen:** `status` pasa a `active` | `archived`; `sensitivity` a `neutral` | `sensitive` | `avoid`; `source` a `caregiver` | `aurora_discovery` | `home_discovery` | `ai_generated`. Se agrega el endpoint de archivado `POST /api/v1/ai/memories/{id}/archive/`, que cambia el estado sin borrar la fila.
+6. **Índice y filtros:** índice compuesto `(patient, status, occurred_at)`; filtros por `patient`, `category`, `subcategory`, `status`, `source` y rango de `occurred_at`; orden estable por `occurred_at` con `id` como desempate, para que la línea de tiempo no dependa de la fecha de carga.
+7. **Normalización de valores sueltos:** la migración traduce `familia`, `family` y `persona` a `person`, y `lenguaje` y `ejercicio` a `other`, **sin borrar el valor original**, que queda registrado en `metadata.normalized_from`: la operación es auditable y reversible. Cualquier valor fuera del vocabulario cae en `other` con el mismo registro.
+8. **Una sola fuente de verdad:** `body` es la fuente de verdad y `content` queda como su espejo al guardar; `content` pasa a `read_only` en la API. La búsqueda sigue indexando `content` y el Worker IA sigue leyendo `body or content`, ambos sin dejar de funcionar.
+9. **Fin del bypass de publicación:** toda memoria `active` exige una contribución aprobada. `POST /api/v1/ai/memories/` deja de publicar: crea una contribución `pending` con `source='caregiver'` y responde `202`. La aprobación con ediciones copia `metadata` igual que la aprobación simple (antes se perdía la confianza de los descubrimientos terapéuticos).
+10. **Contador de uso:** `used_by_aurora_count` cuenta cuántas veces una referencia a esa memoria fue aceptada y persistida por Core, y sólo en los dos puntos donde Core ya valida referencias contra la allow-list de memorias enviadas. El contexto recibido sin citar no es uso.
+
+**Estado de implementación (21/10/2026)**
+
+- **Implementado en Aurora Core** (PR #120, commit `8ef55c3`): los diez puntos anteriores, con la migración `apps/ai/migrations/0009_taxonomia_memoria_y_ancla_temporal.py`, el endpoint de archivado, la deprecación del bypass de publicación, la corrección de la selección por recencia (la consulta tomaba las 20 memorias más viejas) y el tope del contexto del plan diario. Verificación del equipo: CI en verde sobre PostgreSQL; corrida local sobre SQLite con **1710 pruebas pasaron y 6 fallaron** (las 6, preexistentes y ambientales de SQLite); cobertura **95,84 %**; **43 pruebas nuevas**.
+- **No implementado o decidido por otro lado:** el `DELETE` físico de una memoria sigue siendo duro y su deprecación es una decisión **abierta** del equipo de Core con el de Care (la vía suave es el archivado); la limpieza de la columna `content` queda como deuda técnica; el filtro por `tags` no es indexable por SQL.
+
+**Consecuencias**
+
+**Positivas:**
+
+- La línea de tiempo biográfica puede ordenarse por un tiempo que no es el de la carga.
+- La clasificación por sensibilidad deja de depender de un typo: un valor fuera del vocabulario se rechaza en la API en lugar de dejar una memoria invisible para la IA.
+- `category` conserva los 6 valores publicados: no se rompe el alta ni los juegos.
+- La normalización deja rastro (`metadata.normalized_from`): es auditable y reversible.
+- Archivar en lugar de borrar conserva la historia clínica y la trazabilidad de auditoría.
+- Se cierra la pérdida silenciosa de la confianza de un descubrimiento al aprobar con ediciones, y la publicación sin validación.
+- El badge «Usado por Aurora» pasa a significar algo verificable.
+
+**Negativas:**
+
+- La migración de datos es real: hay que normalizar las filas existentes.
+- El vocabulario de `subcategory` es una decisión de producto: agregarlo después requiere una migración de choices, no sólo un cambio de serializer.
+- `tags` como lista JSON no es indexable por SQL: el filtro por tags no es un parámetro de filtro trivial.
+- El bypass de publicación cambia el contrato de `POST /api/v1/ai/memories/` y obliga a coordinar con Aurora Care.
+- `content` como espejo de `body` implica que una actualización directa de la tabla puede romper la invariante: hay que cubrirlo con un test y desaconsejar ese camino.
+- El índice `(patient, status, occurred_at)` agrega costo de escritura en una tabla que recibe escrituras en la aprobación, no en el alta.
+
+**Trade-offs aceptados:** se conserva la columna `content` en lugar de eliminarla (evita una migración destructiva y mantiene la búsqueda); `occurred_at` es fecha y no fecha-hora, porque en la mayoría de los recuerdos biográficos la hora no es información disponible; `subcategory` es cerrado pero admite `other`, en lugar de reabrir el campo a texto libre; el contador de uso cuenta citas aceptadas, no «veces que se habló de ello»: es un número más bajo y más honesto.
+
+### ADR-015: Personas de la vida del paciente
+
+| Campo | Valor |
+| --- | --- |
+| ID | ADR-015 |
+| Fecha | Octubre 2026 (decisión tomada el 20/10/2026) |
+| Estado | Aceptado |
+| Decisores | Equipo Aurora |
+| Origen | `AuroraCore` → `docs/adr/ADR-012-personas-vida-del-paciente.md` |
+
+**Contexto**
+
+La vista de recuerdos del paciente necesita algo que no existe: **los datos de la vida de las personas**. Para que una terapia de reminiscencia sea buena no alcanza con «un recuerdo de categoría `person`»: hace falta saber quién era esa persona (hija, pareja, nieto), en qué etapa de la vida fue, qué temas activa («música», «pesca», «el campo») y cómo hay que hablar de ella.
+
+En el modelo de datos no existía ninguna entidad de persona, familiar o persona de la historia clínica del paciente. Lo único con forma de «persona» era el contacto de emergencia, y es otra cosa:
+
+| Aspecto | Contacto de emergencia | Lo que necesita la feature |
+| --- | --- | --- |
+| Propósito | Lista de escalamiento de emergencias | Perfil biográfico y de vínculo |
+| Campos | nombre, vínculo, teléfono, correo, prioridad, verificado | Vínculo con vocabulario cerrado, etapa de la vida, temas, política de tono, fechas |
+| Ciclo de vida | Activo, con canal de aviso | Persiste aunque la persona ya no esté; puede haber fallecido |
+| Uso por la IA | **Excluido a propósito** del contexto del Worker IA | Necesita participar del contexto para que la reminiscencia funcione |
+
+Es decir: hoy el único directorio de personas del sistema es, por diseño, el que **no** puede usar la IA. Un contacto de emergencia es un destino de alerta; una persona de la vida del paciente es un sujeto de recuerdos.
+
+Dos piezas de apoyo sí existían y se reutilizan: el **cifrado en reposo de identificadores** de Aurora Core con hash determinístico para búsqueda (ver ADR-010) y el **consentimiento como entidad**, con tipo, estado, alcance y versión, único por paciente, tipo y versión en estado concedido.
+
+Y había una brecha legal que esta decisión tiene que cerrar: **los datos de un familiar no son datos del paciente**. RF-81 cubre el consentimiento del paciente y el tratamiento de datos sensibles; no cubre la base legal para incluir datos personales de terceros. La Ley 25.326 exige una base legal propia para datos de terceros, y el familiar no está en condiciones de consentir.
+
+Finalmente, la pantalla de «Nuevo recuerdo» del prototipo de Aurora Care ya ofrecía las opciones de tema **«Tema alegre / Con cuidado / Evitar»**. No había ningún campo que las sostuviera.
+
+**Drivers de decisión**
+
+1. **Habilitar la reminiscencia:** la IA necesita saber de quién habla el recuerdo y cómo hablar de esa persona.
+2. **Protección de PII de terceros:** los nombres de familiares son datos personales de terceros bajo la Ley 25.326; se cifran en reposo y no salen al modelo de lenguaje sin una regla explícita.
+3. **Base legal:** incluir datos de terceros requiere un consentimiento propio y registrado, no el del paciente.
+4. **Continuidad emocional:** las personas que ya no están forman parte de la historia y deben poder aparecer en los recuerdos, con trato en pasado y sin generar ruido de alertas.
+5. **Trazabilidad:** poder decir de qué personas habla cada recuerdo.
+6. **No romper el aislamiento por hogar:** el modelo nuevo respeta el mismo aislamiento de paciente que el resto.
+7. **Dejar la puerta abierta a la mejora de la taxonomía:** el vocabulario de vínculo usa el mismo nivel 2 que la `subcategory` de `person` de ADR-014.
+
+**Alternativas consideradas**
+
+- **Reusar y ampliar el contacto de emergencia:** costo bajo, pero encaje conceptual nulo (un destino de alerta no es un sujeto de recuerdos), empeora la privacidad al arrastrar PII de terceros a un destino que fue deliberadamente aislado, y no modela a las personas fallecidas. Descartada.
+- **Sin entidad de persona, sólo `tags` y texto libre en el recuerdo:** costo cero, pero no hay filtrado por persona, ni forma de responder «¿qué recuerdos hablan de la hija?», ni cifrado específico ni regla de salida al modelo de lenguaje. Descartada.
+- **Nuevo modelo de persona con nombre cifrado y hash determinístico:** modelo, migración, serializer, permisos, relación con los recuerdos, consentimiento y tests, a cambio de cifrado en reposo con el patrón ya auditado en ADR-010, consulta por persona y extensibilidad. **Elegida.**
+- **Personas como JSON en el paciente o en la configuración del hogar:** costo bajo, pero un JSON no se cifra campo a campo (el nombre quedaría en claro), no hay filtro por persona ni integridad referencial, y la migración es trivial de escribir y costosa de evolucionar. Descartada.
+- **Modelar las personas sólo en el Worker IA:** costo nulo en Core, pero el dato biográfico es del paciente y debe vivir en Core; no hay validación humana posible (RN6 exige que un cuidador valide cada aporte) y sin control de Core no hay forma de aplicar la regla de salida al modelo de lenguaje. Descartada.
+
+**Decisión**
+
+Se agrega una entidad de persona de la vida del paciente, con relación explícita con los recuerdos, consentimiento propio de terceros y una regla explícita de salida al modelo de lenguaje.
+
+1. **Modelo de persona** (tabla `ai_patient_persons`): pertenece a un paciente; `display_name` y `nickname` **cifrados en reposo** con el patrón de ADR-010; `display_name_hash` determinístico para búsqueda; `relationship` con vocabulario cerrado de 17 valores (el mismo conjunto de nivel 2 de ADR-014 para `person`); `birth_date` y `death_date` opcionales —esta última **habilitada por decisión del usuario**—; `era_influence` (`infancia`, `juventud`, `adulto`, `tarde`); `topics` (etiquetas que activan recuerdos de esa persona); `tone_policy` (`alegre`, `con_cuidado`, `evitar`); y una referencia opaca a la foto, si la hay.
+2. **`tone_policy` da soporte de datos a una pantalla que ya existe:** «alegre» permite hablar con tono cálido; «con cuidado» permite hablar con delicadeza (duelo, enfermedad, conflicto); «evitar» significa que el nombre **no viaja al modelo de lenguaje** y se usa en rechazo explícito. El mapeo exacto de las etiquetas de la interfaz de Aurora Care lo confirma el equipo de Care antes de implementar la pantalla.
+3. **Relación con los recuerdos:** modelo de enlace explícito (no una relación directa) con `memory`, `person` y `role_in_memory` (`protagonista`, `participante`, `lugar`), con unicidad por memoria, persona y rol. El rol importa: un recuerdo puede tener a la hija como protagonista y al abuelo como participante, y la línea de tiempo puede filtrar por «recuerdos donde la hija es protagonista».
+4. **Consentimiento de terceros:** nuevo tipo de consentimiento `third_party_life_data` que cubre el registro y el tratamiento de datos personales de terceros (familiares y personas de la historia del paciente), incluidos los de personas fallecidas. Sin ese consentimiento concedido no se pueden crear personas. La redacción del texto que el paciente acepta es una decisión legal y de producto **abierta**, que se define con apoyo legal.
+5. **Regla de salida al modelo de lenguaje, explícita:** un nombre de persona viaja **sólo si** se cumplen las dos condiciones: `tone_policy != 'evitar'` **y** la memoria que lo referencia tiene `sensitivity == 'neutral'`. Una persona con `evitar` no viaja nunca; una persona fallecida viaja si cumple las dos condiciones (participa igual: forma parte de la historia), y la regla de tono manda por encima del fallecimiento. La guarda de redacción se amplía con los nombres de las personas excluidas y **falla cerrado**: el pedido no sale y el intento queda auditado.
+6. **Cero notificaciones push para personas fallecidas** (RNF-35): ningún evento de una persona con fecha de fallecimiento dispara la creación de una alerta activa. El texto generado habla de ellas en pasado, por regla de estilo del prompt, no por un campo de Core.
+7. **Qué se cifra:** `display_name` y `nickname` sí; el hash, el vínculo, la etapa de la vida, la política de tono, las fechas y los temas no (son conjuntos cerrados o datos no identificadores directos). El costo es el mismo que ADR-010 ya aceptó: no se puede buscar por texto plano, y por eso existe el hash determinístico.
+8. **API:** listado, creación, detalle y actualización de personas, con el mismo aislamiento por hogar que el resto de los recursos de paciente (consulta acotada al hogar del cuidador y verificación de acceso en escritura), y filtro de recuerdos por persona.
+
+**Estado de implementación (21/10/2026)**
+
+- **No implementado.** La decisión está aceptada, pero **no hay código**: no existen la entidad de persona, su relación con los recuerdos, el consentimiento de terceros, los endpoints ni la ampliación de la guarda de redacción. Es la entrega más grande de la feature (Fase 1: AURA-197 y AURA-199 en Jira).
+- **Lo que sí existe y se reutiliza:** el cifrado en reposo de identificadores (ADR-010), el modelo de consentimiento con versión y revocación, y el aislamiento por hogar de los recursos de paciente.
+- **Decisiones abiertas:** la redacción legal del consentimiento de terceros y el mapeo final entre las etiquetas de la interfaz de Aurora Care y los tres valores de `tone_policy`; el borrado de personas ya cargadas cuando el paciente revoca.
+
+**Consecuencias**
+
+**Positivas:**
+
+- La IA puede hablar de las personas de la historia del paciente sin inventar nombres: el nombre viaja con el recuerdo, verificado.
+- Los nombres de terceros quedan cifrados en reposo, con el mismo patrón ya auditado en ADR-010.
+- La base legal para tratar datos de terceros queda registrada, versionada y revocable.
+- `tone_policy` le da soporte de datos a una pantalla de Care que ya existe.
+- Las personas fallecidas dejan de ser un caso especial: son una fila con fecha.
+- El rol en el recuerdo habilita filtros que la línea de tiempo necesita.
+
+**Negativas:**
+
+- Es la entrega más grande de la feature: modelo, migración, cifrado, API, permisos, consentimiento y tests.
+- El hash determinístico sólo resuelve la búsqueda exacta: «buscar a la persona que se llama X» funciona, «buscar a la que empieza con X» no.
+- La regla de salida al modelo de lenguaje depende de que la guarda de redacción incorpore las personas: esa ampliación es **parte** de la entrega, no una mejora posterior. Si quedara pendiente, una memoria neutra con una persona en `evitar` filtraría el nombre.
+- El consentimiento de terceros agrega un paso al alta del hogar: sin él no se pueden crear personas.
+- El vocabulario de vínculo duplica parte del de los contactos de emergencia, que queda en texto libre: conviven dos listas de vínculos con distinta calidad.
+
+**Trade-offs aceptados:** se cifra el nombre pero no las fechas de nacimiento y fallecimiento, porque no son identificadores directos y cifrarlas rompería la consulta clínica por rango; el consentimiento de terceros se registra como un tipo más del mecanismo existente, en vez de un modelo separado; `tone_policy` aplica a la persona completa y no a cada recuerdo (una decisión por persona frente a una por vínculo); `topics` es JSON y no una tabla, a cambio de no requerir una migración extra por cada tema nuevo.
+
+### ADR-016: Recuerdos diarios de corto plazo
+
+| Campo | Valor |
+| --- | --- |
+| ID | ADR-016 |
+| Fecha | Octubre 2026 (decisión tomada el 20/10/2026) |
+| Estado | Aceptado |
+| Decisores | Equipo Aurora |
+| Origen | `AuroraCore` → `docs/adr/ADR-013-recuerdos-diarios-corto-plazo.md` |
+
+**Contexto**
+
+La memoria del paciente que existía era **biográfica y estática**: recuerdos que el cuidador cargó en algún momento, con una fecha de carga que no dice cuándo ocurrieron. Faltaban tres cosas:
+
+1. **Memoria de corto plazo:** lo que el paciente dijo *hoy*. Esa conversación ya existía, pero moría con la sesión: Aurora Home enviaba los turnos y Core los persistía como mensajes de sesión, sin convertirlos en recuerdo consultable.
+2. **Ancla del presente:** una frase que le anclara el hoy al paciente. No existía ningún texto de ese tipo en el snapshot de configuración.
+3. **Repertorio de corto plazo:** el subconjunto de recuerdos recientes que la therapy del día puede usar de verdad, sin arrastrar recuerdos irrelevantes.
+
+Los tres son cosas distintas y estaban confundidos en una sola palabra: «recuerdos». Esta decisión los separa porque tienen productores, validadores, usuarios y contratos distintos.
+
+Además, había dos defectos de recuperación que cualquier memoria de corto plazo amplificaba: el contexto del plan diario mandaba **todas** las memorias activas y neutrales, sin tope, de modo que el payload al Worker crecía sin límite; y la consulta al motor de lenguaje tomaba las **20 memorias más viejas**, de modo que un paciente con muchos recuerdos nunca veía los recientes.
+
+Y una asimetría de antialucinación: la defensa actual contra las alucinaciones era **100 % textual** (el prompt pide usar exclusivamente las memorias provistas) y **0 % por código**.
+
+**Drivers de decisión**
+
+1. **RN6 manda:** todo recuerdo pasa por validación de un cuidador autorizado. Nada de lo que el paciente dice ni de lo que el sistema redacta se publica sin un humano.
+2. **Separar artefactos:** digest, ancla y repertorio son contratos distintos con consumidores distintos (Aurora Home, el paciente, el Worker IA).
+3. **Determinismo:** la selección del repertorio y del ancla no puede depender del azar de un corte sobre una lista no ordenada.
+4. **Antialucinación con código:** la referencia a una memoria tiene que ser verificable contra lo que Core envió, no confiada al prompt.
+5. **Privacidad:** lo que el paciente dice en su casa es sensible por defecto.
+6. **Offline honesto:** si no hay snapshot, no hay ancla. Aurora Home no improvisa (ver ADR-008).
+7. **No agendar nada desde Core:** n8n es la autoridad de schedule (ver ADR-004).
+8. **Idempotencia:** el dispositivo reenvía; el mismo digest del mismo día no puede crear dos contribuciones.
+
+**Alternativas consideradas**
+
+- **Publicar directamente el digest como memoria:** costo bajo, pero ninguna memoria publicada quedaría ligada a una contribución validada y el texto del paciente pasaría al contexto del modelo sin revisión humana. Contradice RN6 de forma frontal. Descartada.
+- **Guardar el digest como texto de mensaje de sesión y nada más:** es lo que ya pasaba; no habilita línea de tiempo, filtro ni therapies. Descartada.
+- **Redactar el ancla en Core con reglas fijas:** una plantilla no personaliza ni ancla el presente con el contenido real del día, y contradice el patrón vigente de «la IA redacta, Core persiste y valida, Home dice verbatim». Descartada.
+- **Redactar el ancla en el Worker IA y persistirla en Core:** el texto usa el contenido real del día, Core valida que las referencias apunten a memorias reales y que el ancla no se sirva sin un recuerdo aprobado, y Home lo dice tal cual. **Elegida.**
+- **Seleccionar el repertorio con un criterio temporal arbitrario:** es lo que pasa hoy (orden por fecha de carga más un corte); no es una política, es un accidente de orden. Descartada.
+- **Selección determinista por fecha, origen, persona y tono:** reproducible, trazable y con tope explícito. **Elegida.**
+
+**Decisión**
+
+Se separan tres artefactos distintos y se define el circuito de cada uno.
+
+| Artefacto | Qué es | Quién lo produce | Quién lo valida | Quién lo consume |
+| --- | --- | --- | --- | --- |
+| **Digest diario** | Lo que el paciente dijo hoy, en sus palabras | Aurora Home lo captura; Core lo convierte | Cuidador (RN6) | La línea de tiempo y las therapies |
+| **Ancla del día** | La frase que Aurora le dice al paciente para anclar el presente | Worker IA | Core valida las referencias; un humano valida el recuerdo que la sostiene | Aurora Home, verbatim |
+| **Repertorio de corto plazo** | El subconjunto de recuerdos recientes que la therapy del día puede usar | Core, con selección determinista | No requiere validación adicional: usa recuerdos ya aprobados | El plan diario y la consulta |
+
+1. **Digest diario:** el material que Aurora Home ya envía en `activity.completed` se convierte en una **contribución pendiente**, con `source='home_discovery'`, `sensitivity='sensitive'` por defecto (hasta que el cuidador la valide), `occurred_at` = el día local del hogar y `occurred_precision='day'`. **Nunca** se publica directo como memoria: el camino es contribución pendiente → aprobación → memoria publicada. La distinción entre «lo que el paciente dijo» y «lo que generó el sistema» queda en `source` (`home_discovery` frente a `ai_generated`).
+2. **Ancla del día:** la redacta el Worker IA, Core la persiste y la sirve en el snapshot de configuración, y Aurora Home la dice **verbatim**. El contrato propuesto es `payload.daily_memory` con `date` (día local del hogar), `text` (una idea, ≤ 40 palabras), `memory_refs[]` (allow-list estricta contra las memorias enviadas) y `category`. La cantidad de anclas por día es **configurable**, no fija en una. **Regla dura:** el ancla se sirve en el snapshot **sólo cuando el recuerdo que la sostiene está aprobado**.
+3. **Repertorio de corto plazo:** selección determinista en Core, con ventana temporal (últimos 30 días), origen, coincidencia de personas y de etapa de vida, tono compatible con el de la sesión, y tope configurable. En la misma entrega se corrigen los dos defectos de recuperación: la consulta deja de tomar las memorias más viejas y el contexto del plan diario recibe un tope explícito.
+4. **Antialucinación:** el prompt se mantiene pero deja de ser la única defensa; la validación de referencias en Core se extiende al ancla con allow-list estricta (una referencia que no se envió se descarta y no cuenta); el cliente del modelo de lenguaje del Worker acepta `temperature` y `max_tokens` por endpoint; y cuando no hay memorias del día no se llama al modelo, con un texto neutro determinista. **La mitigación principal es la validación humana: nadie escucha un ancla que apoya en algo no validado.**
+5. **Realimentación IA → memoria → IA:** un recuerdo generado por la IA nunca queda activo sin un humano; sale como contribución pendiente con `source='ai_generated'`, y el contenido generado no entra al contexto del Worker sin pasar por la aprobación.
+6. **Endpoint para el dispositivo:** `POST /api/v1/home/daily-digest/`, con autenticación de dispositivo (`X-Device-API-Key`), cuerpo `{device_id, schema_version, date, turns[], session_ids[]}` y paciente **derivado del dispositivo autenticado** (no viaja en el cuerpo). Idempotencia por `(patient, día local del hogar, device_id)`: reenviar el mismo digest no crea una segunda contribución. El evento entra a la cola de eventos durable de Aurora Home y el acuse de Core es lo que cierra el envío.
+7. **Privacidad:** lo que el paciente dice en su casa es sensible **por defecto** y nunca neutro por automático. El digest transporta texto, no audio: el audio sólo sale del hogar durante las ventanas de escucha abiertas por un recordatorio o una actividad (ver ADR-011, que reemplazó a ADR-006). Los turnos heredan las cotas duras de Core (cantidad máxima de turnos y de caracteres por turno) y un turno malformado degrada el reporte completo antes de tocar la base.
+8. **Offline:** sin snapshot no hay ancla y Aurora Home no inventa (ADR-008). El modo degradado es honesto: «no tengo conexión ahora, pero tus recuerdos siguen guardados». El digest que el dispositivo no pudo enviar no se pierde: queda en su cola durable y se entrega cuando vuelve la conexión.
+9. **Quién agenda:** Core no agenda nada. La generación del ancla del día es un paso del flujo de n8n, igual que la generación del plan diario, y Core expone el endpoint que n8n llama.
+
+**Estado de implementación (21/10/2026)**
+
+- **Implementado en Aurora Home** (PR #92, commit `5640f0f`): tabla del buffer de corto plazo con escritura del buffer y de su evento de Outbox en la misma transacción, purga al arrancar y en cada escritura, evento `daily.digest` con identificador estable por día local y entrega diferida al cierre del día, y el ancla del día dicha **verbatim** con tope local por día e idempotencia por día, sin persistir el texto del ancla. La ruta hacia Core queda **PROPOSED** en la matriz de contratos, porque el endpoint todavía no fue publicado. Verificación del equipo: **1980 pruebas pasaron** (1924 del baseline + 56), mypy estricto limpio, cobertura **89 %** (los módulos nuevos, 100 %, 95 % y 94 %).
+- **Implementado en Aurora Worker IA** (PR #21, commit `3f2a0b2`): endpoint `POST /v1/daily-memory` que redacta el relato y la frase que Aurora Home dirá; sin memorias no se llama al modelo y se devuelve el texto neutro; las referencias se filtran contra la allow-list de ids enviados; el modelo `Memory` se extiende con fecha, precisión, personas por **rol**, origen, tono e importancia, todos opcionales; el contrato **rechaza nombres propios** en el payload de personas; y el cliente del modelo acepta `temperature` y `max_tokens` (el endpoint nuevo usa `temperature=0.2` y `max_tokens=400`). Verificación del equipo: **245 pruebas pasaron** (201 del baseline + 44), lint limpio.
+- **No implementado en Aurora Core:** el endpoint `POST /api/v1/home/daily-digest/` (`CORE-024`, AURA-195) y el `payload.daily_memory` del snapshot con su allow-list de referencias (`CORE-025`, AURA-196) **no existen**. No hay scaffolding: no está el modelo, ni la conversión a contribución pendiente, ni la idempotencia del lado de Core. Es lo que impide que Aurora Home cierre el circuito y por eso su ruta a Core figura como propuesta.
+- **No implementado en Aurora Care:** la validación uno a uno de las contribuciones del digest (AURA-202) y la vista de línea de tiempo (AURA-201) todavía no están.
+
+**Consecuencias**
+
+**Positivas:**
+
+- La conversación del paciente deja de morir con la sesión y se vuelve recuerdo validable.
+- El ancla del día le da al paciente un punto de referencia del presente, que es el objetivo clínico de la reminiscencia en deterioro cognitivo.
+- El contexto al Worker deja de crecer sin límite y deja de tomar las memorias más viejas.
+- Las referencias del ancla se validan contra lo enviado: la alucinación con cita se detecta.
+- El patrón de idempotencia por clave natural evita duplicados cuando el dispositivo reenvía.
+
+**Negativas:**
+
+- El digest nunca está disponible de inmediato: hay un humano en el medio. Eso es RN6, no un defecto, pero implica que el «recuerdo de hoy» aparezca con un día de atraso en el peor caso.
+- La cantidad de anclas configurable agrega un parámetro de configuración más que hay que mantener consistente entre Core, el snapshot y el prototipo de Care.
+- La corrección de la selección por recencia cambia el comportamiento observable de la consulta y del plan: hay que revisar las expectativas de las pruebas y el prompt del Worker, que hoy puede depender de recibir la historia completa.
+- `temperature` y `max_tokens` son un cambio en el Worker IA, no en Core: es coordinación externa.
+
+**Trade-offs aceptados:** la ventana de 30 días para el repertorio de corto plazo es un valor inicial, no un dato, y queda configurable; el ancla se persiste aunque el snapshot de ese día ya se haya servido, para poder regenerar el snapshot sin volver a llamar al Worker; la validación de referencias se hace en Core y no en el Worker, porque el Worker no tiene el conjunto de memorias enviadas.
+
+**Riesgos asumidos y abiertos:** la redacción legal del consentimiento de terceros (ADR-015), la deprecación del borrado físico de recuerdos (ADR-014) y la forma exacta del `daily_memory` en el snapshot (objeto único o lista) quedan abiertas y las define el equipo de Core en coordinación con el de Care.
+
 ## 4. Pautas de codificación
 
 ### 4.1 Convenciones de nomenclatura
@@ -979,7 +1261,9 @@ Antes de fijar plazos hay que saber por dónde circulan los datos. Con la arquit
 | **Voz del paciente (audio)** | Aurora Home | Azure Speech (reconocimiento en tiempo real) solo durante las ventanas de escucha abiertas por un recordatorio o una actividad; nunca de forma ambiental ni continua. Sin conexión: Whisper.cpp local. | Alta (dato de salud) |
 | **Texto de lo que dice el paciente y lo que responde Aurora** | Aurora Home y Aurora Core | Aurora Core; Worker IA y su proveedor de modelos de lenguaje (Gemini de Google); Azure para la síntesis de voz. La clasificación de si el paciente confirmó un recordatorio la hace un modelo local en Aurora Home. | Alta |
 | **Datos identificatorios (nombre, DNI, contactos de emergencia)** | Aurora Care | Aurora Core y Supabase, cifrados en la aplicación. | Alta |
-| **Medicación, rutinas y recuerdos personales** | Aurora Care | Aurora Core y Supabase. | Alta (dato de salud) |
+| **Medicación, rutinas y recuerdos personales** | Aurora Care | Aurora Core y Supabase. Desde el 21/10/2026 los recuerdos llevan además su fecha del suceso (`occurred_at`) y su taxonomía de dos niveles (ADR-014). | Alta (dato de salud) |
+| **Turnos del paciente capturados en el dispositivo (buffer de corto plazo)** | Aurora Home | Aurora Core, **cuando exista el endpoint de digest diario** (hoy no está implementado: `CORE-024` / AURA-195, y la ruta de Aurora Home figura como `PROPOSED` en la matriz de contratos). Nunca sale audio: sólo texto de los turnos. | Alta (dato de salud) |
+| **Personas de la vida del paciente (familiares, incluidas las ya fallecidas)** | Aurora Care | Aurora Core y Supabase, con el nombre cifrado en reposo (ADR-010, ADR-015). Al Worker IA viaja el **rol**, nunca el nombre propio. | Alta (PII de terceros) |
 | **Respuestas a recordatorios, eventos y alertas** | Aurora Home y Aurora Core | Aurora Core y Supabase. | Alta |
 | **Datos biométricos y de ubicación** | No aplica | No se procesan en el MVP. | Futuras versiones |
 
@@ -994,7 +1278,10 @@ Principio: la Ley 25.326 establece que los datos no deben conservarse más tiemp
 | Audio crudo del paciente | No se almacena (buffer circular de 5 minutos en el dispositivo) | Solo se necesita para transcribir en el momento; guardarlo no aporta a ninguna función del MVP. Al vencer: se sobrescribe. |
 | Transcripciones de interacciones | 6 meses | Permite al cuidador revisar el historial reciente y auditar las respuestas de la IA; cubre un ciclo habitual de seguimiento con el profesional. Al vencer: se anonimiza o elimina. |
 | Respuestas a recordatorios, eventos y alertas | 2 años | Es la base del historial de cumplimiento que el cuidador lleva a la consulta y la evidencia de qué ocurrió y cómo se actuó; más de 2 años no se justifica para el MVP. Al vencer: se elimina (puede conservarse un resumen estadístico anonimizado). |
-| Rutinas, medicación y recuerdos del paciente | Mientras dure la relación + 90 días | Son necesarios para prestar el servicio; los 90 días posteriores permiten exportar los datos o revertir una baja por error. Al vencer: se elimina. |
+| Rutinas, medicación y recuerdos del paciente | Mientras dure la relación + 90 días | Son necesarios para prestar el servicio; los 90 días posteriores permiten exportar los datos o revertir una baja por error. Al vencer: se elimina. ⚠️ **Parcialmente superado el 21/10/2026:** el plazo de 90 días sigue rigiendo para rutinas y medicación, pero **los recuerdos personales y la biografía obey la fila siguiente** (sin plazo fijo), porque su retención depende de la validación del cuidador y no de un plazo administrativo. |
+| **Recuerdos y biografía del paciente** | **Sin plazo fijo** (política RN6: se validan uno a uno y decide el cuidador) | La biografía del paciente es el activo que sostiene las therapies de reminiscencia y el ancla del presente: un plazo automático la dejaría incompleta a mitad del tratamiento y obligaría al cuidador a recargarla. No se borra: se **archiva** (`status='archived'`), de modo que el recuerdo sale de la vista operativa y de los filtros de contexto sin perder la historia clínica ni la trazabilidad de auditoría. El `DELETE` físico sigue siendo duro y su deprecación es una decisión **abierta** del equipo de Core con el de Care (ADR-014). La baja del paciente borra los recuerdos junto con el resto de sus datos, según lo que ya establece 6.5. |
+| **Buffer de turnos en el dispositivo Aurora Home** | **7 días por defecto**, configurable (`AURORA_HOME_DAILY_MEMORIES_RETENTION_DAYS`) | Es el único dato nuevo fuera de Core: los turnos propios del paciente que Aurora Home captura para el digest diario (ADR-016). Son transcripciones en claro y están en un equipo físico dentro del hogar, así que el plazo corto y la purga automática (al arrancar y en cada escritura) limitan la ventana de exposición. **Brecha declarada:** no hay cifrado en reposo a nivel de aplicación para este buffer; la purga usa `PRAGMA secure_delete` para que el texto se borre del archivo, no sólo la fila. Por esa brecha la feature queda **apagada por defecto** (`AURORA_HOME_DAILY_MEMORIES_ENABLED=false`) hasta que el equipo acepte la protección a nivel de sistema de archivos o se resuelva el cifrado. |
+| **Datos de terceros (familiares, personas de la historia del paciente)** | **Vinculados a la relación con el paciente** (mientras exista el paciente y su consentimiento de terceros esté concedido) | Son **datos personales de terceros**, no del paciente: PII de familiares y de personas ya fallecidas. Su base legal es un **consentimiento específico y registrado** (`third_party_life_data`), no el del paciente: los familiares no son titulares de los datos que se registran sobre ellos y no pueden consentir por sí mismos (ADR-015). El nombre se cifra en reposo con el patrón de ADR-010 y el hash determinístico sólo sirve para la búsqueda exacta. El borrado de personas ya cargadas cuando el paciente revoca el consentimiento queda **abierto** y lo define el equipo de Core con apoyo legal. |
 | Datos identificatorios del paciente | Mientras dure la relación + 90 días | Ídem. Al vencer: se elimina. |
 | Cuenta del cuidador | Mientras dure la relación + 90 días | Ídem; el piloto no tiene facturación que justifique plazos contables. Al vencer: se elimina. |
 | Registro de consentimientos y revocaciones | Mientras dure la relación + 5 años | Prueba de que el tratamiento fue autorizado y de cuándo dejó de estarlo; se conserva por la prescripción general de reclamos. Es el único dato que sobrevive a la baja. Al vencer: se elimina. |
@@ -1016,6 +1303,14 @@ Principio: la Ley 25.326 establece que los datos no deben conservarse más tiemp
 - **Proveedores de voz e IA (RNF-51):** no conservan el audio ni el texto; la configuración de cada proveedor se revisa con una lista de control en cada cambio.
 - **Credencial del proveedor de voz (RNF-52):** no debe quedar expuesta en los dispositivos. Estado actual: no cumple, porque la clave está en el archivo de entorno de la Raspberry Pi; se corregiría emitiendo tokens de corta duración desde Aurora Core.
 - **Anonimización (RNF-50):** ningún dato de pacientes se usa para entrenar o ajustar modelos sin consentimiento específico y sin eliminar identificadores; por defecto, no se usa.
+
+**Controles que introduce la feature de recuerdos (21/10/2026, ADR-014 a ADR-016):**
+
+- **Consentimiento de terceros (RF-81):** los datos personales de familiares y de personas de la historia del paciente —incluidas las ya fallecidas— requieren un consentimiento propio y registrado (`third_party_life_data`), **no** el del paciente. Sin ese consentimiento concedido no se pueden crear personas, y la revocación bloquea la creación de nuevas (el borrado de las ya cargadas es una decisión abierta del equipo de Core con apoyo legal). El marco general de consentimiento y sus efectos está en 6.5.
+- **Minimización del payload al motor de IA (RNF-25, RNF-48):** al Worker IA viajan **roles**, no nombres propios. El contrato del Worker rechaza los nombres propios en el payload de personas (los devuelve con error), y un nombre de Core sólo puede viajar si la política de tono de esa persona no es «evitar» **y** la memoria que lo referencia es `neutral`. Los recuerdos con sensibilidad `sensitive` o `avoid` no salen del contexto, y lo que el paciente dice en su casa nace `sensitive` por defecto. La guarda de redacción compara sobre el payload completo y **falla cerrado**: el pedido no sale y el intento queda auditado.
+- **Ningún recuerdo se publica sin validación del cuidador (RN6):** toda memoria activa exige una contribución aprobada por un cuidador autorizado, uno a uno. No hay atajos: la creación directa de recuerdos desde la API quedó deprecada y ahora crea una contribución pendiente; lo que el paciente dice y lo que genera el sistema llegan como aporte pendiente (`home_discovery` y `ai_generated`), y hasta que un humano aprueba, el ancla del día no se sirve y el descubrimiento no se menciona al paciente.
+- **Cifrado en reposo — Core (RNF-44, RNF-46):** los nombres de las personas de la vida del paciente se cifran con el mismo patrón `EncryptedCharField` ya auditado en **ADR-010**, con hash determinístico para la búsqueda exacta. No se repite la decisión: la referencia es ADR-010 y ADR-015.
+- **Cifrado en reposo — Aurora Home: no implementado.** El buffer de turnos del dispositivo (7 días, configurable) **no tiene cifrado en reposo a nivel de aplicación**. Por esa brecha la captura de corto plazo y el digest diario quedan **apagados por defecto** (`AURORA_HOME_DAILY_MEMORIES_ENABLED=false`) hasta que el equipo acepte la protección a nivel de sistema de archivos o se resuelva el cifrado. Es un control declarado como faltante, no un control cumplido.
 
 ### 6.5 Consentimiento: quién lo da, cómo se registra y qué pasa al revocar
 
