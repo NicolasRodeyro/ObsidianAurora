@@ -2,20 +2,14 @@
 base: "[[Document Hub.base]]"
 Category:
   - Documentación Interna
-Last updated time: 2026-06-19T19:40:00
+Last updated time: 2026-10-19
 ---
-# Trazabilidad — Artefactos por Historia
+# Trazabilidad — dónde están los artefactos
 
-Esta carpeta contiene un **artefacto de trazabilidad por Historia de Usuario** (formato de la cátedra): conecta cada historia con sus decisiones de diseño (ADR), modelo de datos (DER), diagramas de modelado, código y casos de prueba.
+Los **artefactos de trazabilidad** (formato de la cátedra: historia, ADR, DER, diagramas, código y casos de prueba con su ejecución) viven en la carpeta de cada sprint, dentro de `INSTANCIA 3 — Sprints 1 a N/`, como `Sprint N/AURA-xx/Artefacto de Trazabilidad AURA-xx.md`.
 
-- Generar cada artefacto con la skill **`/artefacto-trazabilidad`** (en `ObsidianAurora/.claude/skills/`; abrir Claude Code parado en `ObsidianAurora/` para que quede registrada).
-- Nomenclatura: `<KEY> - <título>.md` (ej. `AURA-78 - Registro y perfil del paciente.md`).
-- Para la trazabilidad a nivel **requerimiento → épica**, ver [[Trazabilidad RF-Épicas]].
+- Se generan con la skill **`/artefacto-trazabilidad`** (en `.claude/skills/`).
+- La trazabilidad de las historias AURA-74 a AURA-80 está en [[Historias de producto AURA-74 a 80]].
+- La trazabilidad a nivel **requerimiento → épica** está en [[Trazabilidad RF-Épicas]].
 
-## Artefactos existentes
-- [[AURA-74 - Sesión guiada de terapia]] — AURA-74 (US-D1) · épica AURA-18
-- [[AURA-78 - Registro y perfil del paciente]] — AURA-78 · épica AURA-18 (formaliza la US 1.1 de ejemplo)
-- [[AURA-79 - Gestión de rutinas y recordatorios]] — AURA-79 · épica AURA-18
-- [[AURA-80 - Gestión de medicación y recetario]] — AURA-80 · épica AURA-18
-
-> Los 4 tienen el diseño trazado; código y ejecución de pruebas quedan como scaffolding hasta que exista implementación (`Backend/`, `Frontend/`). El archivo `US 1.1 - … (EJEMPLO).md` quedó **superado** por AURA-78 (puede archivarse).
+> Los borradores que había en esta carpeta (AURA-74 a 80 y el ejemplo US 1.1) se escribieron antes de que existiera el código y se eliminaron el 19/10/2026; sus historias están cubiertas por los artefactos vigentes.

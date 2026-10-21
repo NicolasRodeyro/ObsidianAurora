@@ -2,13 +2,13 @@
 base: "[[Document Hub.base]]"
 Category:
   - Documentación Interna
-Last updated time: 2026-06-19T19:25:07
+Last updated time: 2026-10-16
 ---
 # Matriz de Trazabilidad — Requerimientos ↔ Épicas
 
 Vincula cada **Requerimiento Funcional** (`Document Hub/Requerimientos.md`) con su **módulo** y la **épica** de Jira que lo implementa. Generada automáticamente a partir de la tabla de RF; ver también [[Índice Aurora]] y [[Tablero Jira]].
 
-> Fuente: 91 RF · Proyecto Jira **AURA** · última actualización 2026-06-19.
+> Fuente: 98 RF · Proyecto Jira **AURA** · última actualización 2026-10-16. Cambios del 16/10/2026: se agregaron RF-92 a RF-98 (privacidad y consentimiento, épica AURA-20) y los módulos 2 y 3 pasaron a `vision` (futuras versiones, por la decisión del 29/08/2026 que dejó Aurora Band fuera del MVP).
 
 | RF | Descripción | Módulo | Épica (Jira) | Scope |
 | --- | --- | --- | --- | --- |
@@ -26,27 +26,27 @@ Vincula cada **Requerimiento Funcional** (`Document Hub/Requerimientos.md`) con 
 | RF-12 | Proponer juegos o actividades recreativas simples según preferencias del paciente. | Interacción con el Paciente | [AURA-14] Interacción y Asistencia por Voz | `mvp` |
 | RF-13 | Iniciar juegos o actividades recreativas simples según preferencias del paciente. | Interacción con el Paciente | [AURA-14] Interacción y Asistencia por Voz | `mvp` |
 | RF-14 | Actualizar el contenido de la interacción según historial, estado estimado y preferencias del paciente. | Interacción con el Paciente | [AURA-14] Interacción y Asistencia por Voz | `mvp` |
-| RF-15 | Registrar frecuencia cardíaca mediante sensor PPG. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-16 | Registrar movimiento mediante acelerómetro y giroscopio. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-17 | Registrar ubicación del paciente mediante GPS. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-18 | Registrar temperatura corporal mediante sensor compatible. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-19 | Registrar actividad electrodérmica mediante sensor compatible. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-20 | Informar pérdida de conexión de la pulsera. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-21 | Informar ausencia prolongada de datos biométricos. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-22 | Consultar estado operativo de la pulsera. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-23 | Consultar nivel de batería de la pulsera. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `mvp` |
-| RF-24 | Registrar posibles caídas a partir de datos de movimiento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-25 | Registrar patrones de deambulación errática. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-26 | Registrar posibles estados de agitación mediante biometría y comportamiento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-27 | Detectar salida del paciente de una zona segura. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-28 | Generar eventos ante situaciones de riesgo. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-29 | Registrar fecha, hora, tipo y datos asociados de cada evento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-30 | Modificar datos de evento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-31 | Eliminar evento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-32 | Clasificar eventos como informativos, preventivos o críticos. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-33 | Enviar eventos relevantes al módulo de alertas. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-34 | Registrar criterios de detección. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
-| RF-35 | Modificar criterios de detección. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `mvp` |
+| RF-15 | Registrar frecuencia cardíaca mediante sensor PPG. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-16 | Registrar movimiento mediante acelerómetro y giroscopio. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-17 | Registrar ubicación del paciente mediante GPS. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-18 | Registrar temperatura corporal mediante sensor compatible. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-19 | Registrar actividad electrodérmica mediante sensor compatible. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-20 | Informar pérdida de conexión de la pulsera. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-21 | Informar ausencia prolongada de datos biométricos. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-22 | Consultar estado operativo de la pulsera. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-23 | Consultar nivel de batería de la pulsera. | Monitoreo Biométrico — Pulsera IoT | [AURA-19] Monitoreo Biométrico | `vision` |
+| RF-24 | Registrar posibles caídas a partir de datos de movimiento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-25 | Registrar patrones de deambulación errática. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-26 | Registrar posibles estados de agitación mediante biometría y comportamiento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-27 | Detectar salida del paciente de una zona segura. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-28 | Generar eventos ante situaciones de riesgo. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-29 | Registrar fecha, hora, tipo y datos asociados de cada evento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-30 | Modificar datos de evento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-31 | Eliminar evento. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-32 | Clasificar eventos como informativos, preventivos o críticos. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-33 | Enviar eventos relevantes al módulo de alertas. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-34 | Registrar criterios de detección. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
+| RF-35 | Modificar criterios de detección. | Detección y Eventos | [AURA-22] Detección de Eventos y Riesgos | `vision` |
 | RF-36 | Generar alertas a partir de eventos relevantes. | Alertas y Comunicación | [AURA-16] Alertas y Comunicación con el Cuidador | `mvp` |
 | RF-37 | Clasificar alertas según nivel de gravedad. | Alertas y Comunicación | [AURA-16] Alertas y Comunicación con el Cuidador | `mvp` |
 | RF-38 | Notificar al cuidador ante eventos preventivos o críticos. | Alertas y Comunicación | [AURA-16] Alertas y Comunicación con el Cuidador | `mvp` |
@@ -103,17 +103,24 @@ Vincula cada **Requerimiento Funcional** (`Document Hub/Requerimientos.md`) con 
 | RF-89 | Registrar omisión de medicación cuando no exista confirmación. | Administración de Rutinas y Medicación | [AURA-17] Administración de Rutinas y Medicación | `mvp` |
 | RF-90 | Visualizar historial de cumplimiento de rutinas. | Administración de Rutinas y Medicación | [AURA-17] Administración de Rutinas y Medicación | `mvp` |
 | RF-91 | Visualizar historial de cumplimiento de medicación. | Administración de Rutinas y Medicación | [AURA-17] Administración de Rutinas y Medicación | `mvp` |
+| RF-92 | Registrar el consentimiento informado, con tipo, versión de la política, alcance, fecha y quién lo registró. | Seguridad, Privacidad y Datos | [AURA-20] Seguridad, Privacidad y Cumplimiento | `mvp` |
+| RF-93 | Permitir revocar el consentimiento desde Aurora Care, con los efectos definidos en la política de privacidad. | Seguridad, Privacidad y Datos | [AURA-20] Seguridad, Privacidad y Cumplimiento | `mvp` |
+| RF-94 | Atender solicitudes de acceso, rectificación y supresión, registrando tipo, estado y responsable. | Seguridad, Privacidad y Datos | [AURA-20] Seguridad, Privacidad y Cumplimiento | `mvp` |
+| RF-95 | Informar en el consentimiento qué datos salen del hogar y a qué proveedores. | Seguridad, Privacidad y Datos | [AURA-20] Seguridad, Privacidad y Cumplimiento | `mvp` |
+| RF-96 | Depurar automáticamente los datos que superaron su plazo de retención y dejar constancia. | Seguridad, Privacidad y Datos | [AURA-20] Seguridad, Privacidad y Cumplimiento | `mvp` |
+| RF-97 | Registrar el acceso a los datos del paciente: quién, qué, cuándo y con qué motivo. | Seguridad, Privacidad y Datos | [AURA-20] Seguridad, Privacidad y Cumplimiento | `mvp` |
+| RF-98 | No incluir datos personales en el texto visible de las notificaciones. | Seguridad, Privacidad y Datos | [AURA-20] Seguridad, Privacidad y Cumplimiento | `mvp` |
 
 ## Resumen por épica
 
 | Épica | Módulo | RF cubiertos | Scope |
 | --- | --- | --- | --- |
 | [AURA-14] Interacción y Asistencia por Voz | 1. Interacción con el Paciente | RF-01–14 | `mvp` |
-| [AURA-19] Monitoreo Biométrico | 2. Monitoreo Biométrico | RF-15–23 | `mvp` |
-| [AURA-22] Detección de Eventos y Riesgos | 3. Detección y Eventos | RF-24–35 | `mvp` |
+| [AURA-19] Monitoreo Biométrico | 2. Monitoreo Biométrico | RF-15–23 | `vision` |
+| [AURA-22] Detección de Eventos y Riesgos | 3. Detección y Eventos | RF-24–35 | `vision` |
 | [AURA-16] Alertas y Comunicación con el Cuidador | 4. Alertas y Comunicación | RF-36–46 | `mvp` |
 | [AURA-15] Motor de IA y Memoria del Paciente | 5. Motor de IA | RF-47–54 | `mvp` |
 | [AURA-21] Orquestación y Automatización | 6. Orquestación y Automatización | RF-55–59 | `vision` |
 | [AURA-18] Panel del Cuidador (Aurora Care) | 7. Cuidador | RF-60–75 | `mvp` |
-| [AURA-20] Seguridad, Privacidad y Cumplimiento | 8. Seguridad, Privacidad y Datos | RF-76–81 | `mvp` |
+| [AURA-20] Seguridad, Privacidad y Cumplimiento | 8. Seguridad, Privacidad y Datos | RF-76–81, RF-92–98 | `mvp` |
 | [AURA-17] Administración de Rutinas y Medicación | 9. Admin. Rutinas y Medicación | RF-82–91 | `mvp` |

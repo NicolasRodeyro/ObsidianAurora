@@ -82,7 +82,7 @@ Generar solo los diagramas que resultaron **aplicables en Paso 3.5**. Mantener c
 Partir de `assets/plantilla-artefacto.md`. Completar cada sección con lo recopilado. Marcar lo faltante de forma inequívoca con bloques `> [!todo]` y con la **checklist de completitud** al final. Conservar el frontmatter (para que aparezca en la base de Obsidian y el grafo).
 
 ### Paso 6 — Guardar en el vault
-Escribir en `Document Hub/Trazabilidad/<KEY> - <slug-del-título>.md` (crear la carpeta si no existe). Para historia manual sin key, usar un slug del título.
+Escribir en `Document Hub/INSTANCIA 3 — Sprints 1 a N/Sprint N/AURA-xx/Artefacto de Trazabilidad AURA-xx.md` (crear la carpeta si no existe). Para historia manual sin key, usar un slug del título.
 
 ### Paso 7 — Publicar en Jira (con confirmación)
 Proponer un resumen breve + el enlace al artefacto y, **solo tras confirmación explícita**, publicarlo con `mcp__atlassian__addCommentToJiraIssue` en el ticket de la historia. Nunca escribir en Jira sin OK del usuario.
