@@ -38,7 +38,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Trazabilidad RF-Épicas]] — matriz RF ↔ módulo ↔ épica.
 - [[Tablero Jira]] — snapshot del board AURA.
 - Artefactos de trazabilidad por historia → carpeta de cada sprint en `INSTANCIA 3 — Sprints 1 a N/` (generados con la skill `/artefacto-trazabilidad`).
-- Feature de recuerdos (línea de tiempo, personas de la vida del paciente, recuerdo del día): historias US-D5 a US-D7 en [[Handoff y Backlog de Diseño]] §3 · ADR-014 a ADR-016 en [[Arquitectura y Stack Tecnológico]] §3 · artefactos de trazabilidad en `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-195/`, `AURA-197/` y `AURA-201/`.
+- Feature de recuerdos (línea de tiempo, personas de la vida del paciente, recuerdo del día): historias US-D5 a US-D7 en [[Handoff y Backlog de Diseño]] §3 · ADR-014 a ADR-016 en [[Arquitectura y Stack Tecnológico]] §3 · artefactos de trazabilidad en `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-195/`, `AURA-197/`, `AURA-201/` y `AURA-202/`.
 
 ## Arquitectura y diseño
 - [[Boceto de Arquitectura]] — esquema temprano.
