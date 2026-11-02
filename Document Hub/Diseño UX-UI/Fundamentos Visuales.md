@@ -82,6 +82,7 @@ En tema oscuro la elevación se expresa por **color de superficie** (`neutral-85
 2. **Respetar reducción de movimiento del sistema**: el token ya está definido y la app debe mapearlo a la API de accesibilidad correspondiente — todas las animaciones colapsan a instantáneas.
 3. **Las alertas críticas no parpadean**: una alerta SOS aparece con un slide firme y **queda estática**; el parpadeo continuo aumenta la ansiedad y puede disparar fotosensibilidad (WCAG 2.3.1). El pulso lento (1 ciclo/2 s) queda solo para el anillo LED del dispositivo.
 4. En el display del dispositivo, las transiciones son **lentas y suaves** (400 ms+): los cambios bruscos de pantalla confunden al paciente.
+5. En el **celular del paciente** el único movimiento es una aparición con fundido de `motion-slow` (400 ms) y 8 px de ascenso, para la foto de reminiscencia y la tarjeta de fin de juego. Sin reducción de movimiento del sistema se anima una vez; con ella, aparece de una vez. No hay animaciones de error, ni repetidas, ni que parpadeen. Ver P10 en `screens-09-paciente.html`.
 
 ## 7. Estados interactivos (todas las superficies de Care)
 

@@ -81,6 +81,12 @@ El diseño de Terapias introdujo alcance sin RF/US propios (ver nota en [[Arquit
 - [ ] **Especialistas** (R1): plantillas de sesión guiada, guiones VUI G1-G10, contenidos de estimulación cognitiva, formato del reporte médico.
 - [ ] **Usability test cuidadores** (5-8 personas, plan en [[Accesibilidad]] §5): dashboard en 5 s, crear rutina, resolver alerta simulada.
 - [ ] **Piloto con pacientes** (acompañado y con consentimiento): respuesta a recordatorios, tolerancia a la voz, botón SOS.
+- [ ] **Celular del paciente (piloto, acompañado y con consentimiento)**: escala tipográfica propia (20/24/28 px, tope 1,3×), pausa de «Descansamos un rato» a los ~15 minutos y si el sonido suave y la vibración sobresaltan o ayudan. Los valores son derivados, no probados ([[Tipografía]]).
+- [ ] **Psicopedagoga — contenido de los juegos**: bancos de palabras, secuencias y dinero; preguntas y distractores de «Elegí la respuesta»; categorías de «Palabras que van juntas»; asignación del juego de la letra que falta; mapeo actividad → juego. Todo contenido nuevo figura «PENDIENTE DE REVISIÓN» hasta entonces.
+- [ ] **Psicopedagoga — nombres, frases y secciones de la lista de juegos** (P12): «Con tus fotos y recuerdos», «Con palabras», «Con números, dinero y fechas», «Para ordenar y pensar»; el nombre y la frase de cada juego; el texto del aviso de juego bloqueado (P14).
+- [ ] **Regla de dificultad adaptativa** (hoy «A VALIDAR»): mientras no se valide, el nivel de los juegos lo elige el cuidador y Aurora no lo cambia sola.
+- [ ] **Línea base de los juegos del celular**: sesiones completadas vs. abandonadas por juego (meta del plan: ≥ 70 % terminadas). Todavía no se midió; el resumen por paciente de Ajustes → Dispositivos (frame 39) da los primeros datos.
+- [ ] **Fuente Atkinson** para el celular del paciente: figura en el tema pero todavía no se empaqueta con `expo-font`.
 - [ ] **Revisión visual del Figma** cuando se pueble (el MCP no pudo verificar: revisar contra los previews HTML, que son la fuente de verdad visual).
 
 ## Documentos relacionados

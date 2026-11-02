@@ -95,6 +95,11 @@
   --text-device-body: 32px;
   --text-device-title: 48px;
   --text-device-clock: 72px;
+  /* Celular del paciente: derivados del manual (piso 16 en Care, 32 en el display), a validar en el piloto */
+  --text-patient-body: 20px;    /* texto corrido */
+  --text-patient-prompt: 24px;  /* consignas de juego, títulos de tarjeta */
+  --text-patient-title: 28px;   /* título de pantalla */
+  --patient-font-scale-max: 1.3; /* tope de la letra del sistema (maxFontSizeMultiplier) */
 
   --leading-tight: 1.2;
   --leading-normal: 1.5;
