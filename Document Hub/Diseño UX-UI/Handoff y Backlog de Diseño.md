@@ -5,7 +5,7 @@ Last edited by: Jeremías Maldonado Gómez
 Created by: Jeremías Maldonado Gómez
 Category:
   - Diseño UX/UI
-Last updated time: 2026-07-09T11:30:00
+Last updated time: 2026-10-21T00:00:00
 ---
 # Handoff y Backlog de Diseño
 
@@ -54,6 +54,36 @@ El diseño de Terapias introdujo alcance sin RF/US propios (ver nota en [[Arquit
 
 **US-D4 — Dificultad adaptativa (AURA-15)**
 > Como sistema, quiero ajustar la dificultad de juegos y trivias según el desempeño registrado (RF-52), sin exponer nunca errores ni puntajes al paciente.
+
+**US-D5 — Línea de tiempo de recuerdos (épica AURA-18 · tickets AURA-201 (Care) / AURA-198 (Core))**
+> Como cuidador, quiero recorrer la vida del paciente en una línea de tiempo agrupada por año o década, con filtro por persona y por categoría, para ver los huecos biográficos y orientar la recolección de recuerdos.
+> **CA:** agrupación por año o década · filtro por persona y por categoría · los recuerdos sin fecha anclada se muestran en una sección aparte, nunca con una fecha inventada · la cobertura biográfica señala las décadas, personas y temas con huecos · paginación real por cursor, sin duplicados al insertar en el medio · orden estable por la fecha del **suceso**, no por la de carga · la línea de tiempo vive en **Aurora Care**; en el dispositivo se recorre **por voz** (el display del dispositivo queda fuera del alcance de esta feature: ver §5 de [[VUI — Diseño Conversacional]]).
+> **RF/RNF:** RF-09, RF-49, RF-68, RNF-31 · **Épica:** AURA-18 (Aurora Care) · **Tickets:** AURA-201 (Care), AURA-198 (Core) · **ADR:** ADR-014 (taxonomía de dos niveles y anclaje temporal) · **Artefacto de trazabilidad:** `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-201/`
+
+**US-D6 — Personas de la vida del paciente (épica AURA-15 · tickets AURA-197 (Core) / AURA-202 (Care))**
+> Como cuidador, quiero registrar y cuidar a las personas de la vida del paciente (incluidas las fallecidas) con su parentesco, su era y el tono con que Aurora debe tratarlas, para que las therapies usen datos reales y con consentimiento.
+> **CA:** ficha con vínculo, etapa de la vida, temas y política de tono («alegre» / «con cuidado» / «evitar») · el nombre se cifra en reposo y se busca por hash, nunca en claro en la base · un recuerdo puede referenciar varias personas con su rol (protagonista, participante, lugar) · crear personas exige el consentimiento de terceros (`third_party_life_data`), **no** el del paciente · una persona con tono «evitar» no viaja al motor de IA · una persona fallecida no genera avisos push al cuidador · el mapa entre las etiquetas de la interfaz y los tres valores de tono lo confirma el equipo de Care antes de implementar la pantalla.
+> **RF/RNF:** RF-49, RF-50, RF-81, RNF-25 · **Épica:** AURA-15 (Motor de IA y Memoria del Paciente) · **Tickets:** AURA-197 (Core), AURA-202 (Care) · **ADR:** ADR-015 (personas de la vida del paciente) · **Artefacto de trazabilidad:** `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-197/`
+
+**US-D7 — Recuerdo del día (épicas AURA-15 y AURA-14 · tickets AURA-195 y AURA-196 (Core), AURA-200 (Worker IA), AURA-203 (Aurora Home))**
+> Como paciente, quiero que Aurora me ancle el presente con un recuerdo breve y verificado —propio o de mi historia— y poder dejar mi propio recuerdo del día para el día siguiente.
+> **CA:** el ancla del día la redacta el Worker IA, la persiste Core y Aurora Home la dice **verbatim** · el ancla sólo se sirve si el recuerdo que la sostiene está **aprobado** · las referencias se validan contra la allow-list de memorias enviadas · lo que el paciente dice llega como aporte **pendiente** y lo valida un cuidador, uno a uno (RN6) · la cantidad de anclas por día es **configurable** · sin conexión no hay ancla y el dispositivo no inventa (ADR-008) · el buffer local del dispositivo dura 7 días y la feature está **apagada por defecto** hasta que se resuelva el cifrado en reposo de ese buffer.
+> **RF/RNF:** RF-09, RF-14, RNF-20, RNF-22 · **Épicas:** AURA-15 (Aurora Core y Worker IA), AURA-14 (Aurora Home) · **Tickets:** AURA-195, AURA-196, AURA-200, AURA-203 · **ADR:** ADR-016 (recuerdos diarios de corto plazo), sobre ADR-014 (taxonomía y anclaje temporal) · **Artefacto de trazabilidad:** `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-195/`
+
+**Ítem de visión — Diario personal guiado (memoria episódica)**
+> Ejes de la memoria episódica: escribir o comentar qué hizo ese día, con apoyo de fotos o preguntas ([[Investigacion sobre neurologia]], «Funciones concretas a agregar»).
+> **Por qué no es historia de MVP:** depende de **US-D5** —sin la línea de tiempo que ordena los recuerdos por la fecha del suceso no hay dónde apoyar el diario— y del **circuito de validación** (RN6: un cuidador autorizado valida cada aporte; un diario que publica texto del paciente sin control rompe la regla). Se anota como ítem de visión, no como historia del MVP, y no se estima.
+
+### 3.1 Decisiones ya cerradas: no hace falta un ADR nuevo
+
+Se revisó el vault en busca de ADR pendientes relacionados con la **sesión guiada (AURA-74)** y con la **«sugerencia del día» (AURA-75)**. **No hay ninguno pendiente de esos dos temas**: el guardarraíl de la sesión guiada ya está decidido, y el criterio de la sugerencia del día quedó cubierto por el anclaje de recuerdos.
+
+| Tema | Guardarraíl ya decidido | Dónde está |
+| --- | --- | --- |
+| Sesión guiada (AURA-74 / US-D1) | Aurora Home **no hace preguntas en cadena** ni corrige lo que el cuidador dice: máximo **1 intervención de voz por paso**; el texto hablable lo redacta Core y el dispositivo lo dice **verbatim** | guion **G10** de [[VUI — Diseño Conversacional]] · [[Accesibilidad]] §2 · **ADR-HOME-019** (Aurora Home) · del lado de la privacidad, **ADR-011** del vault (voz en la nube con respaldo local, que reemplazó a ADR-006) |
+| Sugerencia del día (AURA-75 / US-D2) | La sugerencia se apoya en recuerdos **aprobados** y con fecha del suceso; el ancla del día sólo se sirve si el recuerdo que la sostiene está validado | **ADR-016** (recuerdos diarios de corto plazo) + **ADR-014** (taxonomía de dos niveles y anclaje temporal) |
+
+Los únicos ADR que el vault tiene anotados como **pendientes** son de otros temas: la elección de **LiveKit** como proveedor de media (**ADR-013**, reservado) y la heurística determinista de dificultad adaptativa (AURA-77). Ninguno de los dos pertenece a esta feature.
 
 ## 4. Backlog de diseño — visión (wireframes V1-V6 → hi-fi)
 
