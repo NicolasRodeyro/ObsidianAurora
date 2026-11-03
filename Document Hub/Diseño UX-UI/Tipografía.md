@@ -50,6 +50,22 @@ Visible a 2-3 metros por una persona mayor: los tamaños son ~2× los de la app.
 | `text-device-title` | 48 px | Atkinson 700 | Saludo, título del recordatorio («Hola, Ana») |
 | `text-device-body` | **32 px** | Atkinson 400 | **Mínimo absoluto del display** — fecha, cuerpo del mensaje |
 
+### Celular del paciente (Care en el teléfono de la persona)
+
+El manual original no definía este modo (el paciente usaba solo Aurora Home por voz). Hoy existe: Care corre en el teléfono de la persona, con una sola superficie de juegos, ayuda y llamada. Como no había escala propia, se **derivó una** entre el piso de Care (16 px) y el display (32 px). **Son valores propuestos, no probados con pacientes: se validan en el piloto con acompañamiento profesional** ([[Handoff y Backlog de Diseño]] §6).
+
+| Token | Valor | Uso |
+| --- | --- | --- |
+| `text-patient-body` | 20 px · interlineado 30 | texto corrido, descripciones |
+| `text-patient-prompt` | 24 px · interlineado 34 | consignas de juego, títulos de tarjeta |
+| `text-patient-title` | 28 px · interlineado 36 | título de pantalla |
+| `patient-font-scale-max` | 1,3 | tope de la letra del sistema (`maxFontSizeMultiplier`): más allá, celdas, fichas y cartas dejan de entrar |
+
+- Botones de 60 a 72 px de alto; targets ≥ 44 px siempre.
+- Una acción dominante por pantalla; sin reloj visible, sin puntajes ni conteo de errores.
+- La fuente hiperlegible (Atkinson) **todavía no se carga en la app**: queda pendiente empaquetarla con `expo-font` para este modo.
+- Referencia visual: `Design/previews/screens-09-paciente.html`.
+
 ## 3. Reglas
 
 1. **16 px es el piso** para todo contenido en Care; 14 px solo para labels/controles; 12 px solo metadatos.

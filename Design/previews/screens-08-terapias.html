@@ -331,6 +331,59 @@
     </div>
   </div></div></div>
 
+  <!-- 40: BIBLIOTECA CON JUEGO PARA EL CELULAR -->
+  <div><p class="frame-label">40 · Biblioteca — actividades que también se juegan en el celular</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="title">Actividad</div></div>
+    <div class="content">
+      <div class="seg"><button>Alertas</button><button class="active">Terapias</button><button>Historial</button></div>
+      <div class="ther-card"><div class="ther-thumb" style="background: var(--lilac)">🃏</div>
+        <div style="flex:1"><div class="r-title">Memoria de pares</div><div class="r-sub">Asociar fotos con nombres</div>
+          <div class="hstack" style="margin-top:4px;flex-wrap:wrap"><span class="badge neutral">Memoria</span><span class="badge info">También en el celular del paciente</span><span class="badge neutral">10 min</span></div></div>
+        <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
+      <div class="ther-card"><div class="ther-thumb" style="background: var(--sky)">📖</div>
+        <div style="flex:1"><div class="r-title">Sesión de reminiscencia</div><div class="r-sub">Vos guiás, Aurora acompaña con música y fotos</div>
+          <div class="hstack" style="margin-top:4px;flex-wrap:wrap"><span class="badge neutral">Reminiscencia</span><span class="badge ok"><svg class="ic"><use href="#i-users"/></svg>Guiada por vos</span><span class="badge neutral">15 min</span></div></div>
+        <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
+    </div>
+  </div></div>
+  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)">La insignia aparece cuando la actividad tiene juego en pantalla: la persona puede jugarla sola desde su celular. Describe la actividad, no el estado del hogar: se ve igual haya o no un celular vinculado. Las actividades guiadas sin juego no la llevan.</p></div>
+
+  <!-- 41: RESULTADO DE UNA PARTIDA DEL CELULAR -->
+  <div><p class="frame-label">41 · Resultado de una partida del celular — ¿Cómo lo viste?</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Resultado de la sesión</div></div>
+    <div class="content">
+      <div class="card">
+        <div class="r-title">Memoria de pares</div>
+        <p class="muted">Domingo, 20:15 · desde el celular del paciente</p>
+        <div class="hstack" style="margin-top:var(--space-2)"><span class="badge ok">Completada</span></div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="k-val" style="font-size:var(--text-md)">2 min 10 s</div><div class="k-lbl">Duración</div></div>
+        <div class="kpi"><div class="k-val" style="font-size:var(--text-md)">Sin registrar</div><div class="k-lbl">Participación</div></div>
+        <div class="kpi"><div class="k-val" style="font-size:var(--text-md)">Sin registrar</div><div class="k-lbl">Ánimo</div></div>
+      </div>
+      <div class="card">
+        <div class="r-title">El juego</div>
+        <div class="r-title" style="font-size:var(--text-sm)">Juego 1</div>
+        <div class="r-sub">8 intentos · 1 error · 2 min 10 s</div>
+        <p class="muted">Es un registro para vos: la persona nunca ve errores ni tiempos.</p>
+      </div>
+      <div class="card">
+        <div class="r-title">¿Cómo lo viste?</div>
+        <p class="muted">Completalo solo si estabas con la persona. Si no, dejalo sin registrar: no pasa nada.</p>
+        <div class="field" style="margin-top:var(--space-2)"><label>Participación (opcional)</label>
+          <div class="hstack"><span class="chip">Baja</span><span class="chip selected">Media</span><span class="chip">Alta</span></div></div>
+        <div class="field" style="margin-top:var(--space-2)"><label>Ánimo observado (opcional)</label>
+          <div class="hstack"><span class="chip">Bajo</span><span class="chip">Neutral</span><span class="chip">Positivo</span></div></div>
+        <div class="field" style="margin-top:var(--space-2)"><label>Nota (opcional)</label><textarea class="input" placeholder="Algo que viste mientras jugaba"></textarea></div>
+        <button class="btn btn-primary btn-block" style="margin-top:var(--space-3)">Guardar</button>
+      </div>
+    </div>
+  </div></div>
+  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)">El celular sólo mide el juego: nadie observó el ánimo ni la participación, por eso salen «Sin registrar» y el formulario arranca vacío, sin valores por defecto (un «Media / Neutral» preseleccionado se leería después como algo observado). «Guardar» se habilita al cambiar algo. Cualquier cuidador puede completarlo; no modifica lo que midió el juego. Sólo aparece en partidas cerradas que jugó el paciente solo, no en sesiones de Home ni de Care.</p></div>
+
 </div>
 </body>
 </html>

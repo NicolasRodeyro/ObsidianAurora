@@ -219,6 +219,77 @@
     </div>
   </div></div></div>
 
+  <!-- CELULAR DEL PACIENTE -->
+  <div><p class="frame-label">39 · Dispositivos — celular del paciente</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="title small">Dispositivos</div></div>
+    <div class="content">
+      <div class="card">
+        <div class="card-title"><svg class="ic"><use href="#i-phone"/></svg>Celular del paciente<span class="badge ok" style="margin-left:auto">Vinculado</span></div>
+        <p class="muted">Última señal hace 2 minutos.</p>
+
+        <div class="r-title" style="margin-top:var(--space-3)">Nivel de los juegos</div>
+        <p class="muted">Cuántas cartas, palabras o pasos tiene cada juego. Lo elegís vos: Aurora no lo cambia sola.</p>
+        <div class="seg" style="margin-top:var(--space-2)"><button>Básico</button><button class="active">Intermedio</button><button>Avanzado</button></div>
+
+        <div class="spread" style="margin-top:var(--space-4);gap:var(--space-3)">
+          <div style="flex:1"><div class="r-title">Sonido y vibración</div>
+            <p class="muted">Un sonido suave y una vibración leve al acertar. Empieza apagado: un sonido inesperado puede sobresaltar. Si el celular está sin volumen, no suena.</p></div>
+          <button class="toggle" aria-label="apagado"></button>
+        </div>
+
+        <button class="btn btn-secondary btn-sm btn-block" style="margin-top:var(--space-3)"><svg class="ic"><use href="#i-pin"/></svg>Ver dónde está</button>
+        <div class="hstack" style="margin-top:var(--space-2)"><button class="btn btn-ghost btn-sm">Vincular otro celular</button></div>
+      </div>
+      <div class="card">
+        <style>
+          .gp-row { border-top: 1px solid var(--border-default); padding: var(--space-3) 0; }
+          .gp-name { font-weight: 600; font-size: var(--text-sm); }
+          .gp-ago { font-size: var(--text-xs); color: var(--text-muted); white-space: nowrap; }
+          .gp-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); margin-top: var(--space-2); }
+          .gp-stats b { display: block; font-size: var(--text-lg); line-height: 1.2; }
+          .gp-stats span { display: block; font-size: var(--text-xs); color: var(--text-muted); line-height: 1.25; }
+        </style>
+        <div class="spread"><div class="card-title" style="margin:0">Cómo le fue en el celular</div><span class="muted">30 días</span></div>
+        <div class="kpis" style="margin-top:var(--space-3)">
+          <div class="kpi"><div class="k-val">18</div><div class="k-lbl">Terminadas</div></div>
+          <div class="kpi"><div class="k-val">8</div><div class="k-lbl">Paró antes</div></div>
+          <div class="kpi"><div class="k-val">9</div><div class="k-lbl">Juegos</div></div>
+        </div>
+        <div class="gp-row">
+          <div class="spread"><div class="gp-name">Armar rompecabezas</div><span class="gp-ago">hace 44 min</span></div>
+          <div class="gp-stats">
+            <div><b>3</b><span>terminadas</span></div>
+            <div><b>2</b><span>paró antes</span></div>
+            <div><b>1</b><span>errores por partida</span></div>
+            <div><b>32 s</b><span>tiempo medio</span></div>
+          </div>
+        </div>
+        <div class="gp-row">
+          <div class="spread"><div class="gp-name">Clasificar elementos según diferentes criterios</div><span class="gp-ago">hace 44 min</span></div>
+          <div class="gp-stats">
+            <div><b>2</b><span>terminadas</span></div>
+            <div><b>3</b><span>paró antes</span></div>
+            <div><b>0</b><span>errores por partida</span></div>
+            <div><b>1 min 7 s</b><span>tiempo medio</span></div>
+          </div>
+        </div>
+        <div class="gp-row">
+          <div class="spread"><div class="gp-name">Ordenar pasos de una secuencia</div><span class="gp-ago">hace 1 d</span></div>
+          <div class="gp-stats">
+            <div><b>2</b><span>terminadas</span></div>
+            <div><b>1</b><span>paró antes</span></div>
+            <div><b>0</b><span>errores por partida</span></div>
+            <div><b>13 s</b><span>tiempo medio</span></div>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm btn-block" style="margin-top:var(--space-1)">Ver los 9 juegos</button>
+        <p class="muted" style="margin-top:var(--space-2)">Es un registro para vos: la persona nunca ve errores ni tiempos. El nivel lo decidís vos.</p>
+      </div>
+    </div>
+  </div></div>
+  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)">Sólo el administrador cambia el nivel y el sonido; los demás cuidadores ven «Activado / Apagado». El resumen vive en su propia tarjeta, aparte de los ajustes: arriba, tres números que responden «¿cómo viene?» (partidas terminadas, partidas que paró antes y juegos distintos); abajo, los 3 juegos más jugados con sus cuatro números alineados, y «Ver los N juegos» despliega el resto. Lo ven todos y no sugiere subir ni bajar el nivel: esa regla está pendiente de validar con la psicopedagoga. Un juego sin números guardados no cuenta como «cero errores». Si hubo más de 500 partidas en los 30 días, se avisa que los números son de las más recientes.</p></div>
+
 </div>
 </body>
 </html>

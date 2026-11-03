@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora — Celular del paciente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="app.css">
+<style>
+  /* Escala del celular del paciente (tokens.css: --text-patient-*). Derivada del manual, a validar en el piloto. */
+  .p-title { font-family: var(--font-heading); font-size: var(--text-patient-title); line-height: 1.3; font-weight: 700; text-align: center; }
+  .p-prompt { font-family: var(--font-heading); font-size: var(--text-patient-prompt); line-height: 1.4; font-weight: 700; }
+  .p-body { font-size: var(--text-patient-body); line-height: 1.5; color: var(--text-secondary); }
+  .p-center { text-align: center; }
+  .p-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+  .p-btn { min-height: 72px; font-size: var(--text-patient-prompt); border-radius: var(--radius-lg); }
+  .p-btn.sm { min-height: 60px; font-size: var(--text-patient-body); }
+  .p-game { display: flex; gap: var(--space-4); align-items: center; padding: var(--space-4); }
+  .p-game .ico { width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--bg-brand-subtle, var(--violet-100)); flex: none; }
+  .p-msg { min-height: 30px; text-align: center; font-size: var(--text-patient-body); font-weight: 700; }
+  .p-msg.ok { color: var(--success-text); }
+  .p-msg.soft { color: var(--warning-text); }
+  .p-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+  .p-card { aspect-ratio: 1; border: 2px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--bg-brand-subtle, var(--violet-100)); display: grid; place-items: center; font-size: var(--text-patient-prompt); font-weight: 700; color: var(--text-brand); }
+  .p-card.face { background: var(--bg-surface); color: var(--text-primary); }
+  .p-opt { min-height: 60px; display:flex; align-items:center; justify-content:space-between; gap: var(--space-2); border: 2px solid var(--border-strong); border-radius: var(--radius-lg); padding: var(--space-3) var(--space-4); font-size: var(--text-patient-body); font-weight: 700; background: var(--bg-surface); }
+  .p-opt.off { opacity: .45; background: var(--bg-subtle); border-color: var(--border-default); }
+  .p-opt.ok { background: var(--success-bg); border-color: var(--success-text); color: var(--success-text); }
+  .p-photo { aspect-ratio: 1; border-radius: var(--radius-lg); border: 1px solid var(--border-default); background: var(--bg-subtle); display:grid; place-items:center; color: var(--text-muted); font-size: var(--text-sm); }
+  .p-note { max-width: 380px; font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-2); }
+  /* v2 (pulido): jerarquía del inicio, lista agrupada y juegos bloqueados con su motivo. */
+  .p-ico { width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--bg-brand-subtle, var(--violet-100)); color: var(--text-brand); flex: none; display: grid; place-items: center; font-size: 11px; font-weight: 700; text-align: center; line-height: 1.1; }
+  .p-ico.lg { width: 72px; height: 72px; font-size: 12px; }
+  .p-hero-btn { min-height: 96px; font-size: var(--text-patient-title); border-radius: var(--radius-xl, 24px); }
+  .p-hero { border: 2px solid var(--text-brand); border-radius: var(--radius-lg); background: var(--bg-surface); padding: var(--space-4); display: flex; gap: var(--space-4); align-items: center; }
+  .p-group { font-size: var(--text-patient-body); font-weight: 700; color: var(--text-secondary); margin-top: var(--space-3); }
+  .p-gcard { display: flex; gap: var(--space-4); align-items: center; padding: var(--space-3) var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--bg-surface); }
+  .p-gcard .name { font-family: var(--font-heading); font-size: var(--text-patient-prompt); font-weight: 700; line-height: 1.25; }
+  .p-gcard .desc { font-size: var(--text-patient-body); color: var(--text-secondary); line-height: 1.4; }
+  .p-gcard.lock { background: var(--bg-subtle); border-style: dashed; }
+  .p-gcard.lock .name { color: var(--text-secondary); }
+  .p-gcard.lock .reason { font-size: var(--text-patient-body); color: var(--text-muted); line-height: 1.4; }
+  .p-gcard.lock .p-ico { background: var(--bg-subtle); color: var(--text-muted); }
+  .p-status { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--bg-surface); font-size: var(--text-patient-body); color: var(--text-secondary); }
+  .p-status .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--success-icon, #2e9e6b); flex: none; }
+  .p-pinned { margin-top: auto; padding-top: var(--space-3); }
+  .p-sheet-back { position: absolute; inset: 0; background: rgba(8, 11, 30, .55); }
+  .p-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--bg-surface); border-radius: 24px 24px 0 0; padding: var(--space-5) var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); align-items: center; text-align: center; }
+  .p-grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+  .p-opt-photo { border: 2px solid var(--border-strong); border-radius: var(--radius-lg); padding: var(--space-2); background: var(--bg-surface); display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--text-patient-body); font-weight: 700; text-align: center; }
+  .p-opt-photo .ph { aspect-ratio: 1; border-radius: var(--radius-md); background: var(--bg-subtle); display: grid; place-items: center; color: var(--text-muted); font-size: var(--text-xs); }
+  .p-opt-text { min-height: 84px; border: 2px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--bg-surface); display: grid; place-items: center; font-size: var(--text-patient-prompt); font-weight: 700; padding: var(--space-3); text-align: center; }
+  .p-frame-sub { font-size: var(--text-xs); font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 var(--space-1); }
+</style>
+</head>
+<body>
+<h1 class="gallery-title">Aurora — Celular del paciente</h1>
+<p class="gallery-sub">Pantallas del modo paciente (Care en el teléfono de la persona). Reglas del manual: una acción dominante por pantalla, nunca marcar el error ni mostrar puntajes, sin reloj visible, salida sin culpa, sesiones de hasta 15 minutos, sin emojis ni diminutivos. Escala propia: cuerpo 20, consigna 24, título 28 px y botones de 60 a 72 px; la letra del sistema se acota a 1,3×. Valores derivados, a validar en el piloto con acompañamiento profesional.</p>
+
+<div class="gallery">
+
+  <!-- P1 -->
+  <div><p class="frame-label">P1 · Inicio — «Jugar» manda; la ayuda siempre a mano</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="justify-content:center">
+      <div class="p-stack" style="margin-bottom:var(--space-4)">
+        <div class="p-title">Hola, Ana</div>
+        <div class="p-body p-center">¿Querés jugar un rato?</div>
+      </div>
+      <button class="btn btn-primary p-btn">Jugar</button>
+      <button class="btn btn-danger p-btn">Necesito ayuda</button>
+      <button class="btn btn-secondary p-btn sm">Llamar a María</button>
+      <p class="muted p-center">Ubicación y versión van abajo, en secundario.</p>
+    </div>
+  </div></div>
+  <p class="p-note">Los estados vacío, cargando, error y sin conexión usan los mismos patrones: título 28, una frase de 20 y un solo botón («Reintentar»). Ante un error nunca se culpa a la persona.</p></div>
+
+  <!-- P2 -->
+  <div><p class="frame-label">P2 · ¿A qué querés jugar? — una tarjeta grande por juego</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
+    <div class="content">
+      <div class="p-prompt" style="color:var(--text-brand);font-size:var(--text-patient-body)">Para hoy</div>
+      <div class="card p-game" style="border:2px solid var(--text-brand)"><div class="ico"></div><div><div class="p-prompt">El calendario</div><div class="p-body">Qué día es hoy.</div></div></div>
+      <div class="p-body">Otros juegos</div>
+      <div class="card p-game"><div class="ico"></div><div><div class="p-prompt">Memoria de pares</div><div class="p-body">Asociar fotos con nombres.</div></div></div>
+      <div class="card p-game"><div class="ico"></div><div><div class="p-prompt">Rompecabezas</div><div class="p-body">Armar una foto.</div></div></div>
+    </div>
+  </div></div>
+  <p class="p-note">Sin filtros ni buscador. «Para hoy» es el juego que hace más que no se juega (o nunca se jugó); solo aparece si hay al menos dos. Los juegos que hoy no se pueden armar (faltan recuerdos con foto) no se muestran; si no queda ninguno, se pide al cuidador que cargue recuerdos.</p></div>
+
+  <!-- P3 -->
+  <div><p class="frame-label">P3 · Jugando — la devolución es una frase calma, nunca un error</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Memoria de pares</div></div>
+    <div class="content">
+      <div class="p-body">Dale vuelta a dos cartas y buscá cada foto con su nombre.</div>
+      <div class="p-msg soft">Esas no van juntas. Probá con otras.</div>
+      <div class="p-cards">
+        <div class="p-card face">Elena</div><div class="p-card face">Carlos</div>
+        <div class="p-card">?</div><div class="p-card">?</div>
+      </div>
+    </div>
+  </div></div>
+  <p class="p-note">Sin reloj, sin contador de errores. El mensaje de acierto es «¡Muy bien! Esas van juntas.». La X pide confirmación; el botón atrás del sistema hace lo mismo.</p></div>
+
+  <!-- P4 -->
+  <div><p class="frame-label">P4 · Fin de la partida — sin puntaje</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Memoria de pares</div></div>
+    <div class="content">
+      <div class="card" style="background:var(--success-bg);display:flex;gap:var(--space-3);align-items:center"><span class="p-prompt" style="color:var(--success-text)">¡Muy bien! Completaste el juego.</span></div>
+      <button class="btn btn-primary p-btn sm">Jugar otro juego</button>
+      <button class="btn btn-secondary p-btn sm">Volver al inicio</button>
+    </div>
+  </div></div></div>
+
+  <!-- P5 -->
+  <div><p class="frame-label">P5 · Descanso — tras ~15 minutos acumulados (guion G3)</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Memoria de pares</div></div>
+    <div class="content">
+      <div class="card" style="background:var(--success-bg);display:flex;gap:var(--space-3);align-items:center"><span class="p-prompt" style="color:var(--success-text)">¡Muy bien! Completaste el juego.</span></div>
+      <div class="card" style="display:flex;gap:var(--space-3);align-items:center">
+        <svg class="ic" style="width:28px;height:28px;color:var(--text-brand)"><use href="#i-heart"/></svg>
+        <div><div class="p-prompt">Descansamos un rato</div><div class="p-body">Jugaste bastante. Podés volver a jugar más tarde.</div></div>
+      </div>
+      <button class="btn btn-primary p-btn sm">Volver al inicio</button>
+    </div>
+  </div></div>
+  <p class="p-note">No es un bloqueo: desde el inicio se puede volver a jugar. Si pasan 30 minutos sin jugar, la cuenta vuelve a cero.</p></div>
+
+  <!-- P6 -->
+  <div><p class="frame-label">P6 · El juego no se pudo preparar — siempre hay una salida</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Rompecabezas</div></div>
+    <div class="content" style="justify-content:center">
+      <div class="p-prompt p-center">No pudimos preparar este juego. No pasa nada.</div>
+      <button class="btn btn-primary p-btn sm">Elegir otro juego</button>
+    </div>
+  </div></div>
+  <p class="p-note">Foto que no carga o fecha que no se entiende. Cierra la sesión con calma; el cuidador ve que no se completó, sin valoración.</p></div>
+
+  <!-- P7 -->
+  <div><p class="frame-label">P7 · Mis recuerdos — mirar fotos, sin aciertos ni errores</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Fotografías familiares</div></div>
+    <div class="content" style="align-items:center">
+      <div class="muted">1 de 4</div>
+      <div class="p-photo" style="width:100%;max-width:320px">foto del recuerdo</div>
+      <div class="p-title">Elena</div>
+      <button class="btn btn-primary p-btn sm" style="align-self:stretch">Siguiente</button>
+    </div>
+  </div></div>
+  <p class="p-note">Una foto grande con su nombre y un único botón. Sin puntaje, sin «muy bien» ni «probá»: es para mirar y conversar. Si una foto no carga igual se puede seguir. En la última, el botón dice «Terminar». La música queda para una próxima versión.</p></div>
+
+  <!-- P8 -->
+  <div><p class="frame-label">P8 · Elegí la respuesta — una pregunta, respuestas grandes</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Completar refranes</div></div>
+    <div class="content">
+      <div class="muted p-center">Pregunta 1 de 3</div>
+      <div class="p-prompt">Completá el refrán: «A caballo regalado…»</div>
+      <div class="p-opt off">se le da de comer</div>
+      <div class="p-opt ok">no se le miran los dientes <svg class="ic"><use href="#i-check"/></svg></div>
+      <div class="p-opt off">se lo lleva el viento</div>
+      <div class="p-msg ok">¡Muy bien!</div>
+      <button class="btn btn-primary p-btn sm">Siguiente pregunta</button>
+    </div>
+  </div></div>
+  <p class="p-note">Una respuesta equivocada se apaga y se dice «Esa no es. Probá con otra.»; nunca «error» ni «incorrecta». Las respuestas no son absurdas ni burlonas: la persona es un adulto.</p></div>
+
+  <!-- P9 -->
+  <div><p class="frame-label">P9 · Palabras que van juntas — tocar las que van con la consigna</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Clasificar palabras</div></div>
+    <div class="content">
+      <div class="muted p-center">Ronda 1 de 2</div>
+      <div class="p-prompt">Tocá las que son frutas.</div>
+      <div class="p-cards" style="grid-template-columns:repeat(2,1fr);aspect-ratio:auto">
+        <div class="p-opt ok" style="justify-content:center">Manzana <svg class="ic"><use href="#i-check"/></svg></div>
+        <div class="p-opt off" style="justify-content:center">Perro</div>
+        <div class="p-opt" style="justify-content:center">Pera</div>
+        <div class="p-opt" style="justify-content:center">Silla</div>
+      </div>
+      <div class="p-msg ok">¡Muy bien! Esa va. Buscá las otras.</div>
+    </div>
+  </div></div>
+  <p class="p-note">Las que van se marcan con color, ícono y texto; una que no va se apaga y se puede seguir. Las palabras se muestran como se escriben («Limón», «Sandía»), con su tilde.</p></div>
+
+  <!-- P10 -->
+  <div><p class="frame-label">P10 · Un acierto con sonido suave y movimiento lento</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">Completar refranes</div></div>
+    <div class="content">
+      <div class="muted p-center">Pregunta 2 de 3</div>
+      <div class="p-prompt">¿Cuánto es 5 más 3?</div>
+      <div class="p-opt ok">8 <svg class="ic"><use href="#i-check"/></svg></div>
+      <div class="p-opt off">7</div>
+      <div class="p-opt off">9</div>
+      <div class="p-msg ok">¡Muy bien!</div>
+      <button class="btn btn-primary p-btn sm">Siguiente pregunta</button>
+    </div>
+  </div></div>
+  <p class="p-note"><b>Sonido y vibración.</b> Al acertar suena una nota corta (0,3 s) con una vibración leve; al terminar el juego, dos notas (0,9 s) con una vibración de «hecho». Nunca suena ni vibra al errar. Volumen bajo, y se mezcla con lo que esté sonando (no corta música ni una llamada). <b>Empieza apagado:</b> lo activa el cuidador administrador en Ajustes → Dispositivos (frame 39), porque un sonido inesperado puede sobresaltar. Si el celular está sin volumen de multimedia no suena; en Android no se puede detectar el modo silencio del timbre, así que el interruptor del cuidador es el control.</p>
+  <p class="p-note"><b>Movimiento.</b> La foto de reminiscencia (P7) y la tarjeta de fin (P4) aparecen con un fundido de 400 ms (<code>motion-slow</code>) y suben 8 px mientras lo hacen: nada «salta» a la vista. Con la reducción de movimiento del sistema activada aparecen de una vez. Nada parpadea ni se repite.</p></div>
+
+  <!-- P11 -->
+  <div><p class="frame-label">P11 · Inicio v2 — «Jugar» manda; la ayuda queda fija abajo</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="padding-top:var(--space-6)">
+      <div class="p-stack" style="margin-bottom:var(--space-2)">
+        <div class="p-title">Hola, Laura</div>
+        <div class="p-body p-center">¿Querés jugar un rato?</div>
+      </div>
+      <button class="btn btn-primary p-hero-btn">Jugar</button>
+      <button class="btn btn-secondary p-btn sm">Llamar a María</button>
+      <div class="p-status"><span class="dot"></span><span style="flex:1">Tu cuidador puede ver dónde estás</span><span style="font-size:var(--text-patient-prompt);color:var(--text-muted)">›</span></div>
+      <p class="muted p-center" style="margin-top:var(--space-1)">Versión 1.0.0</p>
+      <div class="p-pinned"><button class="btn btn-danger p-btn" style="width:100%">Necesito ayuda</button></div>
+    </div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Hoy «Jugar», «Necesito ayuda», la llamada y la tarjeta de ubicación pesan lo mismo. Acá hay una sola cosa para hacer (<b>Jugar</b>, más alto y con degradé), lo secundario va abajo y más chico, y <b>«Necesito ayuda» queda anclado al pie</b>: siempre en el mismo lugar, separado del resto para no tocarlo por error y fácil de encontrar con nervios. La ubicación activa se reduce a una línea de estado; tocarla despliega lo de hoy (batería, «Desactivar»). Mientras la persona no aceptó compartir su ubicación, esa tarjeta sigue siendo la explicación completa, pero debajo de todo.</p></div>
+
+  <!-- P12 -->
+  <div><p class="frame-label">P12 · ¿A qué querés jugar? v2 — por lo que se hace, con los bloqueados a la vista</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
+    <div class="content" style="gap:var(--space-3)">
+      <div class="p-group" style="margin-top:0;color:var(--text-brand)">Para hoy</div>
+      <div class="p-hero"><div class="p-ico lg">ícono</div><div><div class="p-prompt">Rompecabezas</div><div class="p-body">Armá la foto, pieza por pieza.</div></div></div>
+
+      <div class="p-group">Con tus fotos y recuerdos</div>
+      <div class="p-gcard"><div class="p-ico">ícono</div><div><div class="name">Mis recuerdos</div><div class="desc">Mirá fotos de tu vida.</div></div></div>
+      <div class="p-gcard lock"><div class="p-ico">candado</div><div><div class="name">Memoria de pares</div><div class="reason">Usa fotos que carga tu cuidador.</div></div></div>
+
+      <div class="p-group">Con palabras</div>
+      <div class="p-gcard"><div class="p-ico">ícono</div><div><div class="name">Completar refranes</div><div class="desc">Elegí cómo sigue cada refrán.</div></div></div>
+      <div class="p-gcard"><div class="p-ico">ícono</div><div><div class="name">Palabras que van juntas</div><div class="desc">Tocá las que son del mismo grupo.</div></div></div>
+
+      <div class="p-group">Con números, dinero y fechas</div>
+      <div class="p-gcard"><div class="p-ico">ícono</div><div><div class="name">Contar el dinero</div><div class="desc">Armá cada monto con billetes.</div></div></div>
+    </div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Cada juego tiene <b>nombre, frase y ícono propios para la persona</b> (hoy se muestra el título clínico del catálogo: «Clasificar elementos según diferentes criterios», con la misma frase repetida debajo). Las secciones dicen <i>qué se hace</i> en lenguaje llano, no la categoría clínica: «Con tus fotos y recuerdos», «Con palabras», «Con números, dinero y fechas» y «Para ordenar y pensar». «Para hoy» es el que hace más que no se juega. Los <b>bloqueados no se esconden: se ven apagados, con borde punteado y el motivo en una frase</b> («Usa fotos que carga tu cuidador»), siempre al final de su sección. Sin números, sin «error» y sin culpar a nadie. Los íconos son del set de la app (Material), acá van como recuadro.</p></div>
+
+  <!-- P13 -->
+  <div><p class="frame-label">P13 · ¿Cuál no va? — las fotos van en todas las opciones o en ninguna</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-x"/></svg></div><div class="p-prompt" style="flex:1">¿Cuál no va?</div></div>
+    <div class="content">
+      <div class="muted p-center">Ronda 1 de 3</div>
+      <div class="p-prompt">¿Cuál NO es una persona?</div>
+      <p class="p-frame-sub">Si no todas tienen foto: sólo palabras</p>
+      <div class="p-grid2">
+        <div class="p-opt-text">Elena</div><div class="p-opt-text">Carlos</div>
+        <div class="p-opt-text">Feria de Dulce Luccia</div><div class="p-opt-text">Roberto</div>
+      </div>
+      <p class="p-frame-sub" style="margin-top:var(--space-3)">Si todas tienen foto: fotos con su nombre</p>
+      <div class="p-grid2">
+        <div class="p-opt-photo"><div class="ph">foto</div>Elena</div><div class="p-opt-photo"><div class="ph">foto</div>Carlos</div>
+      </div>
+    </div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Hoy una opción muestra su foto y las otras no, y esa diferencia <b>delata la respuesta</b> sin que la persona tenga que pensar (es lo que se vio en la prueba). Regla nueva: si <b>todas</b> las opciones de la ronda tienen foto se muestran las fotos con su nombre; si no, <b>ninguna</b> lleva foto y se juega con palabras. La respuesta nunca depende de qué recuerdo tiene foto.</p></div>
+
+  <!-- P14 -->
+  <div><p class="frame-label">P14 · Tocar un juego bloqueado — se explica con calma, sin callejón</p>
+  <div class="phone"><div class="screen" style="position:relative">
+    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
+    <div class="content" style="gap:var(--space-3)">
+      <div class="p-group" style="margin-top:0">Con tus fotos y recuerdos</div>
+      <div class="p-gcard"><div class="p-ico">ícono</div><div><div class="name">Mis recuerdos</div><div class="desc">Mirá fotos de tu vida.</div></div></div>
+      <div class="p-gcard lock"><div class="p-ico">candado</div><div><div class="name">Memoria de pares</div><div class="reason">Usa fotos que carga tu cuidador.</div></div></div>
+    </div>
+    <div class="p-sheet-back"></div>
+    <div class="p-sheet">
+      <div class="p-ico lg">candado</div>
+      <div class="p-prompt">Este juego usa fotos de tu vida</div>
+      <div class="p-body">Tu cuidador tiene que cargarlas. Mientras tanto, podés jugar a otros.</div>
+      <button class="btn btn-primary p-btn sm" style="width:100%">Entendido</button>
+    </div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Un toque que no hace nada es un callejón. Tocar un juego bloqueado abre esta hoja corta: dice <b>qué falta y quién lo resuelve</b> (el cuidador) y deja un único botón. Nada de «no se puede»: es información, no un fallo de la persona. En Care, el cuidador ve el mismo dato con números («cargá 1 foto más») para saber qué hacer.</p></div>
+
+</div>
+</body>
+</html>
