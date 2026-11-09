@@ -2,1077 +2,210 @@
   "source": "project-aurora-alz.atlassian.net",
   "cloudId": "90fd6939-9992-4dac-a29c-53321dda6031",
   "project": "AURA",
-  "lastSynced": "2026-08-23",
-  "total": 91,
+  "lastSynced": "2026-11-09",
+  "total": 202,
   "issues": [
-    {
-      "key": "AURA-1",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Terminar de Definir el Alcance del Proyecto"
-    },
-    {
-      "key": "AURA-2",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Terminar de Definir Funcionalidades del Sistema"
-    },
-    {
-      "key": "AURA-5",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Definir Arquitectura del Proyecto"
-    },
-    {
-      "key": "AURA-6",
-      "type": "Análisis",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Investigar sobre Demencia y enfermedades similares"
-    },
-    {
-      "key": "AURA-7",
-      "type": "Análisis",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Contacto con Profesional - Parte 1"
-    },
-    {
-      "key": "AURA-8",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Definir las Épicas"
-    },
-    {
-      "key": "AURA-9",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Crear y Configurar Repos de Github"
-    },
-    {
-      "key": "AURA-10",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-12",
-      "labels": [],
-      "summary": "Terminar de Definir Roles y Tiempo por semana por miembro"
-    },
-    {
-      "key": "AURA-12",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "gestion",
-        "sprint-0"
-      ],
-      "summary": "Configuraciones Iniciales"
-    },
-    {
-      "key": "AURA-13",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [],
-      "summary": "Documentación para Proyecto"
-    },
-    {
-      "key": "AURA-14",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-home",
-        "modulo-1",
-        "mvp"
-      ],
-      "summary": "Interacción y Asistencia por Voz (Aurora Home)"
-    },
-    {
-      "key": "AURA-15",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-core",
-        "modulo-5",
-        "mvp"
-      ],
-      "summary": "Motor de IA y Memoria del Paciente (Aurora Core)"
-    },
-    {
-      "key": "AURA-16",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-core",
-        "modulo-4",
-        "mvp"
-      ],
-      "summary": "Alertas y Comunicación con el Cuidador"
-    },
-    {
-      "key": "AURA-17",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-core",
-        "modulo-9",
-        "mvp"
-      ],
-      "summary": "Administración de Rutinas y Medicación"
-    },
-    {
-      "key": "AURA-18",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-care",
-        "modulo-7",
-        "mvp"
-      ],
-      "summary": "Panel del Cuidador (Aurora Care)"
-    },
-    {
-      "key": "AURA-19",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-band",
-        "modulo-2",
-        "mvp"
-      ],
-      "summary": "Monitoreo Biométrico (Aurora Band)"
-    },
-    {
-      "key": "AURA-20",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "modulo-8",
-        "mvp",
-        "transversal"
-      ],
-      "summary": "Seguridad, Privacidad y Cumplimiento (Ley 25.326)"
-    },
-    {
-      "key": "AURA-21",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-core",
-        "modulo-6",
-        "vision"
-      ],
-      "summary": "Orquestación y Automatización"
-    },
-    {
-      "key": "AURA-22",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-core",
-        "modulo-3",
-        "mvp"
-      ],
-      "summary": "Detección de Eventos y Riesgos"
-    },
-    {
-      "key": "AURA-23",
-      "type": "Epic",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "obsoleta"
-      ],
-      "summary": "[OBSOLETA — absorbida por AURA-22] Detección de comportamiento anómalo"
-    },
-    {
-      "key": "AURA-24",
-      "type": "Epic",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "obsoleta"
-      ],
-      "summary": "[OBSOLETA — absorbida por AURA-22] Detección de estados fisiológicos/emocionales"
-    },
-    {
-      "key": "AURA-25",
-      "type": "Epic",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "obsoleta"
-      ],
-      "summary": "[OBSOLETA — absorbida por AURA-22] Sistema de geolocalización inteligente"
-    },
-    {
-      "key": "AURA-26",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-28",
-      "labels": [],
-      "summary": "Documento de Objetivo y Funcionalidades"
-    },
-    {
-      "key": "AURA-27",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-29",
-      "labels": [],
-      "summary": "Definir Branding"
-    },
-    {
-      "key": "AURA-28",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "gestion"
-      ],
-      "summary": "Requerimientos Funcionales y No Funcionales"
-    },
-    {
-      "key": "AURA-29",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "diseno",
-        "gestion"
-      ],
-      "summary": "Branding Inicial y UX"
-    },
-    {
-      "key": "AURA-30",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-31",
-      "labels": [],
-      "summary": "Skills/rules para diseño - Parte 1"
-    },
-    {
-      "key": "AURA-31",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "gestion",
-        "tooling"
-      ],
-      "summary": "Automatización IA"
-    },
-    {
-      "key": "AURA-32",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Crear Project Charter/ Plan de Proyecto"
-    },
-    {
-      "key": "AURA-33",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Crear Documento Working Agreement"
-    },
-    {
-      "key": "AURA-34",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Crear Documento de Gestión de la Configuración"
-    },
-    {
-      "key": "AURA-35",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Definir Documento de Arquitectura y Stack Tecnológico"
-    },
-    {
-      "key": "AURA-36",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Definir Documento de Plan de Testing"
-    },
-    {
-      "key": "AURA-37",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Definir User Story Mapping"
-    },
-    {
-      "key": "AURA-38",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Definir Backlog Inicial"
-    },
-    {
-      "key": "AURA-41",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Implementación de Informe de Sprint"
-    },
-    {
-      "key": "AURA-42",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Definición de Artefactos de Trazabilidad"
-    },
-    {
-      "key": "AURA-43",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Revisar granularidad del WBS: tratar de desagregar o agrupar las actividades de gestion de proyecto segun se requiera, para poder planificarlas en un diagrama de gantt o calendario correctamente "
-    },
-    {
-      "key": "AURA-44",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-28",
-      "labels": [],
-      "summary": "Revisar correcciones de los requerimientos funcionales y no funcionales"
-    },
-    {
-      "key": "AURA-45",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Agregar flujo de fondos "
-    },
-    {
-      "key": "AURA-46",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Agregar cronograma"
-    },
-    {
-      "key": "AURA-47",
-      "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Agregar US"
-    },
-    {
-      "key": "AURA-48",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": null,
-      "parent": null,
-      "labels": [],
-      "summary": "Agregar glosario general del proyecto "
-    },
-    {
-      "key": "AURA-49",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Buscar una forma mas linda de mostrar el analisis de costos "
-    },
-    {
-      "key": "AURA-50",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Crear un glosario en el documento de entrega a la profe"
-    },
-    {
-      "key": "AURA-51",
-      "type": "Análisis",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-13",
-      "labels": [],
-      "summary": "Investigar un carrito de compras para un prototipo de Aurora Home."
-    },
-    {
-      "key": "AURA-52",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-31",
-      "labels": [],
-      "summary": "Sub RAG para flujo de información entre Jira y Obsidian"
-    },
-    {
-      "key": "AURA-53",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-15",
-      "labels": [],
-      "summary": "Diseño de BD"
-    },
-    {
-      "key": "AURA-54",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [],
-      "summary": "Login - Aurora Care"
-    },
-    {
-      "key": "AURA-55",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [],
-      "summary": "Modulo Paciente - Aurora Care"
-    },
-    {
-      "key": "AURA-56",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-18",
-      "labels": [],
-      "summary": "Módulo Terapias Cognitivas"
-    },
-    {
-      "key": "AURA-57",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [],
-      "summary": "Módulo Recordatorios"
-    },
-    {
-      "key": "AURA-58",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [],
-      "summary": "Módulo Recetario"
-    },
-    {
-      "key": "AURA-59",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-29",
-      "labels": [],
-      "summary": "Vistas Paciente UI"
-    },
-    {
-      "key": "AURA-60",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-29",
-      "labels": [],
-      "summary": "Vistas Terapias UI"
-    },
-    {
-      "key": "AURA-61",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-29",
-      "labels": [],
-      "summary": "Vistas Recordatorio UI"
-    },
-    {
-      "key": "AURA-62",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-29",
-      "labels": [],
-      "summary": "Vistas Recetario UI"
-    },
-    {
-      "key": "AURA-63",
-      "type": "Tarea",
-      "status": "PAUSED/BLOCKED",
-      "statusCategory": "indeterminate",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-18",
-      "labels": [],
-      "summary": "Implementar Conexión entre Care y la BD"
-    },
-    {
-      "key": "AURA-64",
-      "type": "Análisis",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-19",
-      "labels": [],
-      "summary": "Investigación Pulsera para Aurora Band"
-    },
-    {
-      "key": "AURA-65",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-29",
-      "labels": [
-        "diseno",
-        "transversal"
-      ],
-      "summary": "Design System — tokens, componentes y verificación WCAG AA"
-    },
-    {
-      "key": "AURA-66",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-29",
-      "labels": [
-        "diseno",
-        "transversal"
-      ],
-      "summary": "Manual de UX/UI Aurora (11 capítulos)"
-    },
-    {
-      "key": "AURA-67",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-29",
-      "labels": [
-        "diseno",
-        "transversal"
-      ],
-      "summary": "Prototipo navegable de Aurora Care + wiring para Figma"
-    },
-    {
-      "key": "AURA-68",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-29",
-      "labels": [
-        "aurora-care",
-        "diseno"
-      ],
-      "summary": "Vistas Auth y Onboarding UI"
-    },
-    {
-      "key": "AURA-69",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-29",
-      "labels": [
-        "aurora-care",
-        "diseno"
-      ],
-      "summary": "Vistas Alertas y Actividad UI"
-    },
-    {
-      "key": "AURA-70",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-29",
-      "labels": [
-        "aurora-care",
-        "diseno"
-      ],
-      "summary": "Vistas Ajustes UI"
-    },
-    {
-      "key": "AURA-71",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "nicolasrodeyro",
-      "parent": "AURA-29",
-      "labels": [
-        "aurora-home",
-        "diseno"
-      ],
-      "summary": "Vistas Dispositivo — Aurora Home Display UI"
-    },
-    {
-      "key": "AURA-72",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-29",
-      "labels": [
-        "aurora-care",
-        "diseno"
-      ],
-      "summary": "Vistas Desktop — Aurora Care (1440) UI"
-    },
-    {
-      "key": "AURA-73",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Jeremías Daniel Maldonado Gómez",
-      "parent": "AURA-29",
-      "labels": [
-        "diseno",
-        "vision"
-      ],
-      "summary": "Wireframes de Visión (V1–V6)"
-    },
-    {
-      "key": "AURA-74",
-      "type": "Historia",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [
-        "aurora-care",
-        "derivada-de-diseno",
-        "mvp"
-      ],
-      "summary": "US-D1 — Sesión guiada de terapia"
-    },
-    {
-      "key": "AURA-75",
-      "type": "Historia",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [
-        "aurora-care",
-        "derivada-de-diseno",
-        "mvp"
-      ],
-      "summary": "US-D2 — Biblioteca de actividades terapéuticas"
-    },
-    {
-      "key": "AURA-76",
-      "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-15",
-      "labels": [
-        "aurora-core",
-        "derivada-de-diseno",
-        "mvp"
-      ],
-      "summary": "US-D3 — Descubrimientos con validación"
-    },
-    {
-      "key": "AURA-77",
-      "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-15",
-      "labels": [
-        "aurora-core",
-        "derivada-de-diseno",
-        "mvp"
-      ],
-      "summary": "US-D4 — Dificultad adaptativa"
-    },
-    {
-      "key": "AURA-78",
-      "type": "Historia",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [
-        "aurora-care",
-        "derivada-de-diseno",
-        "mvp"
-      ],
-      "summary": "Registro y perfil del paciente"
-    },
-    {
-      "key": "AURA-79",
-      "type": "Historia",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [
-        "aurora-care",
-        "derivada-de-diseno",
-        "mvp"
-      ],
-      "summary": "Gestión de rutinas y recordatorios (interfaz del cuidador)"
-    },
-    {
-      "key": "AURA-80",
-      "type": "Historia",
-      "status": "En curso",
-      "statusCategory": "indeterminate",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-18",
-      "labels": [
-        "aurora-care",
-        "derivada-de-diseno",
-        "mvp"
-      ],
-      "summary": "Gestión de medicación y recetario (interfaz del cuidador)"
-    },
-    {
-      "key": "AURA-81",
-      "type": "Epic",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": null,
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "Backend AuroraCore — API REST para Panel del Cuidador"
-    },
-    {
-      "key": "AURA-82",
-      "type": "Historia",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Haik Kilic",
-      "parent": "AURA-20",
-      "labels": [
-        "aurora-core",
-        "auth",
-        "backend",
-        "mvp"
-      ],
-      "summary": "Integración Auth0: autenticación JWT en AuroraCore"
-    },
-    {
-      "key": "AURA-83",
-      "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-81",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp",
-        "setup"
-      ],
-      "summary": "Setup inicial del proyecto AuroraCore (estructura, BD, entorno)"
-    },
-    {
-      "key": "AURA-84",
-      "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-81",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "API REST: CRUD de Paciente (perfil, biografía, preferencias)"
-    },
-    {
-      "key": "AURA-85",
-      "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-81",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "API REST: Dashboard del Cuidador (estado actual del paciente)"
-    },
-    {
-      "key": "AURA-86",
-      "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-81",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "API REST: CRUD de Zonas Seguras (geofencing por paciente)"
-    },
-    {
-      "key": "AURA-87",
-      "type": "Historia",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-17",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "API REST: CRUD de Rutinas del Paciente"
-    },
-    {
-      "key": "AURA-88",
-      "type": "Historia",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-17",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "API REST: CRUD de Medicación y Recetario del Paciente"
-    },
-    {
-      "key": "AURA-89",
-      "type": "Historia",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Octavio Escudero",
-      "parent": "AURA-17",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "API REST: Registro de Cumplimiento de Rutinas y Toma de Medicación"
-    },
-    {
-      "key": "AURA-90",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-14",
-      "labels": [
-        "retroactivo",
-        "sprint-1"
-      ],
-      "summary": "AH-M01 - Crear base inicial del repositorio Aurora Home"
-    },
-    {
-      "key": "AURA-91",
-      "type": "Tarea",
-      "status": "Finalizada",
-      "statusCategory": "done",
-      "assignee": "Mateo Romero Plaza",
-      "parent": "AURA-14",
-      "labels": [
-        "retroactivo",
-        "sprint-1"
-      ],
-      "summary": "AH-M02 - Definir contratos v1 y simulador local Home-Core"
-    },
-    {
-      "key": "AURA-92",
-      "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-81",
-      "labels": [],
-      "summary": "Deploy de AuroraCareBack en Render (entorno dev)"
-    },
-    {
-      "key": "AURA-93",
-      "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-20",
-      "labels": [],
-      "summary": "ADR formal de cifrado de PII (Ley 25.326)"
-    },
-    {
-      "key": "AURA-94",
-      "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-81",
-      "labels": [],
-      "summary": "Endpoint GET /api/me (perfil del cuidador autenticado)"
-    },
-    {
-      "key": "AURA-95",
-      "type": "Tarea",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-14",
-      "labels": [
-        "aurora-home",
-        "mvp"
-      ],
-      "summary": "AH-M03 — Fundación local resiliente (SQLite, outbox y resiliencia ante reinicios)"
-    },
-    {
-      "key": "AURA-96",
-      "type": "Historia",
-      "status": "Tareas por hacer",
-      "statusCategory": "new",
-      "assignee": null,
-      "parent": "AURA-16",
-      "labels": [
-        "aurora-core",
-        "backend",
-        "mvp"
-      ],
-      "summary": "API REST: Acuse de recibo de alertas por el cuidador (endpoint acknowledge)"
-    }
+    {"key":"AURA-1","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-12","labels":[],"summary":"Terminar de Definir el Alcance del Proyecto"},
+    {"key":"AURA-2","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-12","labels":[],"summary":"Terminar de Definir Funcionalidades del Sistema"},
+    {"key":"AURA-5","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-12","labels":[],"summary":"Definir Arquitectura del Proyecto"},
+    {"key":"AURA-6","type":"Análisis","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-12","labels":[],"summary":"Investigar sobre Demencia y enfermedades similares"},
+    {"key":"AURA-7","type":"Análisis","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-12","labels":[],"summary":"Contacto con Profesional - Parte 1"},
+    {"key":"AURA-8","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-12","labels":[],"summary":"Definir las Épicas"},
+    {"key":"AURA-9","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-12","labels":[],"summary":"Crear y Configurar Repos de Github"},
+    {"key":"AURA-10","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-12","labels":[],"summary":"Terminar de Definir Roles y Tiempo por semana por miembro"},
+    {"key":"AURA-12","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["gestion","sprint-0"],"summary":"Configuraciones Iniciales"},
+    {"key":"AURA-13","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":[],"summary":"Documentación para Proyecto"},
+    {"key":"AURA-14","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-home","modulo-1","mvp"],"summary":"Interacción y Asistencia por Voz (Aurora Home)"},
+    {"key":"AURA-15","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-core","modulo-5","mvp"],"summary":"Motor de IA y Memoria del Paciente (Aurora Core)"},
+    {"key":"AURA-16","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-core","modulo-4","mvp"],"summary":"Alertas y Comunicación con el Cuidador"},
+    {"key":"AURA-17","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-core","modulo-9","mvp"],"summary":"Administración de Rutinas y Medicación"},
+    {"key":"AURA-18","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-care","modulo-7","mvp"],"summary":"Panel del Cuidador (Aurora Care)"},
+    {"key":"AURA-19","type":"Epic","status":"PAUSED/BLOCKED","statusCategory":"indeterminate","assignee":null,"parent":null,"labels":["aurora-band","descope-economico","modulo-2","vision"],"summary":"Monitoreo Biométrico (Aurora Band)"},
+    {"key":"AURA-20","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["modulo-8","mvp","transversal"],"summary":"Seguridad, Privacidad y Cumplimiento (Ley 25.326)"},
+    {"key":"AURA-21","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-core","modulo-6","vision"],"summary":"Orquestación y Automatización"},
+    {"key":"AURA-22","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-core","modulo-3","mvp"],"summary":"Detección de Eventos y Riesgos"},
+    {"key":"AURA-23","type":"Epic","status":"Finalizada","statusCategory":"done","assignee":null,"parent":null,"labels":["obsoleta"],"summary":"[OBSOLETA — absorbida por AURA-22] Detección de comportamiento anómalo"},
+    {"key":"AURA-24","type":"Epic","status":"Finalizada","statusCategory":"done","assignee":null,"parent":null,"labels":["obsoleta"],"summary":"[OBSOLETA — absorbida por AURA-22] Detección de estados fisiológicos/emocionales"},
+    {"key":"AURA-25","type":"Epic","status":"Finalizada","statusCategory":"done","assignee":null,"parent":null,"labels":["obsoleta"],"summary":"[OBSOLETA — absorbida por AURA-22] Sistema de geolocalización inteligente"},
+    {"key":"AURA-26","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-28","labels":[],"summary":"Documento de Objetivo y Funcionalidades"},
+    {"key":"AURA-27","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-29","labels":[],"summary":"Definir Branding"},
+    {"key":"AURA-28","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["gestion"],"summary":"Requerimientos Funcionales y No Funcionales"},
+    {"key":"AURA-29","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["diseno","gestion"],"summary":"Branding Inicial y UX"},
+    {"key":"AURA-30","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-31","labels":[],"summary":"Skills/rules para diseño - Parte 1"},
+    {"key":"AURA-31","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["gestion","tooling"],"summary":"Automatización IA"},
+    {"key":"AURA-32","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-13","labels":[],"summary":"Crear Project Charter/ Plan de Proyecto"},
+    {"key":"AURA-33","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-13","labels":[],"summary":"Crear Documento Working Agreement"},
+    {"key":"AURA-34","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-13","labels":[],"summary":"Crear Documento de Gestión de la Configuración"},
+    {"key":"AURA-35","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-13","labels":[],"summary":"Definir Documento de Arquitectura y Stack Tecnológico"},
+    {"key":"AURA-36","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-13","labels":[],"summary":"Definir Documento de Plan de Testing"},
+    {"key":"AURA-37","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-13","labels":[],"summary":"Definir User Story Mapping"},
+    {"key":"AURA-38","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-13","labels":[],"summary":"Definir Backlog Inicial"},
+    {"key":"AURA-41","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-13","labels":[],"summary":"Implementación de Informe de Sprint"},
+    {"key":"AURA-42","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-13","labels":[],"summary":"Definición de Artefactos de Trazabilidad"},
+    {"key":"AURA-43","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-13","labels":[],"summary":"Revisar granularidad del WBS: tratar de desagregar o agrupar las actividades de gestion de proyecto segun se requiera, para poder planificarlas en un diagrama de gantt o calendario correctamente "},
+    {"key":"AURA-44","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-28","labels":[],"summary":"Revisar correcciones de los requerimientos funcionales y no funcionales"},
+    {"key":"AURA-45","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-13","labels":[],"summary":"Agregar flujo de fondos "},
+    {"key":"AURA-46","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-13","labels":[],"summary":"Agregar cronograma"},
+    {"key":"AURA-47","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-13","labels":[],"summary":"Agregar US"},
+    {"key":"AURA-48","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":null,"parent":null,"labels":[],"summary":"Agregar glosario general del proyecto "},
+    {"key":"AURA-49","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-13","labels":[],"summary":"Buscar una forma mas linda de mostrar el analisis de costos "},
+    {"key":"AURA-50","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-13","labels":[],"summary":"Crear un glosario en el documento de entrega a la profe"},
+    {"key":"AURA-51","type":"Análisis","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-13","labels":[],"summary":"Investigar un carrito de compras para un prototipo de Aurora Home."},
+    {"key":"AURA-52","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-31","labels":[],"summary":"Sub RAG para flujo de información entre Jira y Obsidian"},
+    {"key":"AURA-53","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-15","labels":[],"summary":"Diseño de BD"},
+    {"key":"AURA-54","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":[],"summary":"Login - Aurora Care"},
+    {"key":"AURA-55","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":[],"summary":"Modulo Paciente - Aurora Care"},
+    {"key":"AURA-56","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-18","labels":[],"summary":"Módulo Terapias Cognitivas"},
+    {"key":"AURA-57","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":[],"summary":"Módulo Recordatorios"},
+    {"key":"AURA-58","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":[],"summary":"Módulo Recetario"},
+    {"key":"AURA-59","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-29","labels":[],"summary":"Vistas Paciente UI"},
+    {"key":"AURA-60","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-29","labels":[],"summary":"Vistas Terapias UI"},
+    {"key":"AURA-61","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-29","labels":[],"summary":"Vistas Recordatorio UI"},
+    {"key":"AURA-62","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-29","labels":[],"summary":"Vistas Recetario UI"},
+    {"key":"AURA-63","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-18","labels":[],"summary":"Implementar Conexión entre Care y la BD"},
+    {"key":"AURA-64","type":"Análisis","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-19","labels":[],"summary":"Investigación Pulsera para Aurora Band"},
+    {"key":"AURA-65","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-29","labels":["diseno","transversal"],"summary":"Design System — tokens, componentes y verificación WCAG AA"},
+    {"key":"AURA-66","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-29","labels":["diseno","transversal"],"summary":"Manual de UX/UI Aurora (11 capítulos)"},
+    {"key":"AURA-67","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-29","labels":["diseno","transversal"],"summary":"Prototipo navegable de Aurora Care + wiring para Figma"},
+    {"key":"AURA-68","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-29","labels":["aurora-care","diseno"],"summary":"Vistas Auth y Onboarding UI"},
+    {"key":"AURA-69","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-29","labels":["aurora-care","diseno"],"summary":"Vistas Alertas y Actividad UI"},
+    {"key":"AURA-70","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-29","labels":["aurora-care","diseno"],"summary":"Vistas Ajustes UI"},
+    {"key":"AURA-71","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-29","labels":["aurora-home","diseno"],"summary":"Vistas Dispositivo — Aurora Home Display UI"},
+    {"key":"AURA-72","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-29","labels":["aurora-care","diseno"],"summary":"Vistas Desktop — Aurora Care (1440) UI"},
+    {"key":"AURA-73","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-29","labels":["diseno","vision"],"summary":"Wireframes de Visión (V1–V6)"},
+    {"key":"AURA-74","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","derivada-de-diseno","mvp"],"summary":"US-D1 — Sesión guiada de terapia"},
+    {"key":"AURA-75","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","derivada-de-diseno","mvp"],"summary":"US-D2 — Biblioteca de actividades terapéuticas"},
+    {"key":"AURA-76","type":"Historia","status":"En curso","statusCategory":"indeterminate","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-15","labels":["aurora-core","derivada-de-diseno","mvp"],"summary":"US-D3 — Descubrimientos con validación"},
+    {"key":"AURA-77","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"nicolasrodeyro","parent":"AURA-15","labels":["aurora-core","derivada-de-diseno","mvp"],"summary":"US-D4 — Dificultad adaptativa"},
+    {"key":"AURA-78","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","derivada-de-diseno","mvp"],"summary":"Registro y perfil del paciente"},
+    {"key":"AURA-79","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","derivada-de-diseno","mvp"],"summary":"Gestión de rutinas y recordatorios (interfaz del cuidador)"},
+    {"key":"AURA-80","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","derivada-de-diseno","mvp"],"summary":"Gestión de medicación y recetario (interfaz del cuidador)"},
+    {"key":"AURA-81","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["aurora-core","backend","mvp"],"summary":"Backend AuroraCore — API REST para Panel del Cuidador"},
+    {"key":"AURA-82","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-20","labels":["aurora-core","auth","backend","mvp"],"summary":"Integración Auth0: autenticación JWT en AuroraCore"},
+    {"key":"AURA-83","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-81","labels":["aurora-core","backend","mvp","setup"],"summary":"Setup inicial del proyecto AuroraCore (estructura, BD, entorno)"},
+    {"key":"AURA-84","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-81","labels":["aurora-core","backend","mvp"],"summary":"API REST: CRUD de Paciente (perfil, biografía, preferencias)"},
+    {"key":"AURA-85","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-81","labels":["aurora-core","backend","mvp"],"summary":"API REST: Dashboard del Cuidador (estado actual del paciente)"},
+    {"key":"AURA-86","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-81","labels":["aurora-core","backend","mvp"],"summary":"API REST: CRUD de Zonas Seguras (geofencing por paciente)"},
+    {"key":"AURA-87","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-17","labels":["aurora-core","backend","mvp"],"summary":"API REST: CRUD de Rutinas del Paciente"},
+    {"key":"AURA-88","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-17","labels":["aurora-core","backend","mvp"],"summary":"API REST: CRUD de Medicación y Recetario del Paciente"},
+    {"key":"AURA-89","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-17","labels":["aurora-core","backend","mvp"],"summary":"API REST: Registro de Cumplimiento de Rutinas y Toma de Medicación"},
+    {"key":"AURA-90","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","home-01","pm-2026","retroactivo","sprint-1"],"summary":"AH-M01 - Crear base inicial del repositorio Aurora Home"},
+    {"key":"AURA-91","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","home-02","pm-2026","retroactivo","sprint-1"],"summary":"AH-M02 - Definir contratos v1 y simulador local Home-Core"},
+    {"key":"AURA-92","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-81","labels":[],"summary":"Deploy de AuroraCareBack en Render (entorno dev)"},
+    {"key":"AURA-93","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-20","labels":[],"summary":"ADR formal de cifrado de PII (Ley 25.326)"},
+    {"key":"AURA-94","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-81","labels":[],"summary":"Endpoint GET/api/v1/auth/me (perfil del cuidador autenticado)"},
+    {"key":"AURA-95","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","home-03","mvp","pm-2026"],"summary":"AH-M03 — Fundación local resiliente (SQLite, outbox y resiliencia ante reinicios)"},
+    {"key":"AURA-96","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-16","labels":["aurora-core","backend","mvp"],"summary":"API REST: Acuse de recibo de alertas por el cuidador (endpoint acknowledge)"},
+    {"key":"AURA-97","type":"Subtask","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-78","labels":[],"summary":"Resolucion el mecanismo/ADR formal de cifrado de PII (DNI y nombre) conforme a Ley 25.326,"},
+    {"key":"AURA-98","type":"Subtask","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-78","labels":[],"summary":"Resolucion Back.  una API operativa de consentimiento informado para registrar y consultar consent_records desde el onboarding. "},
+    {"key":"AURA-99","type":"Subtask","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-74","labels":[],"summary":"Asistencia Back Aurora-74"},
+    {"key":"AURA-100","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":null,"labels":[],"summary":"Revisar cambios backend de facture/notifications-aurora vs main"},
+    {"key":"AURA-101","type":"Subtask","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-76","labels":[],"summary":"Implementacion del Backkend"},
+    {"key":"AURA-102","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-14","labels":[],"summary":"CORE-012 · Normalizar contrato OpenAPI y contract tests de Aurora Home"},
+    {"key":"AURA-103","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":[],"summary":"HOME-0409 · Ejecutar E2E real de configuración y eventos Aurora Home ↔ Core"},
+    {"key":"AURA-104","type":"Tarea","status":"In Revision","statusCategory":"indeterminate","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-15","labels":[],"summary":"CORE-MEM01 — Schema de memoria contextual del paciente en AuroraCore"},
+    {"key":"AURA-105","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-15","labels":[],"summary":"CORE-MEM02 — Endpoint RAG: consulta de contexto del paciente con LLM"},
+    {"key":"AURA-106","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-16","labels":[],"summary":"API REST: Envío proactivo de alertas push al cuidador"},
+    {"key":"AURA-107","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-18","labels":[],"summary":"Vista de alertas en tiempo real — panel del cuidador (AuroraCare)"},
+    {"key":"AURA-108","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":[],"summary":"Conectar pantallas de AuroraCare con endpoints reales de AuroraCore"},
+    {"key":"AURA-109","type":"Historia","status":"In Revision","statusCategory":"indeterminate","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-20","labels":["aurora-care","derivada-de-diseno","modulo-8","mvp"],"summary":"Pantalla de Privacidad y datos (Aurora Care)"},
+    {"key":"AURA-110","type":"Error","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-18","labels":["aurora-care","derivada-de-relevamiento","modulo-7","mvp"],"summary":"Inicio muestra «todo en orden» cuando falla la carga del resumen del hogar"},
+    {"key":"AURA-111","type":"Error","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-18","labels":["aurora-care","derivada-de-relevamiento","modulo-7","mvp"],"summary":"«Alerta atendida» muestra datos de demostración en vez del cierre real"},
+    {"key":"AURA-112","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","derivada-de-qa","modulo-7","mvp"],"summary":"El campo de fecha de nacimiento no funciona en web y no permite tipear"},
+    {"key":"AURA-113","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","derivada-de-qa","modulo-7","mvp"],"summary":"El selector de etapa de enfermedad es ilegible en modo oscuro"},
+    {"key":"AURA-115","type":"Error","status":"Finalizada","statusCategory":"done","assignee":null,"parent":"AURA-18","labels":["aurora-care","derivada-de-qa","modulo-7","mvp"],"summary":"El CRUD de rutinas apunta a una ruta inexistente y la pantalla nunca carga"},
+    {"key":"AURA-116","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","modulo-7","mvp"],"summary":"Layout desktop con sidebar de navegación global"},
+    {"key":"AURA-117","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","modulo-7","mvp"],"summary":"Aislamiento web/native de servicios de plataforma"},
+    {"key":"AURA-118","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","modulo-7","mvp"],"summary":"Botón de llamada al cuidador — implementación real con Linking"},
+    {"key":"AURA-120","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-20","labels":["aurora-core","backend","modulo-8","mvp","transversal"],"summary":"Control de acceso: /auth/me revocado→403 y write sin hogar→403"},
+    {"key":"AURA-121","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-20","labels":["aurora-core","backend","modulo-8","mvp","transversal"],"summary":"Tests de onboarding: buscar por name_hash según ADR-010 (cifrado PII)"},
+    {"key":"AURA-122","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-14","labels":["aurora-home","documentation","integration","mvp"],"summary":"HOME-0409 · Alinear evidencia reproducible y documentación del E2E Home ↔ Core"},
+    {"key":"AURA-123","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","hil","mvp","voice"],"summary":"HOME-0606 · Consolidar evidencia y cierre del turno conversacional local en runtime"},
+    {"key":"AURA-129","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-14","labels":["aurora-home","backend","core","heartbeat","mvp"],"summary":"CORE-004 · Publicar heartbeat autenticado y telemetría mínima para Aurora Home"},
+    {"key":"AURA-130","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-14","labels":["aurora-home","backend","core","mvp","security"],"summary":"CORE-011 · Implementar revocación, reemplazo y rotación segura de Aurora Home"},
+    {"key":"AURA-131","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-14","labels":["aurora-home","backend","commands","core","mvp"],"summary":"CORE-007 · Implementar comandos autenticados, ack durable y WSS para Aurora Home"},
+    {"key":"AURA-134","type":"Tarea","status":"In Revision","statusCategory":"indeterminate","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-14","labels":["aurora-home","backend","core","drop-in","mvp"],"summary":"CORE-010 · Implementar Drop In en vivo (LiveKit) autorizado para Aurora Home"},
+    {"key":"AURA-136","type":"Subtask","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-77","labels":[],"summary":"Backend"},
+    {"key":"AURA-137","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-14","labels":["aurora-home","backend","core","mvp","therapies"],"summary":"CORE-009 · Publicar planes de terapia y assets versionados para Aurora Home"},
+    {"key":"AURA-139","type":"Epic","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":null,"labels":["cicd","deploy","devops","infra"],"summary":"Infraestructura & CD — Ambiente estable en VPS Hostinger"},
+    {"key":"AURA-140","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-139","labels":["devops","infra"],"summary":"Provisioning y hardening del VPS Hostinger"},
+    {"key":"AURA-141","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-139","labels":["devops","infra"],"summary":"Reverse proxy + TLS + DNS para staging"},
+    {"key":"AURA-142","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-139","labels":["aurora-core","devops","infra"],"summary":"Dockerización de AuroraCore"},
+    {"key":"AURA-144","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-139","labels":["devops","infra"],"summary":"Stack docker-compose de staging en el VPS"},
+    {"key":"AURA-145","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-139","labels":["aurora-core","devops","infra"],"summary":"n8n self-hosted en el VPS"},
+    {"key":"AURA-146","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-139","labels":["cicd","devops","infra"],"summary":"Pipeline CD con GitHub Actions (build → GHCR → SSH deploy)"},
+    {"key":"AURA-147","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-139","labels":["devops","infra","seguridad"],"summary":"Gestión de secrets y variables de entorno"},
+    {"key":"AURA-148","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-139","labels":["devops","infra"],"summary":"Backups, monitoreo de recursos y runbook operativo"},
+    {"key":"AURA-149","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-17","labels":[],"summary":"Generacion de Interracciones/Sesiones diarias"},
+    {"key":"AURA-151","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","mvp","offline","reminders","runtime"],"summary":"HOME-0509 · Componer recordatorios automáticos, respuesta y Outbox en runtime"},
+    {"key":"AURA-152","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","home-04","mvp","pm-2026","runtime","systemd"],"summary":"PM-2026/HOME-04 · HomeRuntime y systemd"},
+    {"key":"AURA-153","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","diagnostics","hardware","home-05","mvp","pm-2026"],"summary":"PM-2026/HOME-05 · Hardware real y diagnósticos"},
+    {"key":"AURA-154","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","home-06","mvp","pm-2026","stt","tts","voice"],"summary":"PM-2026/HOME-06 · Pipeline de voz local"},
+    {"key":"AURA-155","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","conversation","home-07","intents","mvp","pm-2026"],"summary":"PM-2026/HOME-07 · Conversación e intenciones locales"},
+    {"key":"AURA-156","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","home-08","mvp","offline","pm-2026","reminders"],"summary":"PM-2026/HOME-08 · Recordatorios offline"},
+    {"key":"AURA-157","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-81","labels":["activityplan","aurora-core","contract-proposal","core-009","home-10","pm-2026"],"summary":"CORE-009 · Propuesta de contrato ActivityPlan para Home (requerido por PM-2026/HOME-10)"},
+    {"key":"AURA-158","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","cp-hc-09","home-09","medicacion","reloj","seguridad-paciente"],"summary":"Home anuncia dosis vencidas tras un arranque con el reloj sin sincronizar"},
+    {"key":"AURA-159","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","cp-hc-09","home-09","medicacion","recordatorios","seguridad-paciente"],"summary":"Un fallo de captura ALSA a mitad de la escucha dejaba el recordatorio colgado para siempre"},
+    {"key":"AURA-160","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":null,"labels":[],"summary":"[Backend] Registrar ConsentRecord atómicamente en POST /households/setup/"},
+    {"key":"AURA-161","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":null,"labels":[],"summary":"Optimizacion Carga inicial de paciente - Front"},
+    {"key":"AURA-162","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":null,"labels":[],"summary":"El alta del hogar tiene que aceptar varios recuerdos iniciales"},
+    {"key":"AURA-163","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":null,"labels":[],"summary":"Fotos en los recuerdos"},
+    {"key":"AURA-164","type":"Error","status":"En curso","statusCategory":"indeterminate","assignee":"Haik Kilic","parent":null,"labels":["aurora-care","aurora-core","bug","compliance-api"],"summary":"Compliance endpoint sin filtro de fecha: Care infiere \"hoy\" por paginación y oculta estados reales"},
+    {"key":"AURA-165","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","core","heartbeat","mvp"],"summary":"HOME · Publicar heartbeat real hacia Core (consumir CORE-004 / AURA-129)"},
+    {"key":"AURA-166","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","commands","core","mvp","security","websocket"],"summary":"HOME · Canal de comandos de Core: WS control, safe mode, rotación de credenciales y ack (consume CORE-011/CORE-007 · AURA-130/AURA-131)"},
+    {"key":"AURA-167","type":"Historia","status":"In Revision","statusCategory":"indeterminate","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","backend","frontend","metrics"],"summary":"Módulo de Métricas y Estadísticas (determinista) — Panel del Cuidador"},
+    {"key":"AURA-168","type":"Historia","status":"In Revision","statusCategory":"indeterminate","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["ai","aurora-care","backend","frontend","metrics","worker-ia"],"summary":"Módulo de Métricas Inteligentes (insights por IA) — Panel del Cuidador"},
+    {"key":"AURA-169","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-20","labels":[],"summary":"[Frontend] Enviar el consentimiento en el alta del hogar y confirmar con consent_record"},
+    {"key":"AURA-170","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Haik Kilic","parent":"AURA-20","labels":[],"summary":"[Backend] Hacer obligatorio consent en POST /households/setup/"},
+    {"key":"AURA-171","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-14","labels":["aurora-home","core","mvp","patient-query"],"summary":"HOME · Integrar patient-query de Core (memoria del paciente) como responder de conversación"},
+    {"key":"AURA-172","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-14","labels":["aurora-home","bloqueado-por-core","core","mvp","therapies"],"summary":"HOME · Ejecutar sesiones cognitivas diarias de Core y reportar activity.started/completed"},
+    {"key":"AURA-173","type":"Error","status":"Tareas por hacer","statusCategory":"new","assignee":"Haik Kilic","parent":"AURA-12","labels":[],"summary":"El cuidador principal se auto-provisiona sin can_drop_in, bloqueando Drop-in por defecto"},
+    {"key":"AURA-174","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":[],"summary":"Falta UI en el frontend para autorizar un Aurora Home para Drop-in"},
+    {"key":"AURA-175","type":"Error","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-18","labels":["aurora-care","derivada-de-qa","frontend"],"summary":"Botón «Llamar» del detalle de alerta está siempre deshabilitado"},
+    {"key":"AURA-176","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-18","labels":["aurora-care","derivada-de-qa","deuda-tecnica","frontend"],"summary":"Carga de pantallas con Promise.all cae entera ante falla parcial (migrar a allSettled)"},
+    {"key":"AURA-177","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","derivada-de-qa","frontend","i18n"],"summary":"Etiquetas de evento y ánimo aparecen en inglés en el dashboard (enums del back sin traducir)"},
+    {"key":"AURA-178","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","backend","derivada-de-qa","frontend","metrics"],"summary":"Duración media de «Asistencia por voz» muestra valor negativo (-18864 min)"},
+    {"key":"AURA-179","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-18","labels":["aurora-care","derivada-de-qa","frontend","onboarding","ux"],"summary":"Onboarding a prueba de errores: no quedar trabado si falta el consentimiento de privacidad"},
+    {"key":"AURA-180","type":"Tarea","status":"In Revision","statusCategory":"indeterminate","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-14","labels":["aurora-home","backend","recordatorios"],"summary":"Acortar cadencia de reconfirmación de recordatorios a 3/5/10 min escalonado"},
+    {"key":"AURA-181","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Jeremías Daniel Maldonado Gómez","parent":"AURA-139","labels":["backend","ci","infra"],"summary":"Destrabar promoción staging→main: gitleaks, test auth_me y gate de compatibilidad Home"},
+    {"key":"AURA-182","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":[],"summary":"Pairing en producción: pantalla de WiFi para vincular Aurora Home (AURA-134)"},
+    {"key":"AURA-183","type":"Error","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core"],"summary":"Conectar la carga de fotos en recuerdos (AuroraCare y Aurora Core)"},
+    {"key":"AURA-184","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-81","labels":["aurora-core","therapies"],"summary":"Terapias cognitivas: catálogo de la psicopedagoga"},
+    {"key":"AURA-185","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","infra"],"summary":"Deploy Staging Frontend"},
+    {"key":"AURA-186","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-13","labels":[],"summary":"Actualizar la documentación del proyecto en el Docs y en el repositorio (correcciones de la cátedra del 12/10/2026)"},
+    {"key":"AURA-187","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-13","labels":["documentacion","instancia-5"],"summary":"Instancia 5 · Documentación del proceso actualizado post-implementación"},
+    {"key":"AURA-188","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-13","labels":["documentacion","instancia-5"],"summary":"Instancia 5 · Instructivos de uso (Aurora Care y Aurora Home)"},
+    {"key":"AURA-189","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-13","labels":["documentacion","instancia-5"],"summary":"Instancia 5 · Manual de instalación y operación"},
+    {"key":"AURA-190","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-13","labels":["documentacion","instancia-5"],"summary":"Instancia 5 · Análisis de impacto ambiental"},
+    {"key":"AURA-191","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-13","labels":["documentacion","instancia-5"],"summary":"Instancia 5 · Retrospectiva de proyecto"},
+    {"key":"AURA-192","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-13","labels":["documentacion","instancia-5"],"summary":"Instancia 5 · Presentación y demostración final (05/11)"},
+    {"key":"AURA-193","type":"Tarea","status":"In Revision","statusCategory":"indeterminate","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core","infra"],"summary":"Reporte de errores de Aurora Care a Aurora Core (sin datos de la persona)"},
+    {"key":"AURA-194","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":null,"labels":[],"summary":"Taxonomía de dos niveles y anclaje temporal de los recuerdos"},
+    {"key":"AURA-195","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-15","labels":[],"summary":"CORE-024 · Endpoint daily-digest y conversión a contribución pendiente"},
+    {"key":"AURA-196","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-15","labels":[],"summary":"CORE-025 · payload.daily_memory en el snapshot con anclas configurables"},
+    {"key":"AURA-197","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-15","labels":[],"summary":"CORE-026 · Modelo de personas de la vida del paciente"},
+    {"key":"AURA-198","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-15","labels":[],"summary":"CORE-027 · Lectura para Care: línea de tiempo con cursor y cobertura biográfica"},
+    {"key":"AURA-199","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-15","labels":[],"summary":"CORE-028 · Guardia de sanitización ampliada a nombres de terceros"},
+    {"key":"AURA-200","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-15","labels":[],"summary":"CORE-MEM03 · Worker IA: /v1/daily-memory y modelo Memory extendido"},
+    {"key":"AURA-201","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-18","labels":[],"summary":"Vista de línea de tiempo de recuerdos (Aurora Care)"},
+    {"key":"AURA-202","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-18","labels":[],"summary":"Ficha de persona y validación uno a uno de recuerdos (Aurora Care)"},
+    {"key":"AURA-203","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Octavio Escudero","parent":"AURA-14","labels":[],"summary":"HOME-20 · Buffer de corto plazo, digest diario y anclas configurables"},
+    {"key":"AURA-204","type":"Tarea","status":"In Revision","statusCategory":"indeterminate","assignee":"Octavio Escudero","parent":"AURA-13","labels":[],"summary":"Formalizar los ADR y las historias de usuario de recuerdos en el vault de Obsidian"},
+    {"key":"AURA-205","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core","celular-paciente"],"summary":"Celular del paciente: vinculación por código y credencial de dispositivo"},
+    {"key":"AURA-206","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core","celular-paciente"],"summary":"Modo paciente: juegos y actividades cognitivas desde el celular vinculado"},
+    {"key":"AURA-207","type":"Historia","status":"In Revision","statusCategory":"indeterminate","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core","celular-paciente"],"summary":"Botón \"Necesito ayuda\" del paciente con ubicación puntual y consentimiento"},
+    {"key":"AURA-208","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core","celular-paciente","zonas-seguras"],"summary":"Zonas seguras en Aurora Care: pantalla de zonas y cobertura real del aviso"},
+    {"key":"AURA-209","type":"Tarea","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-core","seguridad","zonas-seguras"],"summary":"Seguridad: GeofenceZoneViewSet no verificaba el hogar al listar/leer/activar zonas"},
+    {"key":"AURA-210","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-core","celular-paciente","ubicacion-en-vivo","zonas-seguras"],"summary":"CORE: ubicación en vivo del celular y detección de salida de zona en el servidor"},
+    {"key":"AURA-211","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","celular-paciente","ubicacion-en-vivo"],"summary":"CARE: ubicación en vivo en segundo plano en el celular del paciente"},
+    {"key":"AURA-212","type":"Historia","status":"Finalizada","statusCategory":"done","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","celular-paciente","ubicacion-en-vivo"],"summary":"CARE: pantalla \"Dónde está\" para ver la ubicación del paciente"},
+    {"key":"AURA-213","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-core","celular-paciente","n8n","ubicacion-en-vivo"],"summary":"CORE: alerta \"Perdimos la señal del celular\" (barrido de silencio) y programarlo en n8n"},
+    {"key":"AURA-214","type":"Tarea","status":"In Revision","statusCategory":"indeterminate","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core","celular-paciente","qa","ubicacion-en-vivo"],"summary":"Despliegue y QA en celulares reales de la ubicación en vivo"},
+    {"key":"AURA-215","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["celular-paciente","documentacion","legal"],"summary":"Validación legal de los consentimientos y encuadre documental de ubicación y geofencing"},
+    {"key":"AURA-216","type":"Historia","status":"In Revision","statusCategory":"indeterminate","assignee":"Mateo Romero Plaza","parent":"AURA-18","labels":["aurora-care","aurora-core","celular-paciente","juegos","ux"],"summary":"Celular del paciente: mejora de juegos y terapias (Fases 0 a 4) — contenido, juegos nuevos, sonido suave y seguimiento del cuidador"},
+    {"key":"AURA-217","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-18","labels":["aurora-core","therapies"],"summary":"Validar con psicopedagoga las frases de la Fase 4 de razonamiento guiado"},
+    {"key":"AURA-218","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-18","labels":["aurora-core","therapies","ux"],"summary":"Care: UI de preguntas abiertas en terapias (fase posterior razonamiento guiado)"},
+    {"key":"AURA-219","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-15","labels":["aurora-core","validacion"],"summary":"Validar en la Pi el fix de selección de contexto RAG (PR #145)"},
+    {"key":"AURA-220","type":"Tarea","status":"Tareas por hacer","statusCategory":"new","assignee":null,"parent":"AURA-13","labels":["aurora-core","housekeeping","openspec"],"summary":"Cerrar y archivar 5 changes de openspec ya entregados (verificar tareas restantes)"}
   ]
 }
