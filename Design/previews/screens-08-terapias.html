@@ -339,7 +339,7 @@
       <div class="seg"><button>Alertas</button><button class="active">Terapias</button><button>Historial</button></div>
       <div class="ther-card"><div class="ther-thumb" style="background: var(--lilac)">🃏</div>
         <div style="flex:1"><div class="r-title">Memoria de pares</div><div class="r-sub">Asociar fotos con nombres</div>
-          <div class="hstack" style="margin-top:4px;flex-wrap:wrap"><span class="badge neutral">Memoria</span><span class="badge info">También en el celular del paciente</span><span class="badge neutral">10 min</span></div></div>
+          <div class="hstack" style="margin-top:4px;flex-wrap:wrap"><span class="badge neutral">Memoria</span><span class="badge ok">Habilitado en el celular del paciente</span><span class="badge neutral">10 min</span></div></div>
         <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
       <div class="ther-card"><div class="ther-thumb" style="background: var(--sky)">📖</div>
         <div style="flex:1"><div class="r-title">Sesión de reminiscencia</div><div class="r-sub">Vos guiás, Aurora acompaña con música y fotos</div>
@@ -347,7 +347,7 @@
         <svg class="ic chev"><use href="#i-chev-r"/></svg></div>
     </div>
   </div></div>
-  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)">La insignia aparece cuando la actividad tiene juego en pantalla: la persona puede jugarla sola desde su celular. Describe la actividad, no el estado del hogar: se ve igual haya o no un celular vinculado. Las actividades guiadas sin juego no la llevan.</p></div>
+  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)">La insignia aparece cuando la actividad tiene juego en pantalla. Dice <b>«También en el celular del paciente»</b> mientras no esté habilitada y <b>«Habilitado en el celular del paciente»</b> cuando el cuidador la habilitó; al tocarla se abre la pestaña Celular (frame 42), donde se cambia. Describe la actividad, no el estado del hogar: se ve igual haya o no un celular vinculado. Las actividades guiadas sin juego no la llevan.</p></div>
 
   <!-- 41: RESULTADO DE UNA PARTIDA DEL CELULAR -->
   <div><p class="frame-label">41 · Resultado de una partida del celular — ¿Cómo lo viste?</p>
@@ -383,6 +383,106 @@
     </div>
   </div></div>
   <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)">El celular sólo mide el juego: nadie observó el ánimo ni la participación, por eso salen «Sin registrar» y el formulario arranca vacío, sin valores por defecto (un «Media / Neutral» preseleccionado se leería después como algo observado). «Guardar» se habilita al cambiar algo. Cualquier cuidador puede completarlo; no modifica lo que midió el juego. Sólo aparece en partidas cerradas que jugó el paciente solo, no en sesiones de Home ni de Care.</p></div>
+
+  <!-- 42: TERAPIAS · CELULAR -->
+  <div><p class="frame-label">42 · Terapias → Celular — qué juegos puede abrir la persona sola</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="title">Terapias</div></div>
+    <div class="content">
+      <div class="seg"><button>Hoy</button><button>Biblioteca</button><button class="active">Celular</button><button>Mías</button></div>
+      <div class="card">
+        <div class="r-title">Juegos del celular</div>
+        <p class="muted">El paciente sólo ve los juegos que habilites. Son las mismas actividades de la Biblioteca: acá elegís cuáles puede abrir solo.</p>
+        <div class="r-title" style="font-size:var(--text-md)">3 de 17 habilitados</div>
+      </div>
+      <div class="card">
+        <p class="muted" style="font-weight:700;letter-spacing:.04em">CON TUS FOTOS Y RECUERDOS</p>
+        <div class="row" style="padding-inline:0"><div class="r-icon brand">🖼</div><div class="r-main"><div class="r-title">Rompecabezas</div><div class="r-sub">Armar rompecabezas</div><div class="r-sub" style="color:var(--success-text)">Listo para jugar</div><span class="badge neutral">Contenido en revisión</span></div><div class="r-end"><button class="toggle on" aria-label="activado"></button></div></div>
+        <div class="row" style="padding-inline:0"><div class="r-icon brand">📚</div><div class="r-main"><div class="r-title">Mis recuerdos</div><div class="r-sub">Fotografías familiares</div><div class="r-sub" style="color:var(--success-text)">Listo para jugar</div><span class="badge neutral">Contenido en revisión</span></div><div class="r-end"><button class="toggle on" aria-label="activado"></button></div></div>
+        <div class="row" style="padding-inline:0"><div class="r-icon">🃏</div><div class="r-main"><div class="r-title">Memoria de pares</div><div class="r-sub">Asociar fotografías con nombres</div><div class="r-sub" style="color:var(--warning-text)">Faltan recuerdos con foto (hay 2 de 6)</div><span class="badge neutral">Contenido en revisión</span></div><div class="r-end"><button class="toggle" aria-label="apagado"></button></div></div>
+      </div>
+      <div class="card">
+        <p class="muted" style="font-weight:700;letter-spacing:.04em">CON PALABRAS</p>
+        <div class="row" style="padding-inline:0"><div class="r-icon brand">💬</div><div class="r-main"><div class="r-title">Completar refranes</div><div class="r-sub">Completar refranes</div><div class="r-sub" style="color:var(--success-text)">Listo para jugar</div><span class="badge neutral">Contenido en revisión</span></div><div class="r-end"><button class="toggle on" aria-label="activado"></button></div></div>
+        <div class="row" style="padding-inline:0"><div class="r-icon">🔍</div><div class="r-main"><div class="r-title">Sopa de letras</div><div class="r-sub">Tachar la letra</div><div class="r-sub" style="color:var(--warning-text)">Faltan recuerdos con una palabra de 3 a 8 letras (hay 0 de 4)</div><span class="badge neutral">Contenido en revisión</span></div><div class="r-end"><button class="toggle" aria-label="apagado"></button></div></div>
+      </div>
+      <div class="card">
+        <div class="r-title">Nivel de los juegos</div>
+        <p class="muted">Cuántas cartas, palabras o pasos tiene cada juego. Lo elegís vos: Aurora no lo cambia sola.</p>
+        <div class="seg"><button>Básico</button><button class="active">Intermedio</button><button>Avanzado</button></div>
+        <div class="spread"><div><div class="r-title" style="font-size:var(--text-md)">Sonido y vibración</div><p class="muted">Un sonido suave y una vibración leve al acertar. Empieza apagado.</p></div><button class="toggle" aria-label="apagado"></button></div>
+      </div>
+      <div class="card">
+        <div class="spread"><div style="flex:1"><div class="r-title">Avisos de rutinas y medicación</div>
+          <p class="muted">El celular le avisa cuando toca una rutina o una toma, aunque no esté en casa y sin internet. En la pantalla bloqueada dice sólo el tipo («Es la hora de tu pastilla»): el nombre y la dosis se ven dentro de la app. Si toca «Ya lo hice», queda registrado como confirmado por la persona. Está apagado hasta que lo enciendas.</p></div>
+          <button class="toggle" aria-label="apagado"></button></div>
+      </div>
+      <div class="card">
+        <div class="row" style="padding:0"><div class="r-icon brand">▤</div><div class="r-main"><div class="r-title">Cómo le fue en el celular</div><div class="r-sub">Partidas, errores y tiempos, en Métricas</div></div><span class="muted">→</span></div>
+      </div>
+    </div>
+  </div></div>
+  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)"><b>Por qué.</b> Una sola actividad, dos puertas: es la misma de la Biblioteca (la hacés vos en una sesión guiada) y acá decidís si además la puede abrir la persona sola. <b>Sin elegir nada, la persona no ve ningún juego</b>: el contenido todavía lo revisa la psicopedagoga. Habilitar un juego al que le falta material es válido: la persona lo ve apagado, con el motivo. Sólo el administrador cambia; el resto ve el estado. El nombre grande es el que ve la persona; debajo, el clínico. El nivel y el sonido, que vivían en Ajustes → Dispositivos, pasaron acá: es lo que <i>juega</i>; Dispositivos queda para el aparato (vincular, ubicación).</p></div>
+
+  <!-- 43: TERAPIAS · CELULAR, TODAVIA NADA HABILITADO -->
+  <div><p class="frame-label">43 · Terapias → Celular — todavía no habilitaste ningún juego</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="title">Terapias</div></div>
+    <div class="content">
+      <div class="seg"><button>Hoy</button><button>Biblioteca</button><button class="active">Celular</button><button>Mías</button></div>
+      <div class="card">
+        <div class="r-title">Juegos del celular</div>
+        <p class="muted">El paciente sólo ve los juegos que habilites. Son las mismas actividades de la Biblioteca: acá elegís cuáles puede abrir solo.</p>
+        <div class="r-title" style="font-size:var(--text-md)">0 de 17 habilitados</div>
+        <div class="alert info" style="padding:var(--space-3);border-radius:var(--radius-md);background:var(--info-bg);color:var(--info-text)">Todavía no habilitaste ningún juego: el paciente no ve ninguno en su celular.</div>
+        <button class="btn btn-primary btn-block">Habilitar los sugeridos para empezar</button>
+      </div>
+      <div class="card">
+        <p class="muted" style="font-weight:700;letter-spacing:.04em">CON TUS FOTOS Y RECUERDOS</p>
+        <div class="row" style="padding-inline:0"><div class="r-icon">🖼</div><div class="r-main"><div class="r-title">Rompecabezas</div><div class="r-sub">Armar rompecabezas</div><div class="r-sub" style="color:var(--success-text)">Listo para jugar</div></div><div class="r-end"><button class="toggle" aria-label="apagado"></button></div></div>
+      </div>
+    </div>
+  </div></div>
+  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)"><b>Por qué.</b> «Sugeridos» tilda de una vez los juegos sin respuesta «correcta» ni texto libre (reminiscencia, rompecabezas, parejas de fotos, calendario). Es una propuesta del equipo de desarrollo, <b>pendiente de validar con la psicopedagoga</b>. A los celulares ya vinculados se les habilitó, al desplegar, lo que ya veían, para que nadie se quede sin juegos de golpe.</p></div>
+
+  <!-- 44: TERAPIAS · SIN CELULAR -->
+  <div><p class="frame-label">44 · Terapias → Celular — sin celular vinculado</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="title">Terapias</div></div>
+    <div class="content">
+      <div class="seg"><button>Hoy</button><button>Biblioteca</button><button class="active">Celular</button><button>Mías</button></div>
+      <div class="empty"><div class="e-icon">📱</div><div class="r-title">Todavía no hay un celular vinculado</div><p class="muted">Cuando vincules el celular del paciente, desde acá elegís qué juegos puede abrir.</p><button class="btn btn-primary">Ir a Dispositivos</button></div>
+    </div>
+  </div></div></div>
+
+  <!-- 45: METRICAS · JUEGOS DEL CELULAR -->
+  <div><p class="frame-label">45 · Métricas → Juegos del celular — cómo le fue, con el mismo selector de días</p>
+  <div class="phone"><div class="screen">
+    <div class="content">
+      <style>
+        .pm-row { border-top: 1px solid var(--border-default); padding: var(--space-3) 0; display:flex; flex-direction:column; gap: 4px; }
+        .pm-head { display:flex; justify-content:space-between; gap: var(--space-2); font-weight:600; }
+        .pm-track { height:6px; border-radius:3px; background: var(--bg-subtle); overflow:hidden; margin: 4px 0; }
+        .pm-fill { height:6px; border-radius:3px; background: var(--violet-600); }
+      </style>
+      <div class="card-title" style="margin:0 0 var(--space-2)">Estadísticas</div>
+      <div class="seg" style="margin-bottom:var(--space-3)"><span>7 días</span><span class="on">30 días</span></div>
+      <div class="card">
+        <div style="display:flex;gap:var(--space-3);align-items:center"><div class="r-icon brand">◇</div><div><div class="card-title" style="margin:0">Juegos del celular</div><div class="muted">Lo que jugó solo, en los últimos 30 días</div></div></div>
+        <div class="kpis" style="margin-top:var(--space-3)">
+          <div class="kpi"><div class="k-val">18</div><div class="k-lbl">Terminadas</div></div>
+          <div class="kpi"><div class="k-val">8</div><div class="k-lbl">Paró antes</div></div>
+          <div class="kpi"><div class="k-val">9</div><div class="k-lbl">Juegos</div></div>
+        </div>
+        <div class="pm-row"><div class="pm-head"><span>Armar rompecabezas</span><span class="muted">5 partidas</span></div><div class="pm-track"><div class="pm-fill" style="width:100%"></div></div><div class="muted">3 veces terminado · 2 veces paró antes · 1 error por partida · 32 s en promedio</div><div class="muted" style="font-size:var(--text-xs)">Última vez hace 44 min</div></div>
+        <div class="pm-row"><div class="pm-head"><span>Clasificar elementos según diferentes criterios</span><span class="muted">5 partidas</span></div><div class="pm-track"><div class="pm-fill" style="width:100%"></div></div><div class="muted">2 veces terminado · 3 veces paró antes · sin errores · 1 min 7 s en promedio</div><div class="muted" style="font-size:var(--text-xs)">Última vez hace 44 min</div></div>
+        <div class="pm-row"><div class="pm-head"><span>Ordenar pasos de una secuencia</span><span class="muted">3 partidas</span></div><div class="pm-track"><div class="pm-fill" style="width:60%"></div></div><div class="muted">2 veces terminado · 1 vez paró antes · sin errores · 13 s en promedio</div><div class="muted" style="font-size:var(--text-xs)">Última vez hace 1 d</div></div>
+        <button class="btn btn-ghost btn-sm btn-block" style="margin-top:var(--space-1)">Ver los 9 juegos</button>
+        <p class="muted" style="margin-top:var(--space-2)">Es un registro para vos: la persona nunca ve errores ni tiempos. El nivel lo decidís vos.</p>
+      </div>
+    </div>
+  </div></div>
+  <p style="max-width:380px;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-2)"><b>Por qué.</b> «Cómo le fue» sale de Terapias → Celular (frame 42, donde sólo queda una fila que lleva acá) y va con el resto de los números del paciente, en Métricas. <b>Sigue el selector de 7 o 30 días</b> de la pantalla; sólo aparece si hay un celular vinculado, y también cuando las métricas del backend están vacías. Cada juego muestra <b>cuántas partidas</b> y una <b>barra que lo compara con el más jugado</b> (para ver de un vistazo qué le gusta), y debajo, en una frase, lo que pasó; lo que no se midió no se muestra como cero ni como raya. No sugiere subir ni bajar el nivel: esa regla está pendiente de validar con la psicopedagoga.</p></div>
 
 </div>
 </body>
