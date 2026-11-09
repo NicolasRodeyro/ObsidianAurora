@@ -45,7 +45,7 @@ Last updated time: "2026-10-17T00:00:00"
 - **ADR-005** — Autorización de la sesión según vínculo y permiso del cuidador.
 - **ADR-008** — Home mantiene el canal de comandos para recibir la orden.
 
-> **Posible ADR nuevo pendiente:** la elección de LiveKit como proveedor de media no figura como ADR; conviene registrarla como ADR-013.
+- **ADR-013** — LiveKit Cloud como proveedor de media para el Drop-in (ADR-015 en `AuroraCore`, PR #154 pendiente de integrar): Core solo emite tokens de acceso efímeros; el audio no pasa por Core.
 
 ## 3. Modelo de datos (DER)
 Entidad afectada (ya prevista en el [[DER - Base de Datos Aurora]]):
@@ -130,7 +130,7 @@ stateDiagram-v2
 ## 7. Matriz de trazabilidad de la historia
 | Historia | RF | ADR | DER | Diagramas | Código | Casos de prueba |
 | --- | --- | --- | --- | --- | --- | --- |
-| AURA-134, 173, 174, 182 | RF-73, 77, 80 | ADR-004, 005, 008, 012 (+ ADR-013 propuesto) | `DropInSession` | Secuencia, estados | `apps/interactions/*`, `drop_in.py`, `src/features/activity/*` | CP-AURA-134-01 a 07 |
+| AURA-134, 173, 174, 182 | RF-73, 77, 80 | ADR-004, 005, 008, 012 (+ ADR-013) | `DropInSession` | Secuencia, estados | `apps/interactions/*`, `drop_in.py`, `src/features/activity/*` | CP-AURA-134-01 a 07 |
 
 ## Checklist de completitud (cátedra)
 - [x] Historia y criterios de aceptación

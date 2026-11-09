@@ -116,6 +116,30 @@ El diagrama de despliegue muestra cómo se distribuyen físicamente los contened
 
 **Estado al 12/10/2026.** ADR-001 a ADR-004: aceptados. ADR-005: aceptado con enmienda (proveedor: Supabase Auth). ADR-006: reemplazado por ADR-011. ADR-007 y ADR-008: aceptados con enmienda. ADR-009: aceptado, sin implementar (fuera del MVP). ADR-010 y ADR-011: aceptados.
 
+<<<<<<< Updated upstream
+=======
+**Estado al 21/10/2026.** ADR-012: aceptado. ADR-014, ADR-015 y ADR-016: aceptados (feature de recuerdos; decisiones tomadas en Aurora Core el 20/10/2026).
+
+**Estado al 09/11/2026.** ADR-013 y ADR-017: aceptados (LiveKit para el Drop-in y dificultad adaptativa; redactados en `AuroraCore` con los números ADR-015 y ADR-014, en el PR #154, pendiente de integrar).
+
+**Numeración del registro de ADR.** El vault tiene su propia numeración y no coincide con la del repositorio `AuroraCore`: en el vault, ADR-011 ya es «Voz en la nube con respaldo local» y ADR-012 es «Diseño de API», y además **ADR-013** es la decisión de LiveKit como proveedor de media y **ADR-017** la de dificultad adaptativa (en `AuroraCore` son el ADR-015 y el ADR-014; ver más abajo). Por eso los tres ADR de la feature de recuerdos se registran como ADR-014, ADR-015 y ADR-016, y cada entrada declara su archivo de origen:
+
+| ADR del vault | ADR de `AuroraCore` | Decisión | Archivo de origen |
+| --- | --- | --- | --- |
+| ADR-014 | ADR-011 | Taxonomía de dos niveles y anclaje temporal de los recuerdos | `docs/adr/ADR-011-taxonomia-y-ancla-temporal-de-recuerdos.md` |
+| ADR-015 | ADR-012 | Personas de la vida del paciente | `docs/adr/ADR-012-personas-vida-del-paciente.md` |
+| ADR-016 | ADR-013 | Recuerdos diarios de corto plazo | `docs/adr/ADR-013-recuerdos-diarios-corto-plazo.md` |
+
+Las tres entradas están **aceptadas como decisión de diseño**; la implementación es por fases y no está completa. Cada ADR declara en «Estado de implementación» qué está construido y qué no.
+
+Otros dos ADR del vault tienen en `AuroraCore` un número distinto:
+
+- **ADR-013** (vault) — LiveKit Cloud como proveedor de media para el Drop-in. En `AuroraCore` es el ADR-015 (`docs/adr/ADR-015-livekit-media-dropin.md`). Estado: aceptado. Aurora Core no procesa audio: solo emite tokens de acceso efímeros (300 s por defecto); LiveKit Cloud maneja la señalización, el SFU y el transporte. Se configura por entorno. Alternativas descartadas: WebRTC punto a punto, SFU propio y una plataforma de agente completa.
+- **ADR-017** (vault) — Dificultad adaptativa por heurística determinista. En `AuroraCore` es el ADR-014 (`docs/adr/ADR-014-dificultad-adaptativa-heuristica.md`). Estado: aceptado. Para US-D4 (RF-52) se usa una heurística determinista y auditable sobre las últimas 5 sesiones completadas (participación y ánimo), en lugar de un modelo entrenado, que queda para futuras versiones. Los umbrales clínicos quedan pendientes de validación con la psicopedagoga.
+
+Ambos están redactados en el PR #154 de `AuroraCore`, pendiente de integrar.
+
+>>>>>>> Stashed changes
 ### ADR-001: Lenguaje y Framework Backend
 
 | Campo | Valor |
@@ -300,7 +324,7 @@ La elección resulta adecuada para Aurora Care debido a su enfoque principalment
 
 **Contexto**
 
-Aurora requiere persistencia para datos relacionales (pacientes, cuidadores, eventos, rutinas, alertas, configuraciones) y datos vectoriales previstos a futuro (embeddings para RAG — Retrieval-Augmented Generation — en el motor de IA). En el MVP la memoria del paciente se consulta de forma contextual, sin búsqueda vectorial: el motor de IA toma las memorias aprobadas y neutrales y las envía como contexto. Se evaluaron opciones de base de datos única vs. especializadas.
+Aurora requiere persistencia para datos relacionales (pacientes, cuidadores, eventos, rutinas, alertas, configuraciones) y datos vectoriales previstos a futuro (embeddings para RAG — Retrieval-Augmented Generation — en el motor de IA). En el MVP la memoria del paciente se consulta de forma contextual, sin búsqueda vectorial: el motor de IA toma las memorias aprobadas y neutrales, elige las más relevantes por coincidencia de palabras con la pregunta y las envía como contexto. Se evaluaron opciones de base de datos única vs. especializadas.
 
 **Drivers de decisión**
 
@@ -327,7 +351,7 @@ Se adopta **Supabase (PostgreSQL 16 + pgvector)** como plataforma de datos.
 - Incluye autenticación, Realtime (WebSocket), Storage y APIs automáticas, reduciendo servicios externos
 - Plan Free Project (500 MB DB, 2 GB storage, 50k MAU) es suficiente para prototipo y validación
 - Al estar basado en PostgreSQL puro, no hay vendor lock-in: se puede migrar a PostgreSQL estándar en cualquier momento
-- pgvector proporciona búsqueda vectorial HNSW integrada, suficiente para el RAG previsto (memoria del paciente). Hoy el MVP no usa búsqueda vectorial: consulta las memorias aprobadas como contexto (hasta 20 por consulta) y guarda los embeddings como JSON; pgvector queda disponible en Supabase para esa evolución
+- pgvector proporciona búsqueda vectorial HNSW integrada, suficiente para el RAG previsto (memoria del paciente). Hoy el MVP no usa búsqueda vectorial: elige hasta 20 memorias aprobadas por relevancia léxica (coincidencia de palabras con la pregunta) y las usa como contexto; guarda los embeddings como JSON; pgvector queda disponible en Supabase para esa evolución
 
 **Consecuencias**
 
