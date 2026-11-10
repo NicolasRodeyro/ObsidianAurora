@@ -116,8 +116,6 @@ El diagrama de despliegue muestra cómo se distribuyen físicamente los contened
 
 **Estado al 12/10/2026.** ADR-001 a ADR-004: aceptados. ADR-005: aceptado con enmienda (proveedor: Supabase Auth). ADR-006: reemplazado por ADR-011. ADR-007 y ADR-008: aceptados con enmienda. ADR-009: aceptado, sin implementar (fuera del MVP). ADR-010 y ADR-011: aceptados.
 
-<<<<<<< Updated upstream
-=======
 **Estado al 21/10/2026.** ADR-012: aceptado. ADR-014, ADR-015 y ADR-016: aceptados (feature de recuerdos; decisiones tomadas en Aurora Core el 20/10/2026).
 
 **Estado al 09/11/2026.** ADR-013 y ADR-017: aceptados (LiveKit para el Drop-in y dificultad adaptativa; redactados en `AuroraCore` con los números ADR-015 y ADR-014, en el PR #154, pendiente de integrar).
@@ -139,7 +137,6 @@ Otros dos ADR del vault tienen en `AuroraCore` un número distinto:
 
 Ambos están redactados en el PR #154 de `AuroraCore`, pendiente de integrar.
 
->>>>>>> Stashed changes
 ### ADR-001: Lenguaje y Framework Backend
 
 | Campo | Valor |

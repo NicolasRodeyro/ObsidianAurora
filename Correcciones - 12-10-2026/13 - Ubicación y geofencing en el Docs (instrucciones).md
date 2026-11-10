@@ -152,3 +152,19 @@ Para cada uno el agente tiene que ubicar la frase exacta en el Doc y cambiar **s
 ## C. A revisar a mano al aceptar las sugerencias
 
 - En el ítem de biometría del Estudio Inicial, el paréntesis `(frecuencia cardíaca, movimiento, temperatura,` puede haber quedado en negrita. Corregirlo si es así.
+
+---
+
+# Tercera ronda (09/11/2026)
+
+El encuadre quedó **decidido** por el equipo: extensión con prototipo funcional, no cambio del MVP; la pulsera sigue fuera. Se agregó el motivo: se vio al final del desarrollo para que el paciente confirme sus recordatorios desde su celular y para avisar al cuidador cuando está fuera de su casa.
+
+**Estado del Doc al 09/11/2026.** Los cambios A1 a A5, B (glosario, Estudio Inicial, Plan de Testing 9.a, 9.b y 9.c) ya figuran en el Doc. Se agregaron **tres sugerencias nuevas** (el conector no pudo leer el Doc completo por su tamaño, así que se aplicaron con `replaceAllText`, una coincidencia cada una, en modo `SUGGEST`):
+
+| Dónde | Qué se sugirió |
+| --- | --- |
+| Estudio Inicial, párrafo «Como extensión con prototipo funcional…» | Agregar al final: «Se incorporó al final del desarrollo para que el paciente pueda confirmar sus recordatorios desde su celular y para avisar al cuidador cuando está fuera de su casa.» |
+| Arquitectura 6.3, fila «Ubicación asociada a una alerta» | Agregar al final: «[A CONFIRMAR: depuración diaria automática programada en n8n (AURA-221)]». Hoy la purga existe pero no corre sola. |
+| Sección de trabajo pendiente, ítem «Geofencing por GPS de la pulsera» | Cambiar «pero sin GPS no hay quién dispare la salida de zona.» por «pero con la pulsera sigue sin haber fuente de GPS. La salida de zona con el celular del paciente quedó como extensión con prototipo funcional.» |
+
+**A hacer a mano:** aceptar o rechazar esas tres sugerencias en el Doc, y cuando AURA-221 esté hecho, quitar la marca `[A CONFIRMAR]` de la fila de retención.

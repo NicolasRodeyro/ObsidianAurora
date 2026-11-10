@@ -115,6 +115,8 @@ Cuando una función pasa de "futura" al alcance, **no puede incorporarse sin est
 | Geofencing | Precisión de ubicación, tiempo de detección de salida |
 | Anomalías biométricas | Umbrales clínicos validados, manejo de lecturas faltantes |
 
+> **Geofencing (extensión).** Se implementó como extensión con prototipo funcional. Parámetros vigentes: se ignora toda lectura con precisión peor que 100 m; para dar por «afuera» hacen falta 2 lecturas seguidas separadas por al menos 15 s, fuera de todas las zonas descontando la imprecisión del GPS; para dar por «volvió» hay que estar 10 m adentro; una lectura de más de 15 minutos no genera aviso. La precisión de ubicación y el tiempo de detección de salida todavía no se midieron en campo. `[A COMPLETAR]`
+
 ---
 
 ## 5. Ajustes a la tabla "3. Estrategia y Niveles de Testing"
@@ -122,12 +124,26 @@ Cuando una función pasa de "futura" al alcance, **no puede incorporarse sin est
 | Fila | Cambio |
 | ----- | ----- |
 | **Integración** | Reemplazar "recepción de datos de la pulsera IoT" por "recepción de eventos desde Aurora Home y entrega de notificaciones push". |
-| **End-to-End** | Reemplazar el caso "Detección de salida de Zona Segura → Notificación Push" por **"Omisión de medicación → alerta → notificación entregada → acción del cuidador"**. Dejar el de zona segura como *futuras versiones*. |
+| **End-to-End** | Reemplazar el caso "Detección de salida de Zona Segura → Notificación Push" por **"Omisión de medicación → alerta → notificación entregada → acción del cuidador"**. Agregar **«Salida de zona segura (extensión con prototipo funcional): lectura fuera de la zona, confirmada → alerta → notificación push al cuidador»**. |
 | **Resiliencia (Hardware e IoT)** | Renombrar **"Resiliencia (Aurora Home y servicios)"**. Reemplazar los casos de pulsera por los de la sección 2.4. |
 | **IA y RAG** | Reemplazar la columna de ejemplos por la sección 2.5. |
 | **Seguridad y Privacidad** | Agregar los casos de los RF-92 a RF-98 y RNF-44 a RNF-52 (archivo 07). |
 
 ---
+
+### 5.1 Casos de prueba de la extensión de ubicación (celular del paciente)
+
+| Caso | Resultado esperado |
+| ----- | ----- |
+| Retirar el consentimiento de ubicación en vivo | Se borra la última posición del celular |
+| Desvincular el celular | Se borra la última posición |
+| Lectura con precisión peor que 100 m | Se ignora, no mueve el estado |
+| Una sola lectura fuera de la zona | No genera aviso (hacen falta 2 separadas por 15 s) |
+| Lectura de más de 15 minutos de antigüedad | Actualiza la posición, no genera aviso |
+| Celular sin informar más de 20 minutos, con zonas activas | Alerta «Perdimos la señal del celular del paciente», una por silencio |
+| Pedido de ayuda sin consentimiento de ubicación | La alerta se envía; se descarta solo el lugar |
+
+> Los casos de QA en celulares reales que **no** se confirmaron (salida de zona caminando, modo avión, GPS apagado, batería baja y consumo de batería) siguen sin ejecutarse; ver la sección 5 de la nota de decisión de ubicación.
 
 ## 6. Clasificación de incidencias: ampliar la fila P1
 

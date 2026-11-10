@@ -55,8 +55,6 @@ El diseño de Terapias introdujo alcance sin RF/US propios (ver nota en [[Arquit
 **US-D4 — Dificultad adaptativa (AURA-15)**
 > Como sistema, quiero ajustar la dificultad de juegos y trivias según el desempeño registrado (RF-52), sin exponer nunca errores ni puntajes al paciente.
 
-<<<<<<< Updated upstream
-=======
 **US-D5 — Línea de tiempo de recuerdos (épica AURA-18 · tickets AURA-201 (Care) / AURA-198 (Core))**
 > Como cuidador, quiero recorrer la vida del paciente en una línea de tiempo agrupada por año o década, con filtro por persona y por categoría, para ver los huecos biográficos y orientar la recolección de recuerdos.
 > **CA:** agrupación por año o década · filtro por persona y por categoría · los recuerdos sin fecha anclada se muestran en una sección aparte, nunca con una fecha inventada · la cobertura biográfica señala las décadas, personas y temas con huecos · paginación real por cursor, sin duplicados al insertar en el medio · orden estable por la fecha del **suceso**, no por la de carga · la línea de tiempo vive en **Aurora Care**; en el dispositivo se recorre **por voz** (el display del dispositivo queda fuera del alcance de esta feature: ver §5 de [[VUI — Diseño Conversacional]]).
@@ -87,7 +85,6 @@ Se revisó el vault en busca de ADR pendientes relacionados con la **sesión gui
 
 Dos ADR de otros temas se registraron después, y ninguno pertenece a esta feature: **LiveKit** como proveedor de media (**ADR-013**) y la heurística determinista de dificultad adaptativa (**ADR-017**, AURA-77).
 
->>>>>>> Stashed changes
 ## 4. Backlog de diseño — visión (wireframes V1-V6 → hi-fi)
 
 | Ítem | Wireframe | Qué falta decidir/diseñar |

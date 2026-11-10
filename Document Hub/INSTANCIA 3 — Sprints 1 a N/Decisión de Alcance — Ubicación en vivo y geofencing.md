@@ -9,7 +9,7 @@ Last updated time: 2026-11-09T21:00:00
 ---
 # Decisión de Alcance — Ubicación en vivo y geofencing
 
-**Fecha:** 2026-11-09 · **Ticket:** AURA-215 · **Estado:** borrador para revisión del equipo · **Pendiente:** validación legal de los textos y decisión del encuadre ante la cátedra
+**Fecha:** 2026-11-09 · **Ticket:** AURA-215 · **Estado:** encuadre decidido por el equipo el 09/11/2026 · **Pendiente:** validación legal de los textos
 
 Los documentos del 12/10 dicen que ubicación y geofencing son **«futuras versiones»** y que los datos de ubicación **«no se procesan en el MVP»** (ver [[Decisión de Alcance — Aurora Band fuera del MVP]]). Entre el 25/10 y el 07/11 se implementó una función que **sí procesa ubicación** desde el celular del paciente. Esta nota fija qué se construyó, qué se guarda, qué promete y qué no, y qué partes del Docs hoy lo contradicen.
 
@@ -93,17 +93,23 @@ Mitigación parcial: si el celular lleva **más de 20 minutos** sin informar y h
 
 ## 5. Diferencias entre lo que se promete y lo que hoy se cumple
 
-1. **«El lugar se borra a los 7 días»** está en los dos textos de consentimiento. La purga existe (comando y endpoint desplegado en staging) pero **todavía no corre sola**: falta programarla en n8n (AURA-213). Hasta entonces, la promesa se cumple solo si alguien la ejecuta a mano. **Es la brecha más importante**, porque está escrita en lo que acepta la persona.
-2. **QA en celulares reales** (AURA-214, In Revision): se confirmó la pantalla apagada, la creación de zonas con el mapa y el botón de ayuda; **no se confirmaron** la salida de zona caminando, modo avión, GPS apagado, batería baja ni el consumo de batería.
-3. **Hallazgo B3 del análisis del 12/10** (consiente el cuidador, no el paciente): esta función lo **mejora**, porque el consentimiento lo da quien usa el celular. La **presunción de capacidad** del paciente con Alzheimer **sigue abierta**.
+1. **«El lugar se borra a los 7 días»** está en los dos textos de consentimiento. La purga existe (comando y endpoint desplegado en staging) pero **todavía no corre sola**: falta programarla en n8n (AURA-213). Hasta entonces, la promesa se cumple solo si alguien la ejecuta a mano. **Es la brecha más importante**, porque está escrita en lo que acepta la persona. La tarea de programarlo en n8n (purgas y barrido de silencio) está en **AURA-221**, asignada a Octavio en el Sprint 8.
+2. **QA en celulares reales** (AURA-214, figura **Finalizada** en Jira al 09/11/2026): se confirmó la pantalla apagada, la creación de zonas con el mapa y el botón de ayuda; **no se confirmaron** la salida de zona caminando, modo avión, GPS apagado, batería baja ni el consumo de batería.
+3. **Hallazgo B3 del análisis del 12/10** (consiente el cuidador, no el paciente): esta función lo **mejora**, porque el consentimiento lo da quien usa el celular. La **presunción de capacidad** del paciente con Alzheimer **sigue abierta**, y el equipo la **aceptó como limitación el 09/11/2026**: queda anotada acá y se declara, no se resuelve en este alcance.
 
-## 6. Encuadre ante la cátedra — propuesta (a decidir)
+## 6. Encuadre ante la cátedra (decidido el 09/11/2026)
 
-**No cambiar el alcance del MVP.** Presentarlo como **extensión con prototipo funcional y alcance explícito**: ubicación en vivo y salida de zona con un celular común del paciente, con los límites de la sección 4, con consentimientos propios y con la validación legal pendiente declarada. Aurora Band, la biometría y la detección de caídas **siguen siendo futuras versiones**.
+**No cambiar el alcance del MVP.** El equipo decidió presentarlo como **extensión con prototipo funcional y alcance explícito**: algo que se vio hacia el final del desarrollo para que el paciente pueda confirmar sus recordatorios desde su celular y para avisar al cuidador cuando está fuera de su casa (botón de ayuda, ubicación en vivo y aviso de salida de zona), con los límites de la sección 4, con consentimientos propios y con la validación legal pendiente declarada. Aurora Band, la biometría y la detección de caídas **siguen siendo futuras versiones**.
+
+**Redacción acordada.** Hay que usar este mismo texto en la presentación, porque el criterio «cumplimiento del alcance» compara lo comprometido con lo desarrollado:
+
+- **Para el Docs y los archivos 04 y 07:** *«Aurora Band (la pulsera) sigue fuera del MVP por restricción presupuestaria (decisión del 29/08/2026). Hacia el final del desarrollo se agregó una extensión con prototipo funcional en el celular del paciente, para que pueda confirmar sus recordatorios y para avisar al cuidador cuando está fuera de su casa (botón de ayuda, ubicación en vivo y aviso de salida de zona segura). Tiene consentimiento propio, límites explícitos y los textos de consentimiento pendientes de validación legal. No cambia el alcance del MVP.»*
+- **Para una diapositiva (una sola frase):** *«La pulsera quedó fuera por presupuesto; sobre el final sumamos una extensión con prototipo funcional: el celular del paciente le permite confirmar sus recordatorios y avisar al cuidador cuando está fuera de casa.»*
+- **Lo que no se dice:** que sea un sistema de seguridad, que los consentimientos estén validados, que el lugar «se borra solo a los 7 días» mientras la purga no esté programada, ni que el aviso de salida de zona esté probado en la calle (AURA-214 está incompleta).
 
 ## 7. Correcciones propuestas al Docs
 
-Hoy estos archivos contradicen la implementación. **No se modificaron**: quedan acá para revisar y aplicar.
+Estos archivos contradecían la implementación. **Actualización del 09/11/2026:** se aplicaron las correcciones en `01 - Estudio Inicial`, `Estudio Inicial Aurora`, `04 - Alcance y MVP único`, `07 - Privacidad, seguridad y datos sensibles`, `08 - Plan de Testing` y `Trazabilidad RF-Épicas` (cambios sin commitear: se revisan con `git diff`). Los cambios del Docs de Google quedaron como sugerencias y el equipo las aceptó. Los `RF-92 a RF-98` no se modificaron.
 
 | Archivo | Hoy dice | Propuesta |
 | --- | --- | --- |
@@ -116,10 +122,10 @@ Hoy estos archivos contradicen la implementación. **No se modificaron**: quedan
 
 ## 8. Pendientes de esta decisión
 
-- [ ] Validación legal de los dos textos de consentimiento (sección 3).
-- [ ] Decidir el encuadre ante la cátedra (sección 6).
-- [ ] Programar la purga de ubicaciones en n8n (AURA-213) **antes** de afirmar el borrado a los 7 días.
+- [ ] Validación legal de los dos textos de consentimiento (sección 3). **Decisión del equipo (09/11/2026): se hace cuando los tickets estén en revisión.**
+- [x] Decidir el encuadre ante la cátedra (sección 6): decidido el 09/11/2026.
+- [ ] Programar la purga de ubicaciones en n8n **antes** de afirmar el borrado a los 7 días: **AURA-221**, asignada a Octavio.
 - [ ] Completar la QA de AURA-214 con los casos no confirmados.
-- [ ] Aplicar las correcciones de la sección 7 en el vault y en el Docs.
+- [x] Aplicar las correcciones de la sección 7 en el vault y en el Docs (09/11/2026).
 - [ ] Definir y medir precisión y tiempo de detección de salida (sección 4).
-- [ ] Presunción de capacidad del paciente (hallazgo B3): sigue abierta.
+- [x] Presunción de capacidad del paciente (hallazgo B3): **limitación aceptada** el 09/11/2026 (sección 5, punto 3).

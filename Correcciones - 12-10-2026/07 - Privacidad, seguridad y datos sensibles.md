@@ -28,7 +28,8 @@ Antes de fijar plazos hay que saber por dónde circulan los datos. Con la arquit
 | Datos identificatorios (nombre, DNI, contactos de emergencia) | Aurora Care | Aurora Core / Supabase, **cifrados en la aplicación** | Alta |
 | Medicación, rutinas, recuerdos personales | Aurora Care | Aurora Core / Supabase | Alta (dato de salud) |
 | Respuestas del paciente a recordatorios; eventos y alertas | Aurora Home / Core | Aurora Core / Supabase | Alta |
-| Datos biométricos y de ubicación | — | **No se procesan en el MVP** | (Futuras versiones) |
+| Datos biométricos | — | **No se procesan en el MVP** | (Futuras versiones) |
+| **Ubicación del celular del paciente** (última posición y ubicación asociada a las alertas de ayuda y de salida de zona) | Celular del paciente (Aurora Care) | Aurora Core / Supabase. **Solo con consentimiento propio**, que se puede retirar (ver [[Decisión de Alcance — Ubicación en vivo y geofencing]]) | Alta (dato sensible) |
 
 > **Hallazgo que hay que explicitar:** hoy **el audio del paciente (durante las ventanas de escucha) y el texto de la conversación salen del hogar** hacia proveedores externos (voz e IA). El documento anterior decía que el audio crudo no salía de la Raspberry Pi y que el STT era local. Eso ya no es cierto: se cambió por una decisión consciente y documentada (ADR-HOME-010 y ADR-HOME-011), que se explica y se justifica en la sección 8. El consentimiento debe informarlo con claridad (RF-95).
 
@@ -84,7 +85,11 @@ Se suman a los RNF-34 a RNF-38 existentes.
 | Cuenta del cuidador | **Mientras dure la relación + 90 días** | Ídem. *(El borrador anterior decía + 2 años por "motivos contables", que no aplican a un piloto sin facturación.)* | Se elimina |
 | **Registro de consentimientos y revocaciones** | **Mientras dure la relación + 5 años** | Es la prueba de que el tratamiento fue autorizado y de cuándo dejó de estarlo. Se conserva por la prescripción general de reclamos. Es el único dato que **sobrevive** a la baja. | Se elimina |
 | **Registro de accesos y de solicitudes de derechos** | **2 años** | Auditoría de quién accedió a datos sensibles. | Se elimina |
-| Datos biométricos y de ubicación | **(Futuras versiones)** | No se tratan en el MVP. Si se incorporan: plazos cortos y justificación propia (biometría 90 días, ubicación 7 días como punto de partida) | — |
+| Datos biométricos | **(Futuras versiones)** | No se tratan en el MVP. Si se incorporan: plazos cortos y justificación propia (90 días como punto de partida) | — |
+| **Ubicación del celular del paciente: última posición** | **Mientras el consentimiento esté vigente** | Solo se guarda la última posición, que reemplaza a la anterior: **no hay historial de recorridos**. Permite al cuidador ver dónde está el paciente y avisar la salida de una zona segura. | Se elimina al retirar el consentimiento o al desvincular el celular |
+| **Ubicación asociada a una alerta** (pedido de ayuda o salida de zona) | **7 días** | Permite al cuidador saber dónde estaba el paciente cuando ocurrió el evento. Pasado el plazo no se justifica conservarla. | Se borra el lugar y la alerta queda marcada como depurada. **[A CONFIRMAR: depuración diaria automática programada en n8n (AURA-213); hoy la purga existe pero no corre sola]** |
+
+> **Ubicación del celular del paciente:** los dos textos de consentimiento (ubicación para el botón de ayuda, `patient-phone-location-v2`, y ubicación en vivo, `patient-phone-live-location-v1`) prometen que «el lugar se borra a los 7 días». Esa promesa **solo se cumple si la purga corre**, así que hay que programarla antes de afirmarla. Ambos textos siguen **pendientes de validación legal** (Ley 25.326, arts. 5 y 7; AURA-215) y no se deben presentar como validados.
 
 > **Estado de la implementación:** el backend tiene el modelo de políticas de retención y el campo de vencimiento en las interacciones, pero **no encontré un proceso automático que depure los datos vencidos**. Eso es lo que verifica RF-96 y es un trabajo pendiente.
 
