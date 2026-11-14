@@ -38,8 +38,8 @@ Last updated time: "2026-10-17T00:00:00"
 - **ADR-012** — Diseño de API: `GET /api/v1/ai/difficulty-recommendations/` y `GET /api/v1/ai/ai-decisions/`.
 - **ADR-004** — Monolito modular: la heurística es una función pura dentro de la app `ai` de Aurora Core.
 
-> [!todo] Decisión sin ADR formal
-> La historia introdujo una decisión técnica nueva: usar una **heurística determinista y auditable** (en lugar de un modelo de aprendizaje) para ajustar la dificultad, con registro de cada decisión. Conviene registrarla como ADR en [[Arquitectura y Stack Tecnológico]].
+> [!note] Decisión registrada como ADR
+> La historia introdujo una decisión técnica nueva: usar una **heurística determinista y auditable** (en lugar de un modelo de aprendizaje) para ajustar la dificultad, con registro de cada decisión. Quedó registrada como ADR-017 en [[Arquitectura y Stack Tecnológico]] (ADR-014 en `AuroraCore`, PR #154 pendiente de integrar).
 
 ## 3. Modelo de datos (DER)
 **Sin entidades nuevas.** Se usa la tabla de decisiones de la IA ya prevista en el DER del Sprint 1 (módulo de inteligencia artificial); la migración 0006 solo agregó un índice por paciente, tipo y fecha.
@@ -124,5 +124,4 @@ sequenceDiagram
 - [x] Referencias a código (paths/commits/PRs)
 
 > [!todo] Pendiente
-> - Registrar el ADR de la heurística de dificultad.
 > - La recomendación se calcula con las sesiones que informa Aurora Home; con pocas sesiones queda en el nivel medio (arranque en frío).

@@ -15,7 +15,7 @@ La columna «Autoría principal» se basa en la autoría real de los repositorio
 
 | Subsistema | Autoría principal | Estado al 17/10/2026 |
 | --- | --- | --- |
-| Documentación y gestión | Jeremías (Project Manager y Scrum Master) y todo el equipo | Project Charter, Requerimientos (98 RF y 52 RNF), Arquitectura y Stack Tecnológico (12 ADR), Plan de Testing y este documento. Hay una corrección de la cátedra del 12/10/2026 en curso de aplicación (AURA-186). |
+| Documentación y gestión | Jeremías (Project Manager y Scrum Master) y todo el equipo | Project Charter, Requerimientos (98 RF y 52 RNF), Arquitectura y Stack Tecnológico (17 ADR), Plan de Testing y este documento. Hay una corrección de la cátedra del 12/10/2026 en curso de aplicación (AURA-186). |
 | Diseño (Design System y UX/UI) | Nicolás y Jeremías | Completo y verificado con los criterios WCAG AA y AAA. El envío del design system a Figma sigue pendiente por el límite del plan gratuito. |
 | Modelo de datos | Mateo y Nicolás | DER de 50 tablas en 10 módulos, dibujado en 8 vistas. Las migraciones viven en Aurora Core. |
 | Aurora Core (backend) | Octavio, Haik y Mateo | API REST y WebSocket operativas: rutinas, medicación, alertas con push, dashboard, zonas seguras, consentimiento informado, memoria del paciente con consulta de IA, sesiones diarias de terapia, Drop-in y canal de comandos hacia Aurora Home. La suite del equipo pasa con 1.579 pruebas (16/10). Pendientes: AURA-173 y AURA-164, gestión de secretos y respaldos. |

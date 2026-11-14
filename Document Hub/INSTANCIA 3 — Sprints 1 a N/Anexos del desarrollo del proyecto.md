@@ -35,7 +35,7 @@ Este Google Doc reúne los documentos del proyecto. Para ubicar cada tema:
 - **Glosario** y **Estudio Inicial Aurora**: términos del dominio, contexto, requerimientos funcionales y no funcionales.
 - **Plan de Proyecto Aurora**: objetivos, alcance, presupuesto, cronograma y riesgos iniciales (R1 a R14 del registro de riesgos).
 - **Working Agreement** y **Gestión de la Configuración Aurora**: acuerdos de trabajo del equipo, ramas, versionado y entornos.
-- **Arquitectura y Stack Tecnológico Aurora**: modelo C4, decisiones de diseño (12 ADR) y pautas de código.
+- **Arquitectura y Stack Tecnológico Aurora**: modelo C4, decisiones de diseño (17 ADR) y pautas de código.
 - **Plan de Testing Aurora**: estrategia de pruebas y línea base de ejecución (sección 4.7).
 - **User Story Mapping Aurora** y **Product Backlog Inicial**: épicas e historias de partida.
 - **Desarrollo del Proyecto Aurora** ([[Desarrollo del Proyecto — Sprints 0, 1 y 2]]): informes de sprint, artefactos de trazabilidad, riesgos, estado consolidado y anexos.

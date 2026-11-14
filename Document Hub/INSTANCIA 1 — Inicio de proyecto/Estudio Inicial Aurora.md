@@ -151,7 +151,7 @@ Esta parte describe **el sistema que se propone construir**, no una situación e
 
 Con Aurora, la configuración que hoy vive en la cabeza del cuidador pasa a un sistema: el cuidador carga rutinas, medicación y datos biográficos del paciente en la aplicación **Aurora Care**. **Aurora Home**, el dispositivo de voz del hogar, ejecuta esos recordatorios hablándole al paciente, propone actividades cognitivas y de reminiscencia, y registra sus respuestas. **Aurora Core** centraliza la información y avisa al cuidador cuando una rutina o medicación crítica no se cumple. Todo queda en un historial consultable.
 
-La detección automática de eventos de riesgo (caídas, salida de zona segura, anomalías biométricas) y las llamadas automáticas de emergencia forman parte de la visión del producto y **quedan fuera del MVP actual** (ver Propuesta, Alcance del sistema).
+La detección automática de eventos de riesgo (caídas, anomalías biométricas) y las llamadas automáticas de emergencia forman parte de la visión del producto y **quedan fuera del MVP actual** (ver Propuesta, Alcance del sistema). El aviso de salida de zona segura se ofrece como extensión con prototipo funcional, a partir de la ubicación del celular del paciente.
 
 #### Flujo del proceso propuesto
 
@@ -165,9 +165,11 @@ La detección automática de eventos de riesgo (caídas, salida de zona segura, 
 6. Aurora Home propone al paciente actividades cognitivas breves y relatos de reminiscencia, y registra su participación.
 7. El cuidador consulta en Aurora Care el estado del paciente y de los dispositivos, y el historial de cumplimiento.
 
+**Extensión con prototipo funcional** (no cambia el alcance del MVP): hacia el final del desarrollo se agregó, en el celular del paciente, la confirmación de recordatorios, el botón «Necesito ayuda», la ubicación en vivo y el aviso de salida de zona segura, con consentimiento propio y límites explícitos (ver Plan de Testing).
+
 **Futuras versiones (fuera del MVP):**
 
-- Monitoreo de ubicación y biometría, detección de caídas y delimitación de zonas seguras (geofencing).
+- Monitoreo biométrico, detección de caídas y de agitación, y detección de eventos de riesgo a partir de un dispositivo wearable.
 - Clasificación automática de eventos de riesgo y escalamiento por otros canales, incluidas llamadas automáticas.
 - Reportes exportables para uso médico.
 
@@ -175,7 +177,8 @@ La detección automática de eventos de riesgo (caídas, salida de zona segura, 
 
 - **Información del paciente:** datos personales básicos, perfil, preferencias, recuerdos personales, vínculos familiares, rutinas diarias, medicación y tratamientos. *(MVP)*
 - **Información operativa:** respuestas del paciente, participación en actividades, alertas generadas, historial de cumplimiento y de medicación, estado de los dispositivos, registro de acciones del cuidador. *(MVP)*
-- **Información biométrica y de ubicación** (frecuencia cardíaca, movimiento, ubicación, temperatura, actividad electrodérmica): *(futuras versiones; requiere un dispositivo wearable comercial)*.
+- **Información biométrica** (frecuencia cardíaca, movimiento, temperatura, actividad electrodérmica): *(futuras versiones; requiere un dispositivo wearable comercial)*.
+- **Ubicación del celular del paciente** (última posición y ubicación de las alertas de ayuda y de salida de zona): se procesa con consentimiento propio, como extensión con prototipo funcional.
 
 #### Clasificación de eventos
 
@@ -185,7 +188,7 @@ El sistema distingue cuatro niveles de gravedad. La clasificación es una regla 
 | --- | --- | --- | --- |
 | **Baja** | Omisión de recordatorio menor | Actividad cognitiva no realizada | MVP |
 | **Media** | Incumplimiento de un hecho importante | Medicación no tomada | MVP |
-| **Alta** | Requiere intervención inmediata | Salida de zona segura configurada | Futuras versiones |
+| **Alta** | Requiere intervención inmediata | Salida de zona segura configurada | Extensión con prototipo funcional (celular del paciente) |
 | **Crítica** | Compromete la integridad física del paciente | Caída detectada o frecuencia cardíaca alta | Futuras versiones |
 
 ### Sistemas involucrados

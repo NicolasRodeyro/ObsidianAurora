@@ -2,7 +2,7 @@
 base: "[[Document Hub.base]]"
 Category:
   - Documentación Interna
-Last updated time: 2026-10-16
+Last updated time: 2026-11-09
 ---
 # Matriz de Trazabilidad — Requerimientos ↔ Épicas
 
@@ -124,3 +124,23 @@ Vincula cada **Requerimiento Funcional** (`Document Hub/Requerimientos.md`) con 
 | [AURA-18] Panel del Cuidador (Aurora Care) | 7. Cuidador | RF-60–75 | `mvp` |
 | [AURA-20] Seguridad, Privacidad y Cumplimiento | 8. Seguridad, Privacidad y Datos | RF-76–81, RF-92–98 | `mvp` |
 | [AURA-17] Administración de Rutinas y Medicación | 9. Admin. Rutinas y Medicación | RF-82–91 | `mvp` |
+
+## Extensión con prototipo funcional: ubicación del celular del paciente (09/11/2026)
+
+Los `Scope` de la tabla de arriba vienen de las etiquetas de Jira y **no se modificaron**. Esta sección traza la extensión que se agregó hacia el final del desarrollo (ver [[Decisión de Alcance — Ubicación en vivo y geofencing]]). **No cambia el alcance del MVP**: la pulsera sigue en futuras versiones.
+
+| Función | Tickets (Jira) | RF relacionados | Estado |
+| --- | --- | --- | --- |
+| Botón «Necesito ayuda» con ubicación puntual y consentimiento | AURA-207 | RF-62 (ver la última ubicación), RF-92 y RF-93 (consentimiento y revocación) | Finalizada |
+| Zonas seguras con pantalla y cobertura real del aviso | AURA-208, AURA-209 (seguridad: aislamiento por hogar) | RF-70 (ABMC de zonas seguras) | Finalizadas |
+| Ubicación en vivo: detección de salida de zona en Core y lectura en segundo plano en Care | AURA-210, AURA-211 | RF-27 (detectar salida de zona), RF-46 (notificar la salida) | Finalizadas |
+| Pantalla «Dónde está» | AURA-212 | RF-62 | Finalizada |
+| Alerta «Perdimos la señal del celular» (barrido de silencio) | AURA-213 | RF-46 | In Revision; falta programarlo en n8n (AURA-221) |
+| Despliegue y QA en celulares reales | AURA-214 | n/a | Finalizada en Jira; algunos casos de QA no se confirmaron |
+| Validación legal de los consentimientos y encuadre documental | AURA-215 | RF-92 a RF-98 | Validación legal pendiente |
+| Programar en n8n las purgas y el barrido de silencio | AURA-221 | RF-96 (depurar datos vencidos) | Por hacer |
+
+**Notas:**
+
+- RF-27 figura como `vision` (módulo Detección y Eventos, AURA-22) porque se pensó con la pulsera. Con el celular del paciente se cumple de forma parcial y con límites explícitos; no se cambió su `Scope`.
+- RF-17 (registrar ubicación mediante GPS) sigue siendo de la pulsera. La ubicación del celular no lo cierra.

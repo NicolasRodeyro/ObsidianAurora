@@ -43,7 +43,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 
 ## Arquitectura y diseño
 - [[Boceto de Arquitectura]] — esquema temprano.
-- [[Arquitectura y Stack Tecnológico]] — modelo C4 + ADRs + stack (ADR-001 a ADR-012; ADR-013 reservado para LiveKit; ADR-014 a ADR-016: feature de recuerdos).
+- [[Arquitectura y Stack Tecnológico]] — modelo C4 + ADRs + stack (ADR-001 a ADR-012; ADR-013 reservado para LiveKit; ADR-014 a ADR-016: feature de recuerdos) (ADR-001 a ADR-017; ADR-013: LiveKit para el Drop-in; ADR-014 a ADR-016: feature de recuerdos; ADR-017: dificultad adaptativa).
 - [[Investigación — Almacenamiento de Datos y Ley 25.326]] — cumplimiento legal del almacenamiento, escenarios de hosting y costos (base del futuro ADR-010).
 - [[Diseño del Prototipo]] — bocetos iniciales (histórico).
 
