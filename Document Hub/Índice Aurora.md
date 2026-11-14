@@ -2,7 +2,7 @@
 base: "[[Document Hub.base]]"
 Category:
   - Documentación Interna
-Last updated time: 2026-10-21
+Last updated time: 2026-11-14
 ---
 # Índice Aurora (Mapa de Contenido)
 
@@ -20,6 +20,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Presentación del Proyecto]] — pitch y diferenciación.
 - [[Jornada de Presentación]] — paper, póster y video de la jornada del 06/10/2026 (link a la carpeta de Drive).
 - `INSTANCIA 4/video-aurora.html` — render animado del video de presentación (1920×1080, 2:54), listo para grabar.
+- [[Análisis de Impacto Ambiental]] — consumo energético y huella de carbono estimados, alternativas evaluadas y beneficios (Instancia 5, AURA-190), con el script que recalcula las cifras.
 
 ## Análisis y requerimientos
 - [[Estudio Inicial Aurora]] — problema y oportunidad.
