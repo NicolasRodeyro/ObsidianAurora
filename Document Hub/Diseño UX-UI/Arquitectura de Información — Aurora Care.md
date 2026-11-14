@@ -59,7 +59,7 @@ flowchart TD
     SET --> CGD["Cuidadores y dispositivos"]
     SET --> RULES["Reglas de notificación<br/>por severidad y canal"]
     SET --> EMERG["Contactos de emergencia<br/>(orden de escalado)"]
-    SET --> DEV["Dispositivos<br/>Aurora Home · wearable"]
+    SET --> DEV["Dispositivos<br/>Aurora Home · celular del paciente"]
     SET --> PRIV["Privacidad y datos<br/>consentimiento · exportar · ARCO"]
 ```
 
@@ -84,7 +84,7 @@ flowchart TD
 | **Ajustes → Cuidadores** | — | Lista de cuidadores + dispositivos asociados (modelo cuenta única) · invitar por link · revocar dispositivo | RF-76-78 |
 | **Ajustes → Reglas** | — | Matriz severidad × canal (push/WhatsApp/llamada) · ventana de escalado · horarios de silencio para nivel Baja | RF-45/67 |
 | **Ajustes → Contactos** | — | Orden de escalado arrastrable · teléfonos verificados | RF-69 |
-| **Ajustes → Dispositivos** | — | Aurora Home: conexión, volumen, modo noche · Wearable: batería, última sync (modo reducido si no hay, RN10) | RF-20-23/71 |
+| **Ajustes → Dispositivos** | — | Aurora Home: conexión, volumen, modo noche · Celular del paciente: vinculación, ubicación, juegos | RF-20-23/71 |
 | **Ajustes → Privacidad** | — | Consentimiento, exportar datos (reporte médico básico), derechos ARCO | RF-81, RNF |
 
 > [!note] Extensión funcional — sesiones guiadas
@@ -94,7 +94,7 @@ flowchart TD
 
 Cada pantalla se diseña con sus 5 estados: **ideal · vacío** (primer uso, con CTA educativo) · **cargando** (skeleton) · **error/parcial** · **offline** (datos locales sincronizados + timestamp visible — nunca datos viejos que parezcan actuales).
 
-El estado **sin wearable** (RN10) no es un error: el dashboard reordena y muestra lo que sí sabe (interacciones de voz, rutinas), con un módulo «Conectar pulsera» discreto (visión).
+Lo que no hay datos para mostrar no es un error: el dashboard reordena y muestra lo que sí sabe (interacciones de voz, rutinas).
 
 ## 5. Escalabilidad de la IA (nota para visión)
 

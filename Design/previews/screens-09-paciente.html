@@ -44,6 +44,18 @@
   .p-status { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--bg-surface); font-size: var(--text-patient-body); color: var(--text-secondary); }
   .p-status .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--success-icon, #2e9e6b); flex: none; }
   .p-pinned { margin-top: auto; padding-top: var(--space-3); }
+  .p-remind { border: 2px solid var(--text-brand); border-radius: var(--radius-lg); background: var(--bg-surface); padding: var(--space-4); display:flex; flex-direction:column; gap: var(--space-3); align-items:stretch; text-align:center; }
+  .p-lock { background: linear-gradient(180deg, #1d2140, #0d1020); flex:1; display:flex; flex-direction:column; justify-content:flex-start; padding: var(--space-6) var(--space-4); gap: var(--space-3); color:#fff; }
+  .p-lock .clock { font-size: 56px; font-weight: 300; text-align:center; margin-top: var(--space-6); }
+  .p-notif { background: rgba(255,255,255,.14); border-radius: var(--radius-lg); padding: var(--space-3) var(--space-4); display:flex; gap: var(--space-3); align-items:center; }
+  .p-notif .app { font-size: 12px; opacity:.75; }
+  .p-notif .txt { font-size: 18px; font-weight: 600; }
+  .p-bar { display:flex; gap: var(--space-2); padding: var(--space-2); border-top: 1px solid var(--border-default); background: var(--bg-surface); margin-top:auto; }
+  .p-bar-item { flex:1; min-height: 76px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; border-radius: var(--radius-lg); font-size: 18px; font-weight:600; color: var(--text-secondary); }
+  .p-bar-item .ic { font-size: 28px; line-height:1; }
+  .p-bar-item.on { background: var(--bg-brand-subtle, var(--violet-100)); color: var(--text-brand); font-weight:700; }
+  .p-bar-item.help { background: var(--danger-solid-bg, var(--red-600)); color:#fff; font-weight:700; border: 2px solid var(--danger-text); }
+  .p-bar-item.help.on { border-color: #fff; }
   .p-sheet-back { position: absolute; inset: 0; background: rgba(8, 11, 30, .55); }
   .p-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--bg-surface); border-radius: 24px 24px 0 0; padding: var(--space-5) var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); align-items: center; text-align: center; }
   .p-grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
@@ -51,43 +63,41 @@
   .p-opt-photo .ph { aspect-ratio: 1; border-radius: var(--radius-md); background: var(--bg-subtle); display: grid; place-items: center; color: var(--text-muted); font-size: var(--text-xs); }
   .p-opt-text { min-height: 84px; border: 2px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--bg-surface); display: grid; place-items: center; font-size: var(--text-patient-prompt); font-weight: 700; padding: var(--space-3); text-align: center; }
   .p-frame-sub { font-size: var(--text-xs); font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 var(--space-1); }
+  /* v3 (rediseño del perfil): chip de ubicación, «Sí, ya lo hice» y barra de cuatro lugares. */
+  .p-chip { display:flex; align-items:center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg); border: 1.5px solid; font-size: var(--text-patient-body); line-height: 1.35; }
+  .p-chip .g { font-size: 26px; line-height: 1; flex: none; }
+  .p-chip b { display: block; color: var(--text-primary); }
+  .p-chip .d { display: block; color: var(--text-secondary); }
+  .p-chip.ok { background: var(--success-bg); border-color: var(--success-icon); }
+  .p-chip.warn { background: var(--warning-bg); border-color: var(--warning-icon); }
+  .p-chip.err { background: var(--danger-bg); border-color: var(--danger-text); }
+  .p-chip.off { background: var(--bg-subtle); border-color: var(--text-secondary); }
+  .p-yes { min-height: 80px; width: 100%; border: 0; border-radius: var(--radius-lg); background: var(--green-700); color: #fff; font: 700 var(--text-patient-prompt)/1.2 var(--font-heading); display: flex; align-items: center; justify-content: center; gap: var(--space-3); }
+  .p-pager { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); color: var(--text-secondary); font-size: var(--text-patient-body); }
+  .p-pager .btn { min-height: 56px; font-size: var(--text-patient-body); }
+  .p-opts2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .p-sel { min-height: 72px; display: flex; align-items: center; justify-content: center; gap: var(--space-2); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--bg-surface); font-size: var(--text-patient-body); }
+  .p-sel.on { border: 2px solid var(--text-brand); background: var(--bg-brand-subtle, var(--violet-100)); font-weight: 700; }
+  .p-sect { border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--bg-surface); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+  .p-sect .t { font-size: var(--text-patient-body); font-weight: 700; }
+  .p-bar-item .bd { position: absolute; margin: -8px 0 0 -4px; background: var(--text-brand); color: #fff; border-radius: 12px; min-width: 22px; height: 22px; font-size: 14px; display: inline-grid; place-items: center; }
+  .p-no { min-height: 72px; width: 100%; border: 2px solid var(--border-strong); border-radius: var(--radius-lg); background: transparent; color: var(--text-primary); font: 700 var(--text-patient-prompt)/1.2 var(--font-heading); display: flex; align-items: center; justify-content: center; }
+  .p-arow { display:flex; align-items:center; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--border-default); }
+  .p-arow:last-of-type { border-bottom: 0; }
+  .p-arow .name { font-size: var(--text-patient-body); font-weight: 700; }
+  .p-arow .desc { font-size: var(--text-patient-body); color: var(--text-secondary); }
+  .p-arow .ico { width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--bg-subtle); display:grid; place-items:center; flex:none; }
+  .p-arow .ico.ok { background: var(--success-bg); color: var(--success-icon); }
+  .p-arow .r { text-align: right; font-weight: 700; display:flex; flex-direction:column; align-items:flex-end; gap: 4px; }
+  .p-pill { background: var(--success-bg); color: var(--success-text); border-radius: 999px; padding: 2px 10px; font-size: 16px; font-weight: 700; }
+  .p-cardx { border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--bg-surface); padding: var(--space-4); display:flex; flex-direction:column; gap: var(--space-3); }
 </style>
 </head>
 <body>
 <h1 class="gallery-title">Aurora — Celular del paciente</h1>
-<p class="gallery-sub">Pantallas del modo paciente (Care en el teléfono de la persona). Reglas del manual: una acción dominante por pantalla, nunca marcar el error ni mostrar puntajes, sin reloj visible, salida sin culpa, sesiones de hasta 15 minutos, sin emojis ni diminutivos. Escala propia: cuerpo 20, consigna 24, título 28 px y botones de 60 a 72 px; la letra del sistema se acota a 1,3×. Valores derivados, a validar en el piloto con acompañamiento profesional.</p>
+<p class="gallery-sub">Pantallas del modo paciente (Care en el teléfono de la persona). Reglas del manual: una acción dominante por pantalla, nunca marcar el error ni mostrar puntajes, sin reloj visible, salida sin culpa, sesiones de hasta 15 minutos, sin emojis ni diminutivos. Escala propia: cuerpo 20, consigna 24, título 28 px y botones de 60 a 72 px; la letra del sistema se acota a 1,3×. Valores derivados, a validar en el piloto con acompañamiento profesional. Los números de pantalla (P3, P12…) son identificadores estables que citan otros documentos: los de las pantallas retiradas no se reusan.</p>
 
 <div class="gallery">
-
-  <!-- P1 -->
-  <div><p class="frame-label">P1 · Inicio — «Jugar» manda; la ayuda siempre a mano</p>
-  <div class="phone"><div class="screen">
-    <div class="content" style="justify-content:center">
-      <div class="p-stack" style="margin-bottom:var(--space-4)">
-        <div class="p-title">Hola, Ana</div>
-        <div class="p-body p-center">¿Querés jugar un rato?</div>
-      </div>
-      <button class="btn btn-primary p-btn">Jugar</button>
-      <button class="btn btn-danger p-btn">Necesito ayuda</button>
-      <button class="btn btn-secondary p-btn sm">Llamar a María</button>
-      <p class="muted p-center">Ubicación y versión van abajo, en secundario.</p>
-    </div>
-  </div></div>
-  <p class="p-note">Los estados vacío, cargando, error y sin conexión usan los mismos patrones: título 28, una frase de 20 y un solo botón («Reintentar»). Ante un error nunca se culpa a la persona.</p></div>
-
-  <!-- P2 -->
-  <div><p class="frame-label">P2 · ¿A qué querés jugar? — una tarjeta grande por juego</p>
-  <div class="phone"><div class="screen">
-    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
-    <div class="content">
-      <div class="p-prompt" style="color:var(--text-brand);font-size:var(--text-patient-body)">Para hoy</div>
-      <div class="card p-game" style="border:2px solid var(--text-brand)"><div class="ico"></div><div><div class="p-prompt">El calendario</div><div class="p-body">Qué día es hoy.</div></div></div>
-      <div class="p-body">Otros juegos</div>
-      <div class="card p-game"><div class="ico"></div><div><div class="p-prompt">Memoria de pares</div><div class="p-body">Asociar fotos con nombres.</div></div></div>
-      <div class="card p-game"><div class="ico"></div><div><div class="p-prompt">Rompecabezas</div><div class="p-body">Armar una foto.</div></div></div>
-    </div>
-  </div></div>
-  <p class="p-note">Sin filtros ni buscador. «Para hoy» es el juego que hace más que no se juega (o nunca se jugó); solo aparece si hay al menos dos. Los juegos que hoy no se pueden armar (faltan recuerdos con foto) no se muestran; si no queda ninguno, se pide al cuidador que cargue recuerdos.</p></div>
 
   <!-- P3 -->
   <div><p class="frame-label">P3 · Jugando — la devolución es una frase calma, nunca un error</p>
@@ -205,27 +215,10 @@
   <p class="p-note"><b>Sonido y vibración.</b> Al acertar suena una nota corta (0,3 s) con una vibración leve; al terminar el juego, dos notas (0,9 s) con una vibración de «hecho». Nunca suena ni vibra al errar. Volumen bajo, y se mezcla con lo que esté sonando (no corta música ni una llamada). <b>Empieza apagado:</b> lo activa el cuidador administrador en Ajustes → Dispositivos (frame 39), porque un sonido inesperado puede sobresaltar. Si el celular está sin volumen de multimedia no suena; en Android no se puede detectar el modo silencio del timbre, así que el interruptor del cuidador es el control.</p>
   <p class="p-note"><b>Movimiento.</b> La foto de reminiscencia (P7) y la tarjeta de fin (P4) aparecen con un fundido de 400 ms (<code>motion-slow</code>) y suben 8 px mientras lo hacen: nada «salta» a la vista. Con la reducción de movimiento del sistema activada aparecen de una vez. Nada parpadea ni se repite.</p></div>
 
-  <!-- P11 -->
-  <div><p class="frame-label">P11 · Inicio v2 — «Jugar» manda; la ayuda queda fija abajo</p>
-  <div class="phone"><div class="screen">
-    <div class="content" style="padding-top:var(--space-6)">
-      <div class="p-stack" style="margin-bottom:var(--space-2)">
-        <div class="p-title">Hola, Laura</div>
-        <div class="p-body p-center">¿Querés jugar un rato?</div>
-      </div>
-      <button class="btn btn-primary p-hero-btn">Jugar</button>
-      <button class="btn btn-secondary p-btn sm">Llamar a María</button>
-      <div class="p-status"><span class="dot"></span><span style="flex:1">Tu cuidador puede ver dónde estás</span><span style="font-size:var(--text-patient-prompt);color:var(--text-muted)">›</span></div>
-      <p class="muted p-center" style="margin-top:var(--space-1)">Versión 1.0.0</p>
-      <div class="p-pinned"><button class="btn btn-danger p-btn" style="width:100%">Necesito ayuda</button></div>
-    </div>
-  </div></div>
-  <p class="p-note"><b>Por qué.</b> Hoy «Jugar», «Necesito ayuda», la llamada y la tarjeta de ubicación pesan lo mismo. Acá hay una sola cosa para hacer (<b>Jugar</b>, más alto y con degradé), lo secundario va abajo y más chico, y <b>«Necesito ayuda» queda anclado al pie</b>: siempre en el mismo lugar, separado del resto para no tocarlo por error y fácil de encontrar con nervios. La ubicación activa se reduce a una línea de estado; tocarla despliega lo de hoy (batería, «Desactivar»). Mientras la persona no aceptó compartir su ubicación, esa tarjeta sigue siendo la explicación completa, pero debajo de todo.</p></div>
-
   <!-- P12 -->
-  <div><p class="frame-label">P12 · ¿A qué querés jugar? v2 — por lo que se hace, con los bloqueados a la vista</p>
+  <div><p class="frame-label">P12 · ¿A qué querés jugar? — por lo que se hace, con los bloqueados a la vista</p>
   <div class="phone"><div class="screen">
-    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
+    <div class="topbar"><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
     <div class="content" style="gap:var(--space-3)">
       <div class="p-group" style="margin-top:0;color:var(--text-brand)">Para hoy</div>
       <div class="p-hero"><div class="p-ico lg">ícono</div><div><div class="p-prompt">Rompecabezas</div><div class="p-body">Armá la foto, pieza por pieza.</div></div></div>
@@ -241,8 +234,9 @@
       <div class="p-group">Con números, dinero y fechas</div>
       <div class="p-gcard"><div class="p-ico">ícono</div><div><div class="name">Contar el dinero</div><div class="desc">Armá cada monto con billetes.</div></div></div>
     </div>
+    <div class="p-bar"><div class="p-bar-item"><span class="ic">⌂</span><span>Inicio</span></div><div class="p-bar-item on"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item"><span class="ic">⚙</span><span>Ajustes</span></div></div>
   </div></div>
-  <p class="p-note"><b>Por qué.</b> Cada juego tiene <b>nombre, frase y ícono propios para la persona</b> (hoy se muestra el título clínico del catálogo: «Clasificar elementos según diferentes criterios», con la misma frase repetida debajo). Las secciones dicen <i>qué se hace</i> en lenguaje llano, no la categoría clínica: «Con tus fotos y recuerdos», «Con palabras», «Con números, dinero y fechas» y «Para ordenar y pensar». «Para hoy» es el que hace más que no se juega. Los <b>bloqueados no se esconden: se ven apagados, con borde punteado y el motivo en una frase</b> («Usa fotos que carga tu cuidador»), siempre al final de su sección. Sin números, sin «error» y sin culpar a nadie. Los íconos son del set de la app (Material), acá van como recuadro.</p></div>
+  <p class="p-note"><b>Por qué.</b> Cada juego tiene <b>nombre, frase y ícono propios para la persona</b> (hoy se muestra el título clínico del catálogo: «Clasificar elementos según diferentes criterios», con la misma frase repetida debajo). Las secciones dicen <i>qué se hace</i> en lenguaje llano, no la categoría clínica: «Con tus fotos y recuerdos», «Con palabras», «Con números, dinero y fechas» y «Para ordenar y pensar». «Para hoy» es el que hace más que no se juega. Los <b>bloqueados no se esconden: se ven apagados, con borde punteado y el motivo en una frase</b> («Usa fotos que carga tu cuidador»), siempre al final de su sección. Sin números, sin «error» y sin culpar a nadie. Los íconos son del set de la app (Material), acá van como recuadro. <b>La barra de abajo</b> trae cuatro lugares con ícono y palabra, siempre en el mismo orden y con blancos de 76 px o más; «Ayuda» es el único rojo, con un borde fijo (P25), y no vibra al tocar (regla 8). «Inicio» ya está en la barra, así que <b>no hay flecha de volver</b>: dos controles para lo mismo son una duda más. La barra <b>desaparece al abrir un juego</b> (P3) y en el pedido de ayuda: ahí hay una sola cosa para hacer y su propia salida con confirmación («¿Querés dejar de jugar? No pasa nada»); una barra debajo invitaría a irse sin querer.</p></div>
 
   <!-- P13 -->
   <div><p class="frame-label">P13 · ¿Cuál no va? — las fotos van en todas las opciones o en ninguna</p>
@@ -267,12 +261,13 @@
   <!-- P14 -->
   <div><p class="frame-label">P14 · Tocar un juego bloqueado — se explica con calma, sin callejón</p>
   <div class="phone"><div class="screen" style="position:relative">
-    <div class="topbar"><div class="back"><svg class="ic"><use href="#i-chev-l"/></svg></div><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
+    <div class="topbar"><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
     <div class="content" style="gap:var(--space-3)">
       <div class="p-group" style="margin-top:0">Con tus fotos y recuerdos</div>
       <div class="p-gcard"><div class="p-ico">ícono</div><div><div class="name">Mis recuerdos</div><div class="desc">Mirá fotos de tu vida.</div></div></div>
       <div class="p-gcard lock"><div class="p-ico">candado</div><div><div class="name">Memoria de pares</div><div class="reason">Usa fotos que carga tu cuidador.</div></div></div>
     </div>
+    <div class="p-bar"><div class="p-bar-item"><span class="ic">⌂</span><span>Inicio</span></div><div class="p-bar-item on"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item"><span class="ic">⚙</span><span>Ajustes</span></div></div>
     <div class="p-sheet-back"></div>
     <div class="p-sheet">
       <div class="p-ico lg">candado</div>
@@ -282,6 +277,147 @@
     </div>
   </div></div>
   <p class="p-note"><b>Por qué.</b> Un toque que no hace nada es un callejón. Tocar un juego bloqueado abre esta hoja corta: dice <b>qué falta y quién lo resuelve</b> (el cuidador) y deja un único botón. Nada de «no se puede»: es información, no un fallo de la persona. En Care, el cuidador ve el mismo dato con números («cargá 1 foto más») para saber qué hacer.</p></div>
+
+  <!-- P15 -->
+  <div><p class="frame-label">P15 · ¿A qué querés jugar? — todavía no hay juegos elegidos</p>
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="p-prompt" style="flex:1">¿A qué querés jugar?</div></div>
+    <div class="content" style="gap:var(--space-3)">
+      <div class="p-hero"><div class="p-ico lg">ícono</div><div><div class="p-prompt">Todavía no hay juegos</div><div class="p-body">Tu cuidador tiene que elegir los juegos que vas a ver acá. Después tirá hacia abajo para buscar de nuevo.</div></div></div>
+    </div>
+    <div class="p-bar"><div class="p-bar-item"><span class="ic">⌂</span><span>Inicio</span></div><div class="p-bar-item on"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item"><span class="ic">⚙</span><span>Ajustes</span></div></div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> El celular sólo ofrece los juegos que el cuidador habilitó. Con ninguno, la lista viene vacía y la pantalla lo dice <b>con quién lo resuelve</b> (el cuidador), sin prometer que «pronto» habrá juegos: depende de una persona, no del tiempo. Es distinto de P14: allí el juego <i>está elegido</i> pero le falta material (fotos o recuerdos).</p></div>
+
+  <!-- P20 -->
+  <div><p class="frame-label">P20 · El aviso en la pantalla bloqueada — el tipo, nunca el nombre ni la dosis</p>
+  <div class="phone"><div class="screen">
+    <div class="p-lock">
+      <div class="clock">13:00</div>
+      <div class="p-notif"><div style="font-size:28px">🔔</div><div><div class="app">AURORA · ahora</div><div class="txt">Es la hora de tu pastilla.</div></div></div>
+      <div class="p-notif" style="opacity:.7"><div style="font-size:28px">🔔</div><div><div class="app">AURORA · hace 10 min</div><div class="txt">Recordatorio: es la hora de tu pastilla.</div></div></div>
+    </div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Cualquiera que esté cerca lee la pantalla bloqueada, y la medicación es un dato de salud. El aviso dice <b>sólo el tipo</b> («Es la hora de tu pastilla», «Es la hora de comer»), con lenguaje literal. Suena <b>a lo sumo dos veces</b> (a la hora y diez minutos después, si cabe en el margen): sin tercer intento, para no hostigar (Guion G2, RNF-04). Es una notificación <b>local</b>: no pasa por Expo ni por servidores de EE. UU., y suena aunque no haya internet. Excepción buscada a la regla 8: acá sí suena porque el cuidador administrador encendió los avisos a propósito.</p></div>
+
+  <!-- P21 -->
+  <div><p class="frame-label">P21 · Sin permiso para avisar — un aviso en el Inicio; el permiso también se arregla en Ajustes (P26)</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="padding-top:var(--space-4);gap:var(--space-4)">
+      <div class="p-chip ok"><span class="g" style="color:var(--success-icon)">✔</span><div><b>Ubicación activa</b></div></div>
+      <div class="p-prompt">¡Hola, Laura!</div>
+      <div class="p-remind" style="border-color:var(--border-default)">
+        <div class="p-body" style="color:var(--text-primary);font-weight:700">Para avisarte necesito permiso para mostrar notificaciones.</div>
+        <button class="btn btn-secondary p-btn sm" style="width:100%">Permitir avisos</button>
+      </div>
+    </div>
+    <div class="p-bar"><div class="p-bar-item on"><span class="ic">⌂</span><span>Inicio</span></div><div class="p-bar-item"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item"><span class="ic">⚙</span><span>Ajustes</span></div></div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Si el cuidador encendió los avisos pero el celular no deja mostrar notificaciones, los avisos no pueden sonar. Se lo dice a la persona <b>sin alarmar</b>, abajo, con un botón; si el sistema ya no vuelve a preguntar, el botón lleva a los ajustes del celular. Con los avisos apagados esta tarjeta no aparece.</p></div>
+
+  <!-- P23 -->
+  <div><p class="frame-label">P23 · Inicio — la ubicación, el saludo y lo que hay para hacer hoy</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="padding-top:var(--space-4);gap:var(--space-4)">
+      <div class="p-chip ok"><span class="g" style="color:var(--success-icon)">✔</span><div><b>Ubicación activa</b></div></div>
+      <div class="p-prompt">¡Hola, Laura!</div>
+      <div class="p-remind" style="text-align:left">
+        <div class="p-body" style="font-weight:700">13:00 · Pastilla</div>
+        <div class="p-title" style="text-align:left">Enalapril</div>
+        <div class="p-body">10 mg · con un vaso de agua</div>
+        <button class="p-yes"><span>✔</span><span>Sí, ya lo hice</span></button>
+        <button class="p-no"><span>Todavía no</span></button>
+      </div>
+      <div class="p-cardx">
+        <div style="display:flex;gap:var(--space-3);align-items:center"><span style="color:var(--text-brand)">▦</span><div class="p-body" style="font-weight:700;color:var(--text-primary)">Agenda</div></div>
+        <div>
+          <div class="p-arow" style="flex-direction:column;align-items:stretch">
+            <div style="display:flex;align-items:center;gap:var(--space-3)"><div class="ico">◔</div><div style="flex:1"><div class="name">Tafirol</div><div class="desc">Pastilla · 5 mg</div><div class="desc">Se pasó la hora</div></div><div class="r">18:00</div></div>
+            <button class="p-yes"><span>✔</span><span>Sí, ya lo hice</span></button>
+          </div>
+          <div class="p-arow"><div class="ico">🍴</div><div style="flex:1"><div class="name">Cena</div><div class="desc">Comida</div></div><div class="r">20:45</div></div>
+          <div class="p-arow"><div class="ico">◔</div><div style="flex:1"><div class="name">Ibuprofeno</div><div class="desc">Pastilla · 400 mg</div></div><div class="r">21:00</div></div>
+          <div class="p-arow"><div class="ico ok">✔</div><div style="flex:1"><div class="name">Caminata</div><div class="desc">Lo hiciste</div></div><div class="r">18:30<span class="p-pill">Hecho</span></div></div>
+        </div>
+        <div class="p-pager"><span>1–3 de 12</span><span style="display:flex;gap:var(--space-3);font-weight:700;color:var(--text-brand)"><span style="opacity:.4">Anterior</span><span>Siguiente</span></span></div>
+      </div>
+    </div>
+    <div class="p-bar"><div class="p-bar-item on"><span class="ic">⌂<b class="bd">1</b></span><span>Inicio</span></div><div class="p-bar-item"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item"><span class="ic">⚙</span><span>Ajustes</span></div></div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Para una persona con pérdida de memoria cada pantalla dice <b>una sola cosa</b> y se entiende sin recordar nada. El Inicio queda en tres capas, siempre en este orden: <b>cómo viene la ubicación</b> (una línea chica, P24), <b>un saludo con su nombre de pila</b> («¡Hola, María Fernanda!», sin frases de relleno) y <b>lo que hay para hacer hoy</b>. Lo que toca ahora son tarjetas con botones (se ven todas); <b>lo que viene y lo ya hecho va en una sola tarjeta «Agenda», como la del Inicio del cuidador</b>: ícono, nombre con una línea debajo, la hora a la derecha y «Hecho» en lo cumplido, filas separadas por una línea fina, de a tres con «1–3 de 12» y Anterior / Siguiente (sin «Ver agenda»: acá no hay otra pantalla, y sin una frase de apoyo debajo de «Agenda»: el título ya lo dice). <b>Lo de hoy que se pasó de hora va primero en esa lista</b>, con «Se pasó la hora» en el mismo tono (nunca «atrasado», «perdido» ni rojo) y el mismo «Sí, ya lo hice» debajo, que queda registrado como una confirmación tardía; no hay «Todavía no» ahí (no vuelve a avisar) ni un «No lo hice». Sólo se muestra lo de <b>hoy</b>: a medianoche desaparece, y lo de días anteriores no se ofrece nunca. En una pastilla, ver «Se pasó la hora» puede llevar a tomarla tarde: queda pendiente de validar con la psicopedagoga y con un profesional de salud. La tarjeta de ahora ordena de más a menos importante: <b>el nombre</b> en grande («Enalapril»), arriba una línea chica con <b>la hora y el tipo en presente</b> («13:00 · Pastilla»; nunca «te tocaba», que suena a reproche) y el detalle si lo hay. Tiene <b>dos botones del mismo tamaño y la misma letra</b>, para que la elección sea sí o no y no «el botón grande y el chico»: «Sí, ya lo hice» es <b>verde y sólido</b> (el único verde sólido de todo el celular) y «Todavía no» es de contorno neutro (el violeta ya es de la marca). «Sí, ya lo hice» queda registrado como confirmado por la persona; <b>«Todavía no» sólo vuelve a avisar a los 10 minutos y no registra nada</b>: no hay un «No lo hice» que marque una omisión (regla 6, sin culpa). Lo de más tarde se ve sin botón (todavía no es la hora); lo ya hecho, con un tilde. Lo de hoy que se pasó de hora se ve en la lista, sin reproche; lo de ayer no. Jugar, Ayuda y Ajustes están en la barra: el Inicio no los repite. «Hoy» ya no es una pantalla aparte: sus tres secciones se unieron en esta lista. Tocar el aviso del celular abre esta pantalla. Los estados vacío, cargando, error y sin conexión de cualquier pantalla usan los mismos patrones: título 28, una frase de 20 y un solo botón («Reintentar»). Ante un error nunca se culpa a la persona.</p></div>
+
+  <!-- P24 -->
+  <div><p class="frame-label">P24 · El chip de ubicación — verde, amarillo, rojo (y gris cuando está apagada)</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="gap:var(--space-3);padding-top:var(--space-4)">
+      <div class="p-chip ok"><span class="g" style="color:var(--success-icon)">✔</span><div><b>Ubicación activa</b></div></div>
+      <div class="p-chip warn"><span class="g" style="color:var(--warning-icon)">▲</span><div><b>Ubicación con demoras</b><span class="d">No hay internet. Se vuelve a intentar sola.</span></div></div>
+      <div class="p-chip err"><span class="g" style="color:var(--danger-text)">✖</span><div><b>Ubicación sin enviar</b><span class="d">Falta un permiso. Tocá para arreglarlo.</span></div></div>
+      <div class="p-chip off"><span class="g" style="color:var(--text-secondary)">◉</span><div><b>Ubicación no activa</b><span class="d">Podés activarla en Ajustes.</span></div></div>
+    </div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Un solo vistazo para saber si la ubicación llega al cuidador. <b>El color nunca va solo</b>: cada estado lleva también su ícono y su frase (regla de estado = color + ícono + texto). <b>Verde</b> («Ubicación activa», fondo y borde verdosos, una sola línea): la última lectura salió hace menos de 5 minutos. <b>Amarillo</b>: sale con demoras (entre 5 y 15 minutos) o hay un problema que se arregla solo, como no tener internet. <b>Rojo</b>: <b>no está funcionando</b> — falta un permiso, pasaron 15 minutos sin enviar, el GPS no responde o el cuidador desvinculó el celular. <b>El rojo no es una alerta</b>: no avisa al cuidador ni culpa a la persona; dice que algo hay que arreglar, y tocar el chip lleva a Ajustes, donde se arregla. <b>Gris</b> («Ubicación no activa»; no pedido, agregado): la ubicación es opcional y la decide la persona; si está apagada no es una falla y no debe pintarse de rojo. Al abrir la app, durante los primeros 2 minutos se dice «Conectando tu ubicación…» antes de preocupar a nadie. El estado vive en el celular (lo que pasó desde que se abrió la app), no en Core.</p></div>
+
+  <!-- P25 -->
+  <div><p class="frame-label">P25 · Ayuda — avisar a los cuidadores primero, llamar a alguien debajo</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="gap:var(--space-4);padding-top:var(--space-4)">
+      <div class="p-title" style="text-align:left">Ayuda</div>
+      <div class="p-cardx">
+        <div style="display:flex;gap:var(--space-3);align-items:center"><div class="ico" style="width:52px;height:52px;border-radius:12px;background:var(--danger-bg);display:grid;place-items:center;color:var(--danger-text)">🔔</div><div class="p-prompt" style="flex:1">Si te sentís mal o necesitás ayuda</div></div>
+        <div class="p-body">Tocá el botón. Le avisamos a tu cuidador y le decimos dónde estás.</div>
+        <button class="btn btn-danger p-hero-btn" style="width:100%;font-size:var(--text-patient-title)">🔔 Necesito ayuda</button>
+      </div>
+      <div class="p-cardx">
+        <div class="p-prompt">O llamá a alguien</div>
+        <div class="p-body">Tocá el nombre y se abre el teléfono.</div>
+        <button class="btn btn-secondary p-btn sm">Llamar a María</button>
+        <button class="btn btn-secondary p-btn sm">Llamar a Roberto</button>
+      </div>
+    </div>
+    <div class="p-bar"><div class="p-bar-item"><span class="ic">⌂</span><span>Inicio</span></div><div class="p-bar-item"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help on"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item"><span class="ic">⚙</span><span>Ajustes</span></div></div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Cuando algo anda mal lo primero que hay que poder hacer es <b>pedir ayuda</b>; llamar es lo que se hace cuando se sabe a quién. Por eso el lugar se llama <b>«Ayuda»</b> y no «Llamar» —así queda claro que ahí se avisa a los cuidadores si la persona se siente mal o necesita asistencia— y «Necesito ayuda» es su <b>primera opción</b>, rojo y grande (96 px), y las llamadas son <b>la alternativa</b> de abajo. Los dos están siempre: si los contactos no cargan o no hay ninguno, ayuda sigue a la vista. Tocarlo abre el pedido de ayuda, que <b>pregunta antes de avisar</b> (la pantalla «¿Necesitás ayuda?»), así que tocarlo sin querer no asusta a nadie; «No, volver» vuelve a esta pantalla. <b>Historia.</b> «Ayuda» empezó siendo un botón rojo anclado en la barra de todas las pantallas (regla 13); pasó a un lugar con nombre claro, así que ahora son <b>dos toques</b> (Ayuda → Necesito ayuda) más la confirmación. A validar con el cuidador y en el piloto. <b>Cambio del 03/11/2026:</b> «Ayuda» es el único ítem de la barra en rojo sólido y con un borde fijo (más claro cuando se está en esa pantalla), para encontrarlo de un vistazo y con nervios; vuelve a ser lo que decía la regla 13, ahora desde una barra de cuatro lugares.</p></div>
+
+  <!-- P26 -->
+  <div><p class="frame-label">P26 · Ajustes — permisos, la ubicación y cómo se ve</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="gap:var(--space-3);padding-top:var(--space-4)">
+      <div class="p-title" style="text-align:left">Ajustes</div>
+      <div class="p-body">Acá podés revisar que todo funcione.</div>
+      <div class="p-sect"><div class="t">Avisos del celular</div><div class="p-body" style="display:flex;gap:var(--space-2);align-items:center"><span style="color:var(--success-icon)">✔</span><span>Los avisos están permitidos.</span></div></div>
+      <div class="p-sect">
+        <div style="display:flex;gap:var(--space-3);align-items:center"><div class="ico" style="width:44px;height:44px;border-radius:12px;background:var(--bg-brand-subtle);display:grid;place-items:center">◉</div><div class="t" style="flex:1">Tu cuidador puede ver dónde estás</div></div>
+        <div class="p-body" style="background:var(--bg-subtle);border-radius:12px;padding:8px 12px;font-size:16px">Última lectura enviada hace 1 min.</div>
+        <div class="p-body">✔ Se comparte también con la app cerrada.</div>
+        <div class="p-body">✔ Si salís de una zona segura, se le avisa a tu cuidador.</div>
+        <div style="border-top:1px solid var(--border-default);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-2)"><div class="t">Para que no se corte</div><div class="p-body">En los ajustes de Aurora, poné la batería en “Sin restricciones”. Así sigue funcionando con la pantalla apagada.</div><button class="btn btn-secondary p-btn sm" style="width:100%">Abrir ajustes de Aurora</button></div>
+        <div style="border-top:1px solid var(--border-default);padding-top:var(--space-2);display:flex;gap:var(--space-2)"><button class="btn btn-ghost p-btn sm" style="flex:1">Ocultar</button><button class="btn btn-ghost p-btn sm" style="flex:1">Desactivar</button></div>
+      </div>
+      <div class="p-sect"><div class="t">Cómo se ve</div><div class="p-opts2"><div class="p-sel on">☀ Claro ✔</div><div class="p-sel">☾ Oscuro</div></div></div>
+      <p class="muted p-center">Versión 1.0.0</p>
+    </div>
+    <div class="p-bar"><div class="p-bar-item"><span class="ic">⌂</span><span>Inicio</span></div><div class="p-bar-item"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item on"><span class="ic">⚙</span><span>Ajustes</span></div></div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> Es el único lugar del celular con controles, y son <b>los básicos</b>: (1) <b>Avisos</b> — si el cuidador encendió los recordatorios pero el celular no deja mostrar notificaciones, acá está el botón «Permitir avisos» (sin avisos encendidos, la tarjeta dice quién lo resuelve); (2) <b>Ubicación</b> — el mensaje de que el cuidador puede ver dónde está la persona, siempre a la vista, con el consentimiento, los permisos que faltan («Dar permiso de ubicación») y «Desactivar» (retirar el consentimiento tiene que ser tan fácil como darlo); (3) <b>Cómo se ve</b> — claro u oscuro, con ícono, nombre y un tilde en el elegido, no sólo color; (4) la versión de la app. Vuelve a abrirse con el chip del Inicio. <b>Excepción a la regla 7</b> (el paciente no configura el dispositivo): acá no hay nada que desconfigure el uso — sólo permisos del sistema y apariencia —; el nivel, el sonido, los juegos y los avisos siguen administrándose desde Care.</p></div>
+
+  <!-- P27 -->
+  <div><p class="frame-label">P27 · «Todavía no» — se avisa de nuevo, sin registrar nada</p>
+  <div class="phone"><div class="screen">
+    <div class="content" style="padding-top:var(--space-4);gap:var(--space-4)">
+      <div class="p-chip ok"><span class="g" style="color:var(--success-icon)">✔</span><div><b>Ubicación activa</b></div></div>
+      <div class="p-prompt">¡Hola, Laura!</div>
+      <div class="p-remind" style="text-align:left">
+        <div class="p-body" style="font-weight:700">13:00 · Pastilla</div>
+        <div class="p-title" style="text-align:left">Enalapril</div>
+        <div class="p-body">10 mg · con un vaso de agua</div>
+        <button class="p-yes"><span>✔</span><span>Sí, ya lo hice</span></button>
+        <div class="p-body">Te lo recordamos a las 13:10</div>
+      </div>
+    </div>
+    <div class="p-bar"><div class="p-bar-item on"><span class="ic">⌂<b class="bd">1</b></span><span>Inicio</span></div><div class="p-bar-item"><span class="ic">◇</span><span>Jugar</span></div><div class="p-bar-item help"><span class="ic">🔔</span><span>Ayuda</span></div><div class="p-bar-item"><span class="ic">⚙</span><span>Ajustes</span></div></div>
+  </div></div>
+  <p class="p-note"><b>Por qué.</b> «Todavía no» no es un «no lo hice»: <b>no se registra nada</b>, ni como rechazo ni como omisión. Sólo esconde ese botón y dice <b>cuándo vuelve a avisar</b> (a los 10 minutos), para que la persona no tenga que recordar que lo dejó para después. El botón verde sigue ahí: si la hizo mientras tanto, puede confirmarla. Si cierra la app, el recordatorio vuelve a mostrarse completo (es lo seguro con una medicación). Los textos son los mismos la primera vez que la quinta, sin reproches.</p></div>
 
 </div>
 </body>

@@ -2,7 +2,7 @@
 base: "[[Document Hub.base]]"
 Category:
   - Documentación Interna
-Last updated time: 2026-10-16
+Last updated time: 2026-11-14
 ---
 
 # Historial de revisión
@@ -19,5 +19,6 @@ Historial de versiones del documento «Proyecto Aurora 2026» (Google Doc), con 
 | 3.1 | 29/08/2026 | Equipo Aurora | Alcance: Aurora Band queda fuera del MVP por restricción presupuestaria; el Entregable 2 se posterga. |
 | 4.0 | 12/10/2026 | Equipo Aurora | Correcciones de la cátedra: dominio clínico, alcance y MVP único, objetivos medibles, presupuesto real, riesgos, roles de Scrum, política de ramas, arquitectura vigente, privacidad y datos sensibles, métricas del Plan de Testing y consistencia general. |
 | 4.1 | 16/10/2026 | Equipo Aurora | Revisión contra la guía de la cátedra: introducciones y audiencias, métricas de seguimiento, valor esperado, ADR-012 y alternativas de los ADR, épicas 4 a 9 con estimación, sección de la Jornada de Presentación, nombres de los componentes y estado de monitoreo y respaldo. |
+| 5.0 | 14/11/2026 | Equipo Aurora | Instancia 5: Análisis de Impacto Ambiental (AURA-190), con los supuestos y las fuentes de cada cifra. |
 
 Ver también: [[Índice Aurora]].

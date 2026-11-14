@@ -2,7 +2,7 @@
 base: "[[Document Hub.base]]"
 Category:
   - Documentación Interna
-Last updated time: 2026-10-16
+Last updated time: 2026-11-14
 ---
 # Índice Aurora (Mapa de Contenido)
 
@@ -20,6 +20,7 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Presentación del Proyecto]] — pitch y diferenciación.
 - [[Jornada de Presentación]] — paper, póster y video de la jornada del 06/10/2026 (link a la carpeta de Drive).
 - `INSTANCIA 4/video-aurora.html` — render animado del video de presentación (1920×1080, 2:54), listo para grabar.
+- [[Análisis de Impacto Ambiental]] — consumo energético y huella de carbono estimados, alternativas evaluadas y beneficios (Instancia 5, AURA-190), con el script que recalcula las cifras.
 
 ## Análisis y requerimientos
 - [[Estudio Inicial Aurora]] — problema y oportunidad.
@@ -38,10 +39,11 @@ Punto de entrada navegable a la documentación del proyecto **Aurora**. Para el 
 - [[Trazabilidad RF-Épicas]] — matriz RF ↔ módulo ↔ épica.
 - [[Tablero Jira]] — snapshot del board AURA.
 - Artefactos de trazabilidad por historia → carpeta de cada sprint en `INSTANCIA 3 — Sprints 1 a N/` (generados con la skill `/artefacto-trazabilidad`).
+- Feature de recuerdos (línea de tiempo, personas de la vida del paciente, recuerdo del día): historias US-D5 a US-D7 en [[Handoff y Backlog de Diseño]] §3 · ADR-014 a ADR-016 en [[Arquitectura y Stack Tecnológico]] §3 · artefactos de trazabilidad en `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-195/`, `AURA-197/`, `AURA-201/` y `AURA-202/`.
 
 ## Arquitectura y diseño
 - [[Boceto de Arquitectura]] — esquema temprano.
-- [[Arquitectura y Stack Tecnológico]] — modelo C4 + ADRs + stack (ADR-001 a ADR-017; ADR-013: LiveKit para el Drop-in; ADR-014 a ADR-016: feature de recuerdos; ADR-017: dificultad adaptativa).
+- [[Arquitectura y Stack Tecnológico]] — modelo C4 + ADRs + stack (ADR-001 a ADR-012; ADR-013 reservado para LiveKit; ADR-014 a ADR-016: feature de recuerdos) (ADR-001 a ADR-017; ADR-013: LiveKit para el Drop-in; ADR-014 a ADR-016: feature de recuerdos; ADR-017: dificultad adaptativa).
 - [[Investigación — Almacenamiento de Datos y Ley 25.326]] — cumplimiento legal del almacenamiento, escenarios de hosting y costos (base del futuro ADR-010).
 - [[Diseño del Prototipo]] — bocetos iniciales (histórico).
 

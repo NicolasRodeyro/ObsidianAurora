@@ -5,7 +5,7 @@ Last edited by: Jeremías Maldonado Gómez
 Created by: Jeremías Maldonado Gómez
 Category:
   - Diseño UX/UI
-Last updated time: 2026-07-08T22:00:00
+Last updated time: 2026-10-21T00:00:00
 ---
 # VUI — Diseño Conversacional
 
@@ -107,6 +107,11 @@ Plantillas con variables `{}`; el LLM parafrasea dentro de estas estructuras (RF
 ## 5. Estados del dispositivo — anillo LED + audio
 
 El MVP no incorpora display. El LED indica estados técnicos no sensibles y el audio comunica la interacción al paciente; Care conserva texto y diagnóstico en su interfaz. El LED nunca es la única confirmación de una acción relevante.
+
+> [!warning] Contradicción documentada — el display del dispositivo (21/10/2026)
+> Este capítulo y la cabecera de [[Accesibilidad]] dicen que el MVP **no incorpora display**, pero [[Proto-personas]], [[Tipografía]], [[Identidad de Marca]] y [[Fundamentos Visuales]] **sí diseñan** el display del dispositivo (6 estados, tema nocturno permanente, tipografía Atkinson Hyperlegible, transiciones lentas de más de 400 ms), y la pantalla `Design/previews/screens-06-device.html` lo implementa como artefacto ejecutable.
+> **Las dos afirmaciones conviven y no se borra ninguna:** el diseño del display se conserva como material de referencia (y como fuente de la jerarquía visual del modo degradado con LED), y el MVP no incorpora display como superficie.
+> **Decisión para la feature de recuerdos (US-D5 a US-D7):** la línea de tiempo de recuerdos vive en **Aurora Care** y, en el dispositivo, se recorre **por voz**. El display del dispositivo queda **fuera del alcance** de esta feature: no se le agrega una vista de línea de tiempo ni de ficha de persona. Ver [[Handoff y Backlog de Diseño]] §3.
 
 | Estado | Anillo LED | Audio |
 | --- | --- | --- | --- |

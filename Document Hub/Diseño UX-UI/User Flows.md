@@ -126,8 +126,6 @@ flowchart TD
     B --> C{¿Conectado?}
     C -- Sí --> D[Config remota + test de sonido]
     C -- No --> E[Diagnóstico guiado:<br/>¿enchufado? ¿wifi? + última conexión<br/>RF-20/21]
-    A --> F[Wearable — visión:<br/>batería · última sync]
-    F -.-> G([Sin wearable → modo reducido RN10:<br/>la app lo dice sin tratarlo como error])
 ```
 
 ## F8 · Sesión guiada de terapia — cuidador + Aurora en dúo (MVP)

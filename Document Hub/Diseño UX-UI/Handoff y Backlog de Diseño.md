@@ -5,7 +5,7 @@ Last edited by: Jeremías Maldonado Gómez
 Created by: Jeremías Maldonado Gómez
 Category:
   - Diseño UX/UI
-Last updated time: 2026-07-09T11:30:00
+Last updated time: 2026-10-21T00:00:00
 ---
 # Handoff y Backlog de Diseño
 
@@ -85,6 +85,36 @@ Se revisó el vault en busca de ADR pendientes relacionados con la **sesión gui
 
 Dos ADR de otros temas se registraron después, y ninguno pertenece a esta feature: **LiveKit** como proveedor de media (**ADR-013**) y la heurística determinista de dificultad adaptativa (**ADR-017**, AURA-77).
 
+**US-D5 — Línea de tiempo de recuerdos (épica AURA-18 · tickets AURA-201 (Care) / AURA-198 (Core))**
+> Como cuidador, quiero recorrer la vida del paciente en una línea de tiempo agrupada por año o década, con filtro por persona y por categoría, para ver los huecos biográficos y orientar la recolección de recuerdos.
+> **CA:** agrupación por año o década · filtro por persona y por categoría · los recuerdos sin fecha anclada se muestran en una sección aparte, nunca con una fecha inventada · la cobertura biográfica señala las décadas, personas y temas con huecos · paginación real por cursor, sin duplicados al insertar en el medio · orden estable por la fecha del **suceso**, no por la de carga · la línea de tiempo vive en **Aurora Care**; en el dispositivo se recorre **por voz** (el display del dispositivo queda fuera del alcance de esta feature: ver §5 de [[VUI — Diseño Conversacional]]).
+> **RF/RNF:** RF-09, RF-49, RF-68, RNF-31 · **Épica:** AURA-18 (Aurora Care) · **Tickets:** AURA-201 (Care), AURA-198 (Core) · **ADR:** ADR-014 (taxonomía de dos niveles y anclaje temporal) · **Artefacto de trazabilidad:** `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-201/`
+
+**US-D6 — Personas de la vida del paciente (épica AURA-15 · tickets AURA-197 (Core) / AURA-202 (Care))**
+> Como cuidador, quiero registrar y cuidar a las personas de la vida del paciente (incluidas las fallecidas) con su parentesco, su era y el tono con que Aurora debe tratarlas, para que las therapies usen datos reales y con consentimiento.
+> **CA:** ficha con vínculo, etapa de la vida, temas y política de tono («alegre» / «con cuidado» / «evitar») · el nombre se cifra en reposo y se busca por hash, nunca en claro en la base · un recuerdo puede referenciar varias personas con su rol (protagonista, participante, lugar) · crear personas exige el consentimiento de terceros (`third_party_life_data`), **no** el del paciente · una persona con tono «evitar» no viaja al motor de IA · una persona fallecida no genera avisos push al cuidador · el mapa entre las etiquetas de la interfaz y los tres valores de tono lo confirma el equipo de Care antes de implementar la pantalla.
+> **RF/RNF:** RF-49, RF-50, RF-81, RNF-25 · **Épica:** AURA-15 (Motor de IA y Memoria del Paciente) · **Tickets:** AURA-197 (Core), AURA-202 (Care) · **ADR:** ADR-015 (personas de la vida del paciente) · **Artefacto de trazabilidad:** `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-197/`
+
+**US-D7 — Recuerdo del día (épicas AURA-15 y AURA-14 · tickets AURA-195 y AURA-196 (Core), AURA-200 (Worker IA), AURA-203 (Aurora Home))**
+> Como paciente, quiero que Aurora me ancle el presente con un recuerdo breve y verificado —propio o de mi historia— y poder dejar mi propio recuerdo del día para el día siguiente.
+> **CA:** el ancla del día la redacta el Worker IA, la persiste Core y Aurora Home la dice **verbatim** · el ancla sólo se sirve si el recuerdo que la sostiene está **aprobado** · las referencias se validan contra la allow-list de memorias enviadas · lo que el paciente dice llega como aporte **pendiente** y lo valida un cuidador, uno a uno (RN6) · la cantidad de anclas por día es **configurable** · sin conexión no hay ancla y el dispositivo no inventa (ADR-008) · el buffer local del dispositivo dura 7 días y la feature está **apagada por defecto** hasta que se resuelva el cifrado en reposo de ese buffer.
+> **RF/RNF:** RF-09, RF-14, RNF-20, RNF-22 · **Épicas:** AURA-15 (Aurora Core y Worker IA), AURA-14 (Aurora Home) · **Tickets:** AURA-195, AURA-196, AURA-200, AURA-203 · **ADR:** ADR-016 (recuerdos diarios de corto plazo), sobre ADR-014 (taxonomía y anclaje temporal) · **Artefacto de trazabilidad:** `INSTANCIA 3 — Sprints 1 a N/Sprint 6/AURA-195/`
+
+**Ítem de visión — Diario personal guiado (memoria episódica)**
+> Ejes de la memoria episódica: escribir o comentar qué hizo ese día, con apoyo de fotos o preguntas ([[Investigacion sobre neurologia]], «Funciones concretas a agregar»).
+> **Por qué no es historia de MVP:** depende de **US-D5** —sin la línea de tiempo que ordena los recuerdos por la fecha del suceso no hay dónde apoyar el diario— y del **circuito de validación** (RN6: un cuidador autorizado valida cada aporte; un diario que publica texto del paciente sin control rompe la regla). Se anota como ítem de visión, no como historia del MVP, y no se estima.
+
+### 3.1 Decisiones ya cerradas: no hace falta un ADR nuevo
+
+Se revisó el vault en busca de ADR pendientes relacionados con la **sesión guiada (AURA-74)** y con la **«sugerencia del día» (AURA-75)**. **No hay ninguno pendiente de esos dos temas**: el guardarraíl de la sesión guiada ya está decidido, y el criterio de la sugerencia del día quedó cubierto por el anclaje de recuerdos.
+
+| Tema | Guardarraíl ya decidido | Dónde está |
+| --- | --- | --- |
+| Sesión guiada (AURA-74 / US-D1) | Aurora Home **no hace preguntas en cadena** ni corrige lo que el cuidador dice: máximo **1 intervención de voz por paso**; el texto hablable lo redacta Core y el dispositivo lo dice **verbatim** | guion **G10** de [[VUI — Diseño Conversacional]] · [[Accesibilidad]] §2 · **ADR-HOME-019** (Aurora Home) · del lado de la privacidad, **ADR-011** del vault (voz en la nube con respaldo local, que reemplazó a ADR-006) |
+| Sugerencia del día (AURA-75 / US-D2) | La sugerencia se apoya en recuerdos **aprobados** y con fecha del suceso; el ancla del día sólo se sirve si el recuerdo que la sostiene está validado | **ADR-016** (recuerdos diarios de corto plazo) + **ADR-014** (taxonomía de dos niveles y anclaje temporal) |
+
+Los únicos ADR que el vault tiene anotados como **pendientes** son de otros temas: la elección de **LiveKit** como proveedor de media (**ADR-013**, reservado) y la heurística determinista de dificultad adaptativa (AURA-77). Ninguno de los dos pertenece a esta feature.
+
 ## 4. Backlog de diseño — visión (wireframes V1-V6 → hi-fi)
 
 | Ítem | Wireframe | Qué falta decidir/diseñar |
@@ -114,8 +144,20 @@ Dos ADR de otros temas se registraron después, y ninguno pertenece a esta featu
 - [ ] **Celular del paciente (piloto, acompañado y con consentimiento)**: escala tipográfica propia (20/24/28 px, tope 1,3×), pausa de «Descansamos un rato» a los ~15 minutos y si el sonido suave y la vibración sobresaltan o ayudan. Los valores son derivados, no probados ([[Tipografía]]).
 - [ ] **Psicopedagoga — contenido de los juegos**: bancos de palabras, secuencias y dinero; preguntas y distractores de «Elegí la respuesta»; categorías de «Palabras que van juntas»; asignación del juego de la letra que falta; mapeo actividad → juego. Todo contenido nuevo figura «PENDIENTE DE REVISIÓN» hasta entonces.
 - [ ] **Psicopedagoga — nombres, frases y secciones de la lista de juegos** (P12): «Con tus fotos y recuerdos», «Con palabras», «Con números, dinero y fechas», «Para ordenar y pensar»; el nombre y la frase de cada juego; el texto del aviso de juego bloqueado (P14).
+- [ ] **Psicopedagoga — qué juegos se sugieren al empezar** (frame 43): hoy «Sugeridos para empezar» tilda reminiscencia, rompecabezas, parejas de fotos y calendario (sin respuesta «correcta» ni texto libre). Es una propuesta del equipo de desarrollo. También si el cuidador puede habilitar un juego cuyo contenido figura «en revisión».
+- [ ] **Requisito funcional propio para «habilitar juegos del celular»**: la Arquitectura de Información ya reconoce que la sesión guiada «extiende el alcance original» y que el celular del paciente no tiene RF/US propios; elegir qué juegos tiene el paciente tampoco. Proponer RF (cuidador administrador elige; el paciente no ve lo no elegido) y su historia de usuario.
+- [ ] **Requisito funcional para «recordatorios en el celular del paciente»**: RF-07/08/56 y US 2.1 sólo contemplan el recordatorio por voz en Aurora Home. Proponer RF/US propios (aviso local, «Ya lo hice», qué se ve en la pantalla bloqueada).
+- [ ] **Psicopedagoga y salud — mostrar lo vencido del día** (P23): el celular ofrece «Se pasó la hora» con «Sí, ya lo hice» (confirmación tardía) para lo de hoy que nadie respondió. Decisión del equipo del 03/11/2026, que revisa la regla de no mostrar lo no hecho. Falta validar que, en pastillas, verlo no empuje a una toma tardía (riesgo de doble dosis) y si conviene un tope de horas por tipo.
+- [ ] **Consentimiento y ANMAT de los avisos** (frames P20, P21, P23 y P27): datos de medicación en el celular del paciente no están cubiertos por los tres consentimientos de `Correcciones - 12-10-2026/09`; por eso los enciende un administrador y empiezan apagados. Falta decidir quién consiente (situaciones A/B/C) y validar con asesor si un aviso con confirmación acerca el producto a una «finalidad médica» (Disposición 64/2025). Evitar «tratamiento» y «adherencia» en el texto visible.
+- [ ] **Qué pasa si no responde**: hoy nada. En el Inicio tampoco se muestra como atrasado o perdido (regla 18). «Todavía no» sólo vuelve a avisar a los 10 minutos y no registra nada: no hay un «No lo hice». No hay barrido que marque una toma vencida como omitida ni aviso al cuidador por omisión (tampoco lo dispara Aurora Home solo). Es una decisión de producto (AURA-180, cadencia de reconfirmación).
+- [ ] **Pedir ayuda pasó de la barra a «Llamar»** (P25, regla 13): antes era un botón rojo anclado al pie de todas las pantallas (1 toque + confirmación); ahora son Llamar → «Necesito ayuda» + confirmación. Se hizo a pedido del equipo para que cada pantalla diga una sola cosa a una persona con pérdida de memoria. Validar con cuidadores y en el piloto que no se pierde tiempo en una emergencia; si pesa, El lugar de la barra ya se llama «Ayuda» (no «Llamar»); además es rojo sólido con borde fijo en la barra (desde el 03/11/2026).
+- [ ] **El chip de ubicación mide lo que vio el celular, no Core** (P24, regla 19): los umbrales (verde < 5 min, amarillo < 15 min, rojo después) y los 2 minutos de «Conectando…» son provisorios. Cuenta lo ocurrido desde que se abrió la app; con la app cerrada por horas, el chip se pone en verde de nuevo recién cuando llega la primera lectura. Falta decidir con el equipo si el cuidador debe ver este mismo estado en Care.
+- [ ] **Ajustes del paciente y la regla 7** (P26, regla 20): el celular ahora tiene una pantalla con controles (permisos, desactivar ubicación, claro/oscuro). Confirmar con la psicopedagoga que no desorienta; el modo oscuro puede ocultarse si molesta.
+- [ ] **«Cómo le fue en el celular» pasó de Terapias a Métricas** (frames 42 y 45): sigue el selector de 7/30 días y sólo aparece con un celular vinculado. Falta decidir si el cuidador necesita un corte por semana o un gráfico de tendencia; hoy son barras relativas al juego más jugado y no hay regla de nivel (pendiente de la psicopedagoga).
+- [ ] **«Cómo le gusta que le digan»** (frame P23): Core guarda un solo campo `name`, así que el saludo «¡Hola, María Fernanda!» se arma suponiendo que el apellido es lo último (con tres palabras es ambiguo: «Juan Pérez García» saluda «Juan Pérez»). Lo correcto es un campo propio en el perfil del paciente que cargue el cuidador; pendiente de decidir con el equipo.
+- [ ] **Silencio nocturno y exactitud en Android**: los avisos no respetan todavía las horas de silencio del hogar, y en Android 12+ sin el permiso de alarma exacta pueden atrasarse unos minutos. Agregar ese permiso exige un build nativo nuevo.
 - [ ] **Regla de dificultad adaptativa** (hoy «A VALIDAR»): mientras no se valide, el nivel de los juegos lo elige el cuidador y Aurora no lo cambia sola.
-- [ ] **Línea base de los juegos del celular**: sesiones completadas vs. abandonadas por juego (meta del plan: ≥ 70 % terminadas). Todavía no se midió; el resumen por paciente de Ajustes → Dispositivos (frame 39) da los primeros datos.
+- [ ] **Línea base de los juegos del celular**: sesiones completadas vs. abandonadas por juego (meta del plan: ≥ 70 % terminadas). Todavía no se midió; el resumen por paciente de Terapias → Celular (frame 42) da los primeros datos.
 - [ ] **Fuente Atkinson** para el celular del paciente: figura en el tema pero todavía no se empaqueta con `expo-font`.
 - [ ] **Revisión visual del Figma** cuando se pueble (el MCP no pudo verificar: revisar contra los previews HTML, que son la fuente de verdad visual).
 
