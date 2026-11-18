@@ -1,0 +1,112 @@
+Anoté las cuatro decisiones. Tomo tu silencio sobre la pregunta anterior como luz verde para la Fase 3, que sigue siendo solo análisis, sin tocar código.
+
+## Tus decisiones del módulo 9
+
+| Tema | Resultado |
+|---|---|
+| Recuperar contraseña | Lo leo como un **sí**: "no tenemos un flujo aún" y lo incluyo. Avisame si lo entendí mal. |
+| Vinculación en el wizard (L3) | **No se toca.** Queda **bloqueado** hasta que tu compañero defina qué se hace con ese paso. |
+| Documento de privacidad | Se reemplaza por una versión limpia y breve, con hechos exactos y coherentes con lo de Care. |
+| Validación de formularios | **Al salir del campo o al enviar**, igual en toda la app. |
+
+# Fase 3: consolidación
+
+Auditamos los 10 módulos y los hallazgos no son 200 problemas distintos. Son **12 patrones** que se repiten. Si se arreglan una sola vez, en el componente compartido, desaparecen de todos los módulos a la vez.
+
+## 1. Los 12 patrones transversales
+
+| # | Patrón | Dónde aparece | Causa de fondo | Solución única |
+|---|---|---|---|---|
+| **P1** | **Barra inferior sin zona segura.** La navegación de 3 botones del sistema se dibuja sobre las pestañas | Módulos 0, 1, 2, 5, 6, 7 (C1) | La barra de Care tiene `height: 68` fijo, sin `insets.bottom` | **Reutilizar el patrón de `PatientTabBar`**, que ya lo resuelve: `paddingBottom: insets.bottom + 8`, alto mínimo, y estado activo con "píldora", no solo color |
+| **P2** | **`AppButton` roto de tres formas** | Todos | (a) `loading` oculta la etiqueta; (b) `disabled` queda a ≈1,4:1 de contraste y sin motivo; (c) no tiene tope de escala de letra y se recorta con letra grande (SOS, "Llamar a…") | Un solo arreglo: etiqueta visible con spinner, estado deshabilitado a 3:1 como mínimo con motivo debajo, y `maxFontSizeMultiplier` con `minHeight` que crece |
+| **P3** | **Tres formas de avisar un resultado** (aviso arriba 5 s, flotante 3,2 s, pantalla intermedia) y avisos que quedan **fuera de pantalla** | Módulos 1, 2, 3, 4, 5, 7 | Cada módulo armó el suyo | **Un solo patrón**: aviso flotante con duración única (propongo 4 s), "Deshacer" si Core lo permite. El aviso en línea queda solo para errores de formulario |
+| **P4** | **Confirmaciones inconsistentes**: algunas con "Cancelar", otras sin; algunas nombran el objeto, otras no; varias acciones destructivas se ejecutan con un toque | Módulos 1, 2, 3, 5, 7, 8 (R5, T4, Descartar, Incumplida) | No hay un componente | **`ConfirmDialog` compartido**: título con el nombre del objeto, consecuencia, "Cancelar" + acción en rojo. Regla: **deshacer** si es reversible, **confirmar** si es irreversible o afecta a otros |
+| **P5** | **Formularios** que se rompen con el teclado de Android, sin botón fijo, y con campos de texto donde corresponde un selector (hora, unidades) | Módulos 3, 4, 5, 7, 9 | `AppModal` sin manejo del teclado en Android; no existe un campo de hora | Arreglar `AppModal` y usar **pantalla** para formularios de más de 3 campos; `AppTimeField` nuevo; botón de guardar **fijo al pie con el motivo** si está deshabilitado; validar **al salir del campo** |
+| **P6** | **Estado de Aurora Home y datos ausentes**: cada pantalla lo dice a su manera, lo repite o directamente lo afirma como hecho ("No hubo recordatorios") | Módulos 1, 2, 5, 6, 7 | No hay una fuente de estado visible | **Un banner único de estado** ("Sin conexión desde las 14:10") y las pantallas lo consumen. Los vacíos distinguen "sin datos" de "sin eventos". Una regla de tiempo compartida: pendiente / ahora / vencida / hecha |
+| **P7** | **Textos internos y jerga en pantalla** | Módulos 2, 3, 4, 5, 6, 7, 9 (`meal`, `sos.pressed`, `otro`, "Versión lab", hash, "App Care", "0 altas", "GDS", "PoP", "actividad base") | Se muestran claves del sistema sin pasar por un diccionario | **Una capa de etiquetas central** con respaldo neutro: nunca se renderiza la clave. Más un glosario de vocabulario (ver 3) |
+| **P8** | **Cabecera fija que come pantalla** y engranaje redundante | Módulos 1, 3, 5, 6, 7 (12% a 21% de la altura) | La cabecera incluye título, acciones y selectores | Que la cabecera **colapse al desplazar** o que el selector entre al scroll; sacar el engranaje de las subpantallas |
+| **P9** | **Tarjetas densas, con acciones de texto y repetición** | Módulos 1, 3, 4, 5, 6, 7 (R2, S2, T1, E5) | Cada ítem muestra todas sus acciones | **Tarjeta compacta + menú "⋯" + una acción principal**. Un dato aparece **una vez** por pantalla |
+| **P10** | **Color, contraste y estado solo por color** | Módulos 0, 2, 3, 6, 7 | Tokens sin auditar (`danger.solidBg` oscuro 3,79:1, `text.muted` 4,39:1, pista de barra invisible, pestaña inactiva 1,32:1) | Revisar 5 tokens. Regla: **un estado siempre lleva texto o ícono**, y el color de una barra es el de **su valor**, no el del KPI |
+| **P11** | **Permisos por rol aplicados a medias** | Módulos 5, 7 | Cada pantalla decide sola; Core no lo valida | `useIsAdmin` + `AdminOnly` con un mensaje único ("Solo un administrador puede…"), y **Core también lo exige** |
+| **P12** | **Tipografía fuera del sistema** | Módulos 5, 8, 9 [H] | `settingsStyles` no define fuente; algunas pantallas usan `Text` en vez de `AppText` | Usar siempre `AppText`; regla de lint contra `Text` con `fontSize` suelto |
+
+## 2. Componentes compartidos: qué crear y qué corregir
+
+| Componente | Acción | Resuelve |
+|---|---|---|
+| `AppTabBar` (Care) | **Corregir**: copiar el patrón de `PatientTabBar` | P1 |
+| `AppButton` | **Corregir** (3 cosas) + `reason` | P2 |
+| `PatientButton` | **Crear** (o `AppButton scale="patient"`) | P2, módulo 8 |
+| `ConfirmDialog` | **Crear** | P4 |
+| `useFeedback()` sobre `FloatingToast` | **Crear** (hook) | P3 |
+| `AppModal` + `FormScreen` | **Corregir** teclado y pie fijo | P5 |
+| `AppTimeField` | **Crear** | P5 (E2, T6, S2) |
+| `DeviceStatusBanner` + `useHomeStatus` + helper de tiempo | **Crear** | P6 |
+| `labels/` (eventos, roles, severidades, categorías) | **Crear** | P7 |
+| `PageHeader` colapsable | **Corregir** | P8 |
+| `ItemCard` + `RowActionsMenu` | **Crear** | P9 |
+| `AdminOnly` / `useIsAdmin` | **Crear** | P11 |
+| `ProgressBar`, `SegmentedControl`, `MetricSeriesChart` | **Corregir** tokens y relleno de días | P10 |
+
+Es **un total de 13 piezas**. Casi todo el trabajo de la Fase 4 son estas piezas y reemplazar los usos.
+
+## 3. Glosario de vocabulario (una sola vez, para todos los módulos)
+
+| Concepto | Se dice | No se dice |
+|---|---|---|
+| Lo que se hace **con** el cuidador | **Terapia** | actividad, sesión guiada |
+| Lo que el paciente hace **solo** | **Juego** | actividad del celular |
+| Nombre de un juego | El **clínico** ("Armar rompecabezas"); el cotidiano solo como subtítulo en Celular | los dos mezclados |
+| Dónde se hace | "En la app" / "Con Aurora Home" | "App Care", "Home y Care" |
+| Al paciente | **María** (nombre) | "el paciente" |
+| La app | **Aurora Care** | AuroraCare, AuroraCareFront |
+| Participación alta | "Participación alta: 0" | "0 altas" |
+| Rutina no hecha | pendiente de tu decisión (ver 4) | Incumplida / Omitida mezcladas |
+
+## 4. Decisiones de producto
+
+**Resueltas (por vos):** 5 pestañas con Estadísticas dentro de Actividad · Aurora Home sin conexión mayor a 10 min pasa a advertencia · confirmación previa al atender una alerta (Core no tiene "reabrir") · mapa dentro de la app para el pedido de ayuda · Archivar recuerdos ya · el admin publica directo sus recuerdos · reclasificar "Otro" · SOS no apagable · permisos de cuidadores editables · siempre "María" · plantilla de texto en Estadísticas · nombre clínico principal · juegos del celular apagados salvo 3 o 4 · avisos del celular a Ajustes · cronómetro visible · sin 911 · segunda confirmación en medicación vencida · tope de letra 1,3× · consentimientos cortos · privacidad limpia · validar al salir del campo.
+
+**Abiertas** (con mi recomendación para cerrarlas de una vez):
+
+| # | Tema | Recomendación |
+|---|---|---|
+| 1 | Nombre del segmento de Estadísticas | **Seguimiento** |
+| 2 | Enviar el SOS antes de resolver la ubicación (P1 del módulo 8) | Sí; probalo 30 s con el cuadro de Google abierto |
+| 3 | Cuáles 3 o 4 juegos arrancan encendidos | Palabras que van juntas, Historias conocidas, Completar refranes, Series de números |
+| 4 | "Contenido en revisión" | **Quitarlo** hasta que exista un flujo para validar |
+| 5 | Vocabulario de "rutina no hecha" (R4) | "No realizada" en rutinas, "Omitida" en medicación |
+| 6 | Qué hace "Prioridad clínica" (E3) | Decir qué hace o quitarlo; hoy Core solo la guarda |
+| 7 | Historial tras borrar un ítem (D1) | Que quede accesible desde Ajustes o desde el historial |
+| 8 | Nombre de la pestaña Rutinas (R8) | **Cuidados** si incluye medicación |
+| 9 | Comparación vs. período anterior | Probar y decidir viendo cómo queda |
+| 10 | "Personas" en recuerdos | Confirmar que hablabas de la entidad Persona, no de un cuidador |
+| 11 | Duración única del aviso flotante | 4 segundos |
+| 12 | **Wizard paso 4** | **Bloqueado**: espera a tu compañero |
+
+## 5. Cambios en Core (aparte, para planificarlos antes que la app)
+
+| Cambio | Tipo | Prioridad |
+|---|---|---|
+| `NotificationRuleViewSet`: exigir rol admin y **no permitir apagar la regla del SOS** | Seguridad | **Alta** |
+| `AlertSerializer`: `status` escribible por PATCH (se saltea el acuse y su auditoría) | Integridad | Alta |
+| Rellenar con ceros los días sin datos en las series de métricas (`_daily_series`) | Datos | Alta |
+| Permitir actualizar la ubicación de una alerta **después** de crearla | Funcional | Media (si se decide #2) |
+| `attended_by_name` en la alerta (opcional, evita una consulta extra) | Funcional | Media |
+| Verificar que el recuerdo se **publique directo** si quien lo carga puede validar, y que `category` sea editable ("Cambiar tipo") | Funcional | Media |
+| Juegos del celular: sembrar el conjunto por defecto (3 o 4) | Datos | Media |
+| Retención real: purga de transcripciones y eventos (RF-96). Hasta entonces, el texto dice "política", no "hecho" | Cumplimiento | Media |
+| Verificar si "Solicitar exportación" exige ser administrador | Seguridad | Media |
+| Método de comparación con el período anterior (solo si se aprueba #9) | Funcional | Baja |
+| Fuera de Core: recuperar contraseña (Supabase), App Links verificados, plantilla y remitente del correo, renombrar la app a "Aurora Care" en la próxima build | Infra | Media |
+
+## 6. Propuesta de orden para la Fase 4
+
+Lo ordeno por **riesgo y esfuerzo**, no por módulo:
+
+- **Ola 0, antes del 16/11** (todas de esfuerzo S): barra inferior con zona segura (P1) · `AppButton` con etiqueta y contraste (P2) · limpiar el aviso rojo al confirmar el correo (L2) · corregir los textos de **privacidad** de Care (voz en la nube y retención como política) y la privacidad del registro · quitar la nota interna, "Versión lab" y el hash · nombres de evento en Reglas y SOS bloqueado en la app · badge recortado de Zonas · confirmar "Descartar" sesión · usar el diccionario de eventos ya existente.
+- **Ola 1, estructura**: `ConfirmDialog`, `useFeedback`, `AppModal` y `FormScreen`, `AppTimeField`, `labels/`, `AdminOnly`, y las dos reglas de Core de mayor prioridad.
+- **Ola 2, módulos**: Rutinas, Recuerdos, Terapias, Estadísticas (con el cambio de lugar), paciente (botones y juegos con letra grande, medicación vencida).
+- **Ola 3, bloqueado o de producto**: wizard paso 4, comparación de períodos, enviar el SOS primero.
+
+¿Querés que ese paquete de la **Ola 0** lo detalle como lista exacta (archivo, cambio, esfuerzo) para decidir cuáles entran antes del 16/11? Y, aparte, ¿preferís que toda esta auditoría quede como documento en el ObsidianAurora o como una página compartible?
